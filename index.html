@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Cards | Custom Credit Card Designs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ========== RESET & BASE ========== */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    * { -webkit-tap-highlight-color: transparent; }
+    :focus { outline: none; }
+    :focus-visible { outline: 2px solid #7f5af0; outline-offset: 3px; border-radius: 6px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      background-image:
+        radial-gradient(circle at 20% 0%, rgba(127,90,240,0.08), transparent 50%),
+        radial-gradient(circle at 80% 100%, rgba(212,175,55,0.06), transparent 50%);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== TOP BRAND ========== */
+    .top-brand {
+      text-align: center;
+      padding: 28px 20px 6px;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #fff;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      user-select: none;
+    }
+    .top-brand-sub {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    @media (max-width:600px) {
+      .top-brand { font-size: 22px; letter-spacing: 4px; padding: 22px 14px 4px; }
+      .top-brand-sub { font-size: 10px; letter-spacing: 3px; }
+    }
+
+    main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
+
+    /* ========== PROMO ========== */
+    .promo {
+      background: linear-gradient(135deg, #141414 0%, #1c1c1c 100%);
+      border: 1px solid #222;
+      border-radius: 22px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -10%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(127,90,240,0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .promo-left { display: flex; align-items: center; gap: 12px; z-index: 1; }
+    .promo-text { z-index: 1; }
+    .promo-text h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.4px;
+      color: #fff;
+    }
+    .promo-text a { color: #888; font-size: 13px; text-decoration: none; }
+    .promo-img {
+      font-size: 44px;
+      animation: tick 3s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes tick {
+      0% { transform: rotate(-8deg) scale(1); }
+      50% { transform: rotate(8deg) scale(1.05); }
+      100% { transform: rotate(-8deg) scale(1); }
+    }
+    @media (max-width:400px) {
+      .promo { flex-direction: column; text-align: center; padding: 18px; }
+      .promo-text { text-align: center; }
+    }
+
+    /* ========== SECTION TITLE ========== */
+    .heading-row { margin-bottom: 20px; }
+    .heading-row h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .heading-row p {
+      font-size: 13px;
+      color: #777;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    @media (max-width:600px) {
+      .heading-row h1 { font-size: 22px; }
+    }
+
+    /* ========== PRODUCT GRID ========== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+    @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+    @media (min-width: 1000px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+
+    /* ========== GRID CARD ========== */
+    .grid-card {
+      background: linear-gradient(160deg, #131313 0%, #0f0f0f 100%);
+      border: 1px solid #1e1e1e;
+      border-radius: 22px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .grid-card:hover {
+      border-color: #2e2e2e;
+      transform: translateY(-4px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.6);
+    }
+    .grid-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(127,90,240,0.06), transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .grid-card:hover::before { opacity: 1; }
+
+    /* ========== CREDIT CARD SHAPE ========== */
+    .cc-preview {
+      position: relative;
+      aspect-ratio: 1.586 / 1;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 14px 34px rgba(0,0,0,0.7),
+        0 2px 6px rgba(0,0,0,0.4),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .grid-card:hover .cc-preview {
+      transform: perspective(900px) rotateX(6deg) rotateY(-6deg) scale(1.015);
+    }
+
+    .cc-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      padding: 14px 16px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .cc-front { z-index: 2; }
+    .cc-back {
+      transform: rotateY(180deg);
+      z-index: 1;
+    }
+
+    .cc-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.85;
+    }
+    .cc-sheen {
+      position: absolute;
+      top: -50%; left: -30%;
+      width: 60%; height: 200%;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+      transform: rotate(20deg);
+      pointer-events: none;
+      transition: left 0.7s ease;
+    }
+    .grid-card:hover .cc-sheen { left: 120%; }
+
+    .cc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      z-index: 2;
+    }
+    .cc-bank-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 2;
+    }
+    .cc-bank {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      line-height: 1.1;
+    }
+    .cc-bank-type {
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      opacity: 0.75;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+    .cc-contactless {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.9;
+      flex-shrink: 0;
+    }
+    .cc-contactless-icon {
+      width: 14px; height: 14px;
+      position: relative;
+    }
+    .cc-contactless-icon::before,
+    .cc-contactless-icon::after {
+      content: '';
+      position: absolute;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      border-radius: 50%;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-top-color: transparent;
+    }
+    .cc-contactless-icon::before {
+      width: 8px; height: 8px; top: 3px; left: 3px;
+      transform: rotate(45deg);
+    }
+    .cc-contactless-icon::after {
+      width: 13px; height: 13px; top: 0.5px; left: 0.5px;
+      transform: rotate(45deg);
+    }
+
+    .cc-chip {
+      width: 34px;
+      height: 26px;
+      border-radius: 5px;
+      background:
+        linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%);
+      position: relative;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        inset 0 -1px 0 rgba(0,0,0,0.3),
+        0 2px 4px rgba(0,0,0,0.4);
+      z-index: 2;
+      margin-top: 6px;
+      align-self: flex-start;
+    }
+    .cc-chip::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 3px;
+      border: 0.5px solid rgba(0,0,0,0.35);
+      background-image:
+        linear-gradient(to right, transparent 48%, rgba(0,0,0,0.3) 48%, rgba(0,0,0,0.3) 52%, transparent 52%),
+        linear-gradient(to bottom, transparent 48%, rgba(0,0,0,0.3) 48%, rgba(0,0,0,0.3) 52%, transparent 52%);
+    }
+
+    /* Visa logo */
+    .cc-visa {
+      font-family: 'Inter', sans-serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: 18px;
+      letter-spacing: -1px;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      transform: skewX(-10deg);
+      align-self: flex-end;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .cc-number {
+      font-size: 14px;
+      letter-spacing: 2.5px;
+      font-weight: 600;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.18),
+        0 -1px 0 rgba(0,0,0,0.45);
+      z-index: 2;
+    }
+
+    .cc-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 2;
+    }
+    .cc-label {
+      font-size: 7px;
+      letter-spacing: 1.5px;
+      opacity: 0.6;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .cc-value {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+    }
+
+    /* Back of the card */
+    .cc-stripe {
+      position: absolute;
+      top: 14%;
+      left: 0;
+      right: 0;
+      height: 22%;
+      background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+      z-index: 2;
+    }
+    .cc-back-content {
+      position: absolute;
+      bottom: 12px;
+      left: 16px;
+      right: 16px;
+      z-index: 2;
+    }
+    .cc-sig-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .cc-sig-strip {
+      flex: 1;
+      height: 26px;
+      background: repeating-linear-gradient(45deg, #efefef 0 6px, #dcdcdc 6px 12px);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+    }
+    .cc-sig-strip-text {
+      font-size: 10px;
+      color: #333;
+      font-style: italic;
+      font-weight: 600;
+      opacity: 0.5;
+    }
+    .cc-cvv {
+      background: #fff;
+      color: #111;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+    }
+    .cc-back-text {
+      font-size: 7px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+    }
+
+    /* ========== GRID CARD INFO ========== */
+    .gc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .gc-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+    }
+    .gc-tagline {
+      font-size: 12px;
+      color: #777;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .gc-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .gc-rating {
+      font-size: 12px;
+      color: #f5c518;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .gc-price {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.3px;
+    }
+    .gc-material {
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .gc-actions {
+      display: flex;
+      margin-top: 6px;
+    }
+    .gc-buy-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 22px;
+      padding: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(127,90,240,0.3);
+    }
+    .gc-buy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(127,90,240,0.45);
+      background: linear-gradient(135deg, #8f6cf0 0%, #6a4ce0 100%);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: transparent;
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid #1a1a1a;
+      margin-top: 20px;
+    }
+    .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
+
+    /* ========== MODAL OVERLAY ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .modal {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid #222;
+      border-radius: 26px;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+      animation: premiumScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      overflow: hidden;
+    }
+    @keyframes premiumScaleIn {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #aaa;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: #7f5af0; color: #fff; border-color: #7f5af0; }
+
+    .modal-body { padding: 24px; }
+
+    /* Flip card wrapper in modal */
+    .modal-card-wrap {
+      perspective: 1200px;
+      width: 100%;
+      aspect-ratio: 1.586 / 1;
+      cursor: pointer;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .modal-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-card-wrap.flipped .modal-card-inner {
+      transform: rotateY(180deg);
+    }
+    .modal-card-inner .cc-face {
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow:
+        0 24px 50px rgba(0,0,0,0.7),
+        0 4px 10px rgba(0,0,0,0.4),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .modal-card-inner .cc-number { font-size: 17px; letter-spacing: 3px; }
+    .modal-card-inner .cc-bank { font-size: 14px; letter-spacing: 3px; }
+    .modal-card-inner .cc-bank-type { font-size: 9px; letter-spacing: 2.5px; }
+    .modal-card-inner .cc-chip { width: 40px; height: 30px; }
+    .modal-card-inner .cc-label { font-size: 8px; }
+    .modal-card-inner .cc-value { font-size: 12px; }
+    .modal-card-inner .cc-visa { font-size: 22px; }
+
+    .flip-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #666;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    .modal-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .modal-tagline {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+    .modal-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .modal-price {
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.3px;
+    }
+    .modal-rating {
+      color: #f5c518;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .modal-material {
+      font-size: 10px;
+      color: #666;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .modal-description {
+      color: #999;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .field-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .field-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 6px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .field-group input,
+    .field-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #262626;
+      border-radius: 12px;
+      font-size: 14px;
+      background: #0f0f0f;
+      color: #fff;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-group input:focus,
+    .field-group textarea:focus {
+      border-color: #7f5af0;
+      background: #131313;
+      box-shadow: 0 0 0 4px rgba(127,90,240,0.12);
+    }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder { color: #444; }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .qty-row button {
+      background: #1a1a1a;
+      border: 1px solid #262626;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .qty-row button:hover {
+      background: #7f5af0;
+      border-color: #7f5af0;
+      transform: scale(1.05);
+    }
+    .qty-row span {
+      font-size: 20px;
+      font-weight: 800;
+      min-width: 30px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .modal-buy-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 26px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(127,90,240,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .modal-buy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(127,90,240,0.5);
+      background: linear-gradient(135deg, #8f6cf0 0%, #6a4ce0 100%);
+    }
+
+    /* ========== ORDER FORM ========== */
+    .order-form .field-group { margin-bottom: 14px; }
+    .order-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 26px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 8px;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(127,90,240,0.35);
+    }
+    .order-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(127,90,240,0.5);
+    }
+
+    /* ========== SUCCESS MODAL ========== */
+    .success-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+    .success-modal {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid #222;
+      border-radius: 28px;
+      max-width: 380px;
+      width: 100%;
+      padding: 38px 30px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+      animation: successModalIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes successModalIn {
+      0% { opacity: 0; transform: scale(0.7) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .success-checkmark { width: 80px; height: 80px; margin: 0 auto 20px; }
+    .success-checkmark-circle {
+      stroke-dasharray: 166; stroke-dashoffset: 166;
+      stroke-width: 2; stroke-miterlimit: 10; stroke: #7f5af0; fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65,0,0.45,1) forwards;
+    }
+    .success-checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48; stroke-dashoffset: 48;
+      stroke-width: 3; stroke: #7f5af0; fill: none;
+      animation: stroke 0.3s cubic-bezier(0.65,0,0.45,1) 0.6s forwards;
+    }
+    @keyframes stroke { to { stroke-dashoffset: 0; } }
+    .success-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .success-message { font-size: 14px; color: #999; line-height: 1.6; margin-bottom: 20px; }
+    .success-order-details {
+      background: #0f0f0f;
+      border: 1px solid #1f1f1f;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+      font-size: 13px;
+      color: #ccc;
+    }
+    .success-order-details span { display: block; margin-bottom: 5px; }
+    .success-btn {
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+      font-family: inherit;
+      box-shadow: 0 6px 20px rgba(127,90,240,0.35);
+    }
+    .success-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(127,90,240,0.5);
+    }
+
+    /* ========== TOAST ========== */
+    #toastContainer {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      background: #141414;
+      border: 1px solid #262626;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards;
+      pointer-events: auto;
+      max-width: 300px;
+    }
+    .toast.success { border-color: #7f5af0; box-shadow: 0 10px 28px rgba(127,90,240,0.3); }
+    .toast.error { border-color: #ff4d4d; box-shadow: 0 10px 28px rgba(255,77,77,0.3); }
+    .toast-icon { font-size: 20px; }
+    @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    @media (max-width:400px) { #toastContainer { bottom: 16px; right: 10px; } }
+
+    /* ========== CONFETTI ========== */
+    .confetti-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2001;
+    }
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0.9;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ========== CUSTOM ALERT ========== */
+    .custom-alert-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .custom-alert-box {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid #222;
+      border-radius: 22px;
+      padding: 30px 25px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      animation: modalFadeIn 0.25s ease;
+    }
+    @keyframes modalFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .custom-alert-icon { font-size: 46px; margin-bottom: 10px; }
+    .custom-alert-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .custom-alert-message { font-size: 14px; color: #999; margin-bottom: 20px; line-height: 1.5; }
+    .custom-alert-btn {
+      background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      min-width: 120px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .custom-alert-btn:hover { transform: translateY(-2px); }
+    .custom-alert-btn.secondary { background: #1f1f1f; color: #fff; margin-left: 10px; border: 1px solid #2a2a2a; }
+  </style>
+</head>
+<body>
+
+  <div class="top-brand">Aura Cards</div>
+  <div class="top-brand-sub">Custom Credit Card Designs</div>
+
+  <main>
+    <div class="promo">
+      <div class="promo-left"><span class="promo-img">💎</span></div>
+      <div class="promo-text">
+        <h2>Premium Designs</h2>
+        <a>Handcrafted on every card</a>
+      </div>
+    </div>
+
+    <div class="heading-row">
+      <h1>Our Collection</h1>
+      <p>Tap any card to flip & see details</p>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <footer>
+    <div class="copyright">© 2026 Aura Cards. All rights reserved.</div>
+  </footer>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="productOverlay">
+    <div class="modal">
+      <button class="modal-close" id="productClose">&times;</button>
+      <div class="modal-body">
+        <div class="modal-card-wrap" id="modalCardWrap">
+          <div class="modal-card-inner" id="modalCardInner"></div>
+        </div>
+        <div class="flip-hint">↻ Tap card to flip</div>
+
+        <h3 class="modal-title" id="modalName">Design</h3>
+        <p class="modal-tagline" id="modalTagline">Tagline</p>
+
+        <div class="modal-meta">
+          <span class="modal-price" id="modalPrice">$29.99</span>
+          <span class="modal-rating" id="modalRating">⭐ 4.9</span>
+        </div>
+
+        <div class="modal-material" id="modalMaterial">MATTE FINISH</div>
+
+        <p class="modal-description" id="modalDescription">Description</p>
+
+        <div class="field-group">
+          <label>Personalization (Optional)</label>
+          <input type="text" id="personalizationInput" placeholder="Text on card (e.g., your name)" maxlength="22" />
+        </div>
+
+        <div class="qty-row">
+          <button id="qtyMinus">−</button>
+          <span id="qtyValue">1</span>
+          <button id="qtyPlus">+</button>
+        </div>
+
+        <button class="modal-buy-btn" id="modalBuyBtn">⚡ Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER MODAL -->
+  <div class="modal-overlay" id="orderOverlay">
+    <div class="modal">
+      <button class="modal-close" id="orderClose">&times;</button>
+      <div class="modal-body">
+        <h3 class="modal-title" style="margin-bottom:20px;">Delivery Details</h3>
+        <form class="order-form" id="orderForm">
+          <div class="field-group">
+            <label>Full Name</label>
+            <input type="text" id="orderName" placeholder="Your name" required />
+          </div>
+          <div class="field-group">
+            <label>Phone</label>
+            <input type="tel" id="orderPhone" placeholder="Your phone number" required />
+          </div>
+          <div class="field-group">
+            <label>Delivery Address</label>
+            <textarea id="orderAddress" rows="3" placeholder="Your address" required></textarea>
+          </div>
+          <div class="field-group">
+            <label>Email (Optional)</label>
+            <input type="email" id="orderEmail" placeholder="you@email.com" />
+          </div>
+          <button type="submit" class="order-btn">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-modal">
+      <div class="success-checkmark">
+        <svg viewBox="0 0 52 52" style="width:100%; height:100%;">
+          <circle class="success-checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+      </div>
+      <div class="success-title">Order Confirmed</div>
+      <div class="success-message">Thank you! We'll contact you shortly to confirm your design.</div>
+      <div class="success-order-details" id="successOrderDetails" style="display:none;"></div>
+      <button class="success-btn" id="successCloseBtn">Continue</button>
+    </div>
+    <div class="confetti-container" id="confettiContainer"></div>
+  </div>
+
+  <div id="toastContainer"></div>
+
+  <script>
+    // ========== CUSTOM ALERT / CONFIRM ==========
+    (function() {
+      function createOverlay() {
+        var o = document.createElement('div');
+        o.className = 'custom-alert-overlay';
+        document.body.appendChild(o);
+        return o;
+      }
+      window.alert = function(message) {
+        var overlay = createOverlay();
+        var box = document.createElement('div');
+        box.className = 'custom-alert-box';
+        box.innerHTML = '<div class="custom-alert-icon">✨</div><div class="custom-alert-title">Message</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
+        overlay.appendChild(box);
+        document.body.style.overflow = 'hidden';
+        document.getElementById('caOk').addEventListener('click', function() {
+          overlay.remove(); document.body.style.overflow = '';
+        });
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; }
+        });
+      };
+      window.confirm = function(message) {
+        return new Promise(function(resolve) {
+          var overlay = createOverlay();
+          var box = document.createElement('div');
+          box.className = 'custom-alert-box';
+          box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
+          overlay.appendChild(box);
+          document.body.style.overflow = 'hidden';
+          document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(true); });
+          document.getElementById('ccCancel').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(false); });
+          overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; resolve(false); }
+          });
+        });
+      };
+    })();
+
+    // ========== PRODUCT DATA (USA Bank Names + Card Types + USA Names) ==========
+    var designs = [
+      {
+        id: 'd1',
+        name: 'Midnight Galaxy',
+        bank: 'STELLAR NATIONAL',
+        cardType: 'PLATINUM',
+        defaultName: 'JOHN SMITH',
+        tagline: 'Deep space in your pocket',
+        gradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 45%, #0f3460 100%)',
+        accent: '#7f5af0',
+        price: '$29.99',
+        rating: '⭐ 4.9',
+        material: 'Matte Finish',
+        description: 'A deep cosmic gradient with subtle nebula tones. Crafted for those who love the night sky.'
+      },
+      {
+        id: 'd2',
+        name: 'Golden Luxe',
+        bank: 'AURUM TRUST',
+        cardType: 'SIGNATURE',
+        defaultName: 'MICHAEL JOHNSON',
+        tagline: 'Understated opulence',
+        gradient: 'linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 50%, #2d2d2d 100%)',
+        accent: '#d4af37',
+        price: '$39.99',
+        rating: '⭐ 5.0',
+        material: 'Gold Foil',
+        description: 'Sleek black canvas elevated with genuine gold foil accents. A timeless statement piece.'
+      },
+      {
+        id: 'd3',
+        name: 'Ocean Depth',
+        bank: 'PACIFIC COAST',
+        cardType: 'INFINITE',
+        defaultName: 'DAVID WILLIAMS',
+        tagline: 'Calm like the sea',
+        gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)',
+        accent: '#00b4d8',
+        price: '$29.99',
+        rating: '⭐ 4.8',
+        material: 'Gloss Finish',
+        description: 'Layered blue tones inspired by the deep ocean. Smooth, glossy, and calming.'
+      },
+      {
+        id: 'd4',
+        name: 'Cherry Blossom',
+        bank: 'ROSEWOOD BANK',
+        cardType: 'PLATINUM',
+        defaultName: 'MARY MILLER',
+        tagline: 'Soft elegance redefined',
+        gradient: 'linear-gradient(135deg, #4a0d2b 0%, #b03060 55%, #ffb6c1 100%)',
+        accent: '#ff69b4',
+        price: '$27.99',
+        rating: '⭐ 4.9',
+        material: 'Satin Finish',
+        description: 'Delicate pink hues inspired by spring blossoms. A soft, elegant everyday card.'
+      },
+      {
+        id: 'd5',
+        name: 'Carbon Stealth',
+        bank: 'OBSIDIAN BANK',
+        cardType: 'BLACK EDITION',
+        defaultName: 'JAMES BROWN',
+        tagline: 'Pure, minimal, powerful',
+        gradient: 'linear-gradient(135deg, #000000 0%, #151515 50%, #2a2a2a 100%)',
+        accent: '#888888',
+        price: '$34.99',
+        rating: '⭐ 4.8',
+        material: 'Carbon Fiber',
+        description: 'Pure black with a subtle carbon fiber texture. Built for the minimalist.'
+      },
+      {
+        id: 'd6',
+        name: 'Neon Tokyo',
+        bank: 'METRO CITY BANK',
+        cardType: 'SIGNATURE',
+        defaultName: 'ROBERT JONES',
+        tagline: 'Street energy, refined',
+        gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)',
+        accent: '#ff006e',
+        price: '$32.99',
+        rating: '⭐ 4.9',
+        material: 'Holographic',
+        description: 'Electric neon gradients inspired by Tokyo nights. Vivid, holographic, unforgettable.'
+      },
+      {
+        id: 'd7',
+        name: 'Emerald Royale',
+        bank: 'LIBERTY NATIONAL',
+        cardType: 'INFINITE',
+        defaultName: 'WILLIAM GARCIA',
+        tagline: 'Fresh. Bold. Timeless.',
+        gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)',
+        accent: '#10b981',
+        price: '$31.99',
+        rating: '⭐ 4.7',
+        material: 'Matte Finish',
+        description: 'Rich emerald green with subtle depth. A classic colour with a modern twist.'
+      },
+      {
+        id: 'd8',
+        name: 'Sunset Blaze',
+        bank: 'SUNRISE BANK',
+        cardType: 'ELITE',
+        defaultName: 'PATRICIA DAVIS',
+        tagline: 'Warm glow, bold statement',
+        gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)',
+        accent: '#f59e0b',
+        price: '$30.99',
+        rating: '⭐ 4.8',
+        material: 'Gloss Finish',
+        description: 'Fiery red-to-amber transition. Inspired by dusk over the horizon. Warm and striking.'
+      }
+    ];
+
+    // ========== STATE ==========
+    var currentDesign = null;
+    var currentQty = 1;
+    var currentOrderDesign = null;
+    var isFlipped = false;
+
+    // ========== TOAST ==========
+    function showToast(message, type) {
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + (type || '');
+      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
+      container.appendChild(toast);
+      setTimeout(function() { toast.remove(); }, 3000);
+    }
+
+    // ========== CARD RENDER HELPERS ==========
+    function cardFrontHTML(design, personalization) {
+      var holderName = (personalization && personalization.trim())
+        ? personalization.trim().toUpperCase()
+        : design.defaultName;
+      if (holderName.length > 22) holderName = holderName.slice(0, 22);
+
+      return (
+        '<div class="cc-face cc-front" style="background:' + design.gradient + '">' +
+          '<div class="cc-glow" style="background: radial-gradient(circle at 78% 18%, ' + design.accent + '55, transparent 62%)"></div>' +
+          '<div class="cc-sheen"></div>' +
+          '<div class="cc-top">' +
+            '<div class="cc-bank-row">' +
+              '<div class="cc-bank">' + design.bank + '</div>' +
+              '<div class="cc-bank-type">' + design.cardType + '</div>' +
+            '</div>' +
+            '<div class="cc-contactless"><div class="cc-contactless-icon"></div></div>' +
+          '</div>' +
+          '<div class="cc-chip"></div>' +
+          '<div class="cc-number">•••• •••• •••• 1234</div>' +
+          '<div class="cc-bottom">' +
+            '<div>' +
+              '<div class="cc-label">Card Holder</div>' +
+              '<div class="cc-value">' + holderName + '</div>' +
+            '</div>' +
+            '<div>' +
+              '<div class="cc-label">Expires</div>' +
+              '<div class="cc-value">12 / 28</div>' +
+            '</div>' +
+            '<div class="cc-visa">VISA</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    function cardBackHTML(design) {
+      return (
+        '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
+          '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
+          '<div class="cc-stripe"></div>' +
+          '<div class="cc-back-content">' +
+            '<div class="cc-sig-row">' +
+              '<div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div>' +
+              '<div class="cc-cvv">123</div>' +
+            '</div>' +
+            '<div class="cc-back-text">This is a design mockup. Issued by Aura Cards Studio.<br/>For customer preview only. Not a real financial instrument.</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }
+
+    // ========== RENDER PRODUCT GRID ==========
+    function renderGrid() {
+      var grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      designs.forEach(function(design) {
+        var card = document.createElement('div');
+        card.className = 'grid-card';
+        card.setAttribute('data-id', design.id);
+
+        card.innerHTML =
+          '<div class="cc-preview">' +
+            cardFrontHTML(design, null) +
+            cardBackHTML(design) +
+          '</div>' +
+          '<div class="gc-info">' +
+            '<div class="gc-name">' + design.name + '</div>' +
+            '<div class="gc-tagline">' + design.tagline + '</div>' +
+            '<div class="gc-material">' + design.material + '</div>' +
+            '<div class="gc-meta">' +
+              '<span class="gc-rating">' + design.rating + '</span>' +
+              '<span class="gc-price">' + design.price + '</span>' +
+            '</div>' +
+            '<div class="gc-actions">' +
+              '<button class="gc-buy-btn" data-action="buy">Buy Now</button>' +
+            '</div>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      attachGridEvents();
+    }
+
+    function attachGridEvents() {
+      document.querySelectorAll('.grid-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.gc-buy-btn')) return;
+          var design = designs.find(d => d.id === card.getAttribute('data-id'));
+          if (design) openProductModal(design);
+        });
+      });
+
+      document.querySelectorAll('.gc-buy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var design = designs.find(d => d.id === btn.closest('.grid-card').getAttribute('data-id'));
+          if (!design) return;
+          currentDesign = design;
+          currentQty = 1;
+          document.getElementById('personalizationInput').value = '';
+          placeOrderDirect();
+        });
+      });
+    }
+
+    // ========== PRODUCT MODAL ==========
+    function openProductModal(design) {
+      currentDesign = design;
+      currentQty = 1;
+      isFlipped = false;
+
+      var inner = document.getElementById('modalCardInner');
+      inner.innerHTML = cardFrontHTML(design, null) + cardBackHTML(design);
+      document.getElementById('modalCardWrap').classList.remove('flipped');
+
+      document.getElementById('modalName').textContent = design.name;
+      document.getElementById('modalTagline').textContent = design.tagline;
+      document.getElementById('modalPrice').textContent = design.price;
+      document.getElementById('modalRating').textContent = design.rating;
+      document.getElementById('modalMaterial').textContent = design.material;
+      document.getElementById('modalDescription').textContent = design.description;
+      document.getElementById('qtyValue').textContent = '1';
+      document.getElementById('personalizationInput').value = '';
+
+      document.getElementById('productOverlay').style.display = 'flex';
+    }
+
+    function updateModalCardPersonalization() {
+      if (!currentDesign) return;
+      var personalization = document.getElementById('personalizationInput').value;
+      var frontEl = document.querySelector('#modalCardInner .cc-front');
+      if (frontEl) {
+        var holderEl = frontEl.querySelector('.cc-value');
+        var name = personalization.trim()
+          ? personalization.trim().toUpperCase()
+          : currentDesign.defaultName;
+        if (name.length > 22) name = name.slice(0, 22);
+        holderEl.textContent = name;
+      }
+    }
+
+    // ========== ORDER FLOW ==========
+    function placeOrderDirect() {
+      if (!currentDesign) return;
+      var personalization = document.getElementById('personalizationInput')
+        ? document.getElementById('personalizationInput').value.trim()
+        : '';
+
+      currentOrderDesign = {
+        name: currentDesign.name,
+        price: currentDesign.price,
+        qty: currentQty,
+        material: currentDesign.material,
+        personalization: personalization
+      };
+
+      document.getElementById('productOverlay').style.display = 'none';
+      document.getElementById('orderOverlay').style.display = 'flex';
+      document.getElementById('orderName').value = '';
+      document.getElementById('orderPhone').value = '';
+      document.getElementById('orderAddress').value = '';
+      document.getElementById('orderEmail').value = '';
+    }
+
+    function placeOrderFromForm(e) {
+      e.preventDefault();
+      var customerName = document.getElementById('orderName').value.trim();
+      var phone = document.getElementById('orderPhone').value.trim();
+      var address = document.getElementById('orderAddress').value.trim();
+      var email = document.getElementById('orderEmail').value.trim();
+
+      if (!customerName || !phone || !address) {
+        alert('Please fill all required fields');
+        return;
+      }
+
+      var newOrder = {
+        id: Date.now().toString(),
+        designName: currentOrderDesign.name,
+        price: currentOrderDesign.price,
+        qty: currentOrderDesign.qty,
+        material: currentOrderDesign.material,
+        personalization: currentOrderDesign.personalization,
+        customerName: customerName,
+        phone: phone,
+        address: address,
+        email: email,
+        timestamp: Date.now()
+      };
+
+      document.getElementById('orderOverlay').style.display = 'none';
+      showToast('Order placed successfully!', 'success');
+      showSuccessModal(newOrder);
+      playOrderSound();
+    }
+
+    function showSuccessModal(order) {
+      var modal = document.getElementById('successOverlay');
+      var detailsContainer = document.getElementById('successOrderDetails');
+
+      var html = '';
+      html += '<span>💳 ' + order.designName + ' × ' + order.qty + ' — ' + order.price + '</span>';
+      html += '<span>🎨 ' + order.material + '</span>';
+      if (order.personalization) {
+        html += '<span>✍️ "' + order.personalization + '"</span>';
+      }
+      html += '<span>📞 ' + order.phone + '</span>';
+      html += '<span>📍 ' + order.address + '</span>';
+
+      detailsContainer.innerHTML = html;
+      detailsContainer.style.display = 'block';
+      modal.style.display = 'flex';
+      spawnConfetti();
+    }
+
+    function spawnConfetti() {
+      var container = document.getElementById('confettiContainer');
+      container.innerHTML = '';
+      var colors = ['#7f5af0', '#d4af37', '#00d4ff', '#ff006e', '#10b981', '#f59e0b'];
+      for (var i = 0; i < 70; i++) {
+        var piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        piece.style.animationDelay = Math.random() * 0.5 + 's';
+        piece.style.width = (Math.random() * 8 + 6) + 'px';
+        piece.style.height = (Math.random() * 8 + 6) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        container.appendChild(piece);
+      }
+      setTimeout(function() { container.innerHTML = ''; }, 4000);
+    }
+
+    function playOrderSound() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var o1 = ctx.createOscillator();
+        var o2 = ctx.createOscillator();
+        var g = ctx.createGain();
+        o1.type = 'sine';
+        o1.frequency.setValueAtTime(880, ctx.currentTime);
+        o2.type = 'sine';
+        o2.frequency.setValueAtTime(1320, ctx.currentTime + 0.1);
+        g.gain.setValueAtTime(0.08, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+        o1.connect(g); o2.connect(g); g.connect(ctx.destination);
+        o1.start(); o2.start(ctx.currentTime + 0.1);
+        o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2);
+      } catch(e) {}
+    }
+
+    // ========== EVENT LISTENERS ==========
+    document.getElementById('modalCardWrap').addEventListener('click', function() {
+      this.classList.toggle('flipped');
+      isFlipped = this.classList.contains('flipped');
+    });
+
+    document.getElementById('personalizationInput').addEventListener('input', updateModalCardPersonalization);
+
+    document.getElementById('qtyMinus').addEventListener('click', function() {
+      if (currentQty > 1) currentQty--;
+      document.getElementById('qtyValue').textContent = currentQty;
+    });
+    document.getElementById('qtyPlus').addEventListener('click', function() {
+      currentQty++;
+      document.getElementById('qtyValue').textContent = currentQty;
+    });
+
+    document.getElementById('modalBuyBtn').addEventListener('click', placeOrderDirect);
+
+    document.getElementById('productClose').addEventListener('click', function() {
+      document.getElementById('productOverlay').style.display = 'none';
+    });
+    document.getElementById('productOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+
+    document.getElementById('orderClose').addEventListener('click', function() {
+      document.getElementById('orderOverlay').style.display = 'none';
+    });
+    document.getElementById('orderOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+    document.getElementById('orderForm').addEventListener('submit', placeOrderFromForm);
+
+    document.getElementById('successCloseBtn').addEventListener('click', function() {
+      document.getElementById('successOverlay').style.display = 'none';
+      document.getElementById('confettiContainer').innerHTML = '';
+    });
+    document.getElementById('successOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+        document.getElementById('confettiContainer').innerHTML = '';
+      }
+    });
+
+    // ========== INIT ==========
+    renderGrid();
+  </script>
+</body>
+</html>
