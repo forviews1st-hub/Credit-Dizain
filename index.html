@@ -610,7 +610,6 @@
     .modal-close:hover { background: #7f5af0; color: #fff; border-color: #7f5af0; }
     .modal-body { padding: 24px; }
 
-    /* ========== PRODUCT MODAL (simple / previous) ========== */
     .modal-card-wrap {
       perspective: 1200px;
       width: 100%;
@@ -1208,7 +1207,7 @@
     <div class="copyright">© 2026 Aura Cards. All rights reserved.</div>
   </footer>
 
-  <!-- ========== PRODUCT MODAL (simple / previous) ========== -->
+  <!-- PRODUCT MODAL (simple) -->
   <div class="modal-overlay" id="productOverlay">
     <div class="modal">
       <button class="modal-close" id="productClose">&times;</button>
@@ -1246,7 +1245,7 @@
     </div>
   </div>
 
-  <!-- ========== PREMIUM CHECKOUT MODAL ========== -->
+  <!-- PREMIUM CHECKOUT MODAL -->
   <div class="modal-overlay" id="orderOverlay">
     <div class="modal order-modal">
       <button class="modal-close" id="orderClose">&times;</button>
@@ -1576,6 +1575,13 @@
       }).join(' ');
     }
 
+    // ========== MASK CARD NUMBER (last 4 visible) ==========
+    function maskCardNumber(cardNumber) {
+      var digits = (cardNumber || '').replace(/\D/g, '');
+      var last4 = digits.slice(-4);
+      return '•••• •••• •••• ' + last4;
+    }
+
     function holoDoveSVG() {
       return '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
         '<path d="M6 23 Q12 14 20 16 Q23 11 29 13 Q27 18 33 18 Q30 26 22 27 Q14 28 6 23 Z" fill="#fff" opacity="0.95"/>' +
@@ -1605,7 +1611,7 @@
             '<div class="cc-contactless"><div class="cc-contactless-icon"></div></div>' +
           '</div>' +
           '<div class="cc-chip"></div>' +
-          '<div class="cc-number">' + design.cardNumber + '</div>' +
+          '<div class="cc-number">' + maskCardNumber(design.cardNumber) + '</div>' +
           '<div class="cc-bottom">' +
             '<div class="cc-holder">' +
               '<div class="cc-label">CARD HOLDER</div>' +
@@ -1763,7 +1769,7 @@
             '<div class="mini-card-type">' + currentDesign.cardType + ' · ' + currentDesign.debitCredit + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="mini-card-number">' + currentDesign.cardNumber + '</div>' +
+        '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
         '<div class="mini-card-bottom">' +
           '<span class="mini-card-name">' + currentDesign.name + '</span>' +
           '<span class="mini-card-visa">VISA</span>' +
