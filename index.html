@@ -51,7 +51,6 @@
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
-    /* ========== HERO BANNER (16:9) ========== */
     .hero-banner {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -505,6 +504,232 @@
       line-height: 1.35;
     }
 
+    /* ========== AMEX GOLD CARD — REALISTIC ========== */
+    .cc-face.cc-front.cc-amex-gold {
+      padding: 0;
+      background:
+        radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.55) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(240, 200, 90, 0.35) 0%, transparent 60%),
+        linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%);
+      color: #1a1408;
+      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
+    }
+    .cc-face.cc-front.cc-amex-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-image:
+        repeating-radial-gradient(circle at 20% 30%, transparent 0 6px, rgba(255, 235, 150, 0.09) 6px 7px),
+        repeating-radial-gradient(circle at 70% 70%, transparent 0 8px, rgba(120, 85, 15, 0.07) 8px 9px),
+        repeating-linear-gradient(0deg, transparent 0 4px, rgba(255, 240, 170, 0.05) 4px 5px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cc-face.cc-front.cc-amex-gold::after { content: none; }
+
+    .amex-inner-border {
+      position: absolute;
+      inset: 7px;
+      border: 1.2px solid rgba(26, 20, 8, 0.55);
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .amex-inner-border::before {
+      content: '';
+      position: absolute;
+      inset: 2.5px;
+      border: 0.5px solid rgba(26, 20, 8, 0.3);
+      border-radius: 6px;
+    }
+
+    .amex-header {
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      color: #1a1408;
+      z-index: 5;
+      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.8);
+    }
+
+    .amex-chip-wrap {
+      position: absolute;
+      top: 47%;
+      left: 16px;
+      transform: translateY(-50%);
+      z-index: 5;
+    }
+    .amex-chip {
+      width: 32px;
+      height: 24px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%);
+      position: relative;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.6),
+        inset 0 -1px 0 rgba(0,0,0,0.35),
+        0 1px 3px rgba(0,0,0,0.4);
+    }
+    .amex-chip::before {
+      content: '';
+      position: absolute;
+      inset: 2.5px;
+      border-radius: 2px;
+      border: 0.5px solid rgba(0,0,0,0.4);
+      background-image:
+        linear-gradient(to bottom, transparent 31%, rgba(0,0,0,0.42) 31%, rgba(0,0,0,0.42) 34%, transparent 34%),
+        linear-gradient(to bottom, transparent 64%, rgba(0,0,0,0.42) 64%, rgba(0,0,0,0.42) 67%, transparent 67%),
+        linear-gradient(to right, transparent 47%, rgba(0,0,0,0.42) 47%, rgba(0,0,0,0.42) 53%, transparent 53%);
+    }
+
+    .amex-centurion {
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46px;
+      height: 60px;
+      z-index: 5;
+    }
+    .amex-centurion svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 0.5px 0 rgba(255, 245, 200, 0.7));
+    }
+
+    .amex-cid {
+      position: absolute;
+      top: 47%;
+      right: 16px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      color: #1a1408;
+      z-index: 5;
+    }
+    .amex-cid-contactless {
+      width: 12px;
+      height: 12px;
+      position: relative;
+      display: inline-block;
+    }
+    .amex-cid-contactless::before,
+    .amex-cid-contactless::after {
+      content: '';
+      position: absolute;
+      border: 1.3px solid #1a1408;
+      border-radius: 50%;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-top-color: transparent;
+      opacity: 0.85;
+    }
+    .amex-cid-contactless::before { width: 7px; height: 7px; top: 2.5px; left: 2.5px; transform: rotate(45deg); }
+    .amex-cid-contactless::after { width: 11px; height: 11px; top: 0.5px; left: 0.5px; transform: rotate(45deg); }
+
+    .amex-number {
+      position: absolute;
+      bottom: 33%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2.6px;
+      font-variant-numeric: tabular-nums;
+      color: #1a1408;
+      z-index: 5;
+      text-shadow:
+        0 0.5px 0 rgba(255, 245, 200, 0.85),
+        -0.5px -0.5px 0 rgba(80, 55, 10, 0.25);
+    }
+
+    .amex-bottom {
+      position: absolute;
+      bottom: 20px;
+      left: 18px;
+      right: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 5;
+    }
+    .amex-holder {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #1a1408;
+      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.75);
+    }
+    .amex-member {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 6.5px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      line-height: 1.05;
+      color: #1a1408;
+      text-transform: uppercase;
+      text-align: right;
+    }
+    .amex-member-circle {
+      border: 1.2px solid #1a1408;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 900;
+      flex-shrink: 0;
+      background: rgba(255, 245, 200, 0.15);
+    }
+    .amex-copyright {
+      position: absolute;
+      bottom: 9px;
+      right: 16px;
+      font-size: 6px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      color: #1a1408;
+      opacity: 0.7;
+      z-index: 5;
+    }
+
+    /* AMEX Modal scale-up */
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-header { font-size: 16px; top: 20px; letter-spacing: 1.8px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-chip { width: 42px; height: 32px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-chip-wrap { left: 22px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-centurion { width: 62px; height: 80px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid { font-size: 13px; right: 22px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless { width: 15px; height: 15px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::before { width: 9px; height: 9px; top: 3px; left: 3px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::after { width: 14px; height: 14px; top: 0.5px; left: 0.5px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-number { font-size: 18px; letter-spacing: 3px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-bottom { bottom: 26px; left: 24px; right: 24px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-holder { font-size: 12px; letter-spacing: 1.6px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-member { font-size: 8px; gap: 5px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-member-circle { width: 26px; height: 26px; font-size: 13px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-copyright { font-size: 8px; right: 22px; bottom: 12px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 10px; border-width: 1.6px; }
+    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 3.5px; }
+
     .gc-info { display: flex; flex-direction: column; gap: 6px; }
     .gc-name { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.2px; line-height: 1.3; }
     .gc-tagline { font-size: 12px; color: #777; font-weight: 500; letter-spacing: 0.2px; }
@@ -898,6 +1123,42 @@
       border-radius: 1px;
     }
 
+    .mini-card-preview.mini-amex {
+      background:
+        radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.5) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.45) 0%, transparent 50%),
+        linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%);
+      color: #1a1408;
+    }
+    .mini-card-preview.mini-amex .mini-card-bank,
+    .mini-card-preview.mini-amex .mini-card-number,
+    .mini-card-preview.mini-amex .mini-card-name,
+    .mini-card-preview.mini-amex .mini-card-type {
+      color: #1a1408;
+      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
+    }
+    .mini-card-preview.mini-amex .mini-card-bank {
+      text-align: center;
+      width: 100%;
+      font-size: 9px;
+      letter-spacing: 1.2px;
+    }
+    .mini-card-preview.mini-amex .mini-card-number {
+      letter-spacing: 2.2px;
+      font-size: 12px;
+    }
+    .mini-card-amex-box {
+      font-weight: 900;
+      font-size: 8px;
+      letter-spacing: 0.6px;
+      color: #fff;
+      background: #006FCF;
+      padding: 3px 6px;
+      border-radius: 2px;
+      line-height: 1;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+
     .section-divider {
       display: flex;
       align-items: center;
@@ -1276,7 +1537,6 @@
   <div class="top-brand-sub">Custom Credit Card Designs</div>
 
   <main>
-    <!-- HERO BANNER (16:9) -->
     <div class="hero-banner" id="heroBanner">
       <img src="hero-banner.png" alt="Aura Cards - Premium Credit Card Designs" />
     </div>
@@ -1293,7 +1553,6 @@
     <div class="copyright">© 2026 Aura Cards. All rights reserved.</div>
   </footer>
 
-  <!-- PRODUCT MODAL -->
   <div class="modal-overlay" id="productOverlay">
     <div class="modal">
       <button class="modal-close" id="productClose">&times;</button>
@@ -1331,7 +1590,6 @@
     </div>
   </div>
 
-  <!-- PREMIUM CHECKOUT MODAL -->
   <div class="modal-overlay" id="orderOverlay">
     <div class="modal order-modal">
       <button class="modal-close" id="orderClose">&times;</button>
@@ -1398,7 +1656,6 @@
     </div>
   </div>
 
-  <!-- PAYMENT MODAL -->
   <div class="modal-overlay" id="paymentOverlay">
     <div class="modal order-modal">
       <button class="modal-close" id="paymentClose">&times;</button>
@@ -1446,7 +1703,6 @@
     </div>
   </div>
 
-  <!-- SUCCESS MODAL -->
   <div class="success-overlay" id="successOverlay">
     <div class="success-modal">
       <div class="success-checkmark">
@@ -1504,10 +1760,33 @@
       };
     })();
 
-    // ========== PRODUCT DATA (5 Designs - 3 removed) ==========
     var designs = [
       {
+        id: 'amex_gold',
+        brand: 'amex',
+        name: 'American Express Gold',
+        bank: 'AMERICAN EXPRESS',
+        bankInitial: 'AE',
+        cardType: 'GOLD',
+        debitCredit: 'CREDIT',
+        cardNumber: '3759 876543 21001',
+        expiry: '06 / 28',
+        cvv: '8172',
+        cid: '7997',
+        memberSince: '93',
+        serviceNumber: '1-800-528-4800',
+        defaultName: 'MICHAEL ANDERSON',
+        tagline: 'The world in your wallet',
+        gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)',
+        accent: '#d4af37',
+        price: '₹1,499',
+        rating: '⭐ 5.0',
+        material: 'Gold Foil',
+        description: 'A premium gold-finish card with the iconic American Express emblem. Timeless, distinguished, powerful.'
+      },
+      {
         id: 'd6',
+        brand: 'visa',
         name: 'Neon Tokyo',
         bank: 'METRO CITY BANK',
         bankInitial: 'M',
@@ -1528,6 +1807,7 @@
       },
       {
         id: 'd8',
+        brand: 'visa',
         name: 'Sunset Blaze',
         bank: 'SUNRISE BANK',
         bankInitial: 'S',
@@ -1548,6 +1828,7 @@
       },
       {
         id: 'd3',
+        brand: 'visa',
         name: 'Ocean Depth',
         bank: 'PACIFIC COAST',
         bankInitial: 'P',
@@ -1568,6 +1849,7 @@
       },
       {
         id: 'd4',
+        brand: 'visa',
         name: 'Cherry Blossom',
         bank: 'ROSEWOOD BANK',
         bankInitial: 'R',
@@ -1588,6 +1870,7 @@
       },
       {
         id: 'd7',
+        brand: 'visa',
         name: 'Emerald Royale',
         bank: 'LIBERTY NATIONAL',
         bankInitial: 'L',
@@ -1652,8 +1935,10 @@
 
     function maskCardNumber(cardNumber) {
       var digits = (cardNumber || '').replace(/\D/g, '');
-      var last4 = digits.slice(-4);
-      return '•••• •••• •••• ' + last4;
+      if (digits.length === 15) {
+        return '•••• ••••• ' + digits.slice(-5);
+      }
+      return '•••• •••• •••• ' + digits.slice(-4);
     }
 
     function holoDoveSVG() {
@@ -1663,12 +1948,48 @@
       '</svg>';
     }
 
-    function cardFrontHTML(design, personalization) {
-      var holderName = (personalization && personalization.trim())
-        ? personalization.trim().toUpperCase()
-        : design.defaultName;
-      if (holderName.length > 22) holderName = holderName.slice(0, 22);
+    function centurionSVG() {
+      return '<svg viewBox="0 0 50 66" xmlns="http://www.w3.org/2000/svg">' +
+        '<ellipse cx="25" cy="33" rx="22" ry="30" fill="none" stroke="#1a1408" stroke-width="1.4"/>' +
+        '<ellipse cx="25" cy="33" rx="19.5" ry="27.5" fill="none" stroke="#1a1408" stroke-width="0.6" opacity="0.7"/>' +
+        '<path d="M 20 12 Q 18 6 21 3 L 24 4 Q 22 8 23 12 Z" fill="#1a1408"/>' +
+        '<path d="M 18 15 Q 22 10 28 11 Q 32 13 33 18 L 32 22 Q 30 20 27 19 Q 23 19 20 20 L 18 22 Z" fill="#1a1408"/>' +
+        '<path d="M 27 19 Q 32 19 34 23 Q 36 27 35 31 Q 34 34 32 36 L 30 40 Q 29 42 27 42 L 25 40 Q 24 36 24 32 L 24 22 Z" fill="#1a1408"/>' +
+        '<path d="M 22 42 Q 22 46 21 50 L 30 50 Q 29 46 29 42 Z" fill="#1a1408"/>' +
+        '<path d="M 18 50 Q 16 54 15 60 L 15 63 L 36 63 L 36 60 Q 35 54 33 50 Q 28 48 18 50 Z" fill="#1a1408"/>' +
+        '<rect x="20" y="52" width="12" height="8" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.8"/>' +
+        '<line x1="26" y1="52" x2="26" y2="60" stroke="#d4af37" stroke-width="0.5" opacity="0.8"/>' +
+        '<line x1="20" y1="56" x2="32" y2="56" stroke="#d4af37" stroke-width="0.5" opacity="0.8"/>' +
+      '</svg>';
+    }
 
+    function amexFrontHTML(design, holderName) {
+      return (
+        '<div class="cc-face cc-front cc-amex-gold">' +
+          '<div class="amex-inner-border"></div>' +
+          '<div class="amex-header">AMERICAN EXPRESS</div>' +
+          '<div class="amex-chip-wrap">' +
+            '<div class="amex-chip"></div>' +
+          '</div>' +
+          '<div class="amex-centurion">' + centurionSVG() + '</div>' +
+          '<div class="amex-cid">' +
+            '<span class="amex-cid-contactless"></span>' +
+            '<span>' + (design.cid || '7997') + '</span>' +
+          '</div>' +
+          '<div class="amex-number">' + maskCardNumber(design.cardNumber) + '</div>' +
+          '<div class="amex-bottom">' +
+            '<div class="amex-holder">' + holderName + '</div>' +
+            '<div class="amex-member">' +
+              '<span>MEMBER<br/>SINCE</span>' +
+              '<span class="amex-member-circle">' + (design.memberSince || '93') + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="amex-copyright">© AMEX</div>' +
+        '</div>'
+      );
+    }
+
+    function visaFrontHTML(design, holderName) {
       return (
         '<div class="cc-face cc-front" style="background:' + design.gradient + '">' +
           '<div class="cc-glow" style="background: radial-gradient(circle at 78% 18%, ' + design.accent + '55, transparent 62%)"></div>' +
@@ -1704,7 +2025,20 @@
       );
     }
 
+    function cardFrontHTML(design, personalization) {
+      var holderName = (personalization && personalization.trim())
+        ? personalization.trim().toUpperCase()
+        : design.defaultName;
+      if (holderName.length > 22) holderName = holderName.slice(0, 22);
+
+      if (design.brand === 'amex') {
+        return amexFrontHTML(design, holderName);
+      }
+      return visaFrontHTML(design, holderName);
+    }
+
     function cardBackHTML(design) {
+      var backTextColor = design.brand === 'amex' ? 'color:#1a1408;' : '';
       return (
         '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
           '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
@@ -1718,7 +2052,7 @@
               '<span class="cc-back-service-label">CUSTOMER SERVICE</span>' +
               '<span class="cc-back-service-num">' + design.serviceNumber + '</span>' +
             '</div>' +
-            '<div class="cc-back-text">This card is property of ' + titleCase(design.bank) + '. Use is subject to cardholder agreement. Design mockup by Aura Cards Studio — not a real financial instrument.</div>' +
+            '<div class="cc-back-text" style="' + backTextColor + '">This card is property of ' + titleCase(design.bank) + '. Use is subject to cardholder agreement. Design mockup by Aura Cards Studio — not a real financial instrument.</div>' +
           '</div>' +
         '</div>'
       );
@@ -1729,7 +2063,7 @@
       grid.innerHTML = '';
 
       designs.forEach(function(design) {
-        var finishClass = getFinishClass(design.material);
+        var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
@@ -1785,7 +2119,7 @@
       currentQty = 1;
       isFlipped = false;
 
-      var finishClass = getFinishClass(design.material);
+      var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
       var wrap = document.getElementById('modalCardWrap');
       wrap.className = 'modal-card-wrap ' + finishClass;
 
@@ -1808,14 +2142,20 @@
     function updateModalCardPersonalization() {
       if (!currentDesign) return;
       var personalization = document.getElementById('personalizationInput').value;
-      var frontEl = document.querySelector('#modalCardInner .cc-front');
-      if (frontEl) {
-        var holderEl = frontEl.querySelector('.cc-value');
-        var name = personalization.trim()
-          ? personalization.trim().toUpperCase()
-          : currentDesign.defaultName;
-        if (name.length > 22) name = name.slice(0, 22);
-        holderEl.textContent = name;
+      var name = personalization.trim()
+        ? personalization.trim().toUpperCase()
+        : currentDesign.defaultName;
+      if (name.length > 22) name = name.slice(0, 22);
+
+      if (currentDesign.brand === 'amex') {
+        var amexHolder = document.querySelector('#modalCardInner .amex-holder');
+        if (amexHolder) amexHolder.textContent = name;
+      } else {
+        var frontEl = document.querySelector('#modalCardInner .cc-front');
+        if (frontEl) {
+          var holderEl = frontEl.querySelector('.cc-value');
+          if (holderEl) holderEl.textContent = name;
+        }
       }
     }
 
@@ -1834,20 +2174,36 @@
       };
 
       var previewEl = document.getElementById('miniCardPreview');
+      var isAmex = currentDesign.brand === 'amex';
+      previewEl.className = 'mini-card-preview' + (isAmex ? ' mini-amex' : '');
       previewEl.style.background = currentDesign.gradient;
-      previewEl.innerHTML =
-        '<div class="mini-card-glow" style="background: radial-gradient(circle at 78% 18%, ' + currentDesign.accent + '66, transparent 62%)"></div>' +
-        '<div class="mini-card-top">' +
-          '<div>' +
-            '<div class="mini-card-bank">' + currentDesign.bank + '</div>' +
-            '<div class="mini-card-type">' + currentDesign.cardType + ' · ' + currentDesign.debitCredit + '</div>' +
+
+      if (isAmex) {
+        previewEl.innerHTML =
+          '<div class="mini-card-glow" style="background: radial-gradient(circle at 78% 18%, rgba(255,255,255,0.15), transparent 62%)"></div>' +
+          '<div class="mini-card-top">' +
+            '<div class="mini-card-bank">AMERICAN EXPRESS</div>' +
           '</div>' +
-        '</div>' +
-        '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
-        '<div class="mini-card-bottom">' +
-          '<span class="mini-card-name">' + currentDesign.name + '</span>' +
-          '<span class="mini-card-visa">VISA</span>' +
-        '</div>';
+          '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
+          '<div class="mini-card-bottom">' +
+            '<span class="mini-card-name">' + currentDesign.name + '</span>' +
+            '<span class="mini-card-amex-box">AMEX</span>' +
+          '</div>';
+      } else {
+        previewEl.innerHTML =
+          '<div class="mini-card-glow" style="background: radial-gradient(circle at 78% 18%, ' + currentDesign.accent + '66, transparent 62%)"></div>' +
+          '<div class="mini-card-top">' +
+            '<div>' +
+              '<div class="mini-card-bank">' + currentDesign.bank + '</div>' +
+              '<div class="mini-card-type">' + currentDesign.cardType + ' · ' + currentDesign.debitCredit + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
+          '<div class="mini-card-bottom">' +
+            '<span class="mini-card-name">' + currentDesign.name + '</span>' +
+            '<span class="mini-card-visa">VISA</span>' +
+          '</div>';
+      }
 
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
