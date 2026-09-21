@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aura Cards | Custom Credit Card Designs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     * { -webkit-tap-highlight-color: transparent; }
@@ -25,7 +25,7 @@
 
     .top-brand {
       text-align: center;
-      padding: 28px 20px 6px;
+      padding: 32px 20px 6px;
       font-size: 30px;
       font-weight: 900;
       letter-spacing: 6px;
@@ -42,45 +42,99 @@
       letter-spacing: 4px;
       color: #666;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 8px;
     }
     @media (max-width:600px) {
-      .top-brand { font-size: 22px; letter-spacing: 4px; padding: 22px 14px 4px; }
+      .top-brand { font-size: 22px; letter-spacing: 4px; padding: 24px 14px 4px; }
       .top-brand-sub { font-size: 10px; letter-spacing: 3px; }
     }
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
-    .hero-banner {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 22px;
-      overflow: hidden;
-      margin-bottom: 26px;
-      cursor: pointer;
-      box-shadow:
-        0 14px 34px rgba(0,0,0,0.55),
-        0 4px 10px rgba(0,0,0,0.35),
-        inset 0 0 0 1px rgba(255,255,255,0.05);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    /* ========== HERO TEXT SECTION ========== */
+    .hero-text-section {
+      text-align: center;
+      padding: 40px 20px 40px;
+      max-width: 800px;
+      margin: 0 auto 10px;
       position: relative;
-      background: #131313;
     }
-    .hero-banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      color: #d4af37;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.35);
+      padding: 7px 18px;
+      border-radius: 30px;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', 'Inter', serif;
+      font-size: 54px;
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .hero-headline .gold-line {
       display: block;
-      transition: transform 0.5s ease;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 45%, #b8941f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .hero-banner:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 22px 50px rgba(0,0,0,0.65),
-        0 6px 14px rgba(0,0,0,0.45),
-        inset 0 0 0 1px rgba(127,90,240,0.35);
+    .hero-sub {
+      font-size: 15px;
+      color: #999;
+      line-height: 1.75;
+      max-width: 620px;
+      margin: 0 auto 26px;
+      letter-spacing: 0.2px;
     }
-    .hero-banner:hover img { transform: scale(1.02); }
+    .hero-trust {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      letter-spacing: 0.3px;
+    }
+    .hero-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .hero-trust .trust-emoji {
+      font-size: 14px;
+    }
+    .hero-trust .trust-dot {
+      color: #333;
+      font-size: 16px;
+      line-height: 1;
+    }
+    @media (max-width: 700px) {
+      .hero-text-section { padding: 28px 14px 30px; }
+      .hero-headline { font-size: 38px; }
+      .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; padding: 6px 14px; }
+      .hero-sub { font-size: 14px; }
+      .hero-trust { font-size: 11px; gap: 8px 10px; }
+    }
+    @media (max-width: 400px) {
+      .hero-headline { font-size: 32px; }
+      .hero-sub { font-size: 13px; }
+    }
 
     .heading-row { margin-bottom: 20px; }
     .heading-row h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
@@ -1605,9 +1659,24 @@
   <div class="top-brand-sub">Custom Credit Card Designs</div>
 
   <main>
-    <div class="hero-banner" id="heroBanner">
-      <img src="hero-banner.png" alt="Aura Cards - Premium Credit Card Designs" />
-    </div>
+    <!-- HERO TEXT SECTION -->
+    <section class="hero-text-section">
+      <div class="hero-eyebrow">✨ Luxury Credit Card Designs ✨</div>
+      <h1 class="hero-headline">
+        Swipe In Style.
+        <span class="gold-line">Own The Moment.</span>
+      </h1>
+      <p class="hero-sub">
+        Premium handcrafted credit card designs — holographic, gold foil, matte finishes. Personalize every card into a statement.
+      </p>
+      <div class="hero-trust">
+        <span><span class="trust-emoji">💳</span> Chip Compatible</span>
+        <span class="trust-dot">•</span>
+        <span><span class="trust-emoji">⚡</span> Fast Delivery</span>
+        <span class="trust-dot">•</span>
+        <span><span class="trust-emoji">🎨</span> Fully Customizable</span>
+      </div>
+    </section>
 
     <div class="heading-row">
       <h1>Buy Card's</h1>
@@ -2410,10 +2479,6 @@
         o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2);
       } catch(e) {}
     }
-
-    document.getElementById('heroBanner').addEventListener('click', function() {
-      document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
 
     document.getElementById('modalCardWrap').addEventListener('click', function() {
       this.classList.toggle('flipped');
