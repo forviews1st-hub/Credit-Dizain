@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aura Cards | Custom Credit Card Designs</title>
+  <title>Card Seller | Premium Credit Card Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -23,40 +23,58 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .top-brand {
-      text-align: center;
-      padding: 32px 20px 6px;
+    /* ========== STICKY GLASS HEADER ========== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 16px 26px;
+      background: rgba(10, 10, 10, 0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .site-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: default;
+      user-select: none;
+    }
+    .site-brand-icon {
       font-size: 30px;
-      font-weight: 900;
-      letter-spacing: 6px;
-      background: linear-gradient(180deg, #ffffff 0%, #b0b0b0 100%);
+      line-height: 1;
+      filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.5));
+    }
+    .site-brand-name {
+      font-family: 'Cormorant Garamond', 'Inter', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      user-select: none;
-      text-transform: uppercase;
+      line-height: 1;
     }
-    .top-brand-sub {
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: #666;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    @media (max-width:600px) {
-      .top-brand { font-size: 22px; letter-spacing: 4px; padding: 24px 14px 4px; }
-      .top-brand-sub { font-size: 10px; letter-spacing: 3px; }
+    @media (max-width: 500px) {
+      .site-header { padding: 14px 16px; }
+      .site-brand-name { font-size: 24px; letter-spacing: 1px; }
+      .site-brand-icon { font-size: 24px; }
     }
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
-    /* ========== HERO TEXT SECTION ========== */
+    /* ========== HERO TEXT SECTION (LEFT ALIGNED) ========== */
     .hero-text-section {
-      text-align: center;
-      padding: 40px 20px 40px;
+      text-align: left;
+      padding: 50px 20px 40px;
       max-width: 800px;
-      margin: 0 auto 10px;
+      margin: 0;
       position: relative;
     }
     .hero-eyebrow {
@@ -97,12 +115,12 @@
       color: #999;
       line-height: 1.75;
       max-width: 620px;
-      margin: 0 auto 26px;
+      margin: 0 0 26px;
       letter-spacing: 0.2px;
     }
     .hero-trust {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       flex-wrap: wrap;
       gap: 10px 14px;
@@ -110,6 +128,7 @@
       font-weight: 600;
       color: #888;
       letter-spacing: 0.3px;
+      margin-bottom: 0;
     }
     .hero-trust span {
       display: inline-flex;
@@ -124,12 +143,55 @@
       font-size: 16px;
       line-height: 1;
     }
+
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408;
+      border: none;
+      padding: 15px 32px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-top: 26px;
+      box-shadow: 0 8px 24px rgba(212,175,55,0.35);
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-cta-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.5), transparent);
+      transform: rotate(20deg);
+      transition: left 0.7s ease;
+    }
+    .hero-cta-btn:hover::before { left: 130%; }
+    .hero-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(212,175,55,0.5);
+    }
+    .hero-cta-btn .shop-arrow {
+      transition: transform 0.22s ease;
+    }
+    .hero-cta-btn:hover .shop-arrow {
+      transform: translateX(4px);
+    }
+
     @media (max-width: 700px) {
-      .hero-text-section { padding: 28px 14px 30px; }
+      .hero-text-section { padding: 32px 14px 30px; }
       .hero-headline { font-size: 38px; }
       .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; padding: 6px 14px; }
       .hero-sub { font-size: 14px; }
       .hero-trust { font-size: 11px; gap: 8px 10px; }
+      .hero-cta-btn { padding: 13px 26px; font-size: 14px; }
     }
     @media (max-width: 400px) {
       .hero-headline { font-size: 32px; }
@@ -146,7 +208,7 @@
       grid-template-columns: 1fr;
       gap: 18px;
       margin-bottom: 40px;
-      scroll-margin-top: 20px;
+      scroll-margin-top: 90px;
     }
     @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
     @media (min-width: 1000px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
@@ -783,7 +845,7 @@
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 10px; border-width: 1.6px; }
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 3.5px; }
 
-    /* ========== BALANCE BADGE (PREMIUM) ========== */
+    /* ========== BALANCE BADGE ========== */
     .cc-balance-badge {
       display: flex;
       flex-direction: column;
@@ -1655,13 +1717,18 @@
 </head>
 <body>
 
-  <div class="top-brand">Aura Cards</div>
-  <div class="top-brand-sub">Custom Credit Card Designs</div>
+  <!-- STICKY GLASS HEADER -->
+  <header class="site-header">
+    <div class="site-brand">
+      <span class="site-brand-icon">💳</span>
+      <span class="site-brand-name">Card Seller</span>
+    </div>
+  </header>
 
   <main>
-    <!-- HERO TEXT SECTION -->
+    <!-- HERO TEXT SECTION (Left Aligned) -->
     <section class="hero-text-section">
-      <div class="hero-eyebrow">✨ Luxury Credit Card Designs ✨</div>
+      <div class="hero-eyebrow">✨ Selling Credit Card's ✨</div>
       <h1 class="hero-headline">
         Swipe In Style.
         <span class="gold-line">Own The Moment.</span>
@@ -1676,6 +1743,10 @@
         <span class="trust-dot">•</span>
         <span><span class="trust-emoji">🎨</span> Fully Customizable</span>
       </div>
+      <button class="hero-cta-btn" id="heroCtaBtn">
+        Buy Card's
+        <span class="shop-arrow">→</span>
+      </button>
     </section>
 
     <div class="heading-row">
@@ -1687,7 +1758,7 @@
   </main>
 
   <footer>
-    <div class="copyright">© 2026 Aura Cards. All rights reserved.</div>
+    <div class="copyright">© 2026 Card Seller. All rights reserved.</div>
   </footer>
 
   <div class="modal-overlay" id="productOverlay">
@@ -2195,7 +2266,7 @@
               '<span class="cc-back-service-label">CUSTOMER SERVICE</span>' +
               '<span class="cc-back-service-num">' + design.serviceNumber + '</span>' +
             '</div>' +
-            '<div class="cc-back-text" style="' + backTextColor + '">This card is property of ' + titleCase(design.bank) + '. Use is subject to cardholder agreement. Design mockup by Aura Cards Studio — not a real financial instrument.</div>' +
+            '<div class="cc-back-text" style="' + backTextColor + '">This card is property of ' + titleCase(design.bank) + '. Use is subject to cardholder agreement. Design mockup by Card Seller Studio — not a real financial instrument.</div>' +
           '</div>' +
         '</div>'
       );
@@ -2479,6 +2550,10 @@
         o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2);
       } catch(e) {}
     }
+
+    document.getElementById('heroCtaBtn').addEventListener('click', function() {
+      document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     document.getElementById('modalCardWrap').addEventListener('click', function() {
       this.classList.toggle('flipped');
