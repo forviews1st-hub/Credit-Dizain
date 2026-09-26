@@ -69,7 +69,7 @@
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
-    /* ========== HERO TEXT SECTION (LEFT ALIGNED) ========== */
+    /* ========== HERO TEXT SECTION ========== */
     .hero-text-section {
       text-align: left;
       padding: 50px 20px 40px;
@@ -135,14 +135,8 @@
       align-items: center;
       gap: 5px;
     }
-    .hero-trust .trust-emoji {
-      font-size: 14px;
-    }
-    .hero-trust .trust-dot {
-      color: #333;
-      font-size: 16px;
-      line-height: 1;
-    }
+    .hero-trust .trust-emoji { font-size: 14px; }
+    .hero-trust .trust-dot { color: #333; font-size: 16px; line-height: 1; }
 
     .hero-cta-btn {
       display: inline-flex;
@@ -178,12 +172,8 @@
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(212,175,55,0.5);
     }
-    .hero-cta-btn .shop-arrow {
-      transition: transform 0.22s ease;
-    }
-    .hero-cta-btn:hover .shop-arrow {
-      transform: translateX(4px);
-    }
+    .hero-cta-btn .shop-arrow { transition: transform 0.22s ease; }
+    .hero-cta-btn:hover .shop-arrow { transform: translateX(4px); }
 
     @media (max-width: 700px) {
       .hero-text-section { padding: 32px 14px 30px; }
@@ -897,10 +887,7 @@
       position: relative;
       z-index: 1;
     }
-    .cc-balance-emoji {
-      font-size: 12px;
-      line-height: 1;
-    }
+    .cc-balance-emoji { font-size: 12px; line-height: 1; }
     .cc-balance-value {
       font-size: 18px;
       font-weight: 900;
@@ -1088,23 +1075,23 @@
     }
     .modal-description { color: #999; font-size: 13px; line-height: 1.7; margin-bottom: 18px; text-align: center; }
 
-    .field-group { margin-bottom: 14px; text-align: left; }
+    .field-group { margin-bottom: 10px; text-align: left; }
     .field-group label {
       display: block;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
       color: #888;
-      margin-bottom: 6px;
-      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
     }
     .field-group input,
     .field-group textarea {
       width: 100%;
-      padding: 13px 16px;
+      padding: 10px 14px;
       border: 1px solid #262626;
-      border-radius: 12px;
-      font-size: 14px;
+      border-radius: 10px;
+      font-size: 13px;
       background: #0f0f0f;
       color: #fff;
       font-family: inherit;
@@ -1157,41 +1144,42 @@
       background: linear-gradient(135deg, #8f6cf0 0%, #6a4ce0 100%);
     }
 
+    /* ========== ORDER MODAL (COMPACT) ========== */
     .order-modal {
-      max-height: 94vh;
+      max-height: 88vh;
       display: flex;
       flex-direction: column;
     }
     .order-modal .modal-body {
       overflow-y: auto;
       flex: 1;
-      padding: 26px 22px 24px;
+      padding: 18px 16px 16px;
     }
     .order-modal .modal-body::-webkit-scrollbar { width: 4px; }
     .order-modal .modal-body::-webkit-scrollbar-track { background: transparent; }
     .order-modal .modal-body::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
 
-    .checkout-header { text-align: center; margin-bottom: 22px; }
+    .checkout-header { text-align: center; margin-bottom: 14px; }
     .checkout-eyebrow {
       display: inline-block;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: #7f5af0;
       background: rgba(127,90,240,0.1);
       border: 1px solid rgba(127,90,240,0.25);
-      padding: 4px 12px;
+      padding: 3px 10px;
       border-radius: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .checkout-title {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
       color: #fff;
-      letter-spacing: -0.4px;
-      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
     }
-    .checkout-subtitle { font-size: 12px; color: #777; letter-spacing: 0.2px; line-height: 1.5; }
+    .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
 
     .mini-card-preview {
       position: relative;
@@ -1199,7 +1187,7 @@
       aspect-ratio: 1.586 / 1;
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 14px;
       padding: 13px 15px;
       display: flex;
       flex-direction: column;
@@ -1346,13 +1334,13 @@
     .section-divider {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin: 22px 0 12px;
+      gap: 8px;
+      margin: 12px 0 8px;
     }
     .section-divider span {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 2.2px;
+      letter-spacing: 2px;
       color: #666;
       white-space: nowrap;
     }
@@ -1367,19 +1355,19 @@
     .order-summary-card {
       background: #0f0f0f;
       border: 1px solid #1f1f1f;
-      border-radius: 14px;
-      padding: 14px 16px;
+      border-radius: 12px;
+      padding: 10px 12px;
       margin-bottom: 4px;
     }
     .summary-row {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
-      padding: 6px 0;
+      gap: 10px;
+      padding: 4px 0;
     }
     .summary-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       color: #777;
       letter-spacing: 0.8px;
@@ -1387,7 +1375,7 @@
       flex-shrink: 0;
     }
     .summary-value {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: #fff;
       text-align: right;
@@ -1396,17 +1384,17 @@
     .summary-divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
-      margin: 10px 0;
+      margin: 6px 0;
     }
     .total-row { padding: 4px 0; }
     .summary-label-total {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 1.5px;
       color: #fff;
     }
     .summary-value-total {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 900;
       letter-spacing: -0.5px;
       background: linear-gradient(135deg, #b59aff 0%, #7f5af0 100%);
@@ -1420,14 +1408,14 @@
       background: linear-gradient(135deg, #7f5af0 0%, #5a3cd6 100%);
       color: #fff;
       border: none;
-      border-radius: 26px;
-      padding: 17px;
-      font-size: 15px;
+      border-radius: 22px;
+      padding: 13px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.6px;
       cursor: pointer;
       font-family: inherit;
-      margin-top: 10px;
+      margin-top: 8px;
       transition: all 0.25s ease;
       box-shadow: 0 8px 24px rgba(127,90,240,0.4);
       display: flex;
@@ -1458,14 +1446,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      margin-top: 16px;
-      font-size: 11px;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 10px;
       font-weight: 600;
       color: #666;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
     }
-    .trust-badges .dot { color: #333; font-size: 14px; }
+    .trust-badges .dot { color: #333; font-size: 13px; }
     .trust-badges span:not(.dot) {
       display: inline-flex;
       align-items: center;
@@ -1476,8 +1464,8 @@
     .payment-total-card {
       background: linear-gradient(135deg, rgba(127,90,240,0.12) 0%, rgba(127,90,240,0.03) 100%);
       border: 1px solid rgba(127,90,240,0.28);
-      border-radius: 16px;
-      padding: 20px 18px 18px;
+      border-radius: 14px;
+      padding: 14px;
       text-align: center;
       margin-bottom: 4px;
       position: relative;
@@ -1492,29 +1480,29 @@
       pointer-events: none;
     }
     .payment-total-label {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 800;
       letter-spacing: 2.8px;
       color: #7f5af0;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       position: relative;
       z-index: 1;
     }
     .payment-total-amount {
-      font-size: 38px;
+      font-size: 30px;
       font-weight: 900;
       letter-spacing: -1.2px;
       background: linear-gradient(135deg, #c9b3ff 0%, #7f5af0 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       line-height: 1.05;
       position: relative;
       z-index: 1;
     }
     .payment-total-design {
-      font-size: 12px;
+      font-size: 11px;
       color: #999;
       font-weight: 500;
       letter-spacing: 0.3px;
@@ -1526,15 +1514,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 4px 0 12px;
+      margin: 4px 0 10px;
     }
     .qr-container img {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       object-fit: contain;
       background: #fff;
-      padding: 12px;
-      border-radius: 18px;
+      padding: 10px;
+      border-radius: 14px;
       box-shadow:
         0 14px 34px rgba(0,0,0,0.55),
         inset 0 0 0 1px rgba(255,255,255,0.15);
@@ -1542,29 +1530,19 @@
       image-rendering: crisp-edges;
     }
     @media (max-width:400px) {
-      .qr-container img { width: 180px; height: 180px; padding: 10px; border-radius: 14px; }
-      .payment-total-amount { font-size: 32px; }
+      .qr-container img { width: 150px; height: 150px; padding: 8px; border-radius: 12px; }
+      .payment-total-amount { font-size: 26px; }
     }
 
     .qr-hint {
       text-align: center;
-      font-size: 12px;
+      font-size: 11px;
       color: #777;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       letter-spacing: 0.3px;
       font-weight: 500;
     }
     .qr-hint strong { color: #aaa; font-weight: 700; }
-
-    .txn-help {
-      text-align: center;
-      font-size: 11px;
-      color: #666;
-      margin-top: 6px;
-      letter-spacing: 0.2px;
-      line-height: 1.4;
-    }
-    .txn-help strong { color: #7f5af0; font-weight: 700; }
 
     .success-overlay {
       position: fixed;
@@ -1717,7 +1695,6 @@
 </head>
 <body>
 
-  <!-- STICKY GLASS HEADER -->
   <header class="site-header">
     <div class="site-brand">
       <span class="site-brand-icon">💳</span>
@@ -1726,7 +1703,6 @@
   </header>
 
   <main>
-    <!-- HERO TEXT SECTION (Left Aligned) -->
     <section class="hero-text-section">
       <div class="hero-eyebrow">✨ Selling Credit Card's ✨</div>
       <h1 class="hero-headline">
@@ -1892,9 +1868,8 @@
 
         <div class="field-group">
           <label>Transaction ID</label>
-          <input type="text" id="transactionId" placeholder="123456789012" maxlength="15" autocomplete="off" />
+          <input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="15" autocomplete="off" />
         </div>
-        <p class="txn-help">Enter the <strong>12-digit</strong> UPI Transaction ID from your payment app</p>
 
         <button class="order-btn-premium" id="confirmPaymentBtn">
           <span>🔒</span> Confirm Payment
@@ -2481,7 +2456,7 @@
 
       var txnRegex = /^(\d{12}|UPI\d{12})$/;
       if (!txnRegex.test(txnId)) {
-        alert('Invalid Transaction ID.\n\nPlease enter a valid 12-digit UPI Transaction ID.\n\nExamples:\n• 123456789012\n• UPI123456789012');
+        alert('Invalid Transaction ID. Please check and try again.');
         return;
       }
 
