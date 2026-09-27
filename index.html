@@ -1181,6 +1181,7 @@
     }
     .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
 
+    /* Mini Card Preview - Full card rendered, smaller */
     .mini-card-preview {
       position: relative;
       width: 100%;
@@ -1188,148 +1189,45 @@
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 14px;
-      padding: 13px 15px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow:
-        0 14px 30px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.15),
-        inset 0 -1px 0 rgba(0,0,0,0.45);
       transition: transform 0.4s ease;
     }
     .mini-card-preview:hover { transform: translateY(-2px); }
-    .mini-card-preview::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(45deg, transparent 0 8px, rgba(255,255,255,0.025) 8px 9px),
-        repeating-linear-gradient(-45deg, transparent 0 11px, rgba(255,255,255,0.018) 11px 12px);
-      pointer-events: none;
-      z-index: 0;
-      border-radius: inherit;
+    .mini-card-preview .cc-face {
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow:
+        0 14px 30px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.15),
+        inset 0 -1px 0 rgba(0,0,0,0.4);
     }
-    .mini-card-glow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      mix-blend-mode: screen;
-      opacity: 0.85;
-      z-index: 1;
-    }
-    .mini-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      z-index: 2;
-      position: relative;
-    }
-    .mini-card-bank {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.55);
-      line-height: 1;
-    }
-    .mini-card-type {
-      font-size: 7px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-      margin-top: 4px;
-    }
-    .mini-card-number {
-      font-size: 13px;
-      letter-spacing: 2.4px;
-      font-weight: 700;
-      color: #fff;
-      text-align: center;
-      z-index: 2;
-      position: relative;
-      font-variant-numeric: tabular-nums;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.2),
-        0 -1px 0 rgba(0,0,0,0.55);
-    }
-    .mini-card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      z-index: 2;
-      position: relative;
-    }
-    .mini-card-name {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,0.55);
-    }
-    .mini-card-visa {
-      font-weight: 900;
-      font-style: italic;
-      font-size: 11px;
-      color: #1A1F71;
-      background: #fff;
-      padding: 2.5px 7px 3px;
-      border-radius: 3px;
-      letter-spacing: -0.3px;
-      transform: skewX(-10deg);
-      line-height: 1;
-      position: relative;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
-    .mini-card-visa::after {
-      content: '';
-      position: absolute;
-      bottom: 1px;
-      left: 4px;
-      right: 4px;
-      height: 1.4px;
-      background: linear-gradient(90deg, #f7b600, #ffcc00, #f79e1b);
-      border-radius: 1px;
-    }
+    /* Smaller sizes for mini card */
+    .mini-card-preview .cc-number { font-size: 12px; letter-spacing: 2.2px; }
+    .mini-card-preview .cc-bank { font-size: 10px; letter-spacing: 2px; }
+    .mini-card-preview .cc-bank-type { font-size: 6px; letter-spacing: 1.6px; }
+    .mini-card-preview .cc-bank-icon { width: 17px; height: 17px; font-size: 8px; }
+    .mini-card-preview .cc-chip { width: 30px; height: 22px; }
+    .mini-card-preview .cc-label { font-size: 5.5px; }
+    .mini-card-preview .cc-value { font-size: 9px; letter-spacing: 1px; }
+    .mini-card-preview .cc-visa { font-size: 10px; padding: 3px 7px 4px; border-radius: 3px; }
+    .mini-card-preview .cc-holo-sticker { width: 18px; height: 18px; padding: 2px; }
+    .mini-card-preview .cc-tier-wm { font-size: 28px; }
 
-    .mini-card-preview.mini-amex {
-      background:
-        radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.5) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.45) 0%, transparent 50%),
-        linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%);
-      color: #1a1408;
-    }
-    .mini-card-preview.mini-amex .mini-card-bank,
-    .mini-card-preview.mini-amex .mini-card-number,
-    .mini-card-preview.mini-amex .mini-card-name,
-    .mini-card-preview.mini-amex .mini-card-type {
-      color: #1a1408;
-      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
-    }
-    .mini-card-preview.mini-amex .mini-card-bank {
-      text-align: center;
-      width: 100%;
-      font-size: 9px;
-      letter-spacing: 1.2px;
-    }
-    .mini-card-preview.mini-amex .mini-card-number {
-      letter-spacing: 2.2px;
-      font-size: 12px;
-    }
-    .mini-card-amex-box {
-      font-weight: 900;
-      font-size: 8px;
-      letter-spacing: 0.6px;
-      color: #fff;
-      background: #006FCF;
-      padding: 3px 6px;
-      border-radius: 2px;
-      line-height: 1;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-    }
+    /* Amex specific in mini preview */
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-header { font-size: 11px; top: 13px; letter-spacing: 1.2px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-chip-wrap { left: 14px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-centurion { width: 42px; height: 55px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid { font-size: 9px; right: 14px; gap: 3px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless { width: 11px; height: 11px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::before { width: 6px; height: 6px; top: 2px; left: 2px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::after { width: 9px; height: 9px; top: 0.5px; left: 0.5px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-number { font-size: 13px; letter-spacing: 2.4px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-bottom { bottom: 18px; left: 16px; right: 16px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-holder { font-size: 9px; letter-spacing: 1.2px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-member { font-size: 6px; gap: 3.5px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-member-circle { width: 18px; height: 18px; font-size: 9px; border-width: 1px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-copyright { font-size: 5.5px; right: 14px; bottom: 8px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 6px; border-width: 1.1px; }
+    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 2px; }
 
     .section-divider {
       display: flex;
@@ -1713,11 +1611,11 @@
         Premium handcrafted credit card designs — holographic, gold foil, matte finishes. Personalize every card into a statement.
       </p>
       <div class="hero-trust">
-        <span><span class="trust-emoji">💳</span> Chip Compatible</span>
+        <span><span class="trust-emoji">💳</span> Credit Card's</span>
         <span class="trust-dot">•</span>
-        <span><span class="trust-emoji">⚡</span> Fast Delivery</span>
+        <span><span class="trust-emoji">⚡</span> Instant Delivery</span>
         <span class="trust-dot">•</span>
-        <span><span class="trust-emoji">🎨</span> Fully Customizable</span>
+        <span><span class="trust-emoji">💎</span> High Budget Card's</span>
       </div>
       <button class="hero-cta-btn" id="heroCtaBtn">
         Buy Card's
@@ -2366,37 +2264,11 @@
         personalization: personalization
       };
 
+      // FULL CARD RENDER IN MINI PREVIEW
       var previewEl = document.getElementById('miniCardPreview');
-      var isAmex = currentDesign.brand === 'amex';
-      previewEl.className = 'mini-card-preview' + (isAmex ? ' mini-amex' : '');
-      previewEl.style.background = currentDesign.gradient;
-
-      if (isAmex) {
-        previewEl.innerHTML =
-          '<div class="mini-card-glow" style="background: radial-gradient(circle at 78% 18%, rgba(255,255,255,0.15), transparent 62%)"></div>' +
-          '<div class="mini-card-top">' +
-            '<div class="mini-card-bank">AMERICAN EXPRESS</div>' +
-          '</div>' +
-          '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
-          '<div class="mini-card-bottom">' +
-            '<span class="mini-card-name">' + currentDesign.name + '</span>' +
-            '<span class="mini-card-amex-box">AMEX</span>' +
-          '</div>';
-      } else {
-        previewEl.innerHTML =
-          '<div class="mini-card-glow" style="background: radial-gradient(circle at 78% 18%, ' + currentDesign.accent + '66, transparent 62%)"></div>' +
-          '<div class="mini-card-top">' +
-            '<div>' +
-              '<div class="mini-card-bank">' + currentDesign.bank + '</div>' +
-              '<div class="mini-card-type">' + currentDesign.cardType + ' · ' + currentDesign.debitCredit + '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="mini-card-number">' + maskCardNumber(currentDesign.cardNumber) + '</div>' +
-          '<div class="mini-card-bottom">' +
-            '<span class="mini-card-name">' + currentDesign.name + '</span>' +
-            '<span class="mini-card-visa">VISA</span>' +
-          '</div>';
-      }
+      var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
+      previewEl.className = 'mini-card-preview ' + finishClass;
+      previewEl.innerHTML = cardFrontHTML(currentDesign, personalization);
 
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
