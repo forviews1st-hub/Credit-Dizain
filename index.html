@@ -539,7 +539,6 @@
       text-transform: uppercase;
     }
 
-    /* BACK OF CARD — Realistic (only stripe + sig + CVV) */
     .cc-stripe {
       position: absolute;
       top: 13%;
@@ -577,7 +576,6 @@
       letter-spacing: 1px;
     }
 
-    /* ========== AMEX GOLD CARD ========== */
     .cc-face.cc-front.cc-amex-gold {
       padding: 0;
       background:
@@ -802,7 +800,6 @@
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 10px; border-width: 1.6px; }
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 3.5px; }
 
-    /* ========== BALANCE BOX (GREEN NEON) ========== */
     .cc-balance-badge {
       display: flex;
       flex-direction: column;
@@ -873,7 +870,6 @@
     .gc-tagline { font-size: 12px; color: #888; font-weight: 500; letter-spacing: 0.2px; }
     .gc-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
     .gc-rating { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: #aaa; }
-    /* Price GREEN */
     .gc-price {
       font-size: 18px;
       font-weight: 800;
@@ -934,12 +930,37 @@
       white-space: nowrap;
     }
 
+    /* ========== FOOTER (UPGRADED) ========== */
     footer {
       background: transparent;
-      padding: 30px 20px;
+      padding: 36px 20px 30px;
       text-align: center;
       border-top: 1px solid rgba(212, 175, 55, 0.1);
       margin-top: 20px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #999;
+      text-decoration: none;
+      letter-spacing: 0.4px;
+      transition: color 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .footer-links a:hover { color: #d4af37; }
+    .footer-divider {
+      color: #333;
+      font-size: 12px;
+      user-select: none;
     }
     .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
 
@@ -1593,7 +1614,7 @@
 
   <main>
     <section class="hero-text-section">
-      <div class="hero-eyebrow">✨ Selling Credit Card's ✨</div>
+      <div class="hero-eyebrow">✨ Selling Credit Cards ✨</div>
       <h1 class="hero-headline">
         Swipe In Style.
         <span class="gold-line">Own The Moment.</span>
@@ -1623,6 +1644,13 @@
   </main>
 
   <footer>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <span class="footer-divider">·</span>
+      <a href="#">Terms of Service</a>
+      <span class="footer-divider">·</span>
+      <a href="#">Contact</a>
+    </div>
     <div class="copyright">© 2026 Card Seller. All rights reserved.</div>
   </footer>
 
@@ -1666,7 +1694,7 @@
         <div class="checkout-header">
           <span class="checkout-eyebrow">CHECKOUT</span>
           <h3 class="checkout-title">Complete Your Order</h3>
-          <p class="checkout-subtitle">Review your design and enter your details</p>
+          <p class="checkout-subtitle">Confirm your card details and shipping information</p>
         </div>
 
         <div class="mini-card-preview" id="miniCardPreview"></div>
@@ -1774,10 +1802,10 @@
           <path class="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
         </svg>
       </div>
-      <div class="success-title">Order Confirmed</div>
-      <div class="success-message">Thank you! We'll contact you shortly on WhatsApp to confirm your design.</div>
+      <div class="success-title">Order Placed Successfully</div>
+      <div class="success-message">Your premium card is being prepared. We'll reach out on WhatsApp within 24 hours to confirm the design details and shipping.</div>
       <div class="success-order-details" id="successOrderDetails" style="display:none;"></div>
-      <button class="success-btn" id="successCloseBtn">Continue</button>
+      <button class="success-btn" id="successCloseBtn">Continue Shopping</button>
     </div>
     <div class="confetti-container" id="confettiContainer"></div>
   </div>
@@ -1837,16 +1865,15 @@
         cvv: '8172',
         cid: '7997',
         memberSince: '93',
-        serviceNumber: '1-800-528-4800',
-        balance: '50k - 60k',
+        balance: '1 - 1.5 lakh',
         defaultName: 'MICHAEL ANDERSON',
         tagline: 'The world in your wallet',
         gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)',
         accent: '#d4af37',
-        price: '₹1,499',
+        price: '₹899',
         rating: '⭐ 5.0',
         material: 'Gold Foil',
-        description: 'A premium gold-finish card with the iconic American Express emblem. Timeless, distinguished, powerful.'
+        description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.'
       },
       {
         id: 'd6',
@@ -1859,16 +1886,15 @@
         cardNumber: '4733 4455 1234 6789',
         expiry: '05 / 28',
         cvv: '394',
-        serviceNumber: '1-800-555-0267',
         balance: '45k - 55k',
         defaultName: 'ROBERT JONES',
-        tagline: 'Street energy, refined',
+        tagline: 'Urban prestige, delivered',
         gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)',
         accent: '#ff006e',
-        price: '₹499',
+        price: '₹199',
         rating: '⭐ 4.9',
         material: 'Holographic',
-        description: 'Electric neon gradients inspired by Tokyo nights. Vivid, holographic, unforgettable.'
+        description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.'
       },
       {
         id: 'd8',
@@ -1881,16 +1907,15 @@
         cardNumber: '4072 5566 7788 8901',
         expiry: '07 / 27',
         cvv: '149',
-        serviceNumber: '1-800-555-0323',
-        balance: '35k - 45k',
+        balance: '60k - 65k',
         defaultName: 'PATRICIA DAVIS',
-        tagline: 'Warm glow, bold statement',
+        tagline: 'Where luxury meets dawn',
         gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)',
         accent: '#f59e0b',
         price: '₹399',
         rating: '⭐ 4.8',
         material: 'Gloss Finish',
-        description: 'Fiery red-to-amber transition. Inspired by dusk over the horizon. Warm and striking.'
+        description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.'
       },
       {
         id: 'd3',
@@ -1903,38 +1928,15 @@
         cardNumber: '4916 2347 8901 3456',
         expiry: '03 / 28',
         cvv: '265',
-        serviceNumber: '1-800-555-0178',
-        balance: '40k - 50k',
+        balance: '70k - 88k',
         defaultName: 'DAVID WILLIAMS',
-        tagline: 'Calm like the sea',
+        tagline: 'Ocean-inspired elegance',
         gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)',
         accent: '#00b4d8',
-        price: '₹399',
+        price: '₹425',
         rating: '⭐ 4.8',
         material: 'Gloss Finish',
-        description: 'Layered blue tones inspired by the deep ocean. Smooth, glossy, and calming.'
-      },
-      {
-        id: 'd4',
-        brand: 'visa',
-        name: 'Rosewood Platinum',
-        bank: 'ROSEWOOD BANK',
-        bankInitial: 'R',
-        cardType: 'PLATINUM',
-        debitCredit: 'DEBIT',
-        cardNumber: '4024 7789 3456 4567',
-        expiry: '06 / 30',
-        cvv: '738',
-        serviceNumber: '1-800-555-0201',
-        balance: '30k - 40k',
-        defaultName: 'MARY MILLER',
-        tagline: 'Soft elegance redefined',
-        gradient: 'linear-gradient(135deg, #4a0d2b 0%, #b03060 55%, #ffb6c1 100%)',
-        accent: '#ff69b4',
-        price: '₹349',
-        rating: '⭐ 4.9',
-        material: 'Satin Finish',
-        description: 'Delicate pink hues inspired by spring blossoms. A soft, elegant everyday card.'
+        description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.'
       },
       {
         id: 'd7',
@@ -1947,16 +1949,15 @@
         cardNumber: '4488 1122 3344 7890',
         expiry: '02 / 29',
         cvv: '867',
-        serviceNumber: '1-800-555-0290',
-        balance: '38k - 48k',
+        balance: '80k - 95k',
         defaultName: 'WILLIAM GARCIA',
-        tagline: 'Fresh. Bold. Timeless.',
+        tagline: 'Freedom in every swipe',
         gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)',
         accent: '#10b981',
-        price: '₹399',
+        price: '₹547',
         rating: '⭐ 4.7',
         material: 'Matte Finish',
-        description: 'Rich emerald green with subtle depth. A classic colour with a modern twist.'
+        description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.'
       }
     ];
 
@@ -2094,12 +2095,8 @@
       );
     }
 
-    function cardFrontHTML(design, personalization) {
-      var holderName = (personalization && personalization.trim())
-        ? personalization.trim().toUpperCase()
-        : design.defaultName;
-      if (holderName.length > 22) holderName = holderName.slice(0, 22);
-
+    function cardFrontHTML(design) {
+      var holderName = design.defaultName;
       if (design.brand === 'amex') {
         return amexFrontHTML(design, holderName);
       }
@@ -2107,7 +2104,6 @@
     }
 
     function cardBackHTML(design) {
-      // Realistic back: only stripe + signature strip + CVV
       return (
         '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
           '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
@@ -2134,7 +2130,7 @@
 
         card.innerHTML =
           '<div class="cc-preview ' + finishClass + '">' +
-            cardFrontHTML(design, null) +
+            cardFrontHTML(design) +
             cardBackHTML(design) +
           '</div>' +
           '<div class="cc-balance-badge">' +
@@ -2191,7 +2187,7 @@
       wrap.className = 'modal-card-wrap ' + finishClass;
 
       var inner = document.getElementById('modalCardInner');
-      inner.innerHTML = cardFrontHTML(design, null) + cardBackHTML(design);
+      inner.innerHTML = cardFrontHTML(design) + cardBackHTML(design);
       wrap.classList.remove('flipped');
 
       document.getElementById('modalName').textContent = design.name;
@@ -2218,7 +2214,7 @@
       var previewEl = document.getElementById('miniCardPreview');
       var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
       previewEl.className = 'mini-card-preview ' + finishClass;
-      previewEl.innerHTML = cardFrontHTML(currentDesign, null);
+      previewEl.innerHTML = cardFrontHTML(currentDesign);
 
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
