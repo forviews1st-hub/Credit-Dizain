@@ -23,7 +23,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ========== STICKY GLASS HEADER ========== */
     .site-header {
       position: sticky;
       top: 0;
@@ -68,7 +67,6 @@
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
-    /* ========== HERO ========== */
     .hero-text-section {
       text-align: left;
       padding: 50px 20px 40px;
@@ -198,7 +196,6 @@
     @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
     @media (min-width: 1000px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
 
-    /* ========== GRID CARD (BLACK + GOLD PREMIUM) ========== */
     .grid-card {
       background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
       border: 1px solid rgba(212, 175, 55, 0.22);
@@ -542,6 +539,7 @@
       text-transform: uppercase;
     }
 
+    /* BACK OF CARD — Realistic (only stripe + sig + CVV) */
     .cc-stripe {
       position: absolute;
       top: 13%;
@@ -553,12 +551,12 @@
     }
     .cc-back-content {
       position: absolute;
-      bottom: 10px;
+      bottom: 12px;
       left: 14px;
       right: 14px;
       z-index: 2;
     }
-    .cc-sig-row { display: flex; align-items: center; gap: 6px; margin-bottom: 7px; }
+    .cc-sig-row { display: flex; align-items: center; gap: 6px; }
     .cc-sig-strip {
       flex: 1;
       height: 22px;
@@ -577,36 +575,6 @@
       padding: 3px 7px;
       border-radius: 3px;
       letter-spacing: 1px;
-    }
-    .cc-back-service {
-      background: #fff;
-      color: #111;
-      border-radius: 3px;
-      padding: 3px 7px;
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-    .cc-back-service-label {
-      font-size: 5.5px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      color: #666;
-      text-transform: uppercase;
-    }
-    .cc-back-service-num {
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      color: #111;
-    }
-    .cc-back-text {
-      font-size: 6px;
-      color: rgba(255,255,255,0.68);
-      letter-spacing: 0.2px;
-      line-height: 1.35;
     }
 
     /* ========== AMEX GOLD CARD ========== */
@@ -834,7 +802,7 @@
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 10px; border-width: 1.6px; }
     .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 3.5px; }
 
-    /* ========== BALANCE BOX (GREEN NEON — RESTORED) ========== */
+    /* ========== BALANCE BOX (GREEN NEON) ========== */
     .cc-balance-badge {
       display: flex;
       flex-direction: column;
@@ -905,11 +873,13 @@
     .gc-tagline { font-size: 12px; color: #888; font-weight: 500; letter-spacing: 0.2px; }
     .gc-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
     .gc-rating { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: #aaa; }
+    /* Price GREEN */
     .gc-price {
       font-size: 18px;
       font-weight: 800;
-      color: #fff;
+      color: #22c55e;
       letter-spacing: -0.3px;
+      text-shadow: 0 0 12px rgba(34,197,94,0.2);
     }
     .gc-material { font-size: 10px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
     .gc-actions { display: flex; margin-top: 6px; }
@@ -973,7 +943,6 @@
     }
     .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
 
-    /* ========== MODAL ========== */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1053,9 +1022,6 @@
     .modal-card-inner .cc-visa { font-size: 15px; padding: 4px 10px 5px; border-radius: 5px; }
     .modal-card-inner .cc-holo-sticker { width: 26px; height: 26px; padding: 3px; }
     .modal-card-inner .cc-tier-wm { font-size: 42px; }
-    .modal-card-inner .cc-back-text { font-size: 7px; }
-    .modal-card-inner .cc-back-service-num { font-size: 11px; }
-    .modal-card-inner .cc-back-service-label { font-size: 7px; }
 
     .flip-hint {
       text-align: center;
@@ -1092,37 +1058,6 @@
       margin-bottom: 14px;
     }
     .modal-description { color: #999; font-size: 13px; line-height: 1.7; margin-bottom: 18px; text-align: center; }
-
-    .field-group { margin-bottom: 10px; text-align: left; }
-    .field-group label {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      color: #888;
-      margin-bottom: 4px;
-      letter-spacing: 1.3px;
-      text-transform: uppercase;
-    }
-    .field-group input,
-    .field-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid #262626;
-      border-radius: 10px;
-      font-size: 13px;
-      background: #0f0f0f;
-      color: #fff;
-      font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .field-group input:focus,
-    .field-group textarea:focus {
-      border-color: #d4af37;
-      background: #131313;
-      box-shadow: 0 0 0 4px rgba(212,175,55,0.1);
-    }
-    .field-group input::placeholder,
-    .field-group textarea::placeholder { color: #444; }
 
     .qty-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 18px; }
     .qty-row button {
@@ -1467,6 +1402,37 @@
     }
     .qr-hint strong { color: #d4af37; font-weight: 700; }
 
+    .field-group { margin-bottom: 10px; text-align: left; }
+    .field-group label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 4px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+    .field-group input,
+    .field-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #262626;
+      border-radius: 10px;
+      font-size: 13px;
+      background: #0f0f0f;
+      color: #fff;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-group input:focus,
+    .field-group textarea:focus {
+      border-color: #d4af37;
+      background: #131313;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.1);
+    }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder { color: #444; }
+
     .success-overlay {
       position: fixed;
       inset: 0;
@@ -1681,11 +1647,6 @@
 
         <p class="modal-description" id="modalDescription">Description</p>
 
-        <div class="field-group">
-          <label>Personalization (Optional)</label>
-          <input type="text" id="personalizationInput" placeholder="Text on card (e.g., your name)" maxlength="22" />
-        </div>
-
         <div class="qty-row">
           <button id="qtyMinus">−</button>
           <span id="qtyValue">1</span>
@@ -1724,10 +1685,6 @@
           <div class="summary-row">
             <span class="summary-label">Quantity</span>
             <span class="summary-value" id="summaryQty">1</span>
-          </div>
-          <div class="summary-row" id="personalizationRow" style="display:none;">
-            <span class="summary-label">Personalization</span>
-            <span class="summary-value" id="summaryPersonalization">—</span>
           </div>
           <div class="summary-divider"></div>
           <div class="summary-row total-row">
@@ -1894,7 +1851,7 @@
       {
         id: 'd6',
         brand: 'visa',
-        name: 'Neon Tokyo',
+        name: 'Metro Signature',
         bank: 'METRO CITY BANK',
         bankInitial: 'M',
         cardType: 'SIGNATURE',
@@ -1916,7 +1873,7 @@
       {
         id: 'd8',
         brand: 'visa',
-        name: 'Sunset Blaze',
+        name: 'Sunrise Elite',
         bank: 'SUNRISE BANK',
         bankInitial: 'S',
         cardType: 'ELITE',
@@ -1938,7 +1895,7 @@
       {
         id: 'd3',
         brand: 'visa',
-        name: 'Ocean Depth',
+        name: 'Pacific Infinite',
         bank: 'PACIFIC COAST',
         bankInitial: 'P',
         cardType: 'INFINITE',
@@ -1960,7 +1917,7 @@
       {
         id: 'd4',
         brand: 'visa',
-        name: 'Cherry Blossom',
+        name: 'Rosewood Platinum',
         bank: 'ROSEWOOD BANK',
         bankInitial: 'R',
         cardType: 'PLATINUM',
@@ -1982,7 +1939,7 @@
       {
         id: 'd7',
         brand: 'visa',
-        name: 'Emerald Royale',
+        name: 'Liberty Reserve',
         bank: 'LIBERTY NATIONAL',
         bankInitial: 'L',
         cardType: 'INFINITE',
@@ -2150,7 +2107,7 @@
     }
 
     function cardBackHTML(design) {
-      var backTextColor = design.brand === 'amex' ? 'color:#1a1408;' : '';
+      // Realistic back: only stripe + signature strip + CVV
       return (
         '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
           '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
@@ -2160,11 +2117,6 @@
               '<div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div>' +
               '<div class="cc-cvv">' + design.cvv + '</div>' +
             '</div>' +
-            '<div class="cc-back-service">' +
-              '<span class="cc-back-service-label">CUSTOMER SERVICE</span>' +
-              '<span class="cc-back-service-num">' + design.serviceNumber + '</span>' +
-            '</div>' +
-            '<div class="cc-back-text" style="' + backTextColor + '">This card is property of ' + titleCase(design.bank) + '. Use is subject to cardholder agreement. Design mockup by Card Seller Studio — not a real financial instrument.</div>' +
           '</div>' +
         '</div>'
       );
@@ -2224,7 +2176,6 @@
           if (!design) return;
           currentDesign = design;
           currentQty = 1;
-          document.getElementById('personalizationInput').value = '';
           placeOrderDirect();
         });
       });
@@ -2250,60 +2201,28 @@
       document.getElementById('modalMaterial').textContent = design.material;
       document.getElementById('modalDescription').textContent = design.description;
       document.getElementById('qtyValue').textContent = '1';
-      document.getElementById('personalizationInput').value = '';
 
       document.getElementById('productOverlay').style.display = 'flex';
     }
 
-    function updateModalCardPersonalization() {
-      if (!currentDesign) return;
-      var personalization = document.getElementById('personalizationInput').value;
-      var name = personalization.trim()
-        ? personalization.trim().toUpperCase()
-        : currentDesign.defaultName;
-      if (name.length > 22) name = name.slice(0, 22);
-
-      if (currentDesign.brand === 'amex') {
-        var amexHolder = document.querySelector('#modalCardInner .amex-holder');
-        if (amexHolder) amexHolder.textContent = name;
-      } else {
-        var frontEl = document.querySelector('#modalCardInner .cc-front');
-        if (frontEl) {
-          var holderEl = frontEl.querySelector('.cc-value');
-          if (holderEl) holderEl.textContent = name;
-        }
-      }
-    }
-
     function placeOrderDirect() {
       if (!currentDesign) return;
-      var personalization = document.getElementById('personalizationInput')
-        ? document.getElementById('personalizationInput').value.trim()
-        : '';
 
       currentOrderDesign = {
         name: currentDesign.name,
         price: currentDesign.price,
         qty: currentQty,
-        material: currentDesign.material,
-        personalization: personalization
+        material: currentDesign.material
       };
 
       var previewEl = document.getElementById('miniCardPreview');
       var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
       previewEl.className = 'mini-card-preview ' + finishClass;
-      previewEl.innerHTML = cardFrontHTML(currentDesign, personalization);
+      previewEl.innerHTML = cardFrontHTML(currentDesign, null);
 
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
       document.getElementById('summaryQty').textContent = currentQty;
-
-      if (personalization) {
-        document.getElementById('personalizationRow').style.display = 'flex';
-        document.getElementById('summaryPersonalization').textContent = '"' + personalization + '"';
-      } else {
-        document.getElementById('personalizationRow').style.display = 'none';
-      }
 
       var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0;
       var total = Math.round(priceNum * currentQty);
@@ -2331,7 +2250,6 @@
         price: currentOrderDesign.price,
         qty: currentOrderDesign.qty,
         material: currentOrderDesign.material,
-        personalization: currentOrderDesign.personalization,
         customerName: customerName,
         whatsapp: whatsapp,
         timestamp: Date.now()
@@ -2371,9 +2289,6 @@
       var html = '';
       html += '<span>💳 ' + order.designName + ' × ' + order.qty + ' — ' + order.price + '</span>';
       html += '<span>🎨 ' + order.material + '</span>';
-      if (order.personalization) {
-        html += '<span>✍️ "' + order.personalization + '"</span>';
-      }
       if (order.transactionId) {
         html += '<span>✅ Txn ID: ' + order.transactionId + '</span>';
       }
@@ -2430,8 +2345,6 @@
       this.classList.toggle('flipped');
       isFlipped = this.classList.contains('flipped');
     });
-
-    document.getElementById('personalizationInput').addEventListener('input', updateModalCardPersonalization);
 
     document.getElementById('qtyMinus').addEventListener('click', function() {
       if (currentQty > 1) currentQty--;
