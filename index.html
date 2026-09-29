@@ -729,6 +729,106 @@
       white-space: nowrap;
     }
 
+    /* REVIEWS SECTION STYLES START */
+    .reviews-section {
+      margin-bottom: 40px;
+      scroll-margin-top: 90px;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (min-width: 700px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .review-card {
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid rgba(212, 175, 55, 0.55);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #1a1a1a;
+      box-shadow: 0 0 12px rgba(212,175,55,0.15);
+    }
+    .review-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .review-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .review-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+    .review-badge {
+      font-size: 10px;
+      color: #22c55e;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 3px;
+      background: rgba(34,197,94,0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+      width: fit-content;
+      border: 1px solid rgba(34,197,94,0.2);
+    }
+    .review-stars {
+      color: #d4af37;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-top: -4px;
+    }
+    .review-text {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.6;
+      font-style: italic;
+      position: relative;
+      padding-top: 6px;
+    }
+    .review-text::before {
+      content: '"';
+      font-size: 30px;
+      color: rgba(212,175,55,0.2);
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      font-family: serif;
+      font-style: normal;
+    }
+    /* REVIEWS SECTION STYLES END */
+
     footer {
       background: transparent;
       padding: 36px 20px 30px;
@@ -1438,6 +1538,17 @@
     </div>
 
     <div class="product-grid" id="productGrid"></div>
+
+    <!-- REVIEWS SECTION START -->
+    <section class="reviews-section">
+      <div class="heading-row">
+        <h1>Trusted by Thousands</h1>
+        <p>What our customers say after buying</p>
+      </div>
+      <div class="reviews-grid" id="reviewsGrid"></div>
+    </section>
+    <!-- REVIEWS SECTION END -->
+
   </main>
 
   <footer>
@@ -1777,6 +1888,15 @@
       }
     ];
 
+    var reviewsData = [
+      { name: 'Rahul Sharma', avatar: 'https://i.pravatar.cc/100?img=12', comment: 'Payment karte hi turant WhatsApp par card aur uski poori details mil gayi. Itni fast service kahin nahi mili. Genuine seller!', rating: 5 },
+      { name: 'Vikram Malhotra', avatar: 'https://i.pravatar.cc/100?img=33', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Bilkul real aur instant process hai.', rating: 5 },
+      { name: 'Anjali Desai', avatar: 'https://i.pravatar.cc/100?img=47', comment: 'Maine payment ki aur turant hi mere WhatsApp par card aur card ki saari details receive ho gayi. Bohot accha experience raha.', rating: 5 },
+      { name: 'Amit Kumar', avatar: 'https://i.pravatar.cc/100?img=15', comment: 'Payment karte hi card details WhatsApp par instantly aayi. Koi wait nahi karna pada. Highly recommended!', rating: 5 },
+      { name: 'Suresh Patel', avatar: 'https://i.pravatar.cc/100?img=52', comment: 'Teen cards order kiye, sabhi ki details payment ke turant baad WhatsApp par mil gayi. Trustworthy aur fast seller.', rating: 5 },
+      { name: 'Rohan Verma', avatar: 'https://i.pravatar.cc/100?img=8', comment: 'Bohot fast service hai. Payment karne ke saath hi card aur uski details WhatsApp par aa gayi. Dil se shukriya!', rating: 5 }
+    ];
+
     var currentDesign = null;
     var currentQty = 1;
     var currentOrderDesign = null;
@@ -1937,6 +2057,39 @@
       });
 
       attachGridEvents();
+    }
+
+    function renderReviews() {
+      var grid = document.getElementById('reviewsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      reviewsData.forEach(function(review) {
+        var card = document.createElement('div');
+        card.className = 'review-card';
+
+        var starsHTML = '';
+        for (var i = 0; i < 5; i++) {
+          if (i < review.rating) {
+            starsHTML += '★';
+          } else {
+            starsHTML += '☆';
+          }
+        }
+
+        card.innerHTML =
+          '<div class="review-header">' +
+            '<div class="review-avatar"><img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy"></div>' +
+            '<div class="review-info">' +
+              '<div class="review-name">' + review.name + '</div>' +
+              '<div class="review-badge">✓ Verified Buyer</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="review-stars">' + starsHTML + '</div>' +
+          '<div class="review-text">' + review.comment + '</div>';
+
+        grid.appendChild(card);
+      });
     }
 
     function attachGridEvents() {
@@ -2222,6 +2375,7 @@
     // LEGAL MODAL LOGIC END
 
     renderGrid();
+    renderReviews();
   </script>
 </body>
 </html>
