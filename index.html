@@ -576,10 +576,10 @@
       letter-spacing: 1px;
     }
 
-    /* UPDATED AMEX GOLD CARD STYLES - USING IMAGE */
+    /* UPDATED AMEX GOLD CARD STYLES - TRANSPARENT + BLUR ANIMATION */
     .cc-face.cc-front.cc-amex-gold {
       padding: 0 !important;
-      background: #d4af37; /* Fallback */
+      background: transparent !important;
       overflow: hidden;
       display: block !important;
     }
@@ -589,6 +589,13 @@
       object-fit: cover;
       border-radius: inherit;
       display: block;
+      filter: blur(15px);
+      opacity: 0.4;
+      transition: filter 0.8s ease, opacity 0.8s ease;
+    }
+    .cc-face.cc-front.cc-amex-gold img.loaded {
+      filter: blur(0);
+      opacity: 1;
     }
     /* END OF AMEX GOLD STYLES */
 
@@ -1830,7 +1837,7 @@
     function amexFrontHTML(design, holderName) {
       return (
         '<div class="cc-face cc-front cc-amex-gold">' +
-          '<img src="amex-gold.png" alt="American Express Gold">' +
+          '<img src="amex-gold.png" alt="American Express Gold" onload="this.classList.add(\'loaded\')" onerror="this.classList.add(\'loaded\')">' +
         '</div>'
       );
     }
