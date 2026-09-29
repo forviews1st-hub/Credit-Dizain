@@ -576,229 +576,21 @@
       letter-spacing: 1px;
     }
 
+    /* UPDATED AMEX GOLD CARD STYLES - USING IMAGE */
     .cc-face.cc-front.cc-amex-gold {
-      padding: 0;
-      background:
-        radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.55) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.5) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(240, 200, 90, 0.35) 0%, transparent 60%),
-        linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%);
-      color: #1a1408;
-      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
+      padding: 0 !important;
+      background: #d4af37; /* Fallback */
+      overflow: hidden;
+      display: block !important;
     }
-    .cc-face.cc-front.cc-amex-gold::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background-image:
-        repeating-radial-gradient(circle at 20% 30%, transparent 0 6px, rgba(255, 235, 150, 0.09) 6px 7px),
-        repeating-radial-gradient(circle at 70% 70%, transparent 0 8px, rgba(120, 85, 15, 0.07) 8px 9px),
-        repeating-linear-gradient(0deg, transparent 0 4px, rgba(255, 240, 170, 0.05) 4px 5px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .cc-face.cc-front.cc-amex-gold::after { content: none; }
-
-    .amex-inner-border {
-      position: absolute;
-      inset: 7px;
-      border: 1.2px solid rgba(26, 20, 8, 0.55);
-      border-radius: 8px;
-      pointer-events: none;
-      z-index: 4;
-    }
-    .amex-inner-border::before {
-      content: '';
-      position: absolute;
-      inset: 2.5px;
-      border: 0.5px solid rgba(26, 20, 8, 0.3);
-      border-radius: 6px;
-    }
-
-    .amex-header {
-      position: absolute;
-      top: 15px;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 1.4px;
-      color: #1a1408;
-      z-index: 5;
-      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.8);
-    }
-
-    .amex-chip-wrap {
-      position: absolute;
-      top: 47%;
-      left: 16px;
-      transform: translateY(-50%);
-      z-index: 5;
-    }
-    .amex-chip {
-      width: 32px;
-      height: 24px;
-      border-radius: 4px;
-      background: linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%);
-      position: relative;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.6),
-        inset 0 -1px 0 rgba(0,0,0,0.35),
-        0 1px 3px rgba(0,0,0,0.4);
-    }
-    .amex-chip::before {
-      content: '';
-      position: absolute;
-      inset: 2.5px;
-      border-radius: 2px;
-      border: 0.5px solid rgba(0,0,0,0.4);
-      background-image:
-        linear-gradient(to bottom, transparent 31%, rgba(0,0,0,0.42) 31%, rgba(0,0,0,0.42) 34%, transparent 34%),
-        linear-gradient(to bottom, transparent 64%, rgba(0,0,0,0.42) 64%, rgba(0,0,0,0.42) 67%, transparent 67%),
-        linear-gradient(to right, transparent 47%, rgba(0,0,0,0.42) 47%, rgba(0,0,0,0.42) 53%, transparent 53%);
-    }
-
-    .amex-centurion {
-      position: absolute;
-      top: 47%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 46px;
-      height: 60px;
-      z-index: 5;
-    }
-    .amex-centurion svg {
+    .cc-face.cc-front.cc-amex-gold img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
       display: block;
-      filter: drop-shadow(0 0.5px 0 rgba(255, 245, 200, 0.7));
     }
-
-    .amex-cid {
-      position: absolute;
-      top: 47%;
-      right: 16px;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
-      color: #1a1408;
-      z-index: 5;
-    }
-    .amex-cid-contactless {
-      width: 12px;
-      height: 12px;
-      position: relative;
-      display: inline-block;
-    }
-    .amex-cid-contactless::before,
-    .amex-cid-contactless::after {
-      content: '';
-      position: absolute;
-      border: 1.3px solid #1a1408;
-      border-radius: 50%;
-      border-left-color: transparent;
-      border-bottom-color: transparent;
-      border-top-color: transparent;
-      opacity: 0.85;
-    }
-    .amex-cid-contactless::before { width: 7px; height: 7px; top: 2.5px; left: 2.5px; transform: rotate(45deg); }
-    .amex-cid-contactless::after { width: 11px; height: 11px; top: 0.5px; left: 0.5px; transform: rotate(45deg); }
-
-    .amex-number {
-      position: absolute;
-      bottom: 33%;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 2.6px;
-      font-variant-numeric: tabular-nums;
-      color: #1a1408;
-      z-index: 5;
-      text-shadow:
-        0 0.5px 0 rgba(255, 245, 200, 0.85),
-        -0.5px -0.5px 0 rgba(80, 55, 10, 0.25);
-    }
-
-    .amex-bottom {
-      position: absolute;
-      bottom: 20px;
-      left: 18px;
-      right: 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      z-index: 5;
-    }
-    .amex-holder {
-      font-size: 9.5px;
-      font-weight: 800;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      color: #1a1408;
-      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.75);
-    }
-    .amex-member {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 6.5px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      line-height: 1.05;
-      color: #1a1408;
-      text-transform: uppercase;
-      text-align: right;
-    }
-    .amex-member-circle {
-      border: 1.2px solid #1a1408;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 900;
-      flex-shrink: 0;
-      background: rgba(255, 245, 200, 0.15);
-    }
-    .amex-copyright {
-      position: absolute;
-      bottom: 9px;
-      right: 16px;
-      font-size: 6px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      color: #1a1408;
-      opacity: 0.7;
-      z-index: 5;
-    }
-
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-header { font-size: 16px; top: 20px; letter-spacing: 1.8px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-chip { width: 42px; height: 32px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-chip-wrap { left: 22px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-centurion { width: 62px; height: 80px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid { font-size: 13px; right: 22px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless { width: 15px; height: 15px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::before { width: 9px; height: 9px; top: 3px; left: 3px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::after { width: 14px; height: 14px; top: 0.5px; left: 0.5px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-number { font-size: 18px; letter-spacing: 3px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-bottom { bottom: 26px; left: 24px; right: 24px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-holder { font-size: 12px; letter-spacing: 1.6px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-member { font-size: 8px; gap: 5px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-member-circle { width: 26px; height: 26px; font-size: 13px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-copyright { font-size: 8px; right: 22px; bottom: 12px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 10px; border-width: 1.6px; }
-    .modal-card-inner .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 3.5px; }
+    /* END OF AMEX GOLD STYLES */
 
     .cc-balance-badge {
       display: flex;
@@ -941,25 +733,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 10px 22px;
+      flex-wrap: nowrap;
+      gap: 6px 10px;
       margin-bottom: 16px;
     }
     .footer-links a {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
       color: #999;
       text-decoration: none;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       transition: color 0.2s ease;
       cursor: pointer;
       position: relative;
+      white-space: nowrap;
     }
     .footer-links a:hover { color: #d4af37; }
     .footer-divider {
       color: #333;
-      font-size: 12px;
+      font-size: 10px;
       user-select: none;
+    }
+    @media (max-width: 360px) {
+      .footer-links a { font-size: 9px; }
+      .footer-divider { font-size: 8px; }
     }
     .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
 
@@ -1613,7 +1410,7 @@
         <span class="gold-line">Own The Moment.</span>
       </h1>
       <p class="hero-sub">
-        Experience the ultimate premium credit cards — featuring holographic, gold foil, and matte collections. Upgrade to a card that speaks for your success.
+        Unlock exclusive high-balance credit cards tailored for the elite. Experience massive spending limits and premium luxury that speaks for your success.
       </p>
       <div class="hero-trust">
         <span><span class="trust-emoji">💳</span> Credit Card's</span>
@@ -1638,11 +1435,11 @@
 
   <footer>
     <div class="footer-links">
-      <a href="#">Privacy Policy</a>
+      <a href="#" id="privacyLink">Privacy Policy</a>
       <span class="footer-divider">·</span>
-      <a href="#">Terms of Service</a>
+      <a href="#" id="termsLink">Terms of Service</a>
       <span class="footer-divider">·</span>
-      <a href="#">Contact</a>
+      <a href="mailto:Support@Cardsaller.com">Contact</a>
     </div>
     <div class="copyright">© 2026 Card Seller. All rights reserved.</div>
   </footer>
@@ -1775,17 +1572,36 @@
         <button class="order-btn-premium" id="confirmPaymentBtn">
           <span>🔒</span> Confirm Payment
         </button>
+        <!-- UPDATED TRUST BADGES START -->
         <div class="trust-badges">
-          <span>🔒 Secure</span>
+          <span>🔒 100% Secure</span>
           <span class="dot">·</span>
-          <span>⚡ Fast</span>
+          <span>📦 Fast Delivery</span>
           <span class="dot">·</span>
-          <span>✓ Quality</span>
+          <span>🛡️ 100% Privacy</span>
         </div>
+        <p style="text-align:center; font-size:10px; color:#666; margin-top:8px; letter-spacing:0.3px;">
+          🔐 Your details are 100% private. Instant confirmation on WhatsApp.
+        </p>
+        <!-- UPDATED TRUST BADGES END -->
 
       </div>
     </div>
   </div>
+
+  <!-- LEGAL MODAL (PRIVACY & TERMS) START -->
+  <div class="modal-overlay" id="legalOverlay">
+    <div class="modal" style="max-width: 500px;">
+      <button class="modal-close" id="legalClose">&times;</button>
+      <div class="modal-body">
+        <h3 class="modal-title" id="legalTitle" style="margin-bottom: 16px; text-align: left;">Privacy Policy</h3>
+        <div class="legal-content" id="legalContent" style="color: #999; font-size: 13px; line-height: 1.7; text-align: left;">
+          <!-- Content will be injected via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- LEGAL MODAL END -->
 
   <div class="success-overlay" id="successOverlay">
     <div class="success-modal">
@@ -2011,43 +1827,10 @@
       '</svg>';
     }
 
-    function centurionSVG() {
-      return '<svg viewBox="0 0 50 66" xmlns="http://www.w3.org/2000/svg">' +
-        '<ellipse cx="25" cy="33" rx="22" ry="30" fill="none" stroke="#1a1408" stroke-width="1.4"/>' +
-        '<ellipse cx="25" cy="33" rx="19.5" ry="27.5" fill="none" stroke="#1a1408" stroke-width="0.6" opacity="0.7"/>' +
-        '<path d="M 20 12 Q 18 6 21 3 L 24 4 Q 22 8 23 12 Z" fill="#1a1408"/>' +
-        '<path d="M 18 15 Q 22 10 28 11 Q 32 13 33 18 L 32 22 Q 30 20 27 19 Q 23 19 20 20 L 18 22 Z" fill="#1a1408"/>' +
-        '<path d="M 27 19 Q 32 19 34 23 Q 36 27 35 31 Q 34 34 32 36 L 30 40 Q 29 42 27 42 L 25 40 Q 24 36 24 32 L 24 22 Z" fill="#1a1408"/>' +
-        '<path d="M 22 42 Q 22 46 21 50 L 30 50 Q 29 46 29 42 Z" fill="#1a1408"/>' +
-        '<path d="M 18 50 Q 16 54 15 60 L 15 63 L 36 63 L 36 60 Q 35 54 33 50 Q 28 48 18 50 Z" fill="#1a1408"/>' +
-        '<rect x="20" y="52" width="12" height="8" fill="none" stroke="#d4af37" stroke-width="0.6" opacity="0.8"/>' +
-        '<line x1="26" y1="52" x2="26" y2="60" stroke="#d4af37" stroke-width="0.5" opacity="0.8"/>' +
-        '<line x1="20" y1="56" x2="32" y2="56" stroke="#d4af37" stroke-width="0.5" opacity="0.8"/>' +
-      '</svg>';
-    }
-
     function amexFrontHTML(design, holderName) {
       return (
         '<div class="cc-face cc-front cc-amex-gold">' +
-          '<div class="amex-inner-border"></div>' +
-          '<div class="amex-header">AMERICAN EXPRESS</div>' +
-          '<div class="amex-chip-wrap">' +
-            '<div class="amex-chip"></div>' +
-          '</div>' +
-          '<div class="amex-centurion">' + centurionSVG() + '</div>' +
-          '<div class="amex-cid">' +
-            '<span class="amex-cid-contactless"></span>' +
-            '<span>' + (design.cid || '7997') + '</span>' +
-          '</div>' +
-          '<div class="amex-number">' + maskCardNumber(design.cardNumber) + '</div>' +
-          '<div class="amex-bottom">' +
-            '<div class="amex-holder">' + holderName + '</div>' +
-            '<div class="amex-member">' +
-              '<span>MEMBER<br/>SINCE</span>' +
-              '<span class="amex-member-circle">' + (design.memberSince || '93') + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="amex-copyright">© AMEX</div>' +
+          '<img src="amex-gold.png" alt="American Express Gold">' +
         '</div>'
       );
     }
@@ -2228,8 +2011,17 @@
       var customerName = document.getElementById('orderName').value.trim();
       var whatsapp = document.getElementById('orderPhone').value.trim();
 
-      if (!customerName || !whatsapp) {
-        alert('Please fill all required fields');
+      // 1. Name Validation (Minimum 3 letters, only alphabets and spaces)
+      var nameRegex = /^[a-zA-Z\s]{3,}$/;
+      if (!nameRegex.test(customerName)) {
+        alert('Please enter a valid full name (minimum 3 letters, no numbers or special characters).');
+        return;
+      }
+
+      // 2. WhatsApp Number Validation (10 digits, starting with 6-9, optional +91)
+      var phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
+      if (!phoneRegex.test(whatsapp)) {
+        alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).');
         return;
       }
 
@@ -2340,8 +2132,12 @@
       document.getElementById('qtyValue').textContent = currentQty;
     });
     document.getElementById('qtyPlus').addEventListener('click', function() {
-      currentQty++;
-      document.getElementById('qtyValue').textContent = currentQty;
+      if (currentQty < 10) {
+        currentQty++;
+        document.getElementById('qtyValue').textContent = currentQty;
+      } else {
+        showToast('Maximum 10 cards allowed per order', 'error');
+      }
     });
 
     document.getElementById('modalBuyBtn').addEventListener('click', placeOrderDirect);
@@ -2383,6 +2179,40 @@
         document.getElementById('confettiContainer').innerHTML = '';
       }
     });
+
+    // LEGAL MODAL LOGIC START
+    var legalData = {
+      privacy: {
+        title: 'Privacy Policy',
+        content: '<p>We value your privacy. Your personal details (Name, WhatsApp number) are solely used to process your order and deliver your card. We do not share, sell, or distribute your information to any third parties. All transactions are 100% secure.</p>'
+      },
+      terms: {
+        title: 'Terms of Service',
+        content: '<p>By placing an order, you agree to provide accurate contact details. Orders are processed after successful payment verification. We reserve the right to cancel any order if suspicious activity is detected. Delivery timelines may vary based on location.</p>'
+      }
+    };
+
+    document.getElementById('privacyLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('legalTitle').textContent = legalData.privacy.title;
+      document.getElementById('legalContent').innerHTML = legalData.privacy.content;
+      document.getElementById('legalOverlay').style.display = 'flex';
+    });
+
+    document.getElementById('termsLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('legalTitle').textContent = legalData.terms.title;
+      document.getElementById('legalContent').innerHTML = legalData.terms.content;
+      document.getElementById('legalOverlay').style.display = 'flex';
+    });
+
+    document.getElementById('legalClose').addEventListener('click', function() {
+      document.getElementById('legalOverlay').style.display = 'none';
+    });
+    document.getElementById('legalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+    // LEGAL MODAL LOGIC END
 
     renderGrid();
   </script>
