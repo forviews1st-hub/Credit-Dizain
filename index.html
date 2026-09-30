@@ -808,24 +808,36 @@
       font-size: 14px;
       letter-spacing: 2px;
       margin-top: -4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .review-stars .rating-num {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.3px;
+      font-weight: 600;
     }
     .review-text {
       font-size: 13px;
-      color: #999;
+      color: #ffffff;
       line-height: 1.6;
-      font-style: italic;
+      font-style: normal;
       position: relative;
       padding-top: 6px;
+      font-weight: 400;
+      letter-spacing: 0.1px;
     }
     .review-text::before {
       content: '"';
       font-size: 30px;
-      color: rgba(212,175,55,0.2);
+      color: rgba(212,175,55,0.25);
       position: absolute;
       top: -8px;
       left: -8px;
       font-family: serif;
       font-style: normal;
+      font-weight: 700;
     }
     /* REVIEWS SECTION STYLES END */
 
@@ -1690,7 +1702,6 @@
         <button class="order-btn-premium" id="confirmPaymentBtn">
           <span>🔒</span> Confirm Payment
         </button>
-        <!-- UPDATED TRUST BADGES START -->
         <div class="trust-badges">
           <span>🔒 100% Secure</span>
           <span class="dot">·</span>
@@ -1701,7 +1712,6 @@
         <p style="text-align:center; font-size:10px; color:#666; margin-top:8px; letter-spacing:0.3px;">
           🔐 Your details are 100% private. Instant confirmation on WhatsApp.
         </p>
-        <!-- UPDATED TRUST BADGES END -->
 
       </div>
     </div>
@@ -1714,7 +1724,6 @@
       <div class="modal-body">
         <h3 class="modal-title" id="legalTitle" style="margin-bottom: 16px; text-align: left;">Privacy Policy</h3>
         <div class="legal-content" id="legalContent" style="color: #999; font-size: 13px; line-height: 1.7; text-align: left;">
-          <!-- Content will be injected via JS -->
         </div>
       </div>
     </div>
@@ -1888,13 +1897,44 @@
       }
     ];
 
+    // MIXED REVIEWS - 2 card buying + 4 Free Fire use (alternated) - Local PNG photos
     var reviewsData = [
-      { name: 'Rahul Sharma', avatar: 'https://i.pravatar.cc/100?img=12', comment: 'Payment karte hi turant WhatsApp par card aur uski poori details mil gayi. Itni fast service kahin nahi mili. Genuine seller!', rating: 5 },
-      { name: 'Vikram Malhotra', avatar: 'https://i.pravatar.cc/100?img=33', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Bilkul real aur instant process hai.', rating: 5 },
-      { name: 'Anjali Desai', avatar: 'https://i.pravatar.cc/100?img=47', comment: 'Maine payment ki aur turant hi mere WhatsApp par card aur card ki saari details receive ho gayi. Bohot accha experience raha.', rating: 5 },
-      { name: 'Amit Kumar', avatar: 'https://i.pravatar.cc/100?img=15', comment: 'Payment karte hi card details WhatsApp par instantly aayi. Koi wait nahi karna pada. Highly recommended!', rating: 5 },
-      { name: 'Suresh Patel', avatar: 'https://i.pravatar.cc/100?img=52', comment: 'Teen cards order kiye, sabhi ki details payment ke turant baad WhatsApp par mil gayi. Trustworthy aur fast seller.', rating: 5 },
-      { name: 'Rohan Verma', avatar: 'https://i.pravatar.cc/100?img=8', comment: 'Bohot fast service hai. Payment karne ke saath hi card aur uski details WhatsApp par aa gayi. Dil se shukriya!', rating: 5 }
+      {
+        name: 'Anjali Desai',
+        avatar: 'review1.png',
+        comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai, isse accha koi option nahi.',
+        rating: 5
+      },
+      {
+        name: 'Rohit Yadav',
+        avatar: 'review2.png',
+        comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya!',
+        rating: 5
+      },
+      {
+        name: 'Rahul Sharma',
+        avatar: 'review3.png',
+        comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended!',
+        rating: 5
+      },
+      {
+        name: 'Pilu Tonde',
+        avatar: 'review4.png',
+        comment: 'Card ke balance se Free Fire mein weekly membership li, aur instant activate bhi ho gayi. Bohot kaam ka card hai.',
+        rating: 4
+      },
+      {
+        name: 'Ramu Gamer',
+        avatar: 'review5.png',
+        comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai.',
+        rating: 5
+      },
+      {
+        name: 'Karan Mehta',
+        avatar: 'review6.png',
+        comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya!',
+        rating: 5
+      }
     ];
 
     var currentDesign = null;
@@ -2070,7 +2110,7 @@
 
         var starsHTML = '';
         for (var i = 0; i < 5; i++) {
-          if (i < review.rating) {
+          if (i < Math.floor(review.rating)) {
             starsHTML += '★';
           } else {
             starsHTML += '☆';
@@ -2079,13 +2119,13 @@
 
         card.innerHTML =
           '<div class="review-header">' +
-            '<div class="review-avatar"><img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy"></div>' +
+            '<div class="review-avatar"><img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.style.background=\'linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.1))\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;&quot;>' + review.name.split(' ').map(function(n){return n[0];}).join('') + '</span>\'"></div>' +
             '<div class="review-info">' +
               '<div class="review-name">' + review.name + '</div>' +
               '<div class="review-badge">✓ Verified Buyer</div>' +
             '</div>' +
           '</div>' +
-          '<div class="review-stars">' + starsHTML + '</div>' +
+          '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
           '<div class="review-text">' + review.comment + '</div>';
 
         grid.appendChild(card);
@@ -2171,14 +2211,12 @@
       var customerName = document.getElementById('orderName').value.trim();
       var whatsapp = document.getElementById('orderPhone').value.trim();
 
-      // 1. Name Validation (Minimum 3 letters, only alphabets and spaces)
       var nameRegex = /^[a-zA-Z\s]{3,}$/;
       if (!nameRegex.test(customerName)) {
         alert('Please enter a valid full name (minimum 3 letters, no numbers or special characters).');
         return;
       }
 
-      // 2. WhatsApp Number Validation (10 digits, starting with 6-9, optional +91)
       var phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
       if (!phoneRegex.test(whatsapp)) {
         alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).');
