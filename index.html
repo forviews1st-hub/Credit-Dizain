@@ -75,6 +75,17 @@
     .hero-trust .trust-emoji { font-size: 14px; }
     .hero-trust .trust-dot { color: #333; font-size: 16px; line-height: 1; }
 
+    /* HERO STATS */
+    .hero-stats { display: flex; gap: 24px; margin-top: 26px; flex-wrap: wrap; }
+    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+    .hero-stat .stat-number {
+      font-size: 24px; font-weight: 900; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
+    }
+    .hero-stat .stat-label { font-size: 10px; color: #777; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; }
+
     .hero-cta-btn {
       display: inline-flex; align-items: center; gap: 8px;
       background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
@@ -101,16 +112,130 @@
       .hero-sub { font-size: 14px; }
       .hero-trust { font-size: 11px; gap: 8px 10px; }
       .hero-cta-btn { padding: 13px 26px; font-size: 14px; }
+      .hero-stats { gap: 16px; }
+      .hero-stat .stat-number { font-size: 20px; }
     }
     @media (max-width: 400px) {
       .hero-headline { font-size: 32px; }
       .hero-sub { font-size: 13px; }
     }
 
+    /* WHY TRUST US SECTION */
+    .why-trust-section {
+      margin: 20px 0 24px;
+      padding: 28px 20px;
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 22px;
+    }
+    .why-trust-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 700;
+      text-align: center; margin-bottom: 6px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -0.3px;
+    }
+    .why-trust-section .why-trust-sub {
+      text-align: center; font-size: 12px; color: #777;
+      margin-bottom: 22px; letter-spacing: 0.3px;
+    }
+    .trust-features {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    @media (min-width: 700px) { .trust-features { grid-template-columns: repeat(5, 1fr); } }
+    .trust-feature-card {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 6px; padding: 16px 8px;
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 14px;
+      transition: all 0.25s ease;
+    }
+    .trust-feature-card:hover {
+      border-color: rgba(212,175,55,0.55);
+      background: rgba(212,175,55,0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212,175,55,0.12);
+    }
+    .trust-feature-card .tf-icon {
+      font-size: 26px;
+      filter: drop-shadow(0 2px 6px rgba(212,175,55,0.35));
+    }
+    .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
+    .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
+
+    /* RECENT ACTIVITY TICKER */
+    .recent-activity {
+      display: flex; align-items: center; gap: 12px;
+      margin: 0 0 24px;
+      padding: 10px 16px;
+      background: rgba(34,197,94,0.06);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+    .recent-activity .live-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; flex-shrink: 0;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+    .recent-activity-track {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+      height: 18px;
+    }
+    .recent-activity-inner {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 12px;
+      color: #22c55e;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      animation: slideActivity 25s linear infinite;
+    }
+    @keyframes slideActivity {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
     .heading-row { margin-bottom: 20px; }
     .heading-row h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
     .heading-row p { font-size: 13px; color: #777; margin-top: 4px; font-weight: 500; }
     @media (max-width:600px) { .heading-row h1 { font-size: 22px; } }
+
+    /* PRODUCT TRUST ROW */
+    .product-trust-row {
+      display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 14px 20px;
+      background: linear-gradient(160deg, #0f0f0f 0%, #0a0a0a 100%);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 18px;
+      margin: 4px 0 24px;
+    }
+    .product-trust-row .ptr-item {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; color: #ccc;
+      letter-spacing: 0.3px;
+    }
+    .product-trust-row .ptr-item .ptr-icon {
+      font-size: 14px;
+      filter: drop-shadow(0 0 6px rgba(212,175,55,0.4));
+    }
+    .product-trust-row .ptr-divider { color: #333; font-size: 10px; }
+    @media (max-width: 600px) {
+      .product-trust-row { gap: 8px 14px; padding: 12px 12px; }
+      .product-trust-row .ptr-item { font-size: 10px; gap: 4px; }
+      .product-trust-row .ptr-divider { display: none; }
+      .product-trust-row .ptr-icon { font-size: 12px; }
+    }
 
     .product-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 40px; scroll-margin-top: 90px; }
     @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
@@ -120,7 +245,7 @@
       background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
       border: 1px solid rgba(212, 175, 55, 0.22);
       border-radius: 22px; padding: 18px;
-      display: flex; flex-direction: column; gap: 14px;
+      display: flex; flex-direction: column; gap: 12px;
       cursor: pointer; transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
@@ -135,6 +260,19 @@
       pointer-events: none; opacity: 0; transition: opacity 0.4s ease;
     }
     .grid-card:hover::before { opacity: 1; }
+
+    .cc-preview-wrap { position: relative; }
+    .card-verified-badge {
+      position: absolute; top: 10px; left: 10px; z-index: 10;
+      display: inline-flex; align-items: center; gap: 3px;
+      background: rgba(34,197,94,0.92);
+      color: #fff; font-size: 9px; font-weight: 800;
+      padding: 3px 8px; border-radius: 10px;
+      letter-spacing: 0.4px;
+      box-shadow: 0 2px 8px rgba(34,197,94,0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
 
     .cc-preview {
       position: relative; aspect-ratio: 1.586 / 1; border-radius: 14px; overflow: hidden;
@@ -338,6 +476,36 @@
       background: linear-gradient(135deg, #ffdf7a 0%, #d4af37 55%, #b8941f 100%);
     }
 
+    /* STOCK PROGRESS BAR */
+    .stock-progress {
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 10px 12px;
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      margin-top: 4px;
+    }
+    .stock-progress-top {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 10px; font-weight: 800;
+    }
+    .stock-progress-top .stock-left { color: #ef4444; letter-spacing: 0.2px; }
+    .stock-progress-top .stock-percent { color: #d4af37; letter-spacing: 0.3px; }
+    .stock-bar-track {
+      height: 5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .stock-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ef4444, #f59e0b);
+      border-radius: 3px;
+      transition: width 1.5s ease;
+      box-shadow: 0 0 8px rgba(239,68,68,0.5);
+    }
+
     .rating-stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 1.5px; line-height: 1; font-family: Arial, sans-serif; }
     .rating-stars .stars-bg { color: #333; }
     .rating-stars .stars-fill { color: #d4af37; position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; }
@@ -419,7 +587,6 @@
     }
     .review-helpful:hover { border-color: rgba(212,175,55,0.4); color: #d4af37; background: rgba(212,175,55,0.06); }
 
-    /* MORE BUTTON (per review) */
     .review-more-btn {
       display: inline-flex; align-items: center; gap: 5px;
       font-size: 11px; color: #d4af37;
@@ -444,7 +611,6 @@
       display: block; margin-bottom: 3px; letter-spacing: 0.5px; text-transform: uppercase;
     }
 
-    /* LOAD MORE REVIEWS BUTTON (bottom of reviews) */
     .load-more-reviews-wrapper { display: flex; justify-content: center; margin-top: 24px; padding: 4px 0 8px; }
     .load-more-reviews-btn {
       display: inline-flex; align-items: center; gap: 10px;
@@ -485,55 +651,66 @@
 
     /* NETWORK ERROR MODAL */
     .network-error-modal { text-align: center; padding: 40px 26px; }
-    .network-error-icon {
-      font-size: 54px; margin-bottom: 14px;
-      animation: pulseIcon 1.5s ease-in-out infinite;
-    }
-    @keyframes pulseIcon {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.08); }
-    }
-    .network-error-title {
-      font-size: 22px; font-weight: 800; color: #fff;
-      margin-bottom: 10px; letter-spacing: -0.3px;
-    }
+    .network-error-icon { font-size: 54px; margin-bottom: 14px; animation: pulseIcon 1.5s ease-in-out infinite; }
+    @keyframes pulseIcon { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.08); } }
+    .network-error-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
     .network-error-title.warning { color: #f59e0b; }
     .network-error-title.danger { color: #ef4444; }
     .network-error-title.busy { color: #d4af37; }
-    .network-error-message {
-      font-size: 13px; color: #999; line-height: 1.7;
-      margin-bottom: 20px; max-width: 300px;
-      margin-left: auto; margin-right: auto;
-    }
+    .network-error-message { font-size: 13px; color: #999; line-height: 1.7; margin-bottom: 20px; max-width: 300px; margin-left: auto; margin-right: auto; }
     .network-error-details {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      font-size: 11px; color: #666;
-      background: rgba(255,255,255,0.03);
+      font-size: 11px; color: #666; background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
       padding: 8px 14px; border-radius: 20px; margin-bottom: 20px;
       width: fit-content; margin-left: auto; margin-right: auto;
     }
-    .network-error-details .dot-pulse {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: #ef4444;
-      animation: dotPulse 1.5s ease-in-out infinite;
-    }
-    @keyframes dotPulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
+    .network-error-details .dot-pulse { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; animation: dotPulse 1.5s ease-in-out infinite; }
+    @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .network-retry-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
       color: #1a1408; border: none; border-radius: 26px; padding: 14px;
       font-size: 14px; font-weight: 800; letter-spacing: 0.6px;
       cursor: pointer; font-family: inherit; transition: all 0.25s ease;
       box-shadow: 0 6px 20px rgba(212,175,55,0.35);
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .network-retry-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(212,175,55,0.55);
+    .network-retry-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
+
+    /* LIVE NOTIFICATIONS */
+    .live-notif-container {
+      position: fixed; bottom: 20px; left: 20px;
+      z-index: 500;
+      display: flex; flex-direction: column; gap: 10px;
+      pointer-events: none;
+      max-width: 300px;
+    }
+    .live-notif {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08);
+      animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
+      pointer-events: auto;
+    }
+    @keyframes notifIn { from { transform: translateX(-110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-110%); opacity: 0; } }
+    .live-notif .notif-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.08));
+      display: flex; align-items: center; justify-content: center;
+      color: #d4af37; font-weight: 800; font-size: 11px;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(212,175,55,0.5);
+      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+    }
+    .live-notif .notif-content { font-size: 11px; color: #ccc; line-height: 1.4; flex: 1; min-width: 0; }
+    .live-notif .notif-content strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
+    .live-notif .notif-content .notif-time { color: #22c55e; font-size: 10px; display: block; margin-top: 3px; font-weight: 600; letter-spacing: 0.2px; }
+    @media (max-width: 480px) {
+      .live-notif-container { left: 10px; right: 10px; bottom: 12px; max-width: none; }
     }
 
     /* MORE STATS MODAL */
@@ -870,7 +1047,19 @@
     }
     @keyframes stroke { to { stroke-dashoffset: 0; } }
     .success-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
-    .success-message { font-size: 14px; color: #999; line-height: 1.6; margin-bottom: 20px; }
+    .success-message { font-size: 14px; color: #999; line-height: 1.6; margin-bottom: 16px; }
+    .success-tracking {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 11px; color: #22c55e; font-weight: 600;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      padding: 8px 14px; border-radius: 20px; margin-bottom: 18px;
+      letter-spacing: 0.2px;
+    }
+    .success-tracking .st-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
     .success-order-details {
       background: #0d0d0d; border: 1px solid rgba(212,175,55,0.15);
       border-radius: 12px; padding: 14px; margin-bottom: 20px;
@@ -959,12 +1148,57 @@
         <span class="trust-dot">•</span>
         <span><span class="trust-emoji">💎</span> High Budget Card's</span>
       </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-number" data-count="12487">0</span>
+          <span class="stat-label">Cards Sold</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="9876">0</span>
+          <span class="stat-label">Happy Buyers</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="4.9" data-decimal="1">0</span>
+          <span class="stat-label">Avg Rating</span>
+        </div>
+      </div>
       <button class="hero-cta-btn" id="heroCtaBtn">Buy Card's <span class="shop-arrow">→</span></button>
     </section>
+
+    <section class="why-trust-section">
+      <h2>Why Trust Us?</h2>
+      <p class="why-trust-sub">Thousands choose us every month for a reason</p>
+      <div class="trust-features">
+        <div class="trust-feature-card"><div class="tf-icon">🎯</div><div class="tf-label">10,000+</div><div class="tf-value">Happy Customers</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">✅</div><div class="tf-label">100% Verified</div><div class="tf-value">Genuine Cards</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">⚡</div><div class="tf-label">60 Seconds</div><div class="tf-value">Instant Delivery</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">🔒</div><div class="tf-label">100% Secure</div><div class="tf-value">Encrypted Payment</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">⭐</div><div class="tf-label">4.9 / 5.0</div><div class="tf-value">Average Rating</div></div>
+      </div>
+    </section>
+
+    <div class="recent-activity">
+      <span class="live-dot"></span>
+      <div class="recent-activity-track">
+        <div class="recent-activity-inner" id="activityTicker">🎉 Rahul from Delhi just placed an order · 2 min ago · 💳 Anjali from Mumbai bought American Express Gold · 5 min ago · 🎉 Rohit from Bangalore just placed an order · 8 min ago</div>
+      </div>
+    </div>
 
     <div class="heading-row">
       <h1>Buy Card's</h1>
       <p>Tap any card to flip & see details</p>
+    </div>
+
+    <div class="product-trust-row">
+      <span class="ptr-item"><span class="ptr-icon">🔒</span> SSL Secured</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">🛡️</span> 100% Safe</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">⚡</span> Instant Delivery</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">✓</span> Verified Seller</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">💯</span> Genuine Cards</span>
     </div>
 
     <div class="product-grid" id="productGrid"></div>
@@ -979,7 +1213,6 @@
       </div>
       <div class="reviews-grid" id="reviewsGrid"></div>
 
-      <!-- LOAD MORE REVIEWS BUTTON (shows network error on click) -->
       <div class="load-more-reviews-wrapper">
         <button class="load-more-reviews-btn" id="loadMoreReviewsBtn">
           <span class="lm-icon">📖</span>
@@ -1142,23 +1375,18 @@
     </div>
   </div>
 
-  <!-- NETWORK ERROR MODAL -->
   <div class="modal-overlay" id="networkErrorOverlay">
     <div class="modal" style="max-width: 380px;">
       <button class="modal-close" id="networkErrorClose">&times;</button>
       <div class="network-error-modal">
         <div class="network-error-icon" id="networkErrorIcon">📡</div>
         <div class="network-error-title" id="networkErrorTitle">Connection Issue</div>
-        <div class="network-error-message" id="networkErrorMessage">
-          Unable to load more reviews. Please check your internet connection and try again.
-        </div>
+        <div class="network-error-message" id="networkErrorMessage">Unable to load more reviews. Please check your internet connection and try again.</div>
         <div class="network-error-details">
           <span class="dot-pulse" id="networkErrorDot"></span>
           <span id="networkErrorDetails">Checking connection...</span>
         </div>
-        <button class="network-retry-btn" id="networkRetryBtn">
-          <span>🔄</span> Retry Loading Reviews
-        </button>
+        <button class="network-retry-btn" id="networkRetryBtn"><span>🔄</span> Retry Loading Reviews</button>
       </div>
     </div>
   </div>
@@ -1172,9 +1400,7 @@
         <div class="more-stats-label">People Found This Helpful</div>
         <div class="more-stats-divider"></div>
         <div class="more-stats-badge">🛡️ Trusted by Verified Buyers</div>
-        <div class="more-stats-message">
-          Join thousands of satisfied customers who trust this seller. Every review comes from a real purchase.
-        </div>
+        <div class="more-stats-message">Join thousands of satisfied customers who trust this seller. Every review comes from a real purchase.</div>
       </div>
     </div>
   </div>
@@ -1198,7 +1424,11 @@
         </svg>
       </div>
       <div class="success-title">Order Placed Successfully</div>
-      <div class="success-message">Thank you! We'll contact you shortly on WhatsApp to confirm your order.</div>
+      <div class="success-message">Thank you! We'll contact you shortly to confirm your order.</div>
+      <div class="success-tracking">
+        <span class="st-dot"></span>
+        <span>Your card details will be sent within 30 seconds</span>
+      </div>
       <div class="success-order-details" id="successOrderDetails" style="display:none;"></div>
       <button class="success-btn" id="successCloseBtn">Continue Shopping</button>
     </div>
@@ -1206,6 +1436,7 @@
   </div>
 
   <div id="toastContainer"></div>
+  <div class="live-notif-container" id="liveNotifContainer"></div>
 
   <script>
     (function() {
@@ -1241,11 +1472,11 @@
     })();
 
     var designs = [
-      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'MICHAEL ANDERSON', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.' },
-      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.' },
-      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.' },
-      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.' },
-      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.' }
+      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'MICHAEL ANDERSON', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92 },
+      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78 },
+      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85 },
+      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71 },
+      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88 }
     ];
 
     var reviewsData = [
@@ -1348,22 +1579,38 @@
       grid.innerHTML = '';
       designs.forEach(function(design) {
         var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
+        var stockLeft = Math.floor(Math.random() * 5) + 2;
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
         card.innerHTML =
-          '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
+          '<div class="cc-preview-wrap">' +
+            '<span class="card-verified-badge">✓ Verified</span>' +
+            '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
+          '</div>' +
           '<div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div>' +
           '<div class="gc-info">' +
             '<div class="gc-name">' + design.name + '</div>' +
             '<div class="gc-tagline">' + design.tagline + '</div>' +
             '<div class="gc-material">' + design.material + '</div>' +
             '<div class="gc-meta"><span class="gc-rating">' + renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span></span><span class="gc-price">' + design.price + '</span></div>' +
+            '<div class="stock-progress">' +
+              '<div class="stock-progress-top">' +
+                '<span class="stock-left">🔥 Only ' + stockLeft + ' left in stock!</span>' +
+                '<span class="stock-percent">' + design.stockPercent + '% Sold</span>' +
+              '</div>' +
+              '<div class="stock-bar-track"><div class="stock-bar-fill" style="width:0%" data-fill="' + design.stockPercent + '"></div></div>' +
+            '</div>' +
             '<div class="gc-actions"><button class="gc-buy-btn" data-action="buy">Buy Now</button></div>' +
           '</div>';
         grid.appendChild(card);
       });
       attachGridEvents();
+      setTimeout(function() {
+        document.querySelectorAll('.stock-bar-fill').forEach(function(bar) {
+          bar.style.width = bar.getAttribute('data-fill') + '%';
+        });
+      }, 300);
     }
 
     function createReviewCardHTML(review) {
@@ -1584,80 +1831,131 @@
       if (e.target === this) { this.style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; }
     });
 
-    /* ============ LOAD MORE REVIEWS LOGIC (NETWORK ERROR SIMULATION) ============ */
+    /* ============ COUNTER ANIMATION ============ */
+    function animateCounters() {
+      document.querySelectorAll('.stat-number').forEach(function(el) {
+        var target = parseFloat(el.getAttribute('data-count'));
+        var decimals = parseInt(el.getAttribute('data-decimal')) || 0;
+        var duration = 1800;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var current = target * progress;
+          if (decimals > 0) {
+            el.textContent = current.toFixed(decimals);
+          } else {
+            el.textContent = Math.floor(current).toLocaleString('en-IN');
+          }
+          if (progress < 1) requestAnimationFrame(step);
+          else {
+            if (decimals > 0) el.textContent = target.toFixed(decimals);
+            else el.textContent = Math.floor(target).toLocaleString('en-IN') + '+';
+          }
+        }
+        requestAnimationFrame(step);
+      });
+    }
+    /* ============ END COUNTER ============ */
+
+    /* ============ RECENT ACTIVITY TICKER ============ */
+    var activityNames = ['Rahul', 'Anjali', 'Rohit', 'Priya', 'Arjun', 'Neha', 'Karan', 'Sneha', 'Vikram', 'Pooja', 'Deepak', 'Riya', 'Sameer', 'Kavita'];
+    var activityCities = ['Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata', 'Ahmedabad', 'Lucknow'];
+    var activityCards = ['American Express Gold', 'Metro Signature', 'Sunrise Elite', 'Pacific Infinite', 'Liberty Reserve'];
+
+    function updateActivityTicker() {
+      var ticker = document.getElementById('activityTicker');
+      if (!ticker) return;
+      var items = [];
+      for (var i = 0; i < 6; i++) {
+        var name = activityNames[Math.floor(Math.random() * activityNames.length)];
+        var city = activityCities[Math.floor(Math.random() * activityCities.length)];
+        var card = activityCards[Math.floor(Math.random() * activityCards.length)];
+        var mins = Math.floor(Math.random() * 15) + 1;
+        items.push('🎉 ' + name + ' from ' + city + ' just bought ' + card + ' · ' + mins + ' min ago');
+      }
+      ticker.textContent = items.join('  •  ');
+    }
+    setInterval(updateActivityTicker, 30000);
+    /* ============ END TICKER ============ */
+
+    /* ============ LIVE NOTIFICATIONS ============ */
+    var notifNames = ['Rahul S.', 'Anjali D.', 'Rohit Y.', 'Priya M.', 'Arjun K.', 'Neha P.', 'Karan M.', 'Sneha R.', 'Vikram T.', 'Pooja G.', 'Deepak V.', 'Riya B.'];
+    var notifCities = ['Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata'];
+    var notifCards = ['Amex Gold', 'Metro Signature', 'Sunrise Elite', 'Pacific Infinite', 'Liberty Reserve'];
+    var notifContainer = document.getElementById('liveNotifContainer');
+
+    function showLiveNotification() {
+      if (!notifContainer) return;
+      var name = notifNames[Math.floor(Math.random() * notifNames.length)];
+      var city = notifCities[Math.floor(Math.random() * notifCities.length)];
+      var card = notifCards[Math.floor(Math.random() * notifCards.length)];
+      var mins = Math.floor(Math.random() * 10) + 1;
+      var initials = name.split(' ').map(function(n){return n[0];}).join('').substring(0,2);
+
+      var notif = document.createElement('div');
+      notif.className = 'live-notif';
+      notif.innerHTML =
+        '<div class="notif-avatar">' + initials + '</div>' +
+        '<div class="notif-content">' +
+          '<strong>' + name + ' from ' + city + '</strong>' +
+          'just bought ' + card +
+          '<span class="notif-time">🕐 ' + mins + ' min ago</span>' +
+        '</div>';
+      notifContainer.appendChild(notif);
+      setTimeout(function() { notif.remove(); }, 6500);
+    }
+
+    var notifCount = 0;
+    var maxNotifs = 20;
+    function scheduleNextNotif() {
+      if (notifCount >= maxNotifs) return;
+      var delay = 12000 + Math.random() * 8000;
+      setTimeout(function() {
+        showLiveNotification();
+        notifCount++;
+        scheduleNextNotif();
+      }, delay);
+    }
+    setTimeout(function() {
+      showLiveNotification();
+      notifCount++;
+      scheduleNextNotif();
+    }, 4000);
+    /* ============ END LIVE NOTIFICATIONS ============ */
+
+    /* ============ LOAD MORE REVIEWS (NETWORK ERROR SIM) ============ */
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
     var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon');
-
     var clickCount = 0;
     var isProcessing = false;
 
     var errorScenarios = [
-      {
-        icon: '📡',
-        title: 'Connection Slow',
-        titleClass: 'warning',
-        message: 'Aapki internet connection slow lag rahi hai. Kripya WiFi ya mobile data check karein aur dobara try karein.',
-        details: 'Slow network detected',
-        detailsColor: '#f59e0b'
-      },
-      {
-        icon: '⚠️',
-        title: 'Unable to Load',
-        titleClass: 'danger',
-        message: 'Server se connect nahi ho pa raha. Internet connection check karke dobara koshish karein. Baaki 7,859+ reviews safe hain.',
-        details: 'Request timed out',
-        detailsColor: '#ef4444'
-      },
-      {
-        icon: '🌐',
-        title: 'Network Error',
-        titleClass: 'warning',
-        message: 'Aapka network unstable hai. Kuch der baad try karein. Saare reviews load hote hi dikh jayenge.',
-        details: 'Connection unstable',
-        detailsColor: '#f59e0b'
-      },
-      {
-        icon: '🔌',
-        title: 'Connection Lost',
-        titleClass: 'danger',
-        message: 'Internet connection lost. Kripya apni device ka network check karein aur fir try karein.',
-        details: 'No response from server',
-        detailsColor: '#ef4444'
-      },
-      {
-        icon: '⏳',
-        title: 'Server Busy',
-        titleClass: 'busy',
-        message: 'Bohot zyada users abhi reviews dekh rahe hain. Kuch minute baad dobara try karein.',
-        details: 'High traffic detected',
-        detailsColor: '#d4af37'
-      }
+      { icon: '📡', title: 'Connection Slow', titleClass: 'warning', message: 'Aapki internet connection slow lag rahi hai. Kripya WiFi ya mobile data check karein aur dobara try karein.', details: 'Slow network detected', detailsColor: '#f59e0b' },
+      { icon: '⚠️', title: 'Unable to Load', titleClass: 'danger', message: 'Server se connect nahi ho pa raha. Internet connection check karke dobara koshish karein. Baaki 7,859+ reviews safe hain.', details: 'Request timed out', detailsColor: '#ef4444' },
+      { icon: '🌐', title: 'Network Error', titleClass: 'warning', message: 'Aapka network unstable hai. Kuch der baad try karein. Saare reviews load hote hi dikh jayenge.', details: 'Connection unstable', detailsColor: '#f59e0b' },
+      { icon: '🔌', title: 'Connection Lost', titleClass: 'danger', message: 'Internet connection lost. Kripya apni device ka network check karein aur fir try karein.', details: 'No response from server', detailsColor: '#ef4444' },
+      { icon: '⏳', title: 'Server Busy', titleClass: 'busy', message: 'Bohot zyada users abhi reviews dekh rahe hain. Kuch minute baad dobara try karein.', details: 'High traffic detected', detailsColor: '#d4af37' }
     ];
 
     loadMoreBtn.addEventListener('click', function() {
       if (isProcessing) return;
       isProcessing = true;
-
       loadMoreBtn.classList.add('loading');
       loadMoreText.textContent = 'Loading reviews...';
       loadMoreIcon.textContent = '⏳';
-
       var delay = 1800 + Math.random() * 1200;
-
       setTimeout(function() {
         loadMoreBtn.classList.remove('loading');
         loadMoreIcon.textContent = '📖';
-
         var scenarioIndex = clickCount % errorScenarios.length;
         var scenario = errorScenarios[scenarioIndex];
         clickCount++;
-
         showNetworkError(scenario);
-
         var newNumber = 7865 - Math.floor(Math.random() * 30);
         loadMoreText.textContent = 'More + ' + newNumber.toLocaleString('en-IN') + ' Reviews';
-
         isProcessing = false;
       }, delay);
     });
@@ -1668,29 +1966,21 @@
       titleEl.textContent = scenario.title;
       titleEl.className = 'network-error-title ' + scenario.titleClass;
       document.getElementById('networkErrorMessage').textContent = scenario.message;
-
       var details = document.getElementById('networkErrorDetails');
       details.textContent = scenario.details;
       document.getElementById('networkErrorDot').style.background = scenario.detailsColor;
-
       document.getElementById('networkErrorOverlay').style.display = 'flex';
     }
 
-    document.getElementById('networkErrorClose').addEventListener('click', function() {
-      document.getElementById('networkErrorOverlay').style.display = 'none';
-    });
-    document.getElementById('networkErrorOverlay').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
+    document.getElementById('networkErrorClose').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; });
+    document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
     document.getElementById('networkRetryBtn').addEventListener('click', function() {
       document.getElementById('networkErrorOverlay').style.display = 'none';
-      setTimeout(function() {
-        loadMoreBtn.click();
-      }, 300);
+      setTimeout(function() { loadMoreBtn.click(); }, 300);
     });
-    /* ============ END LOAD MORE LOGIC ============ */
+    /* ============ END LOAD MORE ============ */
 
-    /* ============ WRITE A REVIEW LOGIC ============ */
+    /* ============ WRITE A REVIEW ============ */
     var photoUploadArea = document.getElementById('photoUploadArea');
     var photoInput = document.getElementById('reviewPhotoInput');
     var photoPlusIcon = document.getElementById('photoPlusIcon');
@@ -1795,15 +2085,11 @@
       updateStarDisplay();
       setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
     });
-    /* ============ END REVIEW LOGIC ============ */
+    /* ============ END REVIEW ============ */
 
-    /* ============ MORE STATS MODAL LOGIC ============ */
-    document.getElementById('moreStatsClose').addEventListener('click', function() {
-      document.getElementById('moreStatsOverlay').style.display = 'none';
-    });
-    document.getElementById('moreStatsOverlay').addEventListener('click', function(e) {
-      if (e.target === this) this.style.display = 'none';
-    });
+    /* ============ MORE STATS MODAL ============ */
+    document.getElementById('moreStatsClose').addEventListener('click', function() { document.getElementById('moreStatsOverlay').style.display = 'none'; });
+    document.getElementById('moreStatsOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
     function attachMoreButtonEvents() {
       document.querySelectorAll('.review-more-btn').forEach(function(btn) {
@@ -1818,7 +2104,7 @@
         });
       });
     }
-    /* ============ END MORE STATS LOGIC ============ */
+    /* ============ END MORE STATS ============ */
 
     var legalData = {
       privacy: { title: 'Privacy Policy', content: '<p>We value your privacy. Your personal details (Name, WhatsApp number) are only used to process your order and deliver your card. We do not share, sell, or distribute your information to any third parties. All transactions are 100% secure.</p>' },
@@ -1842,6 +2128,7 @@
 
     renderGrid();
     renderReviews();
+    animateCounters();
   </script>
 </body>
 </html>
