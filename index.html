@@ -213,9 +213,7 @@
     .grid-card:hover {
       border-color: rgba(212, 175, 55, 0.55);
       transform: translateY(-4px);
-      box-shadow:
-        0 20px 45px rgba(0,0,0,0.7),
-        0 0 25px rgba(212,175,55,0.15);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.15);
     }
     .grid-card::before {
       content: '';
@@ -233,11 +231,8 @@
       aspect-ratio: 1.586 / 1;
       border-radius: 14px;
       overflow: hidden;
-      box-shadow:
-        0 14px 34px rgba(0,0,0,0.7),
-        0 2px 6px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.14),
-        inset 0 -1px 0 rgba(0,0,0,0.5),
+      box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -1px 0 rgba(0,0,0,0.5),
         inset 0 0 0 1px rgba(255,255,255,0.06);
       transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
       transform-style: preserve-3d;
@@ -317,11 +312,8 @@
       50% { opacity: 1; }
     }
     .cc-preview.finish-holo {
-      box-shadow:
-        0 14px 34px rgba(0,0,0,0.7),
-        0 0 0 1px rgba(255,0,255,0.35),
-        0 0 22px rgba(255,0,255,0.22),
-        0 0 35px rgba(0,255,255,0.18);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,0,255,0.35),
+        0 0 22px rgba(255,0,255,0.22), 0 0 35px rgba(0,255,255,0.18);
     }
     .cc-preview.finish-satin .cc-sheen {
       background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
@@ -364,7 +356,6 @@
       font-weight: 900;
       color: #fff;
       flex-shrink: 0;
-      letter-spacing: 0;
       text-shadow: 0 1px 1px rgba(0,0,0,0.5);
       box-shadow: inset 0 0 4px rgba(255,255,255,0.15);
     }
@@ -408,10 +399,7 @@
       border-radius: 5px;
       background: linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%);
       position: relative;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.55),
-        inset 0 -1px 0 rgba(0,0,0,0.35),
-        0 2px 4px rgba(0,0,0,0.45);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.45);
       z-index: 2;
       margin-top: 4px;
       align-self: flex-start;
@@ -465,10 +453,7 @@
       text-align: center;
       font-variant-numeric: tabular-nums;
       color: #f2f2f2;
-      text-shadow:
-        -0.5px -0.5px 0 rgba(255,255,255,0.28),
-        0.5px 0.5px 1px rgba(0,0,0,0.8),
-        0 0 8px rgba(255,255,255,0.06);
+      text-shadow: -0.5px -0.5px 0 rgba(255,255,255,0.28), 0.5px 0.5px 1px rgba(0,0,0,0.8), 0 0 8px rgba(255,255,255,0.06);
       z-index: 2;
       position: relative;
     }
@@ -510,9 +495,7 @@
       align-items: center;
       justify-content: center;
       padding: 2.5px;
-      box-shadow:
-        0 0 8px rgba(255,255,255,0.35),
-        inset 0 0 4px rgba(255,255,255,0.45);
+      box-shadow: 0 0 8px rgba(255,255,255,0.35), inset 0 0 4px rgba(255,255,255,0.45);
       opacity: 0.96;
     }
     .cc-holo-sticker svg {
@@ -576,7 +559,6 @@
       letter-spacing: 1px;
     }
 
-    /* UPDATED AMEX GOLD CARD STYLES - TRANSPARENT + BLUR ANIMATION */
     .cc-face.cc-front.cc-amex-gold {
       padding: 0 !important;
       background: transparent !important;
@@ -597,7 +579,6 @@
       filter: blur(0);
       opacity: 1;
     }
-    /* END OF AMEX GOLD STYLES */
 
     .cc-balance-badge {
       display: flex;
@@ -611,10 +592,7 @@
       border: 1.5px solid rgba(34,197,94,0.35);
       width: fit-content;
       margin: 0 auto;
-      box-shadow:
-        0 4px 20px rgba(34,197,94,0.15),
-        0 0 24px rgba(34,197,94,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.05);
+      box-shadow: 0 4px 20px rgba(34,197,94,0.15), 0 0 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative;
       overflow: hidden;
     }
@@ -729,16 +707,50 @@
       white-space: nowrap;
     }
 
-    /* REVIEWS SECTION STYLES START */
+    /* REVIEWS SECTION */
     .reviews-section {
       margin-bottom: 40px;
       scroll-margin-top: 90px;
     }
+    .reviews-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .reviews-header .heading-row { margin-bottom: 0; }
+
+    .write-review-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212,175,55,0.1);
+      border: 1.5px solid rgba(212,175,55,0.4);
+      color: #d4af37;
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .write-review-btn:hover {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+    }
+
     .reviews-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 16px;
-      margin-top: 20px;
     }
     @media (min-width: 700px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1000px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -750,9 +762,14 @@
       padding: 18px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s ease, border-color 0.3s ease;
+      animation: reviewFadeIn 0.5s ease;
+    }
+    @keyframes reviewFadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .review-card:hover {
       transform: translateY(-3px);
@@ -782,6 +799,8 @@
     .review-info {
       display: flex;
       flex-direction: column;
+      flex: 1;
+      min-width: 0;
     }
     .review-name {
       font-size: 14px;
@@ -803,11 +822,37 @@
       width: fit-content;
       border: 1px solid rgba(34,197,94,0.2);
     }
+    .review-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 11px;
+      color: #777;
+      margin-top: -4px;
+    }
+    .review-meta .dot {
+      color: #444;
+      font-size: 12px;
+    }
+    .review-purchased {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: #d4af37;
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.2);
+      padding: 4px 10px;
+      border-radius: 8px;
+      width: fit-content;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
     .review-stars {
       color: #d4af37;
       font-size: 14px;
       letter-spacing: 2px;
-      margin-top: -4px;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -822,7 +867,6 @@
       font-size: 13px;
       color: #ffffff;
       line-height: 1.6;
-      font-style: normal;
       position: relative;
       padding-top: 6px;
       font-weight: 400;
@@ -836,10 +880,168 @@
       top: -8px;
       left: -8px;
       font-family: serif;
-      font-style: normal;
       font-weight: 700;
     }
-    /* REVIEWS SECTION STYLES END */
+    .review-helpful {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #888;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 5px 10px;
+      border-radius: 20px;
+      width: fit-content;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+    .review-helpful:hover {
+      border-color: rgba(212,175,55,0.4);
+      color: #d4af37;
+      background: rgba(212,175,55,0.06);
+    }
+    .review-seller-reply {
+      background: rgba(212,175,55,0.04);
+      border-left: 2px solid rgba(212,175,55,0.45);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    .review-seller-reply strong {
+      color: #d4af37;
+      font-weight: 700;
+      font-size: 10px;
+      display: block;
+      margin-bottom: 3px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* WRITE REVIEW MODAL */
+    .review-modal {
+      max-width: 440px;
+    }
+    .review-form-group {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .review-form-group label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #d4af37;
+      margin-bottom: 6px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+    .review-form-group input,
+    .review-form-group textarea,
+    .review-form-group select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #262626;
+      border-radius: 10px;
+      font-size: 13px;
+      background: #0f0f0f;
+      color: #fff;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .review-form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .review-form-group input:focus,
+    .review-form-group textarea:focus,
+    .review-form-group select:focus {
+      border-color: #d4af37;
+      background-color: #131313;
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.1);
+    }
+    .review-form-group input::placeholder,
+    .review-form-group textarea::placeholder { color: #444; }
+    .review-form-group textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.5;
+    }
+
+    .star-selector {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 4px 0;
+    }
+    .star-selector .star-btn {
+      font-size: 28px;
+      color: #333;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      transition: all 0.15s ease;
+      font-family: Arial, sans-serif;
+    }
+    .star-selector .star-btn:hover,
+    .star-selector .star-btn.active {
+      color: #d4af37;
+      transform: scale(1.15);
+    }
+    .star-selector-label {
+      font-size: 11px;
+      color: #888;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .review-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408;
+      border: none;
+      border-radius: 26px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .review-submit-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg);
+      transition: left 0.7s ease;
+    }
+    .review-submit-btn:hover::before { left: 130%; }
+    .review-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(212,175,55,0.55);
+    }
+    /* END REVIEW MODAL */
 
     footer {
       background: transparent;
@@ -942,11 +1144,8 @@
     .modal-card-inner .cc-face {
       border-radius: 16px;
       padding: 16px 20px;
-      box-shadow:
-        0 24px 50px rgba(0,0,0,0.75),
-        0 4px 10px rgba(0,0,0,0.5),
-        inset 0 1px 0 rgba(255,255,255,0.15),
-        inset 0 -1px 0 rgba(0,0,0,0.5);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.75), 0 4px 10px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.5);
     }
     .modal-card-inner .cc-number { font-size: 16px; letter-spacing: 3px; }
     .modal-card-inner .cc-bank { font-size: 13px; letter-spacing: 2.5px; }
@@ -1091,10 +1290,7 @@
     .mini-card-preview .cc-face {
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow:
-        0 14px 30px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.15),
-        inset 0 -1px 0 rgba(0,0,0,0.4);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4);
     }
     .mini-card-preview .cc-number { font-size: 12px; letter-spacing: 2.2px; }
     .mini-card-preview .cc-bank { font-size: 10px; letter-spacing: 2px; }
@@ -1106,22 +1302,6 @@
     .mini-card-preview .cc-visa { font-size: 10px; padding: 3px 7px 4px; border-radius: 3px; }
     .mini-card-preview .cc-holo-sticker { width: 18px; height: 18px; padding: 2px; }
     .mini-card-preview .cc-tier-wm { font-size: 28px; }
-
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-header { font-size: 11px; top: 13px; letter-spacing: 1.2px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-chip-wrap { left: 14px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-centurion { width: 42px; height: 55px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid { font-size: 9px; right: 14px; gap: 3px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless { width: 11px; height: 11px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::before { width: 6px; height: 6px; top: 2px; left: 2px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-cid-contactless::after { width: 9px; height: 9px; top: 0.5px; left: 0.5px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-number { font-size: 13px; letter-spacing: 2.4px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-bottom { bottom: 18px; left: 16px; right: 16px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-holder { font-size: 9px; letter-spacing: 1.2px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-member { font-size: 6px; gap: 3.5px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-member-circle { width: 18px; height: 18px; font-size: 9px; border-width: 1px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-copyright { font-size: 5.5px; right: 14px; bottom: 8px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-inner-border { inset: 6px; border-width: 1.1px; }
-    .mini-card-preview .cc-face.cc-front.cc-amex-gold .amex-inner-border::before { inset: 2px; }
 
     .section-divider {
       display: flex;
@@ -1311,9 +1491,7 @@
       background: #fff;
       padding: 10px;
       border-radius: 14px;
-      box-shadow:
-        0 14px 34px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(212,175,55,0.25);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.25);
       display: block;
       image-rendering: crisp-edges;
     }
@@ -1553,9 +1731,14 @@
 
     <!-- REVIEWS SECTION START -->
     <section class="reviews-section">
-      <div class="heading-row">
-        <h1>Trusted by Thousands</h1>
-        <p>What our customers say after buying</p>
+      <div class="reviews-header">
+        <div class="heading-row">
+          <h1>Trusted by Thousands</h1>
+          <p>What our customers say after buying</p>
+        </div>
+        <button class="write-review-btn" id="writeReviewBtn">
+          ✍️ Write a Review
+        </button>
       </div>
       <div class="reviews-grid" id="reviewsGrid"></div>
     </section>
@@ -1582,25 +1765,19 @@
           <div class="modal-card-inner" id="modalCardInner"></div>
         </div>
         <div class="flip-hint">↻ Tap card to flip</div>
-
         <h3 class="modal-title" id="modalName">Card</h3>
         <p class="modal-tagline" id="modalTagline">Tagline</p>
-
         <div class="modal-meta">
           <span class="modal-price" id="modalPrice">₹499</span>
           <span class="modal-rating" id="modalRating"></span>
         </div>
-
         <div class="modal-material" id="modalMaterial">MATTE FINISH</div>
-
         <p class="modal-description" id="modalDescription">Description</p>
-
         <div class="qty-row">
           <button id="qtyMinus">−</button>
           <span id="qtyValue">1</span>
           <button id="qtyPlus">+</button>
         </div>
-
         <button class="modal-buy-btn" id="modalBuyBtn">⚡ Buy Now</button>
       </div>
     </div>
@@ -1610,17 +1787,13 @@
     <div class="modal order-modal">
       <button class="modal-close" id="orderClose">&times;</button>
       <div class="modal-body">
-
         <div class="checkout-header">
           <span class="checkout-eyebrow">CHECKOUT</span>
           <h3 class="checkout-title">Complete Your Order</h3>
           <p class="checkout-subtitle">Confirm your card details and shipping information</p>
         </div>
-
         <div class="mini-card-preview" id="miniCardPreview"></div>
-
         <div class="section-divider"><span>ORDER SUMMARY</span></div>
-
         <div class="order-summary-card">
           <div class="summary-row">
             <span class="summary-label">Card</span>
@@ -1640,9 +1813,7 @@
             <span class="summary-value-total" id="summaryTotal">₹0</span>
           </div>
         </div>
-
         <div class="section-divider"><span>YOUR DETAILS</span></div>
-
         <form class="order-form" id="orderForm">
           <div class="field-group">
             <label>Full Name</label>
@@ -1663,7 +1834,6 @@
             <span>✓ Quality</span>
           </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -1672,33 +1842,26 @@
     <div class="modal order-modal">
       <button class="modal-close" id="paymentClose">&times;</button>
       <div class="modal-body">
-
         <div class="checkout-header">
           <span class="checkout-eyebrow">PAYMENT</span>
           <h3 class="checkout-title">Scan & Pay</h3>
           <p class="checkout-subtitle">Complete payment and enter your transaction ID</p>
         </div>
-
         <div class="payment-total-card">
           <div class="payment-total-label">ORDER TOTAL</div>
           <div class="payment-total-amount" id="paymentAmount">₹0</div>
           <div class="payment-total-design" id="paymentDesign">—</div>
         </div>
-
         <div class="section-divider"><span>SCAN QR CODE</span></div>
-
         <div class="qr-container">
           <img id="qrCodeImage" src="qr-code.png" alt="Payment QR Code" />
         </div>
         <p class="qr-hint">Scan with any <strong>UPI app</strong> to pay</p>
-
         <div class="section-divider"><span>ENTER TRANSACTION ID</span></div>
-
         <div class="field-group">
           <label>Transaction ID</label>
           <input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="15" autocomplete="off" />
         </div>
-
         <button class="order-btn-premium" id="confirmPaymentBtn">
           <span>🔒</span> Confirm Payment
         </button>
@@ -1712,23 +1875,79 @@
         <p style="text-align:center; font-size:10px; color:#666; margin-top:8px; letter-spacing:0.3px;">
           🔐 Your details are 100% private. Instant confirmation on WhatsApp.
         </p>
-
       </div>
     </div>
   </div>
 
-  <!-- LEGAL MODAL (PRIVACY & TERMS) START -->
+  <!-- WRITE REVIEW MODAL START -->
+  <div class="modal-overlay" id="reviewOverlay">
+    <div class="modal review-modal">
+      <button class="modal-close" id="reviewClose">&times;</button>
+      <div class="modal-body">
+        <div class="checkout-header" style="margin-bottom: 20px;">
+          <span class="checkout-eyebrow">SHARE YOUR EXPERIENCE</span>
+          <h3 class="checkout-title">Write a Review</h3>
+          <p class="checkout-subtitle">Help others by sharing your honest experience</p>
+        </div>
+
+        <form id="reviewForm">
+          <div class="review-form-group">
+            <label>Your Name</label>
+            <input type="text" id="reviewName" placeholder="e.g. Arjun Singh" required maxlength="30" />
+          </div>
+
+          <div class="review-form-group">
+            <label>Your City</label>
+            <input type="text" id="reviewLocation" placeholder="e.g. Mumbai" required maxlength="20" />
+          </div>
+
+          <div class="review-form-group">
+            <label>Which Card Did You Buy?</label>
+            <select id="reviewCard" required>
+              <option value="">-- Select Card --</option>
+              <option>American Express Gold</option>
+              <option>Metro Signature</option>
+              <option>Sunrise Elite</option>
+              <option>Pacific Infinite</option>
+              <option>Liberty Reserve</option>
+            </select>
+          </div>
+
+          <div class="review-form-group">
+            <label>Your Rating</label>
+            <div class="star-selector" id="starSelector">
+              <button type="button" class="star-btn" data-star="1">★</button>
+              <button type="button" class="star-btn" data-star="2">★</button>
+              <button type="button" class="star-btn" data-star="3">★</button>
+              <button type="button" class="star-btn" data-star="4">★</button>
+              <button type="button" class="star-btn" data-star="5">★</button>
+              <span class="star-selector-label" id="starLabel">Select rating</span>
+            </div>
+          </div>
+
+          <div class="review-form-group">
+            <label>Your Review</label>
+            <textarea id="reviewText" placeholder="Share your experience with the card, delivery, and service..." required maxlength="250"></textarea>
+          </div>
+
+          <button type="submit" class="review-submit-btn">
+            <span>✨</span> Submit Review
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- WRITE REVIEW MODAL END -->
+
   <div class="modal-overlay" id="legalOverlay">
     <div class="modal" style="max-width: 500px;">
       <button class="modal-close" id="legalClose">&times;</button>
       <div class="modal-body">
         <h3 class="modal-title" id="legalTitle" style="margin-bottom: 16px; text-align: left;">Privacy Policy</h3>
-        <div class="legal-content" id="legalContent" style="color: #999; font-size: 13px; line-height: 1.7; text-align: left;">
-        </div>
+        <div class="legal-content" id="legalContent" style="color: #999; font-size: 13px; line-height: 1.7; text-align: left;"></div>
       </div>
     </div>
   </div>
-  <!-- LEGAL MODAL END -->
 
   <div class="success-overlay" id="successOverlay">
     <div class="success-modal">
@@ -1788,153 +2007,20 @@
     })();
 
     var designs = [
-      {
-        id: 'amex_gold',
-        brand: 'amex',
-        name: 'American Express Gold',
-        bank: 'AMERICAN EXPRESS',
-        bankInitial: 'AE',
-        cardType: 'GOLD',
-        debitCredit: 'CREDIT',
-        cardNumber: '3759 876543 21001',
-        expiry: '06 / 28',
-        cvv: '8172',
-        cid: '7997',
-        memberSince: '93',
-        balance: '1 - 1.5 lakh',
-        defaultName: 'MICHAEL ANDERSON',
-        tagline: 'The world in your wallet',
-        gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)',
-        accent: '#d4af37',
-        price: '₹899',
-        rating: '⭐ 5.0',
-        material: 'Gold Foil',
-        description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.'
-      },
-      {
-        id: 'd6',
-        brand: 'visa',
-        name: 'Metro Signature',
-        bank: 'METRO CITY BANK',
-        bankInitial: 'M',
-        cardType: 'SIGNATURE',
-        debitCredit: 'CREDIT',
-        cardNumber: '4733 4455 1234 6789',
-        expiry: '05 / 28',
-        cvv: '394',
-        balance: '45k - 55k',
-        defaultName: 'ROBERT JONES',
-        tagline: 'Urban prestige, delivered',
-        gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)',
-        accent: '#ff006e',
-        price: '₹199',
-        rating: '⭐ 4.9',
-        material: 'Holographic',
-        description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.'
-      },
-      {
-        id: 'd8',
-        brand: 'visa',
-        name: 'Sunrise Elite',
-        bank: 'SUNRISE BANK',
-        bankInitial: 'S',
-        cardType: 'ELITE',
-        debitCredit: 'DEBIT',
-        cardNumber: '4072 5566 7788 8901',
-        expiry: '07 / 27',
-        cvv: '149',
-        balance: '60k - 65k',
-        defaultName: 'PATRICIA DAVIS',
-        tagline: 'Where luxury meets dawn',
-        gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)',
-        accent: '#f59e0b',
-        price: '₹399',
-        rating: '⭐ 4.8',
-        material: 'Gloss Finish',
-        description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.'
-      },
-      {
-        id: 'd3',
-        brand: 'visa',
-        name: 'Pacific Infinite',
-        bank: 'PACIFIC COAST',
-        bankInitial: 'P',
-        cardType: 'INFINITE',
-        debitCredit: 'CREDIT',
-        cardNumber: '4916 2347 8901 3456',
-        expiry: '03 / 28',
-        cvv: '265',
-        balance: '70k - 88k',
-        defaultName: 'DAVID WILLIAMS',
-        tagline: 'Ocean-inspired elegance',
-        gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)',
-        accent: '#00b4d8',
-        price: '₹425',
-        rating: '⭐ 4.8',
-        material: 'Gloss Finish',
-        description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.'
-      },
-      {
-        id: 'd7',
-        brand: 'visa',
-        name: 'Liberty Reserve',
-        bank: 'LIBERTY NATIONAL',
-        bankInitial: 'L',
-        cardType: 'INFINITE',
-        debitCredit: 'CREDIT',
-        cardNumber: '4488 1122 3344 7890',
-        expiry: '02 / 29',
-        cvv: '867',
-        balance: '80k - 95k',
-        defaultName: 'WILLIAM GARCIA',
-        tagline: 'Freedom in every swipe',
-        gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)',
-        accent: '#10b981',
-        price: '₹547',
-        rating: '⭐ 4.7',
-        material: 'Matte Finish',
-        description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.'
-      }
+      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'MICHAEL ANDERSON', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.' },
+      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.' },
+      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.' },
+      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.' },
+      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.' }
     ];
 
-    // MIXED REVIEWS - 2 card buying + 4 Free Fire use (alternated) - Local PNG photos in "reviews" folder
     var reviewsData = [
-      {
-        name: 'Anjali Desai',
-        avatar: 'reviews/review1.png',
-        comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai, isse accha koi option nahi.',
-        rating: 5
-      },
-      {
-        name: 'Rohit Yadav',
-        avatar: 'reviews/review2.png',
-        comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya!',
-        rating: 5
-      },
-      {
-        name: 'Rahul Sharma',
-        avatar: 'reviews/review3.png',
-        comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended!',
-        rating: 5
-      },
-      {
-        name: 'Pilu Tonde',
-        avatar: 'reviews/review4.png',
-        comment: 'Card ke balance se Free Fire mein weekly membership li, aur instant activate bhi ho gayi. Bohot kaam ka card hai.',
-        rating: 4
-      },
-      {
-        name: 'Ramu Gamer',
-        avatar: 'reviews/review5.png',
-        comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai.',
-        rating: 5
-      },
-      {
-        name: 'Karan Mehta',
-        avatar: 'reviews/review6.png',
-        comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya!',
-        rating: 5
-      }
+      { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'Purchased: American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47 },
+      { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Purchased: Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89 },
+      { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Purchased: Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156 },
+      { name: 'Pilu Tonde', avatar: 'reviews/review4.png', location: 'Pune', time: '1 month ago', purchased: 'Purchased: Sunrise Elite', comment: 'Card ke balance se Free Fire mein weekly membership li. Achha hai par delivery mein thoda time laga. Baaki sab badhiya 👍', rating: 4, helpful: 23, sellerReply: 'Thanks Pilu bhai! Next order mein fast delivery ka promise 🙏' },
+      { name: 'Ramu Gamer', avatar: 'reviews/review5.png', location: 'Hyderabad', time: '2 months ago', purchased: 'Purchased: Liberty Reserve', comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai. Paisa vasool 🔥🔥', rating: 5, helpful: 67 },
+      { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'Purchased: American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
 
     var currentDesign = null;
@@ -1942,6 +2028,7 @@
     var currentOrderDesign = null;
     var currentPendingOrder = null;
     var isFlipped = false;
+    var selectedRating = 0;
 
     function showToast(message, type) {
       var container = document.getElementById('toastContainer');
@@ -1973,17 +2060,9 @@
       '</span>';
     }
 
-    function titleCase(str) {
-      return str.toLowerCase().split(' ').map(function(w) {
-        return w.charAt(0).toUpperCase() + w.slice(1);
-      }).join(' ');
-    }
-
     function maskCardNumber(cardNumber) {
       var digits = (cardNumber || '').replace(/\D/g, '');
-      if (digits.length === 15) {
-        return '•••• ••••• ' + digits.slice(-5);
-      }
+      if (digits.length === 15) return '•••• ••••• ' + digits.slice(-5);
       return '•••• •••• •••• ' + digits.slice(-4);
     }
 
@@ -2040,9 +2119,7 @@
 
     function cardFrontHTML(design) {
       var holderName = design.defaultName;
-      if (design.brand === 'amex') {
-        return amexFrontHTML(design, holderName);
-      }
+      if (design.brand === 'amex') return amexFrontHTML(design, holderName);
       return visaFrontHTML(design, holderName);
     }
 
@@ -2073,8 +2150,7 @@
 
         card.innerHTML =
           '<div class="cc-preview ' + finishClass + '">' +
-            cardFrontHTML(design) +
-            cardBackHTML(design) +
+            cardFrontHTML(design) + cardBackHTML(design) +
           '</div>' +
           '<div class="cc-balance-badge">' +
             '<div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div>' +
@@ -2099,6 +2175,46 @@
       attachGridEvents();
     }
 
+    function createReviewCardHTML(review) {
+      var starsHTML = '';
+      for (var i = 0; i < 5; i++) {
+        starsHTML += (i < Math.floor(review.rating)) ? '★' : '☆';
+      }
+
+      var initials = review.name.split(' ').map(function(n){return n[0];}).join('').substring(0,2).toUpperCase();
+
+      var avatarHTML;
+      if (review.avatar) {
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;&quot;>' + initials + '</span>\'">';
+      } else {
+        avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;">' + initials + '</span>';
+      }
+
+      var html =
+        '<div class="review-header">' +
+          '<div class="review-avatar">' + avatarHTML + '</div>' +
+          '<div class="review-info">' +
+            '<div class="review-name">' + review.name + '</div>' +
+            '<div class="review-badge">✓ Verified Buyer</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="review-meta">' +
+          '<span>📍 ' + review.location + '</span>' +
+          '<span class="dot">·</span>' +
+          '<span>🕐 ' + review.time + '</span>' +
+        '</div>' +
+        '<div class="review-purchased">📦 ' + review.purchased + '</div>' +
+        '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
+        '<div class="review-text">' + review.comment + '</div>' +
+        '<div class="review-helpful">👍 Helpful (' + review.helpful + ')</div>';
+
+      if (review.sellerReply) {
+        html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
+      }
+
+      return html;
+    }
+
     function renderReviews() {
       var grid = document.getElementById('reviewsGrid');
       if (!grid) return;
@@ -2107,27 +2223,7 @@
       reviewsData.forEach(function(review) {
         var card = document.createElement('div');
         card.className = 'review-card';
-
-        var starsHTML = '';
-        for (var i = 0; i < 5; i++) {
-          if (i < Math.floor(review.rating)) {
-            starsHTML += '★';
-          } else {
-            starsHTML += '☆';
-          }
-        }
-
-        card.innerHTML =
-          '<div class="review-header">' +
-            '<div class="review-avatar"><img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.style.background=\'linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.1))\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;&quot;>' + review.name.split(' ').map(function(n){return n[0];}).join('') + '</span>\'"></div>' +
-            '<div class="review-info">' +
-              '<div class="review-name">' + review.name + '</div>' +
-              '<div class="review-badge">✓ Verified Buyer</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
-          '<div class="review-text">' + review.comment + '</div>';
-
+        card.innerHTML = createReviewCardHTML(review);
         grid.appendChild(card);
       });
     }
@@ -2179,13 +2275,7 @@
 
     function placeOrderDirect() {
       if (!currentDesign) return;
-
-      currentOrderDesign = {
-        name: currentDesign.name,
-        price: currentDesign.price,
-        qty: currentQty,
-        material: currentDesign.material
-      };
+      currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material };
 
       var previewEl = document.getElementById('miniCardPreview');
       var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
@@ -2246,15 +2336,12 @@
 
     function confirmPayment() {
       var txnId = document.getElementById('transactionId').value.trim();
-
       var txnRegex = /^(\d{12}|UPI\d{12})$/;
       if (!txnRegex.test(txnId)) {
         alert('Invalid Transaction ID. Please check and try again.');
         return;
       }
-
       currentPendingOrder.transactionId = txnId;
-
       document.getElementById('paymentOverlay').style.display = 'none';
       showToast('Payment confirmed!', 'success');
       showSuccessModal(currentPendingOrder);
@@ -2268,9 +2355,7 @@
       var html = '';
       html += '<span>💳 ' + order.designName + ' × ' + order.qty + ' — ' + order.price + '</span>';
       html += '<span>🎨 ' + order.material + '</span>';
-      if (order.transactionId) {
-        html += '<span>✅ Txn ID: ' + order.transactionId + '</span>';
-      }
+      if (order.transactionId) html += '<span>✅ Txn ID: ' + order.transactionId + '</span>';
       html += '<span>📱 WhatsApp: ' + order.whatsapp + '</span>';
 
       detailsContainer.innerHTML = html;
@@ -2378,7 +2463,110 @@
       }
     });
 
-    // LEGAL MODAL LOGIC START
+    /* ============ WRITE A REVIEW LOGIC START ============ */
+    document.getElementById('writeReviewBtn').addEventListener('click', function() {
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      updateStarDisplay();
+      document.getElementById('starLabel').textContent = 'Select rating';
+      document.getElementById('reviewOverlay').style.display = 'flex';
+    });
+
+    document.getElementById('reviewClose').addEventListener('click', function() {
+      document.getElementById('reviewOverlay').style.display = 'none';
+    });
+    document.getElementById('reviewOverlay').addEventListener('click', function(e) {
+      if (e.target === this) this.style.display = 'none';
+    });
+
+    document.querySelectorAll('.star-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        selectedRating = parseInt(this.getAttribute('data-star'));
+        updateStarDisplay();
+      });
+      btn.addEventListener('mouseenter', function() {
+        var hoverVal = parseInt(this.getAttribute('data-star'));
+        document.querySelectorAll('.star-btn').forEach(function(b) {
+          var val = parseInt(b.getAttribute('data-star'));
+          b.style.color = val <= hoverVal ? '#d4af37' : '#333';
+        });
+      });
+      btn.addEventListener('mouseleave', function() {
+        updateStarDisplay();
+      });
+    });
+
+    function updateStarDisplay() {
+      document.querySelectorAll('.star-btn').forEach(function(b) {
+        var val = parseInt(b.getAttribute('data-star'));
+        if (val <= selectedRating) {
+          b.classList.add('active');
+          b.style.color = '#d4af37';
+        } else {
+          b.classList.remove('active');
+          b.style.color = '#333';
+        }
+      });
+
+      var labels = {
+        0: 'Select rating',
+        1: 'Poor 😞',
+        2: 'Fair 😐',
+        3: 'Good 🙂',
+        4: 'Very Good 😊',
+        5: 'Excellent! 🤩'
+      };
+      document.getElementById('starLabel').textContent = labels[selectedRating] || 'Select rating';
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var name = document.getElementById('reviewName').value.trim();
+      var location = document.getElementById('reviewLocation').value.trim();
+      var card = document.getElementById('reviewCard').value;
+      var text = document.getElementById('reviewText').value.trim();
+
+      if (!name || !location || !card || !text || selectedRating === 0) {
+        if (selectedRating === 0) {
+          alert('Please select a rating (1-5 stars).');
+        } else {
+          alert('Please fill all the fields.');
+        }
+        return;
+      }
+
+      var newReview = {
+        name: name,
+        avatar: null,
+        location: location,
+        time: 'Just now',
+        purchased: 'Purchased: ' + card,
+        comment: text,
+        rating: selectedRating,
+        helpful: 0
+      };
+
+      reviewsData.unshift(newReview);
+
+      var grid = document.getElementById('reviewsGrid');
+      var card_el = document.createElement('div');
+      card_el.className = 'review-card';
+      card_el.innerHTML = createReviewCardHTML(newReview);
+      grid.insertBefore(card_el, grid.firstChild);
+
+      document.getElementById('reviewOverlay').style.display = 'none';
+      showToast('Thank you! Your review has been posted.', 'success');
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      updateStarDisplay();
+
+      setTimeout(function() {
+        document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    });
+    /* ============ WRITE A REVIEW LOGIC END ============ */
+
     var legalData = {
       privacy: {
         title: 'Privacy Policy',
@@ -2410,7 +2598,6 @@
     document.getElementById('legalOverlay').addEventListener('click', function(e) {
       if (e.target === this) this.style.display = 'none';
     });
-    // LEGAL MODAL LOGIC END
 
     renderGrid();
     renderReviews();
