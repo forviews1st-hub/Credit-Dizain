@@ -119,6 +119,7 @@
       .hero-sub { font-size: 13px; }
     }
 
+    /* WHY TRUST US - 4 cards now */
     .why-trust-section {
       margin: 20px 0 24px;
       padding: 28px 20px;
@@ -139,7 +140,7 @@
       margin-bottom: 22px; letter-spacing: 0.3px;
     }
     .trust-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    @media (min-width: 700px) { .trust-features { grid-template-columns: repeat(5, 1fr); } }
+    @media (min-width: 700px) { .trust-features { grid-template-columns: repeat(4, 1fr); } }
     .trust-feature-card {
       display: flex; flex-direction: column; align-items: center; text-align: center;
       gap: 6px; padding: 16px 8px;
@@ -379,12 +380,162 @@
     .cc-sig-strip-text { font-size: 8px; color: #333; font-style: italic; font-weight: 600; opacity: 0.5; }
     .cc-cvv { background: #fff; color: #111; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 3px; letter-spacing: 1px; }
 
+    /* AMEX GOLD FRONT */
     .cc-face.cc-front.cc-amex-gold { padding: 0 !important; background: transparent !important; overflow: hidden; display: block !important; }
     .cc-face.cc-front.cc-amex-gold img {
       width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block;
       filter: blur(15px); opacity: 0.4; transition: filter 0.8s ease, opacity 0.8s ease;
     }
     .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
+
+    /* AMEX GOLD BACK - REALISTIC */
+    .cc-face.cc-back.cc-amex-gold-back {
+      background: linear-gradient(160deg, #1a1a1a 0%, #050505 100%);
+      padding: 0;
+      color: #e5e5e5;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+    .cc-face.cc-back.cc-amex-gold-back::before {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .cc-face.cc-back.cc-amex-gold-back::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent 0 9px, rgba(255,255,255,0.015) 9px 10px),
+        repeating-linear-gradient(-45deg, transparent 0 12px, rgba(255,255,255,0.008) 12px 13px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .amex-back-stripe {
+      width: 100%;
+      height: 20%;
+      background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
+      margin-top: 11%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05);
+      z-index: 2;
+      position: relative;
+    }
+    .amex-back-content {
+      padding: 6% 6% 5%;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+      z-index: 3;
+      position: relative;
+    }
+    .amex-back-sig-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .amex-back-sig-strip {
+      flex: 1;
+      height: 20px;
+      background: repeating-linear-gradient(45deg, #f0f0f0 0 6px, #e0e0e0 6px 12px);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .amex-back-sig-strip::before {
+      content: 'Authorized Signature';
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 7px;
+      color: #555;
+      font-style: italic;
+      font-weight: 600;
+    }
+    .amex-back-cvv {
+      background: #fff;
+      color: #111;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+    .amex-back-info {
+      font-size: 6.5px;
+      color: #999;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+    }
+    .amex-back-info strong {
+      color: #d4af37;
+      font-weight: 800;
+    }
+    .amex-back-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent);
+      margin: 1px 0;
+    }
+    .amex-back-barcode {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 1.5px;
+      height: 12px;
+      margin-top: auto;
+      padding-top: 3px;
+    }
+    .amex-back-barcode span {
+      background: #d4d4d4;
+      height: 100%;
+      display: block;
+      border-radius: 0.5px;
+    }
+    .amex-back-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 5.5px;
+      color: #666;
+      letter-spacing: 0.3px;
+      margin-top: 3px;
+    }
+    .amex-back-footer .amex-card-num {
+      color: #d4af37;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+
+    /* Modal size adjustments for amex back */
+    .modal-card-inner .amex-back-stripe { height: 20%; margin-top: 11%; }
+    .modal-card-inner .amex-back-content { gap: 7px; padding: 6% 6% 5%; }
+    .modal-card-inner .amex-back-sig-strip { height: 28px; }
+    .modal-card-inner .amex-back-sig-strip::before { font-size: 9px; left: 10px; }
+    .modal-card-inner .amex-back-cvv { font-size: 13px; padding: 5px 11px; }
+    .modal-card-inner .amex-back-info { font-size: 8.5px; }
+    .modal-card-inner .amex-back-barcode { height: 16px; }
+    .modal-card-inner .amex-back-footer { font-size: 7px; }
+    .modal-card-inner .cc-face.cc-back.cc-amex-gold-back::before { inset: 8px; border-width: 1.3px; }
+
+    /* Mini preview adjustments for amex back */
+    .mini-card-preview .amex-back-sig-strip { height: 16px; }
+    .mini-card-preview .amex-back-sig-strip::before { font-size: 5.5px; left: 6px; }
+    .mini-card-preview .amex-back-cvv { font-size: 8px; padding: 2px 5px; }
+    .mini-card-preview .amex-back-info { font-size: 5px; }
+    .mini-card-preview .amex-back-barcode { height: 9px; }
+    .mini-card-preview .amex-back-footer { font-size: 4.5px; }
 
     .cc-balance-badge {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
@@ -526,14 +677,33 @@
       content: '"'; font-size: 30px; color: rgba(212,175,55,0.25);
       position: absolute; top: -8px; left: -8px; font-family: serif; font-weight: 700;
     }
+
+    /* HELPFUL BUTTON */
     .review-helpful {
       display: inline-flex; align-items: center; gap: 6px; font-size: 11px;
       color: #888; background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
       padding: 5px 10px; border-radius: 20px; width: fit-content; margin-top: 2px;
-      cursor: pointer; transition: all 0.2s; font-weight: 600;
+      cursor: pointer; transition: all 0.25s ease; font-weight: 600;
+      font-family: inherit;
+      user-select: none;
     }
     .review-helpful:hover { border-color: rgba(212,175,55,0.4); color: #d4af37; background: rgba(212,175,55,0.06); }
+    .review-helpful.active {
+      border-color: #d4af37;
+      color: #d4af37;
+      background: rgba(212,175,55,0.12);
+      box-shadow: 0 0 12px rgba(212,175,55,0.3), inset 0 0 8px rgba(212,175,55,0.08);
+      transform: translateY(-1px);
+    }
+    .review-helpful.active .helpful-icon {
+      animation: helpfulPop 0.4s ease;
+    }
+    @keyframes helpfulPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
 
     .review-more-btn {
       display: inline-flex; align-items: center; gap: 5px;
@@ -548,13 +718,40 @@
     .review-more-btn .arrow { font-size: 10px; transition: transform 0.2s; }
     .review-more-btn:hover .arrow { transform: translateX(2px); }
 
+    /* SELLER REPLY - GLOWING LIGHT */
     .review-seller-reply {
-      background: rgba(212,175,55,0.04); border-left: 2px solid rgba(212,175,55,0.45);
-      padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #bbb; margin-top: 4px; line-height: 1.5;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
+      border-left: 3px solid rgba(212,175,55,0.75);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #e8e8e8;
+      margin-top: 4px;
+      line-height: 1.6;
+      box-shadow:
+        0 0 14px rgba(212,175,55,0.18),
+        inset 0 1px 0 rgba(212,175,55,0.2),
+        inset 0 0 12px rgba(212,175,55,0.05);
+      position: relative;
+    }
+    .review-seller-reply::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
     }
     .review-seller-reply strong {
-      color: #d4af37; font-weight: 700; font-size: 10px;
-      display: block; margin-bottom: 3px; letter-spacing: 0.5px; text-transform: uppercase;
+      color: #f5d76e;
+      font-weight: 800;
+      font-size: 10px;
+      display: block;
+      margin-bottom: 4px;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(212,175,55,0.5);
     }
 
     .load-more-reviews-wrapper { display: flex; justify-content: center; margin-top: 24px; padding: 4px 0 8px; }
@@ -602,7 +799,7 @@
     .network-error-title.warning { color: #f59e0b; }
     .network-error-title.danger { color: #ef4444; }
     .network-error-title.busy { color: #d4af37; }
-    .network-error-message { font-size: 13px; color: #999; line-height: 1.7; margin-bottom: 20px; max-width: 300px; margin-left: auto; margin-right: auto; }
+    .network-error-message { font-size: 13px; color: #999; line-height: 1.7; margin-bottom: 20px; max-width: 320px; margin-left: auto; margin-right: auto; }
     .network-error-details {
       display: flex; align-items: center; justify-content: center; gap: 8px;
       font-size: 11px; color: #666; background: rgba(255,255,255,0.03);
@@ -650,7 +847,6 @@
     }
     @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
-
     .live-notif .notif-card-badge {
       display: flex;
       align-items: center;
@@ -825,6 +1021,7 @@
       box-shadow: 0 24px 50px rgba(0,0,0,0.75), 0 4px 10px rgba(0,0,0,0.5),
         inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.5);
     }
+    .modal-card-inner .cc-face.cc-back.cc-amex-gold-back { padding: 0; }
     .modal-card-inner .cc-number { font-size: 16px; letter-spacing: 3px; }
     .modal-card-inner .cc-bank { font-size: 13px; letter-spacing: 2.5px; }
     .modal-card-inner .cc-bank-type { font-size: 8px; letter-spacing: 2px; }
@@ -896,6 +1093,7 @@
       border-radius: 12px; padding: 10px 12px;
       box-shadow: 0 14px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4);
     }
+    .mini-card-preview .cc-face.cc-back.cc-amex-gold-back { padding: 0; }
     .mini-card-preview .cc-number { font-size: 12px; letter-spacing: 2.2px; }
     .mini-card-preview .cc-bank { font-size: 10px; letter-spacing: 2px; }
     .mini-card-preview .cc-bank-type { font-size: 6px; letter-spacing: 1.6px; }
@@ -1052,6 +1250,7 @@
     }
     .toast.success { border-color: #d4af37; box-shadow: 0 10px 28px rgba(212,175,55,0.3); }
     .toast.error { border-color: #ff4d4d; box-shadow: 0 10px 28px rgba(255,77,77,0.3); }
+    .toast.info { border-color: #888; box-shadow: 0 10px 28px rgba(136,136,136,0.2); }
     .toast-icon { font-size: 20px; }
     @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
@@ -1138,7 +1337,6 @@
         <div class="trust-feature-card"><div class="tf-icon">✅</div><div class="tf-label">100% Verified</div><div class="tf-value">Genuine Cards</div></div>
         <div class="trust-feature-card"><div class="tf-icon">⚡</div><div class="tf-label">60 Seconds</div><div class="tf-value">Instant Delivery</div></div>
         <div class="trust-feature-card"><div class="tf-icon">🔒</div><div class="tf-label">100% Secure</div><div class="tf-value">Encrypted Payment</div></div>
-        <div class="trust-feature-card"><div class="tf-icon">⭐</div><div class="tf-label">4.9 / 5.0</div><div class="tf-value">Average Rating</div></div>
       </div>
     </section>
 
@@ -1248,7 +1446,7 @@
           <div class="field-group"><label>WhatsApp Number</label><input type="tel" id="orderPhone" placeholder="+91 98765 43210" required /></div>
           <button type="submit" class="order-btn-premium"><span>💳</span> Proceed to Payment</button>
           <div class="trust-badges">
-            <span>🔒 Secure</span><span class="dot">·</span><span>⚡ Fast</span><span class="dot">·</span><span>✓ Quality</span>
+            <span>🔒 Secure</span><span class="dot">·</span><span>⚡ Fast</span><span class="dot">·</span><span>✓ Genuine</span>
           </div>
         </form>
       </div>
@@ -1346,7 +1544,7 @@
       <div class="network-error-modal">
         <div class="network-error-icon" id="networkErrorIcon">📡</div>
         <div class="network-error-title" id="networkErrorTitle">Connection Issue</div>
-        <div class="network-error-message" id="networkErrorMessage">Unable to load more reviews. Please check your internet connection and try again.</div>
+        <div class="network-error-message" id="networkErrorMessage">Unable to load reviews. Please check your connection.</div>
         <div class="network-error-details">
           <span class="dot-pulse" id="networkErrorDot"></span>
           <span id="networkErrorDetails">Checking connection...</span>
@@ -1437,7 +1635,7 @@
     })();
 
     var designs = [
-      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'MICHAEL ANDERSON', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92 },
+      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92 },
       { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78 },
       { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85 },
       { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71 },
@@ -1465,7 +1663,7 @@
       var container = document.getElementById('toastContainer');
       var toast = document.createElement('div');
       toast.className = 'toast ' + (type || '');
-      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : type === 'info' ? 'ℹ' : 'ℹ';
       toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
       container.appendChild(toast);
       setTimeout(function() { toast.remove(); }, 3000);
@@ -1502,6 +1700,31 @@
       return '<div class="cc-face cc-front cc-amex-gold"><img src="amex-gold.png" alt="American Express Gold" onload="this.classList.add(\'loaded\')" onerror="this.classList.add(\'loaded\')"></div>';
     }
 
+    function amexBackHTML(design) {
+      var barcodeHTML = '';
+      for (var i = 0; i < 42; i++) {
+        var w = Math.random() > 0.55 ? 1.5 : 1;
+        barcodeHTML += '<span style="width:' + w + 'px"></span>';
+      }
+      return '<div class="cc-face cc-back cc-amex-gold-back">' +
+        '<div class="amex-back-stripe"></div>' +
+        '<div class="amex-back-content">' +
+          '<div class="amex-back-sig-row">' +
+            '<div class="amex-back-sig-strip"></div>' +
+            '<div class="amex-back-cvv">' + design.cvv + '</div>' +
+          '</div>' +
+          '<div class="amex-back-info">For 24/7 Customer Service call <strong>1800-XXX-XXXX</strong> or visit <strong>americanexpress.com</strong></div>' +
+          '<div class="amex-back-divider"></div>' +
+          '<div class="amex-back-info">This card is issued by American Express. Use of this card is subject to the terms and conditions of the Cardmember Agreement.</div>' +
+          '<div class="amex-back-barcode">' + barcodeHTML + '</div>' +
+          '<div class="amex-back-footer">' +
+            '<span>© American Express</span>' +
+            '<span class="amex-card-num">' + design.cardNumber + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
     function visaFrontHTML(design, holderName) {
       return '<div class="cc-face cc-front" style="background:' + design.gradient + '">' +
         '<div class="cc-glow" style="background: radial-gradient(circle at 78% 18%, ' + design.accent + '55, transparent 62%)"></div>' +
@@ -1533,6 +1756,7 @@
     }
 
     function cardBackHTML(design) {
+      if (design.brand === 'amex') return amexBackHTML(design);
       return '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
         '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
         '<div class="cc-stripe"></div>' +
@@ -1599,7 +1823,7 @@
         '<div class="review-purchased">📦 ' + review.purchased + '</div>' +
         '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
         '<div class="review-text">' + review.comment + '</div>' +
-        '<div class="review-helpful">👍 Helpful (' + review.helpful + ')</div>' +
+        '<button class="review-helpful" type="button" data-helpful="' + review.helpful + '"><span class="helpful-icon">👍</span> Helpful (<span class="helpful-count">' + review.helpful + '</span>)</button>' +
         '<button class="review-more-btn" data-more="' + (review.moreCount || 0) + '">More <span class="arrow">+</span>' + (review.moreCount || 0) + '</button>';
       if (review.sellerReply) {
         html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
@@ -1618,6 +1842,7 @@
         grid.appendChild(card);
       });
       attachMoreButtonEvents();
+      attachHelpfulButtonEvents();
     }
 
     function attachGridEvents() {
@@ -1836,28 +2061,75 @@
     }
     setInterval(updateActivityTicker, 30000);
 
-    /* ============ LIVE NOTIFICATIONS (TOP RIGHT with CARD PURCHASED banner) ============ */
-    var notifNames = ['Rahul S.', 'Anjali D.', 'Rohit Y.', 'Priya M.', 'Arjun K.', 'Neha P.', 'Karan M.', 'Sneha R.', 'Vikram T.', 'Pooja G.', 'Deepak V.', 'Riya B.'];
-    var notifCities = ['Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata'];
+    /* ============ LIVE NOTIFICATIONS (AI-Style Auto Generator) ============ */
+    var firstNames = [
+      'Aarav', 'Vivaan', 'Aditya', 'Vihaan', 'Arjun', 'Sai', 'Reyansh', 'Ayaan', 'Krishna', 'Ishaan',
+      'Rohan', 'Karan', 'Rahul', 'Amit', 'Vikram', 'Raj', 'Suraj', 'Deepak', 'Manish', 'Ankit',
+      'Ravi', 'Sunil', 'Nikhil', 'Harsh', 'Yash', 'Dev', 'Kartik', 'Pranav', 'Rudra', 'Shaurya',
+      'Anjali', 'Priya', 'Sneha', 'Neha', 'Pooja', 'Riya', 'Simran', 'Kavita', 'Divya', 'Meera',
+      'Aditi', 'Nisha', 'Sakshi', 'Tanvi', 'Ishita', 'Aisha', 'Ananya', 'Diya', 'Kritika', 'Sanya'
+    ];
+
+    var surnames = [
+      'Sharma', 'Verma', 'Yadav', 'Patel', 'Khan', 'Singh', 'Gupta', 'Agarwal', 'Jain', 'Mehta',
+      'Shah', 'Reddy', 'Nair', 'Iyer', 'Rao', 'Kumar', 'Chauhan', 'Rathore', 'Mishra', 'Tiwari',
+      'Pandey', 'Joshi', 'Desai', 'Kapoor', 'Malhotra', 'Chopra', 'Sinha', 'Bose', 'Das', 'Roy',
+      'Thakur', 'Kaur', 'Saxena', 'Bansal', 'Garg', 'Ahuja', 'Khanna', 'Bhatia', 'Sethi', 'Dutta'
+    ];
+
+    var cities = [
+      'Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata',
+      'Ahmedabad', 'Lucknow', 'Indore', 'Bhopal', 'Chandigarh', 'Surat', 'Nagpur', 'Varanasi',
+      'Ranchi', 'Patna', 'Kanpur', 'Coimbatore', 'Visakhapatnam', 'Goa', 'Agra', 'Amritsar',
+      'Dehradun', 'Noida', 'Gurgaon', 'Kochi', 'Mysore', 'Udaipur', 'Jodhpur', 'Raipur',
+      'Guwahati', 'Bhubaneswar', 'Ludhiana', 'Jalandhar', 'Nashik', 'Aurangabad', 'Vadodara', 'Rajkot'
+    ];
+
     var notifCards = ['Amex Gold', 'Metro Signature', 'Sunrise Elite', 'Pacific Infinite', 'Liberty Reserve'];
     var notifContainer = document.getElementById('liveNotifContainer');
+    var usedNameKeys = [];
+
+    function generateUniqueBuyer() {
+      var attempts = 0;
+      var firstName, surname, city, key;
+
+      while (attempts < 30) {
+        firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+        surname = surnames[Math.floor(Math.random() * surnames.length)];
+        city = cities[Math.floor(Math.random() * cities.length)];
+        key = firstName + '|' + surname + '|' + city;
+
+        if (usedNameKeys.indexOf(key) === -1) {
+          usedNameKeys.push(key);
+          if (usedNameKeys.length > 5000) usedNameKeys.shift();
+          return { firstName: firstName, surname: surname, city: city };
+        }
+        attempts++;
+      }
+      return {
+        firstName: firstNames[Math.floor(Math.random() * firstNames.length)],
+        surname: surnames[Math.floor(Math.random() * surnames.length)],
+        city: cities[Math.floor(Math.random() * cities.length)]
+      };
+    }
 
     function showLiveNotification() {
       if (!notifContainer) return;
-      var name = notifNames[Math.floor(Math.random() * notifNames.length)];
-      var city = notifCities[Math.floor(Math.random() * notifCities.length)];
+
+      var buyer = generateUniqueBuyer();
+      var displayName = buyer.firstName + ' ' + buyer.surname.charAt(0) + '.';
+      var initials = buyer.firstName.charAt(0) + buyer.surname.charAt(0);
       var card = notifCards[Math.floor(Math.random() * notifCards.length)];
       var mins = Math.floor(Math.random() * 10) + 1;
-      var initials = name.split(' ').map(function(n){return n[0];}).join('').substring(0,2);
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
       notif.innerHTML =
         '<div class="notif-card-badge">💳 Card Purchased</div>' +
         '<div class="notif-row">' +
-          '<div class="notif-avatar">' + initials + '</div>' +
+          '<div class="notif-avatar">' + initials.toUpperCase() + '</div>' +
           '<div class="notif-content">' +
-            '<strong>' + name + ' from ' + city + '</strong>' +
+            '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
             'bought ' + card +
             '<span class="notif-time">🕐 ' + mins + ' min ago</span>' +
           '</div>' +
@@ -1866,24 +2138,19 @@
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
-    var notifCount = 0;
-    var maxNotifs = 20;
-    function scheduleNextNotif() {
-      if (notifCount >= maxNotifs) return;
-      var delay = 12000 + Math.random() * 8000;
-      setTimeout(function() {
-        showLiveNotification();
-        notifCount++;
-        scheduleNextNotif();
-      }, delay);
-    }
     setTimeout(function() {
       showLiveNotification();
-      notifCount++;
-      scheduleNextNotif();
+      function loop() {
+        var delay = 12000 + Math.random() * 8000;
+        setTimeout(function() {
+          showLiveNotification();
+          loop();
+        }, delay);
+      }
+      loop();
     }, 4000);
 
-    /* ============ LOAD MORE REVIEWS (NETWORK ERROR SIM) ============ */
+    /* ============ LOAD MORE REVIEWS (PROFESSIONAL ENGLISH ERRORS) ============ */
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
     var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon');
@@ -1891,11 +2158,11 @@
     var isProcessing = false;
 
     var errorScenarios = [
-      { icon: '📡', title: 'Connection Slow', titleClass: 'warning', message: 'Aapki internet connection slow lag rahi hai. Kripya WiFi ya mobile data check karein aur dobara try karein.', details: 'Slow network detected', detailsColor: '#f59e0b' },
-      { icon: '⚠️', title: 'Unable to Load', titleClass: 'danger', message: 'Server se connect nahi ho pa raha. Internet connection check karke dobara koshish karein. Baaki 7,859+ reviews safe hain.', details: 'Request timed out', detailsColor: '#ef4444' },
-      { icon: '🌐', title: 'Network Error', titleClass: 'warning', message: 'Aapka network unstable hai. Kuch der baad try karein. Saare reviews load hote hi dikh jayenge.', details: 'Connection unstable', detailsColor: '#f59e0b' },
-      { icon: '🔌', title: 'Connection Lost', titleClass: 'danger', message: 'Internet connection lost. Kripya apni device ka network check karein aur fir try karein.', details: 'No response from server', detailsColor: '#ef4444' },
-      { icon: '⏳', title: 'Server Busy', titleClass: 'busy', message: 'Bohot zyada users abhi reviews dekh rahe hain. Kuch minute baad dobara try karein.', details: 'High traffic detected', detailsColor: '#d4af37' }
+      { icon: '📡', title: 'Connection Error', titleClass: 'warning', message: 'Unable to load reviews right now. Please check your internet connection and try again.', details: 'Slow network detected', detailsColor: '#f59e0b' },
+      { icon: '⚠️', title: 'Request Timed Out', titleClass: 'danger', message: 'We couldn\'t load more reviews. Your connection may be unstable. Please try again in a moment.', details: 'Server did not respond', detailsColor: '#ef4444' },
+      { icon: '🌐', title: 'Network Unstable', titleClass: 'warning', message: 'Your network connection appears unstable. Reviews will load once the connection is restored.', details: 'Connection unstable', detailsColor: '#f59e0b' },
+      { icon: '🔌', title: 'Connection Lost', titleClass: 'danger', message: 'Please check your internet connection and retry. All reviews are safe and will load shortly.', details: 'No response from server', detailsColor: '#ef4444' },
+      { icon: '⏳', title: 'Server Busy', titleClass: 'busy', message: 'Our servers are experiencing high traffic at the moment. Please wait a moment and try again.', details: 'High traffic detected', detailsColor: '#d4af37' }
     ];
 
     loadMoreBtn.addEventListener('click', function() {
@@ -1936,6 +2203,31 @@
       document.getElementById('networkErrorOverlay').style.display = 'none';
       setTimeout(function() { loadMoreBtn.click(); }, 300);
     });
+
+    /* ============ HELPFUL BUTTON EVENTS ============ */
+    function attachHelpfulButtonEvents() {
+      document.querySelectorAll('.review-helpful').forEach(function(btn) {
+        if (btn.dataset.helpfulAttached === '1') return;
+        btn.dataset.helpfulAttached = '1';
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          var isActive = this.classList.contains('active');
+          var countEl = this.querySelector('.helpful-count');
+          var currentCount = parseInt(countEl.textContent) || 0;
+
+          if (isActive) {
+            this.classList.remove('active');
+            countEl.textContent = currentCount - 1;
+            showToast('Removed from helpful', 'info');
+          } else {
+            this.classList.add('active');
+            countEl.textContent = currentCount + 1;
+            showToast('Thanks for your feedback!', 'success');
+          }
+        });
+      });
+    }
 
     /* ============ WRITE A REVIEW ============ */
     var photoUploadArea = document.getElementById('photoUploadArea');
@@ -2033,6 +2325,7 @@
       card_el.innerHTML = createReviewCardHTML(newReview);
       grid.insertBefore(card_el, grid.firstChild);
       attachMoreButtonEvents();
+      attachHelpfulButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
       showToast('Thank you! Your review has been posted.', 'success');
       document.getElementById('reviewForm').reset();
