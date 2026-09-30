@@ -972,9 +972,95 @@
     .review-form-group textarea::placeholder { color: #444; }
     .review-form-group textarea {
       resize: vertical;
-      min-height: 90px;
+      min-height: 80px;
       line-height: 1.5;
     }
+
+    /* PHOTO UPLOAD STYLES */
+    .photo-upload-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 4px 0;
+    }
+    .photo-upload-area {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px dashed rgba(212,175,55,0.5);
+      background: rgba(212,175,55,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .photo-upload-area:hover {
+      border-color: #d4af37;
+      background: rgba(212,175,55,0.1);
+      transform: scale(1.03);
+    }
+    .photo-upload-area .plus-icon {
+      font-size: 26px;
+      color: #d4af37;
+      font-weight: 300;
+      line-height: 1;
+      user-select: none;
+    }
+    .photo-upload-area.has-photo {
+      border-style: solid;
+      border-color: #d4af37;
+      box-shadow: 0 0 18px rgba(212,175,55,0.35);
+    }
+    .photo-upload-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-remove-btn {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ff4444;
+      color: #fff;
+      border: 2px solid #0d0d0d;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      z-index: 3;
+    }
+    .photo-upload-area.has-photo .photo-remove-btn {
+      display: flex;
+    }
+    .photo-upload-hint {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .photo-upload-hint .primary {
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.2px;
+    }
+    .photo-upload-hint .secondary {
+      font-size: 10px;
+      color: #777;
+      letter-spacing: 0.2px;
+    }
+    /* END PHOTO UPLOAD */
 
     .star-selector {
       display: flex;
@@ -1729,7 +1815,6 @@
 
     <div class="product-grid" id="productGrid"></div>
 
-    <!-- REVIEWS SECTION START -->
     <section class="reviews-section">
       <div class="reviews-header">
         <div class="heading-row">
@@ -1742,7 +1827,6 @@
       </div>
       <div class="reviews-grid" id="reviewsGrid"></div>
     </section>
-    <!-- REVIEWS SECTION END -->
 
   </main>
 
@@ -1892,6 +1976,21 @@
 
         <form id="reviewForm">
           <div class="review-form-group">
+            <label>Your Photo (Optional)</label>
+            <div class="photo-upload-row">
+              <div class="photo-upload-area" id="photoUploadArea">
+                <span class="plus-icon" id="photoPlusIcon">+</span>
+                <button type="button" class="photo-remove-btn" id="photoRemoveBtn" title="Remove photo">×</button>
+              </div>
+              <div class="photo-upload-hint">
+                <span class="primary">Add your photo</span>
+                <span class="secondary">Tap to open gallery 📷</span>
+              </div>
+            </div>
+            <input type="file" id="reviewPhotoInput" accept="image/*" style="display: none;" />
+          </div>
+
+          <div class="review-form-group">
             <label>Your Name</label>
             <input type="text" id="reviewName" placeholder="e.g. Arjun Singh" required maxlength="30" />
           </div>
@@ -2029,6 +2128,7 @@
     var currentPendingOrder = null;
     var isFlipped = false;
     var selectedRating = 0;
+    var selectedPhotoDataURL = null;
 
     function showToast(message, type) {
       var container = document.getElementById('toastContainer');
@@ -2463,10 +2563,17 @@
       }
     });
 
-    /* ============ WRITE A REVIEW LOGIC START ============ */
+    /* ============ WRITE A REVIEW LOGIC WITH PHOTO ============ */
+    var photoUploadArea = document.getElementById('photoUploadArea');
+    var photoInput = document.getElementById('reviewPhotoInput');
+    var photoPlusIcon = document.getElementById('photoPlusIcon');
+    var photoRemoveBtn = document.getElementById('photoRemoveBtn');
+
     document.getElementById('writeReviewBtn').addEventListener('click', function() {
       document.getElementById('reviewForm').reset();
       selectedRating = 0;
+      selectedPhotoDataURL = null;
+      resetPhotoUpload();
       updateStarDisplay();
       document.getElementById('starLabel').textContent = 'Select rating';
       document.getElementById('reviewOverlay').style.display = 'flex';
@@ -2478,6 +2585,59 @@
     document.getElementById('reviewOverlay').addEventListener('click', function(e) {
       if (e.target === this) this.style.display = 'none';
     });
+
+    /* ---- PHOTO UPLOAD ---- */
+    photoUploadArea.addEventListener('click', function(e) {
+      if (e.target === photoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
+      photoInput.click();
+    });
+
+    photoInput.addEventListener('change', function(e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file.');
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size should be less than 5MB.');
+        return;
+      }
+
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        selectedPhotoDataURL = ev.target.result;
+        photoUploadArea.classList.add('has-photo');
+        photoPlusIcon.style.display = 'none';
+
+        // Remove old image if exists
+        var oldImg = photoUploadArea.querySelector('img');
+        if (oldImg) oldImg.remove();
+
+        var img = document.createElement('img');
+        img.src = selectedPhotoDataURL;
+        img.alt = 'Review photo';
+        photoUploadArea.insertBefore(img, photoUploadArea.firstChild);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    photoRemoveBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      resetPhotoUpload();
+      photoInput.value = '';
+    });
+
+    function resetPhotoUpload() {
+      selectedPhotoDataURL = null;
+      photoUploadArea.classList.remove('has-photo');
+      photoPlusIcon.style.display = '';
+      var oldImg = photoUploadArea.querySelector('img');
+      if (oldImg) oldImg.remove();
+    }
+    /* ---- END PHOTO UPLOAD ---- */
 
     document.querySelectorAll('.star-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
@@ -2538,7 +2698,7 @@
 
       var newReview = {
         name: name,
-        avatar: null,
+        avatar: selectedPhotoDataURL || null,
         location: location,
         time: 'Just now',
         purchased: 'Purchased: ' + card,
@@ -2559,6 +2719,8 @@
       showToast('Thank you! Your review has been posted.', 'success');
       document.getElementById('reviewForm').reset();
       selectedRating = 0;
+      selectedPhotoDataURL = null;
+      resetPhotoUpload();
       updateStarDisplay();
 
       setTimeout(function() {
@@ -2570,7 +2732,7 @@
     var legalData = {
       privacy: {
         title: 'Privacy Policy',
-        content: '<p>We value your privacy. Your personal details (Name, WhatsApp number) are solely used to process your order and deliver your card. We do not share, sell, or distribute your information to any third parties. All transactions are 100% secure.</p>'
+        content: '<p>We value your privacy. Your personal details (Name, WhatsApp number) are only used to process your order and deliver your card. We do not share, sell, or distribute your information to any third parties. All transactions are 100% secure.</p>'
       },
       terms: {
         title: 'Terms of Service',
