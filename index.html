@@ -158,44 +158,100 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
-    /* RECENT ACTIVITY (PREMIUM TICKER) */
-    .recent-activity {
-      display: flex; align-items: center; gap: 10px;
+    /* PULSE FEED (WHOP STYLE) - FIXED TO 3 ITEMS & MORE GOLD */
+    .pulse-feed {
       margin: 0 0 24px;
-      padding: 8px 16px;
-      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
-      border: 1px solid rgba(212,175,55,0.2);
-      border-radius: 30px;
+      padding: 16px 20px;
+      background: linear-gradient(160deg, #1c180e 0%, #0d0a05 100%); /* Golden tint */
+      border: 1px solid rgba(212,175,55,0.5); /* Stronger gold border */
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.2);
+      position: relative;
       overflow: hidden;
+    }
+    .pulse-feed::before {
+      content: ''; position: absolute; top: -50%; left: -20%; width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%); pointer-events: none;
+    }
+    .pulse-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .pulse-title {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #f5d76e; /* Brighter gold */
+      text-transform: uppercase;
+    }
+    .pulse-live-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #ef4444;
+      animation: pulseLive 1.5s ease-in-out infinite;
+    }
+    @keyframes pulseLive { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.7); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(239,68,68,0); } }
+
+    .pulse-list {
+      display: flex; flex-direction: column; gap: 8px;
+      max-height: 210px; /* Strict limit to ~3 items */
+      overflow: hidden; /* Ensure nothing spills over */
+    }
+
+    .pulse-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.04) 100%); /* More golden */
+      border: 1px solid rgba(212,175,55,0.3);
+      border-left: 4px solid #d4af37; /* Gold accent */
+      animation: pulseItemIn 0.4s ease-out forwards;
+    }
+    @keyframes pulseItemIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pulse-avatar-wrap {
+      position: relative; flex-shrink: 0;
+    }
+    .pulse-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));
+      color: #f5d76e; font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(212,175,55,0.4);
+    }
+    .pulse-check {
+      position: absolute; bottom: -2px; right: -2px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #22c55e; color: #000; font-size: 8px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid #0d0d0d;
+    }
+
+    .pulse-content { flex: 1; min-width: 0; }
+    .pulse-text { font-size: 12px; color: #ddd; line-height: 1.4; }
+    .pulse-text strong { color: #fff; font-weight: 700; }
+    .pulse-text .card-name { color: #f5d76e; font-weight: 700; } /* Brighter gold */
+    .pulse-meta { font-size: 10px; color: #888; margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .pulse-price { color: #22c55e; font-weight: 800; }
+    .pulse-balance { color: #22c55e; font-weight: 800; }
+
+    .pulse-card-thumb {
+      width: 42px; height: 26px; border-radius: 4px; flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      border: 1px solid rgba(212,175,55,0.6); /* Stronger gold border */
+      background-size: cover; background-position: center;
       position: relative;
     }
-    .live-badge {
-      display: flex; align-items: center; gap: 4px;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      color: #ef4444; font-size: 9px; font-weight: 900;
-      padding: 3px 8px; border-radius: 12px; letter-spacing: 1.5px;
-      text-transform: uppercase; flex-shrink: 0;
+    .pulse-card-thumb::before {
+      content: ''; position: absolute; top: 4px; left: 4px; width: 6px; height: 4px; border-radius: 1px;
+      background: #f7e7a1; opacity: 0.8;
     }
-    .live-badge::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: #ef4444; animation: livePulse 1.5s ease-in-out infinite;
-    }
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(239,68,68,0); }
-    }
-    .recent-activity-track { overflow: hidden; flex: 1; position: relative; height: 16px; }
-    .recent-activity-inner {
-      position: absolute; white-space: nowrap;
-      font-size: 11px; color: #ccc; font-weight: 500;
-      letter-spacing: 0.3px;
-      animation: slideActivity 30s linear infinite;
-    }
-    .recent-activity-inner span { color: #d4af37; font-weight: 700; }
-    @keyframes slideActivity {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+    .pulse-card-thumb.visa-thumb::before { display: none; }
+
+    @media (max-width: 480px) {
+      .pulse-feed { padding: 12px 14px; }
+      .pulse-item { padding: 8px 10px; gap: 8px; }
+      .pulse-text { font-size: 11px; }
+      .pulse-card-thumb { width: 34px; height: 20px; }
+      .pulse-list { max-height: 180px; }
     }
 
     .heading-row { margin-bottom: 20px; }
@@ -1480,10 +1536,13 @@
       </div>
     </section>
 
-    <div class="recent-activity">
-      <div class="live-badge">LIVE</div>
-      <div class="recent-activity-track">
-        <div class="recent-activity-inner" id="activityTicker"></div>
+    <!-- PULSE FEED (WHOP STYLE) - FIXED TO 3 ITEMS & MORE GOLD -->
+    <div class="pulse-feed">
+      <div class="pulse-header">
+        <div class="pulse-title"><span class="pulse-live-dot"></span> LIVE PURCHASES</div>
+      </div>
+      <div class="pulse-list" id="pulseList">
+        <!-- Items will be injected here via JS. Max 3 items. -->
       </div>
     </div>
 
@@ -2196,40 +2255,6 @@
       });
     }
 
-    var usedActivityKeys = [];
-
-    function generateUniqueActivityBuyer() {
-      var attempts = 0;
-      while (attempts < 50) {
-        var fn = firstNames[Math.floor(Math.random() * firstNames.length)];
-        var ln = surnames[Math.floor(Math.random() * surnames.length)];
-        var city = cities[Math.floor(Math.random() * cities.length)];
-        var key = fn + '|' + ln + '|' + city;
-        if (usedActivityKeys.indexOf(key) === -1) {
-          usedActivityKeys.push(key);
-          if (usedActivityKeys.length > 5000) usedActivityKeys.shift();
-          return { name: fn + ' ' + ln, city: city };
-        }
-        attempts++;
-      }
-      return { name: 'Amit Sharma', city: 'Delhi' };
-    }
-
-    function updateActivityTicker() {
-      var ticker = document.getElementById('activityTicker');
-      if (!ticker) return;
-      var items = [];
-      for (var i = 0; i < 8; i++) {
-        var buyer = generateUniqueActivityBuyer();
-        var card = notifCards[Math.floor(Math.random() * notifCards.length)];
-        var mins = Math.floor(Math.random() * 20) + 1;
-        items.push('🎉 <span>' + buyer.name + '</span> from ' + buyer.city + ' bought ' + card + ' · ' + mins + ' min ago');
-      }
-      ticker.innerHTML = items.join(' &nbsp;&nbsp;•&nbsp;&nbsp; ');
-    }
-    setInterval(updateActivityTicker, 35000);
-    setTimeout(updateActivityTicker, 2000);
-
     var firstNames = [
       'Aarav', 'Vivaan', 'Aditya', 'Vihaan', 'Arjun', 'Sai', 'Reyansh', 'Ayaan', 'Krishna', 'Ishaan',
       'Rohan', 'Karan', 'Rahul', 'Amit', 'Vikram', 'Raj', 'Suraj', 'Deepak', 'Manish', 'Ankit',
@@ -2279,13 +2304,66 @@
       };
     }
 
-    function showLiveNotification() {
-      if (!notifContainer) return;
-      var buyer = generateUniqueBuyer();
-      var displayName = buyer.firstName + ' ' + buyer.surname.charAt(0) + '.';
-      var initials = buyer.firstName.charAt(0) + buyer.surname.charAt(0);
-      var card = notifCards[Math.floor(Math.random() * notifCards.length)];
-      var mins = Math.floor(Math.random() * 10) + 1;
+    // --- PULSE FEED LOGIC (SYNCHRONIZED WITH POPUP) ---
+    var usedPulseKeys = [];
+
+    function generatePulseBuyer() {
+      var attempts = 0;
+      while (attempts < 50) {
+        var fn = firstNames[Math.floor(Math.random() * firstNames.length)];
+        var ln = surnames[Math.floor(Math.random() * surnames.length)];
+        var city = cities[Math.floor(Math.random() * cities.length)];
+        var key = fn + '|' + ln + '|' + city;
+        if (usedPulseKeys.indexOf(key) === -1) {
+          usedPulseKeys.push(key);
+          if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
+          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city };
+        }
+        attempts++;
+      }
+      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi' };
+    }
+
+    function getCardThumbStyle(design) {
+      if (design.brand === 'amex') {
+        return "background-image: url('amex-gold.png'); background-size: cover; background-position: center;";
+      }
+      return "background: " + design.gradient + ";";
+    }
+
+    // Format time: Just now for < 1 min, then X mins ago
+    function formatTimeAgo(timestamp) {
+      var diffMins = Math.floor((Date.now() - timestamp) / 60000);
+      if (diffMins < 1) return 'Just now';
+      if (diffMins === 1) return '1 min ago';
+      return diffMins + ' mins ago';
+    }
+
+    function createPulseItemHTML(buyer, design, timestamp) {
+      var thumbStyle = getCardThumbStyle(design);
+      var timeStr = formatTimeAgo(timestamp);
+
+      return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
+        '<div class="pulse-avatar-wrap">' +
+          '<div class="pulse-avatar">' + buyer.initials.toUpperCase() + '</div>' +
+          '<div class="pulse-check">✓</div>' +
+        '</div>' +
+        '<div class="pulse-content">' +
+          '<div class="pulse-text"><strong>' + buyer.name + '</strong> from ' + buyer.city + ' just bought <span class="card-name">' + design.name + '</span></div>' +
+          '<div class="pulse-meta">' +
+            '<span class="pulse-price">' + design.price + '</span> &bull; ' +
+            '<span class="pulse-balance">Balance: ' + design.balance + '</span> &bull; ' +
+            '<span class="pulse-time-text">' + timeStr + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pulse-card-thumb" style="' + thumbStyle + '"></div>' +
+      '</div>';
+    }
+
+    function addLiveNotification(buyer, design, timestamp) {
+      var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
+      var initials = buyer.initials;
+      var timeStr = formatTimeAgo(timestamp); // Will always be "Just now" for new popups
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
@@ -2295,24 +2373,60 @@
           '<div class="notif-avatar">' + initials.toUpperCase() + '</div>' +
           '<div class="notif-content">' +
             '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
-            'bought ' + card +
-            '<span class="notif-time">🕐 ' + mins + ' min ago</span>' +
+            'bought ' + design.name +
+            '<span class="notif-time">🕐 ' + timeStr + '</span>' +
           '</div>' +
         '</div>';
       notifContainer.appendChild(notif);
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
-    setTimeout(function() {
-      showLiveNotification();
-      function loop() {
-        var delay = 12000 + Math.random() * 8000;
-        setTimeout(function() {
-          showLiveNotification();
-          loop();
-        }, delay);
+    function addPulseItem(buyer, design, timestamp) {
+      var list = document.getElementById('pulseList');
+      if (!list) return;
+      
+      var itemHTML = createPulseItemHTML(buyer, design, timestamp);
+      list.insertAdjacentHTML('afterbegin', itemHTML);
+      
+      // Strictly keep only 3 items, remove the oldest (bottom) one
+      while (list.children.length > 3) {
+        list.removeChild(list.lastElementChild);
       }
-      loop();
+    }
+
+    function triggerRandomPurchase() {
+      // Generate one single event
+      var buyer = generatePulseBuyer();
+      var design = designs[Math.floor(Math.random() * designs.length)];
+      var timestamp = Date.now();
+      
+      // Send to both places
+      addLiveNotification(buyer, design, timestamp);
+      addPulseItem(buyer, design, timestamp);
+      
+      // Schedule next event
+      var delay = 8000 + Math.random() * 7000; // 8 to 15 seconds
+      setTimeout(triggerRandomPurchase, delay);
+    }
+
+    // Update times of existing pulse items every 30 seconds
+    function updateNotificationTimes() {
+      var items = document.querySelectorAll('.pulse-item');
+      var now = Date.now();
+      items.forEach(function(item) {
+        var ts = parseInt(item.getAttribute('data-timestamp'));
+        if (!ts) return;
+        var timeSpan = item.querySelector('.pulse-time-text');
+        if (timeSpan) {
+          timeSpan.textContent = formatTimeAgo(ts);
+        }
+      });
+    }
+    setInterval(updateNotificationTimes, 30000);
+
+    // Start the synchronized loop
+    setTimeout(function() {
+      triggerRandomPurchase();
     }, 4000);
 
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
