@@ -416,7 +416,7 @@
 
     .amex-back-frame {
       position: absolute;
-      inset: 5px;
+      inset: 7px; /* Updated from 5px */
       border: 1.4px solid rgba(26, 20, 8, 0.85);
       border-radius: 9px;
       pointer-events: none;
@@ -443,7 +443,7 @@
     .amex-back-content {
       position: relative;
       z-index: 3;
-      padding: 5% 4.5% 3.5%;
+      padding: 8% 7% 7%; /* Updated from 5% 4.5% 3.5% */
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -454,18 +454,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 4.8px;
+      font-size: 4.2px; /* Updated from 4.8px */
       font-weight: 800;
       color: rgba(26, 20, 8, 0.9);
       letter-spacing: 0.15px;
       padding: 0 1px;
-      margin-bottom: 3px;
+      margin-bottom: 5px; /* Updated from 3px */
       line-height: 1;
     }
     .amex-back-top-strip .amex-top-right {
       font-weight: 900;
       letter-spacing: 0.6px;
-      font-size: 5.5px;
+      font-size: 4.8px; /* Updated from 5.5px */
     }
 
     .amex-back-magstripe {
@@ -477,7 +477,7 @@
         0 2px 5px rgba(0,0,0,0.65),
         inset 0 1px 0 rgba(255,255,255,0.06),
         inset 0 -1px 0 rgba(0,0,0,0.95);
-      margin-bottom: 5px;
+      margin-bottom: 7px; /* Updated from 5px */
       border-radius: 1px;
       position: relative;
     }
@@ -493,11 +493,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 4.3px;
+      font-size: 3.8px; /* Updated from 4.3px */
       font-weight: 900;
       color: #1a1408;
       letter-spacing: 0.35px;
-      margin-bottom: 2px;
+      margin-bottom: 3px; /* Updated from 2px */
       padding: 0 1px;
       text-transform: uppercase;
     }
@@ -506,7 +506,7 @@
       display: flex;
       align-items: flex-start;
       gap: 4px;
-      margin-bottom: 5px;
+      margin-bottom: 7px; /* Updated from 5px */
     }
     .amex-back-sig-strip {
       flex: 1;
@@ -536,7 +536,7 @@
     .amex-back-cvv-num {
       background: #ffffff;
       color: #111;
-      font-size: 8px;
+      font-size: 7.5px; /* Updated from 8px */
       font-weight: 700;
       padding: 2.5px 6px;
       border-radius: 1.5px;
@@ -548,7 +548,7 @@
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
     }
     .amex-back-cvv-label {
-      font-size: 3.6px;
+      font-size: 3.3px; /* Updated from 3.6px */
       font-weight: 800;
       color: #1a1408;
       letter-spacing: 0.5px;
@@ -563,7 +563,7 @@
       margin-bottom: auto;
     }
     .amex-back-cs-info {
-      font-size: 4.2px;
+      font-size: 4px; /* Updated from 4.2px */
       color: #1a1408;
       line-height: 1.5;
       font-weight: 700;
@@ -574,13 +574,13 @@
       white-space: nowrap;
     }
     .amex-back-nontransferable {
-      font-size: 4px;
+      font-size: 3.8px; /* Updated from 4px */
       font-weight: 900;
       color: #1a1408;
       letter-spacing: 0.3px;
       text-transform: uppercase;
       flex-shrink: 0;
-      padding-top: 1px;
+      padding-top: 0px; /* Updated from 1px */
       text-align: right;
     }
 
@@ -588,7 +588,7 @@
       display: flex;
       align-items: flex-end;
       gap: 4px;
-      margin-top: 4px;
+      margin-top: 6px; /* Updated from 4px */
     }
     .amex-back-logo {
       background: #006FCF;
@@ -612,8 +612,8 @@
       font-weight: 900;
       letter-spacing: 0.3px;
     }
-    .amex-back-logo .amex-logo-line1 { font-size: 4.2px; }
-    .amex-back-logo .amex-logo-line2 { font-size: 4.2px; letter-spacing: 0.5px; margin-top: 0.5px; }
+    .amex-back-logo .amex-logo-line1 { font-size: 3.8px; } /* Updated from 4.2px */
+    .amex-back-logo .amex-logo-line2 { font-size: 3.8px; letter-spacing: 0.5px; margin-top: 0.5px; } /* Updated from 4.2px */
     .amex-back-logo::after {
       content: '®';
       position: absolute;
@@ -632,7 +632,7 @@
     }
     .amex-back-legal {
       flex: 1;
-      font-size: 3.4px;
+      font-size: 3px; /* Updated from 3.4px */
       color: rgba(26, 20, 8, 0.82);
       line-height: 1.4;
       font-weight: 600;
@@ -640,38 +640,38 @@
       text-align: left;
     }
 
-    .modal-card-inner .amex-back-frame { inset: 9px; border-width: 1.7px; border-radius: 11px; }
+    .modal-card-inner .amex-back-frame { inset: 11px; border-width: 1.7px; border-radius: 11px; } /* Updated from 9px */
     .modal-card-inner .amex-back-frame::before { inset: 3.5px; border-width: 0.9px; border-radius: 8px; }
     .modal-card-inner .amex-back-frame::after { inset: -4px; border-width: 0.8px; border-radius: 14px; }
-    .modal-card-inner .amex-back-content { padding: 5% 4.5% 3.5%; }
-    .modal-card-inner .amex-back-top-strip { font-size: 6.5px; margin-bottom: 5px; }
-    .modal-card-inner .amex-back-top-strip .amex-top-right { font-size: 7.5px; }
+    .modal-card-inner .amex-back-content { padding: 8% 7% 7%; }
+    .modal-card-inner .amex-back-top-strip { font-size: 5.5px; margin-bottom: 5px; }
+    .modal-card-inner .amex-back-top-strip .amex-top-right { font-size: 6.5px; }
     .modal-card-inner .amex-back-magstripe { height: 20%; min-height: 30px; margin-bottom: 8px; }
-    .modal-card-inner .amex-back-sig-labels { font-size: 6px; margin-bottom: 3px; }
+    .modal-card-inner .amex-back-sig-labels { font-size: 5px; margin-bottom: 3px; }
     .modal-card-inner .amex-back-sig-strip { height: 32px; border: none; box-shadow: none; }
-    .modal-card-inner .amex-back-cvv-num { font-size: 12px; padding: 4px 10px; min-width: 32px; }
-    .modal-card-inner .amex-back-cvv-label { font-size: 5.5px; }
-    .modal-card-inner .amex-back-cs-info { font-size: 6px; }
-    .modal-card-inner .amex-back-nontransferable { font-size: 5.5px; }
+    .modal-card-inner .amex-back-cvv-num { font-size: 10px; padding: 4px 10px; min-width: 32px; }
+    .modal-card-inner .amex-back-cvv-label { font-size: 4.5px; }
+    .modal-card-inner .amex-back-cs-info { font-size: 5px; }
+    .modal-card-inner .amex-back-nontransferable { font-size: 4.5px; }
     .modal-card-inner .amex-back-logo { padding: 3.5px 4.5px; min-width: 32px; }
     .modal-card-inner .amex-back-logo .amex-logo-line1,
-    .modal-card-inner .amex-back-logo .amex-logo-line2 { font-size: 6px; }
+    .modal-card-inner .amex-back-logo .amex-logo-line2 { font-size: 5px; }
     .modal-card-inner .amex-back-logo::after { font-size: 3.5px; width: 5px; height: 5px; bottom: -3px; right: -3px; }
-    .modal-card-inner .amex-back-legal { font-size: 5px; }
+    .modal-card-inner .amex-back-legal { font-size: 4px; }
 
-    .mini-card-preview .amex-back-frame { inset: 5px; }
-    .mini-card-preview .amex-back-top-strip { font-size: 3.6px; }
-    .mini-card-preview .amex-back-top-strip .amex-top-right { font-size: 4.2px; }
-    .mini-card-preview .amex-back-sig-labels { font-size: 3.3px; }
+    .mini-card-preview .amex-back-frame { inset: 6px; } /* Updated from 5px */
+    .mini-card-preview .amex-back-top-strip { font-size: 3.2px; }
+    .mini-card-preview .amex-back-top-strip .amex-top-right { font-size: 3.8px; }
+    .mini-card-preview .amex-back-sig-labels { font-size: 3px; }
     .mini-card-preview .amex-back-sig-strip { height: 15px; border: none; box-shadow: none; }
-    .mini-card-preview .amex-back-cvv-num { font-size: 6px; padding: 1.5px 4px; min-width: 16px; }
-    .mini-card-preview .amex-back-cvv-label { font-size: 2.8px; }
-    .mini-card-preview .amex-back-cs-info { font-size: 3.2px; }
-    .mini-card-preview .amex-back-nontransferable { font-size: 3px; }
+    .mini-card-preview .amex-back-cvv-num { font-size: 5px; padding: 1.5px 4px; min-width: 16px; }
+    .mini-card-preview .amex-back-cvv-label { font-size: 2.5px; }
+    .mini-card-preview .amex-back-cs-info { font-size: 3px; }
+    .mini-card-preview .amex-back-nontransferable { font-size: 2.8px; }
     .mini-card-preview .amex-back-logo { padding: 2px 2.5px; min-width: 16px; }
     .mini-card-preview .amex-back-logo .amex-logo-line1,
     .mini-card-preview .amex-back-logo .amex-logo-line2 { font-size: 3.2px; }
-    .mini-card-preview .amex-back-legal { font-size: 2.6px; }
+    .mini-card-preview .amex-back-legal { font-size: 2.4px; }
 
     .cc-balance-badge {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
@@ -1863,7 +1863,7 @@
               '<span class="amex-logo-line2">EXPRESS</span>' +
             '</div>' +
             '<div class="amex-back-legal">' +
-              'This card is issued by American Express Banking Corp. pursuant to a license from American Express. © 2023 American Express Company. All rights reserved.' +
+              'This card is issued by American Express Banking Corp. © 2023 American Express Company. All rights reserved.' +
             '</div>' +
           '</div>' +
         '</div>' +
