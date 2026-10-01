@@ -119,7 +119,6 @@
       .hero-sub { font-size: 13px; }
     }
 
-    /* WHY TRUST US - 4 cards now */
     .why-trust-section {
       margin: 20px 0 24px;
       padding: 28px 20px;
@@ -388,7 +387,7 @@
     }
     .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
 
-    /* AMEX GOLD BACK - REALISTIC */
+    /* AMEX GOLD BACK - CLEAN (only stripe + signature + CVV) */
     .cc-face.cc-back.cc-amex-gold-back {
       background: linear-gradient(160deg, #1a1a1a 0%, #050505 100%);
       padding: 0;
@@ -420,19 +419,18 @@
     }
     .amex-back-stripe {
       width: 100%;
-      height: 20%;
+      height: 22%;
       background: linear-gradient(180deg, #000 0%, #1a1a1a 100%);
-      margin-top: 11%;
+      margin-top: 12%;
       box-shadow: 0 2px 6px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.05);
       z-index: 2;
       position: relative;
     }
     .amex-back-content {
-      padding: 6% 6% 5%;
+      padding: 7% 6% 5%;
       display: flex;
       flex-direction: column;
       gap: 5px;
-      flex: 1;
       z-index: 3;
       position: relative;
     }
@@ -443,7 +441,7 @@
     }
     .amex-back-sig-strip {
       flex: 1;
-      height: 20px;
+      height: 22px;
       background: repeating-linear-gradient(45deg, #f0f0f0 0 6px, #e0e0e0 6px 12px);
       border-radius: 3px;
       display: flex;
@@ -473,69 +471,19 @@
       letter-spacing: 1px;
       flex-shrink: 0;
     }
-    .amex-back-info {
-      font-size: 6.5px;
-      color: #999;
-      line-height: 1.5;
-      letter-spacing: 0.2px;
-    }
-    .amex-back-info strong {
-      color: #d4af37;
-      font-weight: 800;
-    }
-    .amex-back-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.35), transparent);
-      margin: 1px 0;
-    }
-    .amex-back-barcode {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 1.5px;
-      height: 12px;
-      margin-top: auto;
-      padding-top: 3px;
-    }
-    .amex-back-barcode span {
-      background: #d4d4d4;
-      height: 100%;
-      display: block;
-      border-radius: 0.5px;
-    }
-    .amex-back-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 5.5px;
-      color: #666;
-      letter-spacing: 0.3px;
-      margin-top: 3px;
-    }
-    .amex-back-footer .amex-card-num {
-      color: #d4af37;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-    }
 
     /* Modal size adjustments for amex back */
-    .modal-card-inner .amex-back-stripe { height: 20%; margin-top: 11%; }
-    .modal-card-inner .amex-back-content { gap: 7px; padding: 6% 6% 5%; }
-    .modal-card-inner .amex-back-sig-strip { height: 28px; }
-    .modal-card-inner .amex-back-sig-strip::before { font-size: 9px; left: 10px; }
-    .modal-card-inner .amex-back-cvv { font-size: 13px; padding: 5px 11px; }
-    .modal-card-inner .amex-back-info { font-size: 8.5px; }
-    .modal-card-inner .amex-back-barcode { height: 16px; }
-    .modal-card-inner .amex-back-footer { font-size: 7px; }
+    .modal-card-inner .amex-back-stripe { height: 22%; margin-top: 12%; }
+    .modal-card-inner .amex-back-content { padding: 7% 6% 5%; gap: 7px; }
+    .modal-card-inner .amex-back-sig-strip { height: 30px; }
+    .modal-card-inner .amex-back-sig-strip::before { font-size: 10px; left: 12px; }
+    .modal-card-inner .amex-back-cvv { font-size: 14px; padding: 5px 12px; }
     .modal-card-inner .cc-face.cc-back.cc-amex-gold-back::before { inset: 8px; border-width: 1.3px; }
 
     /* Mini preview adjustments for amex back */
     .mini-card-preview .amex-back-sig-strip { height: 16px; }
     .mini-card-preview .amex-back-sig-strip::before { font-size: 5.5px; left: 6px; }
     .mini-card-preview .amex-back-cvv { font-size: 8px; padding: 2px 5px; }
-    .mini-card-preview .amex-back-info { font-size: 5px; }
-    .mini-card-preview .amex-back-barcode { height: 9px; }
-    .mini-card-preview .amex-back-footer { font-size: 4.5px; }
 
     .cc-balance-badge {
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
@@ -696,9 +644,7 @@
       box-shadow: 0 0 12px rgba(212,175,55,0.3), inset 0 0 8px rgba(212,175,55,0.08);
       transform: translateY(-1px);
     }
-    .review-helpful.active .helpful-icon {
-      animation: helpfulPop 0.4s ease;
-    }
+    .review-helpful.active .helpful-icon { animation: helpfulPop 0.4s ease; display: inline-block; }
     @keyframes helpfulPop {
       0% { transform: scale(1); }
       50% { transform: scale(1.35); }
@@ -718,7 +664,7 @@
     .review-more-btn .arrow { font-size: 10px; transition: transform 0.2s; }
     .review-more-btn:hover .arrow { transform: translateX(2px); }
 
-    /* SELLER REPLY - GLOWING LIGHT */
+    /* SELLER REPLY */
     .review-seller-reply {
       background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
       border-left: 3px solid rgba(212,175,55,0.75);
@@ -819,7 +765,7 @@
     }
     .network-retry-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
 
-    /* LIVE NOTIFICATIONS - TOP RIGHT */
+    /* LIVE NOTIFICATIONS */
     .live-notif-container {
       position: fixed;
       top: 86px;
@@ -1663,7 +1609,7 @@
       var container = document.getElementById('toastContainer');
       var toast = document.createElement('div');
       toast.className = 'toast ' + (type || '');
-      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : type === 'info' ? 'ℹ' : 'ℹ';
+      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
       toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
       container.appendChild(toast);
       setTimeout(function() { toast.remove(); }, 3000);
@@ -1701,25 +1647,12 @@
     }
 
     function amexBackHTML(design) {
-      var barcodeHTML = '';
-      for (var i = 0; i < 42; i++) {
-        var w = Math.random() > 0.55 ? 1.5 : 1;
-        barcodeHTML += '<span style="width:' + w + 'px"></span>';
-      }
       return '<div class="cc-face cc-back cc-amex-gold-back">' +
         '<div class="amex-back-stripe"></div>' +
         '<div class="amex-back-content">' +
           '<div class="amex-back-sig-row">' +
             '<div class="amex-back-sig-strip"></div>' +
             '<div class="amex-back-cvv">' + design.cvv + '</div>' +
-          '</div>' +
-          '<div class="amex-back-info">For 24/7 Customer Service call <strong>1800-XXX-XXXX</strong> or visit <strong>americanexpress.com</strong></div>' +
-          '<div class="amex-back-divider"></div>' +
-          '<div class="amex-back-info">This card is issued by American Express. Use of this card is subject to the terms and conditions of the Cardmember Agreement.</div>' +
-          '<div class="amex-back-barcode">' + barcodeHTML + '</div>' +
-          '<div class="amex-back-footer">' +
-            '<span>© American Express</span>' +
-            '<span class="amex-card-num">' + design.cardNumber + '</span>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -2150,7 +2083,7 @@
       loop();
     }, 4000);
 
-    /* ============ LOAD MORE REVIEWS (PROFESSIONAL ENGLISH ERRORS) ============ */
+    /* ============ LOAD MORE REVIEWS ============ */
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
     var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon');
@@ -2204,7 +2137,7 @@
       setTimeout(function() { loadMoreBtn.click(); }, 300);
     });
 
-    /* ============ HELPFUL BUTTON EVENTS ============ */
+    /* ============ HELPFUL BUTTON ============ */
     function attachHelpfulButtonEvents() {
       document.querySelectorAll('.review-helpful').forEach(function(btn) {
         if (btn.dataset.helpfulAttached === '1') return;
