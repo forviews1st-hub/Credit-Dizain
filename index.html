@@ -158,12 +158,12 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
-    /* PULSE FEED (WHOP STYLE) - FIXED TO 3 ITEMS & MORE GOLD */
+    /* PULSE FEED */
     .pulse-feed {
       margin: 0 0 24px;
       padding: 16px 20px;
-      background: linear-gradient(160deg, #1c180e 0%, #0d0a05 100%); /* Golden tint */
-      border: 1px solid rgba(212,175,55,0.5); /* Stronger gold border */
+      background: linear-gradient(160deg, #1c180e 0%, #0d0a05 100%);
+      border: 1px solid rgba(212,175,55,0.5);
       border-radius: 18px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.2);
       position: relative;
@@ -179,7 +179,7 @@
     }
     .pulse-title {
       display: flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #f5d76e; /* Brighter gold */
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #f5d76e;
       text-transform: uppercase;
     }
     .pulse-live-dot {
@@ -190,16 +190,16 @@
 
     .pulse-list {
       display: flex; flex-direction: column; gap: 8px;
-      max-height: 210px; /* Strict limit to ~3 items */
-      overflow: hidden; /* Ensure nothing spills over */
+      max-height: 210px;
+      overflow: hidden;
     }
 
     .pulse-item {
       display: flex; align-items: center; gap: 12px;
       padding: 10px 12px; border-radius: 12px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.04) 100%); /* More golden */
+      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.04) 100%);
       border: 1px solid rgba(212,175,55,0.3);
-      border-left: 4px solid #d4af37; /* Gold accent */
+      border-left: 4px solid #d4af37;
       animation: pulseItemIn 0.4s ease-out forwards;
     }
     @keyframes pulseItemIn {
@@ -207,9 +207,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .pulse-avatar-wrap {
-      position: relative; flex-shrink: 0;
-    }
+    .pulse-avatar-wrap { position: relative; flex-shrink: 0; }
     .pulse-avatar {
       width: 32px; height: 32px; border-radius: 50%;
       background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));
@@ -228,7 +226,7 @@
     .pulse-content { flex: 1; min-width: 0; }
     .pulse-text { font-size: 12px; color: #ddd; line-height: 1.4; }
     .pulse-text strong { color: #fff; font-weight: 700; }
-    .pulse-text .card-name { color: #f5d76e; font-weight: 700; } /* Brighter gold */
+    .pulse-text .card-name { color: #f5d76e; font-weight: 700; }
     .pulse-meta { font-size: 10px; color: #888; margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .pulse-price { color: #22c55e; font-weight: 800; }
     .pulse-balance { color: #22c55e; font-weight: 800; }
@@ -236,7 +234,7 @@
     .pulse-card-thumb {
       width: 42px; height: 26px; border-radius: 4px; flex-shrink: 0;
       box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-      border: 1px solid rgba(212,175,55,0.6); /* Stronger gold border */
+      border: 1px solid rgba(212,175,55,0.6);
       background-size: cover; background-position: center;
       position: relative;
     }
@@ -444,7 +442,6 @@
     .cc-sig-strip-text { font-size: 8px; color: #333; font-style: italic; font-weight: 600; opacity: 0.5; }
     .cc-cvv { background: #fff; color: #111; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 3px; letter-spacing: 1px; }
 
-    /* AMEX GOLD FRONT */
     .cc-face.cc-front.cc-amex-gold { padding: 0 !important; background: transparent !important; overflow: hidden; display: block !important; }
     .cc-face.cc-front.cc-amex-gold img {
       width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block;
@@ -452,7 +449,6 @@
     }
     .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
 
-    /* AMEX GOLD BACK - REALISTIC MATCHING REAL CARD */
     .cc-face.cc-back.cc-amex-gold-back {
       padding: 0;
       color: #1a1408;
@@ -480,232 +476,112 @@
     }
 
     .amex-back-frame {
-      position: absolute;
-      inset: 7px; /* Updated from 5px */
+      position: absolute; inset: 7px;
       border: 1.4px solid rgba(26, 20, 8, 0.85);
       border-radius: 9px;
-      pointer-events: none;
-      z-index: 10;
-      box-shadow:
-        inset 0 0 0 1px rgba(212, 175, 55, 0.55),
-        0 0 0 0.5px rgba(26, 20, 8, 0.4);
+      pointer-events: none; z-index: 10;
+      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.55), 0 0 0 0.5px rgba(26, 20, 8, 0.4);
     }
-    .amex-back-frame::before {
-      content: '';
-      position: absolute;
-      inset: 2.5px;
-      border: 0.7px solid rgba(26, 20, 8, 0.5);
-      border-radius: 7px;
-    }
-    .amex-back-frame::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border: 0.6px solid rgba(26, 20, 8, 0.55);
-      border-radius: 11px;
-    }
+    .amex-back-frame::before { content: ''; position: absolute; inset: 2.5px; border: 0.7px solid rgba(26, 20, 8, 0.5); border-radius: 7px; }
+    .amex-back-frame::after { content: ''; position: absolute; inset: -3px; border: 0.6px solid rgba(26, 20, 8, 0.55); border-radius: 11px; }
 
     .amex-back-content {
-      position: relative;
-      z-index: 3;
-      padding: 8% 7% 7%; /* Updated from 5% 4.5% 3.5% */
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      box-sizing: border-box;
+      position: relative; z-index: 3;
+      padding: 8% 7% 7%;
+      display: flex; flex-direction: column;
+      height: 100%; box-sizing: border-box;
     }
 
     .amex-back-top-strip {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 4.2px; /* Updated from 4.8px */
-      font-weight: 800;
-      color: rgba(26, 20, 8, 0.9);
-      letter-spacing: 0.15px;
-      padding: 0 1px;
-      margin-bottom: 5px; /* Updated from 3px */
-      line-height: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 4.2px; font-weight: 800;
+      color: rgba(26, 20, 8, 0.9); letter-spacing: 0.15px;
+      padding: 0 1px; margin-bottom: 5px; line-height: 1;
     }
-    .amex-back-top-strip .amex-top-right {
-      font-weight: 900;
-      letter-spacing: 0.6px;
-      font-size: 4.8px; /* Updated from 5.5px */
-    }
+    .amex-back-top-strip .amex-top-right { font-weight: 900; letter-spacing: 0.6px; font-size: 4.8px; }
 
     .amex-back-magstripe {
-      width: 100%;
-      height: 20%;
-      min-height: 18px;
+      width: 100%; height: 20%; min-height: 18px;
       background: linear-gradient(180deg, #000 0%, #0d0d0d 45%, #000 100%);
-      box-shadow:
-        0 2px 5px rgba(0,0,0,0.65),
-        inset 0 1px 0 rgba(255,255,255,0.06),
-        inset 0 -1px 0 rgba(0,0,0,0.95);
-      margin-bottom: 7px; /* Updated from 5px */
-      border-radius: 1px;
-      position: relative;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.95);
+      margin-bottom: 7px; border-radius: 1px; position: relative;
     }
     .amex-back-magstripe::after {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
       pointer-events: none;
     }
 
     .amex-back-sig-labels {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 3.8px; /* Updated from 4.3px */
-      font-weight: 900;
-      color: #1a1408;
-      letter-spacing: 0.35px;
-      margin-bottom: 3px; /* Updated from 2px */
-      padding: 0 1px;
-      text-transform: uppercase;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 3.8px; font-weight: 900; color: #1a1408;
+      letter-spacing: 0.35px; margin-bottom: 3px; padding: 0 1px; text-transform: uppercase;
     }
 
-    .amex-back-sig-area {
-      display: flex;
-      align-items: flex-start;
-      gap: 4px;
-      margin-bottom: 7px; /* Updated from 5px */
-    }
+    .amex-back-sig-area { display: flex; align-items: flex-start; gap: 4px; margin-bottom: 7px; }
     .amex-back-sig-strip {
-      flex: 1;
-      height: 20px;
+      flex: 1; height: 20px;
       background: linear-gradient(180deg, #eef3f8 0%, #d5e0ea 100%);
-      border-radius: 2px;
-      border: none;
-      box-shadow: none;
-      position: relative;
-      overflow: hidden;
+      border-radius: 2px; border: none; box-shadow: none;
+      position: relative; overflow: hidden;
     }
     .amex-back-sig-strip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(135deg, rgba(160, 185, 210, 0.18) 0 3px, transparent 3px 7px);
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(135deg, rgba(160, 185, 210, 0.18) 0 3px, transparent 3px 7px);
       pointer-events: none;
     }
-    .amex-back-cvv-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5px;
-      flex-shrink: 0;
-    }
+    .amex-back-cvv-box { display: flex; flex-direction: column; align-items: center; gap: 0.5px; flex-shrink: 0; }
     .amex-back-cvv-num {
-      background: #ffffff;
-      color: #111;
-      font-size: 7.5px; /* Updated from 8px */
-      font-weight: 700;
-      padding: 2.5px 6px;
-      border-radius: 1.5px;
+      background: #ffffff; color: #111;
+      font-size: 7.5px; font-weight: 700;
+      padding: 2.5px 6px; border-radius: 1.5px;
       letter-spacing: 1.2px;
       border: 0.4px solid rgba(26, 20, 8, 0.28);
-      min-width: 22px;
-      text-align: center;
-      line-height: 1;
+      min-width: 22px; text-align: center; line-height: 1;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
     }
-    .amex-back-cvv-label {
-      font-size: 3.3px; /* Updated from 3.6px */
-      font-weight: 800;
-      color: #1a1408;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
+    .amex-back-cvv-label { font-size: 3.3px; font-weight: 800; color: #1a1408; letter-spacing: 0.5px; text-transform: uppercase; }
 
-    .amex-back-cs-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 4px;
-      margin-bottom: auto;
-    }
+    .amex-back-cs-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; margin-bottom: auto; }
     .amex-back-cs-info {
-      font-size: 4px; /* Updated from 4.2px */
-      color: #1a1408;
-      line-height: 1.5;
-      font-weight: 700;
-      letter-spacing: 0.1px;
-      padding: 0 1px;
+      font-size: 4px; color: #1a1408;
+      line-height: 1.5; font-weight: 700;
+      letter-spacing: 0.1px; padding: 0 1px;
     }
-    .amex-back-cs-info div {
-      white-space: nowrap;
-    }
+    .amex-back-cs-info div { white-space: nowrap; }
     .amex-back-nontransferable {
-      font-size: 3.8px; /* Updated from 4px */
-      font-weight: 900;
-      color: #1a1408;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-      flex-shrink: 0;
-      padding-top: 0px; /* Updated from 1px */
-      text-align: right;
+      font-size: 3.8px; font-weight: 900; color: #1a1408;
+      letter-spacing: 0.3px; text-transform: uppercase;
+      flex-shrink: 0; padding-top: 0px; text-align: right;
     }
 
-    .amex-back-bottom {
-      display: flex;
-      align-items: flex-end;
-      gap: 4px;
-      margin-top: 6px; /* Updated from 4px */
-    }
+    .amex-back-bottom { display: flex; align-items: flex-end; gap: 4px; margin-top: 6px; }
     .amex-back-logo {
-      background: #006FCF;
-      color: #ffffff;
-      padding: 2.5px 3px;
-      border-radius: 1px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      font-family: 'Inter', sans-serif;
-      flex-shrink: 0;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      position: relative;
-      min-width: 22px;
+      background: #006FCF; color: #ffffff;
+      padding: 2.5px 3px; border-radius: 1px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      line-height: 1; font-family: 'Inter', sans-serif;
+      flex-shrink: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      position: relative; min-width: 22px;
     }
-    .amex-back-logo span {
-      display: block;
-      text-align: center;
-      font-weight: 900;
-      letter-spacing: 0.3px;
-    }
-    .amex-back-logo .amex-logo-line1 { font-size: 3.8px; } /* Updated from 4.2px */
-    .amex-back-logo .amex-logo-line2 { font-size: 3.8px; letter-spacing: 0.5px; margin-top: 0.5px; } /* Updated from 4.2px */
+    .amex-back-logo span { display: block; text-align: center; font-weight: 900; letter-spacing: 0.3px; }
+    .amex-back-logo .amex-logo-line1 { font-size: 3.8px; }
+    .amex-back-logo .amex-logo-line2 { font-size: 3.8px; letter-spacing: 0.5px; margin-top: 0.5px; }
     .amex-back-logo::after {
-      content: '®';
-      position: absolute;
-      bottom: -2px;
-      right: -2px;
-      font-size: 2.5px;
-      color: #1a1408;
-      background: #d4af37;
-      border-radius: 50%;
-      width: 3.5px;
-      height: 3.5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
+      content: '®'; position: absolute;
+      bottom: -2px; right: -2px; font-size: 2.5px;
+      color: #1a1408; background: #d4af37; border-radius: 50%;
+      width: 3.5px; height: 3.5px;
+      display: flex; align-items: center; justify-content: center; font-weight: 700;
     }
     .amex-back-legal {
-      flex: 1;
-      font-size: 3px; /* Updated from 3.4px */
+      flex: 1; font-size: 3px;
       color: rgba(26, 20, 8, 0.82);
-      line-height: 1.4;
-      font-weight: 600;
-      letter-spacing: 0.05px;
-      text-align: left;
+      line-height: 1.4; font-weight: 600;
+      letter-spacing: 0.05px; text-align: left;
     }
 
-    .modal-card-inner .amex-back-frame { inset: 11px; border-width: 1.7px; border-radius: 11px; } /* Updated from 9px */
+    .modal-card-inner .amex-back-frame { inset: 11px; border-width: 1.7px; border-radius: 11px; }
     .modal-card-inner .amex-back-frame::before { inset: 3.5px; border-width: 0.9px; border-radius: 8px; }
     .modal-card-inner .amex-back-frame::after { inset: -4px; border-width: 0.8px; border-radius: 14px; }
     .modal-card-inner .amex-back-content { padding: 8% 7% 7%; }
@@ -724,7 +600,7 @@
     .modal-card-inner .amex-back-logo::after { font-size: 3.5px; width: 5px; height: 5px; bottom: -3px; right: -3px; }
     .modal-card-inner .amex-back-legal { font-size: 4px; }
 
-    .mini-card-preview .amex-back-frame { inset: 6px; } /* Updated from 5px */
+    .mini-card-preview .amex-back-frame { inset: 6px; }
     .mini-card-preview .amex-back-top-strip { font-size: 3.2px; }
     .mini-card-preview .amex-back-top-strip .amex-top-right { font-size: 3.8px; }
     .mini-card-preview .amex-back-sig-labels { font-size: 3px; }
@@ -840,25 +716,89 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s ease, border-color 0.3s ease;
       animation: reviewFadeIn 0.5s ease;
+      position: relative;
+      overflow: hidden;
     }
     @keyframes reviewFadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
     .review-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
+
+    /* YOUTUBER REVIEW SPECIAL STYLING */
+    .review-card.youtuber-card {
+      background: linear-gradient(160deg, #1a0f0f 0%, #0d0d0d 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(239, 68, 68, 0.08);
+    }
+    .review-card.youtuber-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #ef4444, #dc2626, #b91c1c, #ef4444);
+      border-radius: 18px 18px 0 0;
+    }
+    .review-card.youtuber-card:hover {
+      border-color: rgba(239, 68, 68, 0.7);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 30px rgba(239, 68, 68, 0.2);
+    }
+
     .review-header { display: flex; align-items: center; gap: 12px; }
     .review-avatar {
       width: 46px; height: 46px; border-radius: 50%;
       border: 2px solid rgba(212, 175, 55, 0.55);
       overflow: hidden; flex-shrink: 0; background: #1a1a1a;
       box-shadow: 0 0 12px rgba(212,175,55,0.15);
+      position: relative;
     }
     .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .review-card.youtuber-card .review-avatar {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 12px rgba(239,68,68,0.5), 0 0 0 2px rgba(239,68,68,0.2);
+    }
+    .review-card.youtuber-card .review-avatar::after {
+      content: '▶';
+      position: absolute;
+      bottom: -2px; right: -2px;
+      width: 16px; height: 16px;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 8px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #0d0d0d;
+      box-shadow: 0 2px 6px rgba(239,68,68,0.6);
+      line-height: 1;
+      padding-left: 1px;
+    }
+
     .review-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
     .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+
     .review-badge {
       font-size: 10px; color: #22c55e; font-weight: 700;
       display: inline-flex; align-items: center; gap: 3px; margin-top: 3px;
       background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 10px;
       width: fit-content; border: 1px solid rgba(34,197,94,0.2);
     }
+
+    .review-badge.youtube-badge {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(239,68,68,0.9) 0%, rgba(185,28,28,0.9) 100%);
+      border: 1px solid rgba(239,68,68,0.7);
+      box-shadow: 0 0 10px rgba(239,68,68,0.3);
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .review-badge.youtube-badge .yt-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #ef4444;
+      width: 12px; height: 9px;
+      border-radius: 2px;
+      font-size: 6px;
+      padding-left: 1px;
+      font-weight: 900;
+    }
+
     .review-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: #777; margin-top: -4px; }
     .review-meta .dot { color: #444; font-size: 12px; }
     .review-purchased {
@@ -878,6 +818,7 @@
       content: '"'; font-size: 30px; color: rgba(212,175,55,0.25);
       position: absolute; top: -8px; left: -8px; font-family: serif; font-weight: 700;
     }
+    .review-card.youtuber-card .review-text::before { color: rgba(239,68,68,0.3); }
 
     .review-helpful {
       display: inline-flex; align-items: center; gap: 6px; font-size: 11px;
@@ -932,22 +873,13 @@
       position: relative;
     }
     .review-seller-reply::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
     }
     .review-seller-reply strong {
-      color: #f5d76e;
-      font-weight: 800;
-      font-size: 10px;
-      display: block;
-      margin-bottom: 4px;
-      letter-spacing: 0.9px;
-      text-transform: uppercase;
+      color: #f5d76e; font-weight: 800; font-size: 10px;
+      display: block; margin-bottom: 4px;
+      letter-spacing: 0.9px; text-transform: uppercase;
       text-shadow: 0 0 8px rgba(212,175,55,0.5);
     }
 
@@ -1018,21 +950,15 @@
 
     .live-notif-container {
       position: fixed;
-      top: 86px;
-      right: 20px;
-      left: auto;
-      bottom: auto;
+      top: 86px; right: 20px;
+      left: auto; bottom: auto;
       z-index: 500;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: flex; flex-direction: column; gap: 10px;
       pointer-events: none;
       max-width: 320px;
     }
     .live-notif {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      display: flex; flex-direction: column; gap: 0;
       background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
       border: 1px solid rgba(212,175,55,0.35);
       border-radius: 14px;
@@ -1044,25 +970,14 @@
     @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
     .live-notif .notif-card-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
       background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.2px;
-      padding: 5px 10px;
+      color: #fff; font-size: 10px; font-weight: 900;
+      letter-spacing: 1.2px; padding: 5px 10px;
       text-transform: uppercase;
       text-shadow: 0 1px 2px rgba(0,0,0,0.25);
     }
-    .live-notif .notif-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-    }
+    .live-notif .notif-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
     .live-notif .notif-avatar {
       width: 34px; height: 34px; border-radius: 50%;
       background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.08));
@@ -1536,14 +1451,11 @@
       </div>
     </section>
 
-    <!-- PULSE FEED (WHOP STYLE) - FIXED TO 3 ITEMS & MORE GOLD -->
     <div class="pulse-feed">
       <div class="pulse-header">
         <div class="pulse-title"><span class="pulse-live-dot"></span> LIVE PURCHASES</div>
       </div>
-      <div class="pulse-list" id="pulseList">
-        <!-- Items will be injected here via JS. Max 3 items. -->
-      </div>
+      <div class="pulse-list" id="pulseList"></div>
     </div>
 
     <div class="heading-row">
@@ -1841,7 +1753,71 @@
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88 }
     ];
 
+    // --- REVIEWS DATA ---
+    // YouTubers ke reviews sabse upar (isYouTuber: true), ab avatar images ke saath
     var reviewsData = [
+      // YOUTUBER REVIEWS (TOP) - avatar images with youtuber1-5.png
+      {
+        name: 'Total Gaming',
+        avatar: 'reviews/youtuber1.png',
+        location: 'Gujarat',
+        time: '9 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥',
+        rating: 4.5,
+        helpful: 1247,
+        moreCount: 8932,
+        isYouTuber: true
+      },
+      {
+        name: 'Tonde Gamer',
+        avatar: 'reviews/youtuber2.png',
+        location: 'Nepal',
+        time: '17 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯',
+        rating: 4.9,
+        helpful: 2156,
+        moreCount: 12480,
+        isYouTuber: true
+      },
+      {
+        name: 'Gyan Gaming',
+        avatar: 'reviews/youtuber3.png',
+        location: 'Kolkata',
+        time: '28 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍',
+        rating: 4.1,
+        helpful: 876,
+        moreCount: 5432,
+        isYouTuber: true
+      },
+      {
+        name: 'Lokesh Gamer',
+        avatar: 'reviews/youtuber4.png',
+        location: 'Hyderabad',
+        time: '7 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀',
+        rating: 5,
+        helpful: 1876,
+        moreCount: 9543,
+        isYouTuber: true
+      },
+      {
+        name: 'Sooneeta',
+        avatar: 'reviews/youtuber5.png',
+        location: 'Nepal',
+        time: '21 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊',
+        rating: 4.3,
+        helpful: 654,
+        moreCount: 3421,
+        isYouTuber: true
+      },
+      // NORMAL REVIEWS
       { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'Purchased: American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
       { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Purchased: Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
       { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Purchased: Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
@@ -2016,32 +1992,50 @@
 
     function createReviewCardHTML(review) {
       var starsHTML = '';
-      for (var i = 0; i < 5; i++) starsHTML += (i < Math.floor(review.rating)) ? '★' : '☆';
+      for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
+
       var initials = review.name.split(' ').map(function(n){return n[0];}).join('').substring(0,2).toUpperCase();
       var avatarHTML;
       if (review.avatar) {
-        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;&quot;>' + initials + '</span>\'">';
+        // Agar avatar image hai, to use karo; agar fail hui to initials fallback
+        var fallbackColor = review.isYouTuber ? '#ef4444' : '#d4af37';
+        var fallbackBg = review.isYouTuber ? 'rgba(239,68,68,0.25)' : 'rgba(212,175,55,0.25)';
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:' + fallbackColor + ';font-weight:800;font-size:' + (review.isYouTuber ? '15' : '14') + 'px;background:linear-gradient(135deg, ' + fallbackBg + ' 0%, rgba(0,0,0,0.1) 100%);&quot;>' + initials + '</span>\'">';
       } else {
-        avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;background:linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);">' + initials + '</span>';
+        if (review.isYouTuber) {
+          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#ef4444;font-weight:900;font-size:15px;background:linear-gradient(135deg, rgba(239,68,68,0.25) 0%, rgba(239,68,68,0.08) 100%);">' + initials + '</span>';
+        } else {
+          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;background:linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);">' + initials + '</span>';
+        }
       }
+
+      var badgeHTML;
+      if (review.isYouTuber) {
+        badgeHTML = '<div class="review-badge youtube-badge"><span class="yt-icon">▶</span> YouTube Verified</div>';
+      } else {
+        badgeHTML = '<div class="review-badge">✓ Verified Buyer</div>';
+      }
+
+      var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
+
       var html =
         '<div class="review-header">' +
           '<div class="review-avatar">' + avatarHTML + '</div>' +
           '<div class="review-info">' +
             '<div class="review-name">' + review.name + '</div>' +
-            '<div class="review-badge">✓ Verified Buyer</div>' +
+            badgeHTML +
           '</div>' +
         '</div>' +
         '<div class="review-meta"><span>📍 ' + review.location + '</span><span class="dot">·</span><span>🕐 ' + review.time + '</span></div>' +
         '<div class="review-purchased">📦 ' + review.purchased + '</div>' +
         '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
         '<div class="review-text">' + review.comment + '</div>' +
-        '<button class="review-helpful" type="button" data-helpful="' + review.helpful + '"><span class="helpful-icon">👍</span> Helpful (<span class="helpful-count">' + review.helpful + '</span>)</button>' +
-        '<button class="review-more-btn" data-more="' + (review.moreCount || 0) + '">More <span class="arrow">+</span>' + (review.moreCount || 0) + '</button>';
+        '<button class="review-helpful" type="button" data-helpful="' + review.helpful + '"><span class="helpful-icon">👍</span> Helpful (<span class="helpful-count">' + review.helpful.toLocaleString('en-IN') + '</span>)</button>' +
+        '<button class="review-more-btn" data-more="' + (review.moreCount || 0) + '">More <span class="arrow">+</span>' + (review.moreCount || 0).toLocaleString('en-IN') + '</button>';
       if (review.sellerReply) {
         html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
       }
-      return html;
+      return { html: html, cardClass: cardClass };
     }
 
     function renderReviews() {
@@ -2049,9 +2043,10 @@
       if (!grid) return;
       grid.innerHTML = '';
       reviewsData.forEach(function(review) {
+        var result = createReviewCardHTML(review);
         var card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = createReviewCardHTML(review);
+        card.className = result.cardClass;
+        card.innerHTML = result.html;
         grid.appendChild(card);
       });
       attachMoreButtonEvents();
@@ -2278,31 +2273,7 @@
       'Guwahati', 'Bhubaneswar', 'Ludhiana', 'Jalandhar', 'Nashik', 'Aurangabad', 'Vadodara', 'Rajkot'
     ];
 
-    var notifCards = ['Amex Gold', 'Metro Signature', 'Sunrise Elite', 'Pacific Infinite', 'Liberty Reserve'];
     var notifContainer = document.getElementById('liveNotifContainer');
-    var usedNameKeys = [];
-
-    function generateUniqueBuyer() {
-      var attempts = 0;
-      var firstName, surname, city, key;
-      while (attempts < 30) {
-        firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        surname = surnames[Math.floor(Math.random() * surnames.length)];
-        city = cities[Math.floor(Math.random() * cities.length)];
-        key = firstName + '|' + surname + '|' + city;
-        if (usedNameKeys.indexOf(key) === -1) {
-          usedNameKeys.push(key);
-          if (usedNameKeys.length > 5000) usedNameKeys.shift();
-          return { firstName: firstName, surname: surname, city: city };
-        }
-        attempts++;
-      }
-      return {
-        firstName: firstNames[Math.floor(Math.random() * firstNames.length)],
-        surname: surnames[Math.floor(Math.random() * surnames.length)],
-        city: cities[Math.floor(Math.random() * cities.length)]
-      };
-    }
 
     // --- PULSE FEED LOGIC (SYNCHRONIZED WITH POPUP) ---
     var usedPulseKeys = [];
@@ -2331,7 +2302,6 @@
       return "background: " + design.gradient + ";";
     }
 
-    // Format time: Just now for < 1 min, then X mins ago
     function formatTimeAgo(timestamp) {
       var diffMins = Math.floor((Date.now() - timestamp) / 60000);
       if (diffMins < 1) return 'Just now';
@@ -2363,7 +2333,7 @@
     function addLiveNotification(buyer, design, timestamp) {
       var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
       var initials = buyer.initials;
-      var timeStr = formatTimeAgo(timestamp); // Will always be "Just now" for new popups
+      var timeStr = formatTimeAgo(timestamp);
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
@@ -2384,35 +2354,29 @@
     function addPulseItem(buyer, design, timestamp) {
       var list = document.getElementById('pulseList');
       if (!list) return;
-      
+
       var itemHTML = createPulseItemHTML(buyer, design, timestamp);
       list.insertAdjacentHTML('afterbegin', itemHTML);
-      
-      // Strictly keep only 3 items, remove the oldest (bottom) one
+
       while (list.children.length > 3) {
         list.removeChild(list.lastElementChild);
       }
     }
 
     function triggerRandomPurchase() {
-      // Generate one single event
       var buyer = generatePulseBuyer();
       var design = designs[Math.floor(Math.random() * designs.length)];
       var timestamp = Date.now();
-      
-      // Send to both places
+
       addLiveNotification(buyer, design, timestamp);
       addPulseItem(buyer, design, timestamp);
-      
-      // Schedule next event
-      var delay = 8000 + Math.random() * 7000; // 8 to 15 seconds
+
+      var delay = 8000 + Math.random() * 7000;
       setTimeout(triggerRandomPurchase, delay);
     }
 
-    // Update times of existing pulse items every 30 seconds
     function updateNotificationTimes() {
       var items = document.querySelectorAll('.pulse-item');
-      var now = Date.now();
       items.forEach(function(item) {
         var ts = parseInt(item.getAttribute('data-timestamp'));
         if (!ts) return;
@@ -2424,7 +2388,6 @@
     }
     setInterval(updateNotificationTimes, 30000);
 
-    // Start the synchronized loop
     setTimeout(function() {
       triggerRandomPurchase();
     }, 4000);
@@ -2491,15 +2454,15 @@
           e.preventDefault();
           var isActive = this.classList.contains('active');
           var countEl = this.querySelector('.helpful-count');
-          var currentCount = parseInt(countEl.textContent) || 0;
+          var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
 
           if (isActive) {
             this.classList.remove('active');
-            countEl.textContent = currentCount - 1;
+            countEl.textContent = (currentCount - 1).toLocaleString('en-IN');
             showToast('Removed from helpful', 'info');
           } else {
             this.classList.add('active');
-            countEl.textContent = currentCount + 1;
+            countEl.textContent = (currentCount + 1).toLocaleString('en-IN');
             showToast('Thanks for your feedback!', 'success');
           }
         });
@@ -2594,12 +2557,13 @@
         purchased: 'Purchased: ' + card, comment: text, rating: selectedRating,
         helpful: 0, moreCount: Math.floor(Math.random() * 500) + 50
       };
-      reviewsData.unshift(newReview);
+      reviewsData.push(newReview);
       var grid = document.getElementById('reviewsGrid');
+      var result = createReviewCardHTML(newReview);
       var card_el = document.createElement('div');
-      card_el.className = 'review-card';
-      card_el.innerHTML = createReviewCardHTML(newReview);
-      grid.insertBefore(card_el, grid.firstChild);
+      card_el.className = result.cardClass;
+      card_el.innerHTML = result.html;
+      grid.appendChild(card_el);
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
