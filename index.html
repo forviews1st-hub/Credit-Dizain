@@ -158,7 +158,6 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
-    /* PULSE FEED */
     .pulse-feed {
       margin: 0 0 24px;
       padding: 16px 20px;
@@ -722,20 +721,19 @@
     @keyframes reviewFadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
     .review-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
 
-    /* YOUTUBER REVIEW SPECIAL STYLING */
     .review-card.youtuber-card {
-      background: linear-gradient(160deg, #1a0f0f 0%, #0d0d0d 100%);
-      border: 1px solid rgba(239, 68, 68, 0.4);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(239, 68, 68, 0.08);
+      background: linear-gradient(160deg, #0f1420 0%, #0d0d0d 100%);
+      border: 1px solid rgba(29, 155, 240, 0.35);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(29, 155, 240, 0.08);
     }
     .review-card.youtuber-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, #ef4444, #dc2626, #b91c1c, #ef4444);
+      background: linear-gradient(90deg, #1d9bf0, #0a7bc7, #1d9bf0);
       border-radius: 18px 18px 0 0;
     }
     .review-card.youtuber-card:hover {
-      border-color: rgba(239, 68, 68, 0.7);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 30px rgba(239, 68, 68, 0.2);
+      border-color: rgba(29, 155, 240, 0.6);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 30px rgba(29, 155, 240, 0.2);
     }
 
     .review-header { display: flex; align-items: center; gap: 12px; }
@@ -749,65 +747,46 @@
     .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .review-card.youtuber-card .review-avatar {
-      border: 2px solid #ef4444;
-      box-shadow: 0 0 12px rgba(239,68,68,0.5), 0 0 0 2px rgba(239,68,68,0.2);
-    }
-    .review-card.youtuber-card .review-avatar::after {
-      content: '▶';
-      position: absolute;
-      bottom: -2px; right: -2px;
-      width: 16px; height: 16px;
-      background: #ef4444;
-      color: #fff;
-      border-radius: 4px;
-      font-size: 8px;
-      display: flex; align-items: center; justify-content: center;
-      border: 2px solid #0d0d0d;
-      box-shadow: 0 2px 6px rgba(239,68,68,0.6);
-      line-height: 1;
-      padding-left: 1px;
+      border: 2px solid #1d9bf0;
+      box-shadow: 0 0 12px rgba(29,155,240,0.5), 0 0 0 2px rgba(29,155,240,0.2);
     }
 
     .review-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-    .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
 
-    .review-badge {
-      font-size: 10px; color: #22c55e; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 3px; margin-top: 3px;
-      background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 10px;
-      width: fit-content; border: 1px solid rgba(34,197,94,0.2);
-    }
-
-    .review-badge.youtube-badge {
-      color: #fff;
-      background: linear-gradient(135deg, rgba(239,68,68,0.9) 0%, rgba(185,28,28,0.9) 100%);
-      border: 1px solid rgba(239,68,68,0.7);
-      box-shadow: 0 0 10px rgba(239,68,68,0.3);
-      font-weight: 800;
-      letter-spacing: 0.3px;
-    }
-    .review-badge.youtube-badge .yt-icon {
+    .review-name-row {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      background: #fff;
-      color: #ef4444;
-      width: 12px; height: 9px;
-      border-radius: 2px;
-      font-size: 6px;
-      padding-left: 1px;
-      font-weight: 900;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+    .verified-tick {
+      width: 15px; height: 15px; border-radius: 50%;
+      background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(29,155,240,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+      position: relative;
+    }
+    .verified-tick svg {
+      width: 9px; height: 9px; display: block;
+      stroke: #fff; stroke-width: 4; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
     }
 
     .review-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: #777; margin-top: -4px; }
     .review-meta .dot { color: #444; font-size: 12px; }
+
     .review-purchased {
-      display: inline-flex; align-items: center; gap: 5px; font-size: 10px;
-      color: #d4af37; background: rgba(212,175,55,0.06);
-      border: 1px solid rgba(212,175,55,0.2);
-      padding: 4px 10px; border-radius: 8px; width: fit-content;
-      font-weight: 600; letter-spacing: 0.2px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11.5px; color: #ccc;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 6px 12px; border-radius: 8px;
+      width: fit-content; font-weight: 500; letter-spacing: 0.2px;
     }
+    .review-purchased strong { color: #f5d76e; font-weight: 800; margin-left: 2px; }
+
     .review-stars { color: #d4af37; font-size: 14px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
     .review-stars .rating-num { font-size: 11px; color: #888; letter-spacing: 0.3px; font-weight: 600; }
     .review-text {
@@ -818,58 +797,78 @@
       content: '"'; font-size: 30px; color: rgba(212,175,55,0.25);
       position: absolute; top: -8px; left: -8px; font-family: serif; font-weight: 700;
     }
-    .review-card.youtuber-card .review-text::before { color: rgba(239,68,68,0.3); }
+    .review-card.youtuber-card .review-text::before { color: rgba(29,155,240,0.3); }
 
-    .review-helpful {
-      display: inline-flex; align-items: center; gap: 6px; font-size: 11px;
-      color: #888; background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 5px 10px; border-radius: 20px; width: fit-content; margin-top: 2px;
-      cursor: pointer; transition: all 0.25s ease; font-weight: 600;
-      font-family: inherit;
+    .review-actions {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .review-helpful,
+    .review-more-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; padding: 6px 11px;
+      border-radius: 8px; cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 600; font-family: inherit;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #999; letter-spacing: 0.2px;
       user-select: none;
     }
-    .review-helpful:hover { border-color: rgba(212,175,55,0.4); color: #d4af37; background: rgba(212,175,55,0.06); }
+    .review-helpful:hover,
+    .review-more-btn:hover {
+      border-color: rgba(212,175,55,0.4);
+      color: #d4af37;
+      background: rgba(212,175,55,0.06);
+    }
     .review-helpful.active {
       border-color: #d4af37;
       color: #d4af37;
-      background: rgba(212,175,55,0.12);
-      box-shadow: 0 0 12px rgba(212,175,55,0.3), inset 0 0 8px rgba(212,175,55,0.08);
-      transform: translateY(-1px);
+      background: rgba(212,175,55,0.14);
+      box-shadow: 0 0 12px rgba(212,175,55,0.25), inset 0 0 8px rgba(212,175,55,0.06);
     }
-    .review-helpful.active .helpful-icon { animation: helpfulPop 0.4s ease; display: inline-block; }
+    .review-helpful.active .helpful-icon {
+      animation: helpfulPop 0.4s ease;
+      display: inline-block;
+    }
     @keyframes helpfulPop {
       0% { transform: scale(1); }
-      50% { transform: scale(1.35); }
+      50% { transform: scale(1.3); }
       100% { transform: scale(1); }
     }
-
-    .review-more-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; color: #d4af37;
-      background: rgba(212,175,55,0.06);
-      border: 1px solid rgba(212,175,55,0.25);
-      padding: 5px 12px; border-radius: 20px; width: fit-content; margin-top: 2px;
-      cursor: pointer; transition: all 0.2s; font-weight: 700;
-      font-family: inherit; letter-spacing: 0.3px;
+    .review-helpful .helpful-count,
+    .review-more-btn .more-count {
+      color: #fff;
+      font-weight: 800;
+      margin-left: 1px;
     }
-    .review-more-btn:hover { background: rgba(212,175,55,0.15); border-color: #d4af37; transform: translateY(-1px); }
-    .review-more-btn .arrow { font-size: 10px; transition: transform 0.2s; }
-    .review-more-btn:hover .arrow { transform: translateX(2px); }
+    .review-helpful.active .helpful-count { color: #d4af37; }
+    .review-helpful .helpful-icon { font-size: 11px; line-height: 1; }
+
+    .review-report {
+      margin-left: auto;
+      background: transparent;
+      border: none;
+      color: #4d4d4d;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 4px 6px;
+      transition: color 0.2s ease;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+    .review-report:hover { color: #ef4444; }
 
     .review-seller-reply {
       background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
       border-left: 3px solid rgba(212,175,55,0.75);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #e8e8e8;
-      margin-top: 4px;
-      line-height: 1.6;
-      box-shadow:
-        0 0 14px rgba(212,175,55,0.18),
-        inset 0 1px 0 rgba(212,175,55,0.2),
-        inset 0 0 12px rgba(212,175,55,0.05);
+      padding: 10px 14px; border-radius: 8px;
+      font-size: 12px; color: #e8e8e8;
+      margin-top: 4px; line-height: 1.6;
+      box-shadow: 0 0 14px rgba(212,175,55,0.18), inset 0 1px 0 rgba(212,175,55,0.2), inset 0 0 12px rgba(212,175,55,0.05);
       position: relative;
     }
     .review-seller-reply::before {
@@ -1425,11 +1424,11 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <span class="stat-number" data-count="12487">0</span>
+          <span class="stat-number" data-count="12487" data-increment="35">0</span>
           <span class="stat-label">Cards Sold</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-number" data-count="9876">0</span>
+          <span class="stat-number" data-count="9876" data-increment="25">0</span>
           <span class="stat-label">Happy Buyers</span>
         </div>
         <div class="hero-stat">
@@ -1713,6 +1712,71 @@
   <div class="live-notif-container" id="liveNotifContainer"></div>
 
   <script>
+    // ============================================================
+    // DAILY GROWTH SYSTEM
+    // Number har din automatically badhta hai
+    // localStorgage mein pehli visit date save hoti hai
+    // Same din = same number (deterministic)
+    // ============================================================
+    (function() {
+      try {
+        var STORAGE_KEY = 'cardseller_first_visit';
+        var todayKey = new Date().toDateString();
+        if (!localStorage.getItem(STORAGE_KEY)) {
+          localStorage.setItem(STORAGE_KEY, todayKey);
+        }
+      } catch (e) {
+        // localStorage not available, ignore
+      }
+    })();
+
+    function initDailyGrowth() {
+      try {
+        var STORAGE_KEY = 'cardseller_first_visit';
+        var todayKey = new Date().toDateString();
+        var stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          localStorage.setItem(STORAGE_KEY, todayKey);
+          return 0;
+        }
+        var firstDate = new Date(stored);
+        var todayDate = new Date(todayKey);
+        var days = Math.floor((todayDate - firstDate) / 86400000);
+        return days < 0 ? 0 : days;
+      } catch(e) {
+        return 0;
+      }
+    }
+
+    var DAYS_PASSED = initDailyGrowth();
+
+    function pseudoRandom(seed) {
+      var x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function dayNumber() {
+      var d = new Date();
+      return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    }
+
+    // Cumulative growth calculation
+    // base: starting value
+    // dailyMin, dailyMax: range of daily increment
+    // seedOffset: unique per number
+    function growNumber(base, dailyMin, dailyMax, seedOffset) {
+      var total = base;
+      if (DAYS_PASSED <= 0) return total;
+      for (var i = 1; i <= DAYS_PASSED; i++) {
+        var seed = dayNumber() - i + seedOffset;
+        var r = pseudoRandom(seed);
+        total += Math.floor(r * (dailyMax - dailyMin + 1)) + dailyMin;
+      }
+      return total;
+    }
+
+    // ============================================================
+
     (function() {
       function createOverlay() {
         var o = document.createElement('div');
@@ -1753,16 +1817,13 @@
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88 }
     ];
 
-    // --- REVIEWS DATA ---
-    // YouTubers ke reviews sabse upar (isYouTuber: true), ab avatar images ke saath
     var reviewsData = [
-      // YOUTUBER REVIEWS (TOP) - avatar images with youtuber1-5.png
       {
         name: 'Total Gaming',
         avatar: 'reviews/youtuber1.png',
         location: 'Gujarat',
         time: '9 days ago',
-        purchased: 'Purchased: All Cards',
+        purchased: 'All 5 Cards',
         comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥',
         rating: 4.5,
         helpful: 1247,
@@ -1774,7 +1835,7 @@
         avatar: 'reviews/youtuber2.png',
         location: 'Nepal',
         time: '17 days ago',
-        purchased: 'Purchased: All Cards',
+        purchased: 'All 5 Cards',
         comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯',
         rating: 4.9,
         helpful: 2156,
@@ -1786,7 +1847,7 @@
         avatar: 'reviews/youtuber3.png',
         location: 'Kolkata',
         time: '28 days ago',
-        purchased: 'Purchased: All Cards',
+        purchased: 'All 5 Cards',
         comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍',
         rating: 4.1,
         helpful: 876,
@@ -1798,7 +1859,7 @@
         avatar: 'reviews/youtuber4.png',
         location: 'Hyderabad',
         time: '7 days ago',
-        purchased: 'Purchased: All Cards',
+        purchased: 'All 5 Cards',
         comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀',
         rating: 5,
         helpful: 1876,
@@ -1810,20 +1871,19 @@
         avatar: 'reviews/youtuber5.png',
         location: 'Nepal',
         time: '21 days ago',
-        purchased: 'Purchased: All Cards',
+        purchased: 'All 5 Cards',
         comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊',
         rating: 4.3,
         helpful: 654,
         moreCount: 3421,
         isYouTuber: true
       },
-      // NORMAL REVIEWS
-      { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'Purchased: American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
-      { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Purchased: Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
-      { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Purchased: Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
-      { name: 'Pilu Tonde', avatar: 'reviews/review4.png', location: 'Pune', time: '1 month ago', purchased: 'Purchased: Sunrise Elite', comment: 'Card ke balance se Free Fire mein weekly membership li. Achha hai par delivery mein thoda time laga. Baaki sab badhiya 👍', rating: 4, helpful: 23, moreCount: 654, sellerReply: 'Thanks Pilu bhai! Next order mein fast delivery ka promise 🙏' },
-      { name: 'Ramu Gamer', avatar: 'reviews/review5.png', location: 'Hyderabad', time: '2 months ago', purchased: 'Purchased: Liberty Reserve', comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai. Paisa vasool 🔥🔥', rating: 5, helpful: 67, moreCount: 2135 },
-      { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'Purchased: American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
+      { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
+      { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
+      { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
+      { name: 'Pilu Tonde', avatar: 'reviews/review4.png', location: 'Pune', time: '1 month ago', purchased: 'Sunrise Elite', comment: 'Card ke balance se Free Fire mein weekly membership li. Achha hai par delivery mein thoda time laga. Baaki sab badhiya 👍', rating: 4, helpful: 23, moreCount: 654, sellerReply: 'Thanks Pilu bhai! Next order mein fast delivery ka promise 🙏' },
+      { name: 'Ramu Gamer', avatar: 'reviews/review5.png', location: 'Hyderabad', time: '2 months ago', purchased: 'Liberty Reserve', comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai. Paisa vasool 🔥🔥', rating: 5, helpful: 67, moreCount: 2135 },
+      { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
 
     var currentDesign = null;
@@ -1990,48 +2050,55 @@
       }, 300);
     }
 
-    function createReviewCardHTML(review) {
+    function createReviewCardHTML(review, index) {
       var starsHTML = '';
       for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
 
       var initials = review.name.split(' ').map(function(n){return n[0];}).join('').substring(0,2).toUpperCase();
       var avatarHTML;
       if (review.avatar) {
-        // Agar avatar image hai, to use karo; agar fail hui to initials fallback
-        var fallbackColor = review.isYouTuber ? '#ef4444' : '#d4af37';
-        var fallbackBg = review.isYouTuber ? 'rgba(239,68,68,0.25)' : 'rgba(212,175,55,0.25)';
-        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:' + fallbackColor + ';font-weight:800;font-size:' + (review.isYouTuber ? '15' : '14') + 'px;background:linear-gradient(135deg, ' + fallbackBg + ' 0%, rgba(0,0,0,0.1) 100%);&quot;>' + initials + '</span>\'">';
+        var fallbackColor = review.isYouTuber ? '#1d9bf0' : '#d4af37';
+        var fallbackBg = review.isYouTuber ? 'rgba(29,155,240,0.25)' : 'rgba(212,175,55,0.25)';
+        var fSize = review.isYouTuber ? '15' : '14';
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:' + fallbackColor + ';font-weight:800;font-size:' + fSize + 'px;background:linear-gradient(135deg, ' + fallbackBg + ' 0%, rgba(0,0,0,0.1) 100%);&quot;>' + initials + '</span>\'">';
       } else {
         if (review.isYouTuber) {
-          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#ef4444;font-weight:900;font-size:15px;background:linear-gradient(135deg, rgba(239,68,68,0.25) 0%, rgba(239,68,68,0.08) 100%);">' + initials + '</span>';
+          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#1d9bf0;font-weight:900;font-size:15px;background:linear-gradient(135deg, rgba(29,155,240,0.25) 0%, rgba(29,155,240,0.08) 100%);">' + initials + '</span>';
         } else {
           avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;background:linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);">' + initials + '</span>';
         }
       }
 
-      var badgeHTML;
+      var nameInner = '<span class="review-name">' + review.name + '</span>';
       if (review.isYouTuber) {
-        badgeHTML = '<div class="review-badge youtube-badge"><span class="yt-icon">▶</span> YouTube Verified</div>';
-      } else {
-        badgeHTML = '<div class="review-badge">✓ Verified Buyer</div>';
+        nameInner += '<span class="verified-tick" title="Verified Creator"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span>';
       }
 
       var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
+
+      // DAILY GROWTH APPLIED TO HELPFUL AND MORE COUNTS
+      var baseHelpful = review.helpful || 0;
+      var baseMore = review.moreCount || 0;
+      var seedBase = index * 100;
+      var helpfulDisplay = growNumber(baseHelpful, 0, 2, seedBase + 11);
+      var moreDisplay = growNumber(baseMore, 1, 4, seedBase + 12);
 
       var html =
         '<div class="review-header">' +
           '<div class="review-avatar">' + avatarHTML + '</div>' +
           '<div class="review-info">' +
-            '<div class="review-name">' + review.name + '</div>' +
-            badgeHTML +
+            '<div class="review-name-row">' + nameInner + '</div>' +
           '</div>' +
         '</div>' +
         '<div class="review-meta"><span>📍 ' + review.location + '</span><span class="dot">·</span><span>🕐 ' + review.time + '</span></div>' +
-        '<div class="review-purchased">📦 ' + review.purchased + '</div>' +
+        '<div class="review-purchased">🛍️ Bought <strong>' + review.purchased + '</strong></div>' +
         '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
         '<div class="review-text">' + review.comment + '</div>' +
-        '<button class="review-helpful" type="button" data-helpful="' + review.helpful + '"><span class="helpful-icon">👍</span> Helpful (<span class="helpful-count">' + review.helpful.toLocaleString('en-IN') + '</span>)</button>' +
-        '<button class="review-more-btn" data-more="' + (review.moreCount || 0) + '">More <span class="arrow">+</span>' + (review.moreCount || 0).toLocaleString('en-IN') + '</button>';
+        '<div class="review-actions">' +
+          '<button class="review-helpful" type="button"><span class="helpful-icon">👍</span> Helpful <span class="helpful-count">' + helpfulDisplay.toLocaleString('en-IN') + '</span></button>' +
+          '<button class="review-more-btn" type="button" data-more="' + moreDisplay + '"><span>More</span> <span class="more-count">+' + moreDisplay.toLocaleString('en-IN') + '</span></button>' +
+          '<button class="review-report" type="button">Report</button>' +
+        '</div>';
       if (review.sellerReply) {
         html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
       }
@@ -2042,8 +2109,8 @@
       var grid = document.getElementById('reviewsGrid');
       if (!grid) return;
       grid.innerHTML = '';
-      reviewsData.forEach(function(review) {
-        var result = createReviewCardHTML(review);
+      reviewsData.forEach(function(review, index) {
+        var result = createReviewCardHTML(review, index);
         var card = document.createElement('div');
         card.className = result.cardClass;
         card.innerHTML = result.html;
@@ -2051,6 +2118,7 @@
       });
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
+      attachReportButtonEvents();
     }
 
     function attachGridEvents() {
@@ -2230,8 +2298,16 @@
 
     function animateCounters() {
       document.querySelectorAll('.stat-number').forEach(function(el) {
-        var target = parseFloat(el.getAttribute('data-count'));
+        var base = parseFloat(el.getAttribute('data-count'));
         var decimals = parseInt(el.getAttribute('data-decimal')) || 0;
+        var increment = parseInt(el.getAttribute('data-increment')) || 0;
+
+        // Apply daily growth
+        var target = base;
+        if (increment > 0) {
+          target = growNumber(base, Math.floor(increment * 0.7), Math.ceil(increment * 1.5), Math.floor(base));
+        }
+
         var duration = 1800;
         var startTime = null;
         function step(timestamp) {
@@ -2275,7 +2351,6 @@
 
     var notifContainer = document.getElementById('liveNotifContainer');
 
-    // --- PULSE FEED LOGIC (SYNCHRONIZED WITH POPUP) ---
     var usedPulseKeys = [];
 
     function generatePulseBuyer() {
@@ -2469,6 +2544,18 @@
       });
     }
 
+    function attachReportButtonEvents() {
+      document.querySelectorAll('.review-report').forEach(function(btn) {
+        if (btn.dataset.reportAttached === '1') return;
+        btn.dataset.reportAttached = '1';
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          showToast('Report submitted. Thanks for the feedback.', 'info');
+        });
+      });
+    }
+
     var photoUploadArea = document.getElementById('photoUploadArea');
     var photoInput = document.getElementById('reviewPhotoInput');
     var photoPlusIcon = document.getElementById('photoPlusIcon');
@@ -2554,18 +2641,19 @@
       }
       var newReview = {
         name: name, avatar: selectedPhotoDataURL || null, location: location, time: 'Just now',
-        purchased: 'Purchased: ' + card, comment: text, rating: selectedRating,
+        purchased: card, comment: text, rating: selectedRating,
         helpful: 0, moreCount: Math.floor(Math.random() * 500) + 50
       };
       reviewsData.push(newReview);
       var grid = document.getElementById('reviewsGrid');
-      var result = createReviewCardHTML(newReview);
+      var result = createReviewCardHTML(newReview, reviewsData.length - 1);
       var card_el = document.createElement('div');
       card_el.className = result.cardClass;
       card_el.innerHTML = result.html;
       grid.appendChild(card_el);
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
+      attachReportButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
       showToast('Thank you! Your review has been posted.', 'success');
       document.getElementById('reviewForm').reset();
