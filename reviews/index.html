@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Seller | Premium Credit Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    * { -webkit-tap-highlight-color: transparent; }
+    :focus { outline: none; }
+    :focus-visible { outline: 2px solid #d4af37; outline-offset: 3px; border-radius: 6px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      background-image:
+        radial-gradient(circle at 20% 0%, rgba(212,175,55,0.06), transparent 50%),
+        radial-gradient(circle at 80% 100%, rgba(212,175,55,0.04), transparent 50%);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: flex-start;
+      padding: 16px 26px;
+      background: rgba(10, 10, 10, 0.72);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+    }
+    .site-brand { display: flex; align-items: center; gap: 12px; cursor: default; user-select: none; }
+    .site-brand-icon { font-size: 30px; line-height: 1; filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.5)); }
+    .site-brand-name {
+      font-family: 'Cormorant Garamond', 'Inter', serif;
+      font-size: 30px; font-weight: 700; letter-spacing: 1.2px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
+    }
+    @media (max-width: 500px) {
+      .site-header { padding: 14px 16px; }
+      .site-brand-name { font-size: 24px; letter-spacing: 1px; }
+      .site-brand-icon { font-size: 24px; }
+    }
+
+    main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
+
+    .hero-text-section { text-align: left; padding: 50px 20px 40px; max-width: 800px; margin: 0; position: relative; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #d4af37;
+      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.35);
+      padding: 7px 18px; border-radius: 30px; margin-bottom: 22px;
+      text-transform: uppercase; box-shadow: 0 0 20px rgba(212,175,55,0.1);
+    }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', 'Inter', serif;
+      font-size: 54px; font-weight: 700; line-height: 1.08; letter-spacing: -1px; margin-bottom: 20px; color: #fff;
+    }
+    .hero-headline .gold-line {
+      display: block;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 45%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub { font-size: 15px; color: #999; line-height: 1.75; max-width: 620px; margin: 0 0 26px; letter-spacing: 0.2px; }
+    .hero-trust {
+      display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap;
+      gap: 10px 14px; font-size: 12px; font-weight: 600; color: #888; letter-spacing: 0.3px; margin-bottom: 0;
+    }
+    .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
+    .hero-trust .trust-emoji { font-size: 14px; }
+    .hero-trust .trust-dot { color: #333; font-size: 16px; line-height: 1; }
+
+    .hero-stats { display: flex; gap: 24px; margin-top: 26px; flex-wrap: wrap; }
+    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+    .hero-stat .stat-number {
+      font-size: 24px; font-weight: 900; letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
+    }
+    .hero-stat .stat-label { font-size: 10px; color: #777; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; }
+
+    .hero-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; padding: 15px 32px; border-radius: 30px;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer;
+      font-family: inherit; margin-top: 26px;
+      box-shadow: 0 8px 24px rgba(212,175,55,0.35);
+      transition: all 0.25s ease; position: relative; overflow: hidden;
+    }
+    .hero-cta-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.5), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .hero-cta-btn:hover::before { left: 130%; }
+    .hero-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,175,55,0.5); }
+    .hero-cta-btn .shop-arrow { transition: transform 0.22s ease; }
+    .hero-cta-btn:hover .shop-arrow { transform: translateX(4px); }
+
+    @media (max-width: 700px) {
+      .hero-text-section { padding: 32px 14px 30px; }
+      .hero-headline { font-size: 38px; }
+      .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; padding: 6px 14px; }
+      .hero-sub { font-size: 14px; }
+      .hero-trust { font-size: 11px; gap: 8px 10px; }
+      .hero-cta-btn { padding: 13px 26px; font-size: 14px; }
+      .hero-stats { gap: 16px; }
+      .hero-stat .stat-number { font-size: 20px; }
+    }
+    @media (max-width: 400px) {
+      .hero-headline { font-size: 32px; }
+      .hero-sub { font-size: 13px; }
+    }
+
+    .why-trust-section {
+      margin: 20px 0 24px;
+      padding: 28px 20px;
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 22px;
+    }
+    .why-trust-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 700;
+      text-align: center; margin-bottom: 6px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -0.3px;
+    }
+    .why-trust-section .why-trust-sub {
+      text-align: center; font-size: 12px; color: #777;
+      margin-bottom: 22px; letter-spacing: 0.3px;
+    }
+    .trust-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (min-width: 700px) { .trust-features { grid-template-columns: repeat(4, 1fr); } }
+    .trust-feature-card {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 6px; padding: 16px 8px;
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 14px;
+      transition: all 0.25s ease;
+    }
+    .trust-feature-card:hover {
+      border-color: rgba(212,175,55,0.55);
+      background: rgba(212,175,55,0.08);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212,175,55,0.12);
+    }
+    .trust-feature-card .tf-icon { font-size: 26px; filter: drop-shadow(0 2px 6px rgba(212,175,55,0.35)); }
+    .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
+    .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
+
+    /* PULSE FEED */
+    .pulse-feed {
+      margin: 0 0 24px;
+      padding: 16px 20px;
+      background: linear-gradient(160deg, #1c180e 0%, #0d0a05 100%);
+      border: 1px solid rgba(212,175,55,0.5);
+      border-radius: 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .pulse-feed::before {
+      content: ''; position: absolute; top: -50%; left: -20%; width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%); pointer-events: none;
+    }
+    .pulse-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .pulse-title {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #f5d76e;
+      text-transform: uppercase;
+    }
+    .pulse-live-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #ef4444;
+      animation: pulseLive 1.5s ease-in-out infinite;
+    }
+    @keyframes pulseLive { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.7); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(239,68,68,0); } }
+
+    .pulse-list {
+      display: flex; flex-direction: column; gap: 8px;
+      max-height: 210px;
+      overflow: hidden;
+    }
+
+    .pulse-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 12px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.04) 100%);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-left: 4px solid #d4af37;
+      animation: pulseItemIn 0.4s ease-out forwards;
+    }
+    @keyframes pulseItemIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pulse-avatar-wrap { position: relative; flex-shrink: 0; }
+    .pulse-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));
+      color: #f5d76e; font-size: 11px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(212,175,55,0.4);
+    }
+    .pulse-check {
+      position: absolute; bottom: -2px; right: -2px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #22c55e; color: #000; font-size: 8px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid #0d0d0d;
+    }
+
+    .pulse-content { flex: 1; min-width: 0; }
+    .pulse-text { font-size: 12px; color: #ddd; line-height: 1.4; }
+    .pulse-text strong { color: #fff; font-weight: 700; }
+    .pulse-text .card-name { color: #f5d76e; font-weight: 700; }
+    .pulse-meta { font-size: 10px; color: #888; margin-top: 3px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .pulse-price { color: #22c55e; font-weight: 800; }
+    .pulse-balance { color: #22c55e; font-weight: 800; }
+
+    .pulse-card-thumb {
+      width: 42px; height: 26px; border-radius: 4px; flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      border: 1px solid rgba(212,175,55,0.6);
+      background-size: cover; background-position: center;
+      position: relative;
+    }
+    .pulse-card-thumb::before {
+      content: ''; position: absolute; top: 4px; left: 4px; width: 6px; height: 4px; border-radius: 1px;
+      background: #f7e7a1; opacity: 0.8;
+    }
+    .pulse-card-thumb.visa-thumb::before { display: none; }
+
+    @media (max-width: 480px) {
+      .pulse-feed { padding: 12px 14px; }
+      .pulse-item { padding: 8px 10px; gap: 8px; }
+      .pulse-text { font-size: 11px; }
+      .pulse-card-thumb { width: 34px; height: 20px; }
+      .pulse-list { max-height: 180px; }
+    }
+
+    .heading-row { margin-bottom: 20px; }
+    .heading-row h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
+    .heading-row p { font-size: 13px; color: #777; margin-top: 4px; font-weight: 500; }
+    @media (max-width:600px) { .heading-row h1 { font-size: 22px; } }
+
+    .product-trust-row {
+      display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+      gap: 10px 22px;
+      padding: 14px 20px;
+      background: linear-gradient(160deg, #0f0f0f 0%, #0a0a0a 100%);
+      border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 18px;
+      margin: 4px 0 24px;
+    }
+    .product-trust-row .ptr-item { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #ccc; letter-spacing: 0.3px; }
+    .product-trust-row .ptr-item .ptr-icon { font-size: 14px; filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)); }
+    .product-trust-row .ptr-divider { color: #333; font-size: 10px; }
+    @media (max-width: 600px) {
+      .product-trust-row { gap: 8px 14px; padding: 12px 12px; }
+      .product-trust-row .ptr-item { font-size: 10px; gap: 4px; }
+      .product-trust-row .ptr-divider { display: none; }
+      .product-trust-row .ptr-icon { font-size: 12px; }
+    }
+
+    .product-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 40px; scroll-margin-top: 90px; }
+    @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
+    @media (min-width: 1000px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+
+    .grid-card {
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      border-radius: 22px; padding: 18px;
+      display: flex; flex-direction: column; gap: 12px;
+      cursor: pointer; transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .grid-card:hover {
+      border-color: rgba(212, 175, 55, 0.55);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.15);
+    }
+    .grid-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.06), transparent 60%);
+      pointer-events: none; opacity: 0; transition: opacity 0.4s ease;
+    }
+    .grid-card:hover::before { opacity: 1; }
+
+    .cc-preview-wrap { position: relative; }
+
+    .cc-preview {
+      position: relative; aspect-ratio: 1.586 / 1; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -1px 0 rgba(0,0,0,0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.06);
+      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-style: preserve-3d; will-change: transform;
+    }
+    .grid-card:hover .cc-preview { transform: perspective(900px) rotateX(6deg) rotateY(-6deg) scale(1.015); }
+
+    .cc-face {
+      position: absolute; inset: 0; border-radius: 14px; padding: 12px 14px; color: #fff;
+      display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    }
+    .cc-front { z-index: 2; }
+    .cc-back { transform: rotateY(180deg); z-index: 1; }
+
+    .cc-front::before, .cc-back::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background-image:
+        repeating-linear-gradient(45deg, transparent 0 9px, rgba(255,255,255,0.022) 9px 10px),
+        repeating-linear-gradient(-45deg, transparent 0 12px, rgba(255,255,255,0.015) 12px 13px),
+        repeating-linear-gradient(0deg, transparent 0 18px, rgba(255,255,255,0.012) 18px 19px);
+      pointer-events: none; z-index: 0;
+    }
+
+    .cc-glow { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0.85; z-index: 1; }
+    .cc-sheen {
+      position: absolute; top: -50%; left: -30%; width: 60%; height: 200%;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+      transform: rotate(20deg); pointer-events: none; transition: left 0.7s ease; z-index: 1;
+    }
+    .grid-card:hover .cc-sheen { left: 120%; }
+
+    .cc-preview.finish-matte .cc-sheen { display: none; }
+    .cc-preview.finish-gloss .cc-sheen { background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%); width: 70%; }
+    .cc-preview.finish-gold::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(115deg, transparent 38%, rgba(212,175,55,0.28) 50%, transparent 62%);
+      pointer-events: none; z-index: 3; animation: goldShimmer 3s ease-in-out infinite; border-radius: 14px;
+    }
+    @keyframes goldShimmer { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    .cc-preview.finish-holo {
+      box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,0,255,0.35),
+        0 0 22px rgba(255,0,255,0.22), 0 0 35px rgba(0,255,255,0.18);
+    }
+    .cc-preview.finish-satin .cc-sheen { background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%); }
+    .cc-preview.finish-carbon::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 5px 5px; pointer-events: none; z-index: 3; border-radius: 14px;
+    }
+
+    .cc-top { display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative; }
+    .cc-bank-row { display: flex; flex-direction: row; align-items: center; gap: 7px; z-index: 2; }
+    .cc-bank-icon {
+      width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 900; color: #fff; flex-shrink: 0;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.5); box-shadow: inset 0 0 4px rgba(255,255,255,0.15);
+    }
+    .cc-bank-info { display: flex; flex-direction: column; gap: 1px; }
+    .cc-bank { font-size: 10.5px; font-weight: 800; letter-spacing: 2.2px; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.55); line-height: 1; }
+    .cc-bank-type { font-size: 6.5px; font-weight: 700; letter-spacing: 1.8px; opacity: 0.85; text-transform: uppercase; color: #fff; line-height: 1; margin-top: 2px; }
+    .cc-contactless { display: flex; align-items: center; flex-shrink: 0; opacity: 0.9; }
+    .cc-contactless-icon { width: 14px; height: 14px; position: relative; }
+    .cc-contactless-icon::before, .cc-contactless-icon::after {
+      content: ''; position: absolute; border: 1.5px solid rgba(255,255,255,0.85); border-radius: 50%;
+      border-left-color: transparent; border-bottom-color: transparent; border-top-color: transparent;
+    }
+    .cc-contactless-icon::before { width: 8px; height: 8px; top: 3px; left: 3px; transform: rotate(45deg); }
+    .cc-contactless-icon::after { width: 13px; height: 13px; top: 0.5px; left: 0.5px; transform: rotate(45deg); }
+
+    .cc-chip {
+      width: 32px; height: 24px; border-radius: 5px;
+      background: linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%);
+      position: relative;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.45);
+      z-index: 2; margin-top: 4px; align-self: flex-start;
+    }
+    .cc-chip::before {
+      content: ''; position: absolute; inset: 2.5px; border-radius: 3px; border: 0.5px solid rgba(0,0,0,0.4);
+      background-image:
+        linear-gradient(to bottom, transparent 31%, rgba(0,0,0,0.42) 31%, rgba(0,0,0,0.42) 34%, transparent 34%),
+        linear-gradient(to bottom, transparent 64%, rgba(0,0,0,0.42) 64%, rgba(0,0,0,0.42) 67%, transparent 67%),
+        linear-gradient(to right, transparent 47%, rgba(0,0,0,0.42) 47%, rgba(0,0,0,0.42) 53%, transparent 53%);
+    }
+
+    .cc-visa {
+      position: relative; font-family: 'Inter', sans-serif; font-weight: 900; font-style: italic;
+      font-size: 11px; letter-spacing: -0.4px; color: #1A1F71; background: #ffffff;
+      padding: 3px 8px 4px; border-radius: 4px; transform: skewX(-10deg); align-self: flex-end;
+      line-height: 1; margin-bottom: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.4); display: inline-block;
+    }
+    .cc-visa::after {
+      content: ''; position: absolute; bottom: 1.5px; left: 5px; right: 5px; height: 1.6px;
+      background: linear-gradient(90deg, #f7b600, #ffcc00, #f79e1b); border-radius: 1px; opacity: 0.95;
+    }
+
+    .cc-number {
+      font-size: 13px; letter-spacing: 2.4px; font-weight: 700; text-align: center;
+      font-variant-numeric: tabular-nums; color: #f2f2f2;
+      text-shadow: -0.5px -0.5px 0 rgba(255,255,255,0.28), 0.5px 0.5px 1px rgba(0,0,0,0.8), 0 0 8px rgba(255,255,255,0.06);
+      z-index: 2; position: relative;
+    }
+
+    .cc-bottom { display: flex; justify-content: space-between; align-items: flex-end; z-index: 2; position: relative; gap: 6px; }
+    .cc-label { font-size: 6px; letter-spacing: 1.2px; opacity: 0.7; margin-bottom: 2px; text-transform: uppercase; font-weight: 700; line-height: 1.05; }
+    .cc-value { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; text-shadow: 0 1px 1px rgba(0,0,0,0.6); }
+    .cc-holder { display: flex; flex-direction: column; min-width: 0; }
+    .cc-valid { display: flex; flex-direction: column; align-items: flex-start; }
+    .cc-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+
+    .cc-holo-sticker {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: conic-gradient(from 45deg, #ff0080, #ffcc00, #00ffcc, #00b7ff, #a200ff, #ff0080);
+      display: flex; align-items: center; justify-content: center; padding: 2.5px;
+      box-shadow: 0 0 8px rgba(255,255,255,0.35), inset 0 0 4px rgba(255,255,255,0.45); opacity: 0.96;
+    }
+    .cc-holo-sticker svg { width: 100%; height: 100%; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.65)); display: block; }
+
+    .cc-tier-wm {
+      position: absolute; right: -6px; bottom: 6px; font-size: 32px; font-weight: 900; font-style: italic;
+      letter-spacing: 1.5px; color: rgba(255,255,255,0.055); z-index: 1; pointer-events: none;
+      transform: rotate(-8deg); white-space: nowrap; user-select: none; text-transform: uppercase;
+    }
+
+    .cc-stripe { position: absolute; top: 13%; left: 0; right: 0; height: 20%; background: linear-gradient(180deg, #000 0%, #1a1a1a 100%); z-index: 2; }
+    .cc-back-content { position: absolute; bottom: 12px; left: 14px; right: 14px; z-index: 2; }
+    .cc-sig-row { display: flex; align-items: center; gap: 6px; }
+    .cc-sig-strip {
+      flex: 1; height: 22px;
+      background: repeating-linear-gradient(45deg, #efefef 0 6px, #dcdcdc 6px 12px);
+      border-radius: 3px; display: flex; align-items: center; padding: 0 8px;
+    }
+    .cc-sig-strip-text { font-size: 8px; color: #333; font-style: italic; font-weight: 600; opacity: 0.5; }
+    .cc-cvv { background: #fff; color: #111; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 3px; letter-spacing: 1px; }
+
+    .cc-face.cc-front.cc-amex-gold { padding: 0 !important; background: transparent !important; overflow: hidden; display: block !important; }
+    .cc-face.cc-front.cc-amex-gold img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block;
+      filter: blur(15px); opacity: 0.4; transition: filter 0.8s ease, opacity 0.8s ease;
+    }
+    .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
+
+    .cc-face.cc-back.cc-amex-gold-back {
+      padding: 0;
+      color: #1a1408;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.55) 0%, transparent 45%),
+        radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(240, 200, 90, 0.35) 0%, transparent 60%),
+        linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%);
+      text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
+    }
+    .cc-face.cc-back.cc-amex-gold-back::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background-image:
+        repeating-radial-gradient(circle at 20% 30%, transparent 0 6px, rgba(255, 235, 150, 0.09) 6px 7px),
+        repeating-radial-gradient(circle at 70% 70%, transparent 0 8px, rgba(120, 85, 15, 0.07) 8px 9px),
+        repeating-linear-gradient(0deg, transparent 0 4px, rgba(255, 240, 170, 0.05) 4px 5px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .amex-back-frame {
+      position: absolute; inset: 7px;
+      border: 1.4px solid rgba(26, 20, 8, 0.85);
+      border-radius: 9px;
+      pointer-events: none; z-index: 10;
+      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.55), 0 0 0 0.5px rgba(26, 20, 8, 0.4);
+    }
+    .amex-back-frame::before { content: ''; position: absolute; inset: 2.5px; border: 0.7px solid rgba(26, 20, 8, 0.5); border-radius: 7px; }
+    .amex-back-frame::after { content: ''; position: absolute; inset: -3px; border: 0.6px solid rgba(26, 20, 8, 0.55); border-radius: 11px; }
+
+    .amex-back-content {
+      position: relative; z-index: 3;
+      padding: 8% 7% 7%;
+      display: flex; flex-direction: column;
+      height: 100%; box-sizing: border-box;
+    }
+
+    .amex-back-top-strip {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 4.2px; font-weight: 800;
+      color: rgba(26, 20, 8, 0.9); letter-spacing: 0.15px;
+      padding: 0 1px; margin-bottom: 5px; line-height: 1;
+    }
+    .amex-back-top-strip .amex-top-right { font-weight: 900; letter-spacing: 0.6px; font-size: 4.8px; }
+
+    .amex-back-magstripe {
+      width: 100%; height: 20%; min-height: 18px;
+      background: linear-gradient(180deg, #000 0%, #0d0d0d 45%, #000 100%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.95);
+      margin-bottom: 7px; border-radius: 1px; position: relative;
+    }
+    .amex-back-magstripe::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .amex-back-sig-labels {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 3.8px; font-weight: 900; color: #1a1408;
+      letter-spacing: 0.35px; margin-bottom: 3px; padding: 0 1px; text-transform: uppercase;
+    }
+
+    .amex-back-sig-area { display: flex; align-items: flex-start; gap: 4px; margin-bottom: 7px; }
+    .amex-back-sig-strip {
+      flex: 1; height: 20px;
+      background: linear-gradient(180deg, #eef3f8 0%, #d5e0ea 100%);
+      border-radius: 2px; border: none; box-shadow: none;
+      position: relative; overflow: hidden;
+    }
+    .amex-back-sig-strip::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(135deg, rgba(160, 185, 210, 0.18) 0 3px, transparent 3px 7px);
+      pointer-events: none;
+    }
+    .amex-back-cvv-box { display: flex; flex-direction: column; align-items: center; gap: 0.5px; flex-shrink: 0; }
+    .amex-back-cvv-num {
+      background: #ffffff; color: #111;
+      font-size: 7.5px; font-weight: 700;
+      padding: 2.5px 6px; border-radius: 1.5px;
+      letter-spacing: 1.2px;
+      border: 0.4px solid rgba(26, 20, 8, 0.28);
+      min-width: 22px; text-align: center; line-height: 1;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .amex-back-cvv-label { font-size: 3.3px; font-weight: 800; color: #1a1408; letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .amex-back-cs-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; margin-bottom: auto; }
+    .amex-back-cs-info {
+      font-size: 4px; color: #1a1408;
+      line-height: 1.5; font-weight: 700;
+      letter-spacing: 0.1px; padding: 0 1px;
+    }
+    .amex-back-cs-info div { white-space: nowrap; }
+    .amex-back-nontransferable {
+      font-size: 3.8px; font-weight: 900; color: #1a1408;
+      letter-spacing: 0.3px; text-transform: uppercase;
+      flex-shrink: 0; padding-top: 0px; text-align: right;
+    }
+
+    .amex-back-bottom { display: flex; align-items: flex-end; gap: 4px; margin-top: 6px; }
+    .amex-back-logo {
+      background: #006FCF; color: #ffffff;
+      padding: 2.5px 3px; border-radius: 1px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      line-height: 1; font-family: 'Inter', sans-serif;
+      flex-shrink: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      position: relative; min-width: 22px;
+    }
+    .amex-back-logo span { display: block; text-align: center; font-weight: 900; letter-spacing: 0.3px; }
+    .amex-back-logo .amex-logo-line1 { font-size: 3.8px; }
+    .amex-back-logo .amex-logo-line2 { font-size: 3.8px; letter-spacing: 0.5px; margin-top: 0.5px; }
+    .amex-back-logo::after {
+      content: '®'; position: absolute;
+      bottom: -2px; right: -2px; font-size: 2.5px;
+      color: #1a1408; background: #d4af37; border-radius: 50%;
+      width: 3.5px; height: 3.5px;
+      display: flex; align-items: center; justify-content: center; font-weight: 700;
+    }
+    .amex-back-legal {
+      flex: 1; font-size: 3px;
+      color: rgba(26, 20, 8, 0.82);
+      line-height: 1.4; font-weight: 600;
+      letter-spacing: 0.05px; text-align: left;
+    }
+
+    .modal-card-inner .amex-back-frame { inset: 11px; border-width: 1.7px; border-radius: 11px; }
+    .modal-card-inner .amex-back-frame::before { inset: 3.5px; border-width: 0.9px; border-radius: 8px; }
+    .modal-card-inner .amex-back-frame::after { inset: -4px; border-width: 0.8px; border-radius: 14px; }
+    .modal-card-inner .amex-back-content { padding: 8% 7% 7%; }
+    .modal-card-inner .amex-back-top-strip { font-size: 5.5px; margin-bottom: 5px; }
+    .modal-card-inner .amex-back-top-strip .amex-top-right { font-size: 6.5px; }
+    .modal-card-inner .amex-back-magstripe { height: 20%; min-height: 30px; margin-bottom: 8px; }
+    .modal-card-inner .amex-back-sig-labels { font-size: 5px; margin-bottom: 3px; }
+    .modal-card-inner .amex-back-sig-strip { height: 32px; border: none; box-shadow: none; }
+    .modal-card-inner .amex-back-cvv-num { font-size: 10px; padding: 4px 10px; min-width: 32px; }
+    .modal-card-inner .amex-back-cvv-label { font-size: 4.5px; }
+    .modal-card-inner .amex-back-cs-info { font-size: 5px; }
+    .modal-card-inner .amex-back-nontransferable { font-size: 4.5px; }
+    .modal-card-inner .amex-back-logo { padding: 3.5px 4.5px; min-width: 32px; }
+    .modal-card-inner .amex-back-logo .amex-logo-line1,
+    .modal-card-inner .amex-back-logo .amex-logo-line2 { font-size: 5px; }
+    .modal-card-inner .amex-back-logo::after { font-size: 3.5px; width: 5px; height: 5px; bottom: -3px; right: -3px; }
+    .modal-card-inner .amex-back-legal { font-size: 4px; }
+
+    .mini-card-preview .amex-back-frame { inset: 6px; }
+    .mini-card-preview .amex-back-top-strip { font-size: 3.2px; }
+    .mini-card-preview .amex-back-top-strip .amex-top-right { font-size: 3.8px; }
+    .mini-card-preview .amex-back-sig-labels { font-size: 3px; }
+    .mini-card-preview .amex-back-sig-strip { height: 15px; border: none; box-shadow: none; }
+    .mini-card-preview .amex-back-cvv-num { font-size: 5px; padding: 1.5px 4px; min-width: 16px; }
+    .mini-card-preview .amex-back-cvv-label { font-size: 2.5px; }
+    .mini-card-preview .amex-back-cs-info { font-size: 3px; }
+    .mini-card-preview .amex-back-nontransferable { font-size: 2.8px; }
+    .mini-card-preview .amex-back-logo { padding: 2px 2.5px; min-width: 16px; }
+    .mini-card-preview .amex-back-logo .amex-logo-line1,
+    .mini-card-preview .amex-back-logo .amex-logo-line2 { font-size: 3.2px; }
+    .mini-card-preview .amex-back-legal { font-size: 2.4px; }
+
+    .cc-balance-badge {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      padding: 12px 22px; border-radius: 18px;
+      background: linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.04) 100%);
+      border: 1.5px solid rgba(34,197,94,0.35);
+      width: fit-content; margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.15), 0 0 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative; overflow: hidden;
+    }
+    .cc-balance-badge::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(34,197,94,0.22), transparent);
+      transform: rotate(20deg); animation: balanceShimmer 3.5s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes balanceShimmer { 0% { left: -60%; } 50% { left: 130%; } 100% { left: -60%; } }
+    .cc-balance-label {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      font-size: 9px; font-weight: 800; letter-spacing: 2.5px; color: #22c55e;
+      text-transform: uppercase; opacity: 0.9; line-height: 1; position: relative; z-index: 1;
+    }
+    .cc-balance-emoji { font-size: 12px; line-height: 1; }
+    .cc-balance-value {
+      font-size: 18px; font-weight: 900; letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 60%, #16a34a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; position: relative; z-index: 1;
+    }
+
+    .gc-info { display: flex; flex-direction: column; gap: 6px; }
+    .gc-name { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.2px; line-height: 1.3; }
+    .gc-tagline { font-size: 12px; color: #888; font-weight: 500; letter-spacing: 0.2px; }
+    .gc-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+    .gc-rating { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.3px; color: #aaa; }
+    .gc-price { font-size: 18px; font-weight: 800; color: #22c55e; letter-spacing: -0.3px; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
+    .gc-material { font-size: 10px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+    .gc-actions { display: flex; margin-top: 6px; }
+    .gc-buy-btn {
+      flex: 1; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 22px; padding: 12px;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; font-family: inherit;
+      transition: all 0.25s ease; box-shadow: 0 4px 14px rgba(212,175,55,0.3);
+      position: relative; overflow: hidden;
+    }
+    .gc-buy-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .gc-buy-btn:hover::before { left: 130%; }
+    .gc-buy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(212,175,55,0.5);
+      background: linear-gradient(135deg, #ffdf7a 0%, #d4af37 55%, #b8941f 100%);
+    }
+
+    .stock-progress {
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 10px 12px;
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      margin-top: 4px;
+    }
+    .stock-progress-top { display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 800; }
+    .stock-progress-top .stock-left { color: #ef4444; letter-spacing: 0.2px; }
+    .stock-progress-top .stock-percent { color: #d4af37; letter-spacing: 0.3px; }
+    .stock-bar-track { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; position: relative; }
+    .stock-bar-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b); border-radius: 3px; transition: width 1.5s ease; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+
+    .rating-stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 1.5px; line-height: 1; font-family: Arial, sans-serif; }
+    .rating-stars .stars-bg { color: #333; }
+    .rating-stars .stars-fill { color: #d4af37; position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; }
+
+    .reviews-section { margin-bottom: 40px; scroll-margin-top: 90px; }
+    .reviews-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .reviews-header .heading-row { margin-bottom: 0; }
+
+    .write-review-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.4);
+      color: #d4af37; padding: 10px 18px; border-radius: 24px;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer;
+      font-family: inherit; transition: all 0.25s ease; white-space: nowrap;
+    }
+    .write-review-btn:hover {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border-color: transparent; transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,175,55,0.4);
+    }
+
+    .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 700px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .review-card {
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 18px; padding: 18px;
+      display: flex; flex-direction: column; gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      animation: reviewFadeIn 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    @keyframes reviewFadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+    .review-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
+
+    /* YOUTUBER REVIEW SPECIAL STYLING */
+    .review-card.youtuber-card {
+      background: linear-gradient(160deg, #1a0f0f 0%, #0d0d0d 100%);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(239, 68, 68, 0.08);
+    }
+    .review-card.youtuber-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #ef4444, #dc2626, #b91c1c, #ef4444);
+      border-radius: 18px 18px 0 0;
+    }
+    .review-card.youtuber-card:hover {
+      border-color: rgba(239, 68, 68, 0.7);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 30px rgba(239, 68, 68, 0.2);
+    }
+
+    .review-header { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      border: 2px solid rgba(212, 175, 55, 0.55);
+      overflow: hidden; flex-shrink: 0; background: #1a1a1a;
+      box-shadow: 0 0 12px rgba(212,175,55,0.15);
+      position: relative;
+    }
+    .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .review-card.youtuber-card .review-avatar {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 12px rgba(239,68,68,0.5), 0 0 0 2px rgba(239,68,68,0.2);
+    }
+    .review-card.youtuber-card .review-avatar::after {
+      content: '▶';
+      position: absolute;
+      bottom: -2px; right: -2px;
+      width: 16px; height: 16px;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 8px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #0d0d0d;
+      box-shadow: 0 2px 6px rgba(239,68,68,0.6);
+      line-height: 1;
+      padding-left: 1px;
+    }
+
+    .review-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+    .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
+
+    .review-badge {
+      font-size: 10px; color: #22c55e; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 3px; margin-top: 3px;
+      background: rgba(34,197,94,0.1); padding: 2px 8px; border-radius: 10px;
+      width: fit-content; border: 1px solid rgba(34,197,94,0.2);
+    }
+
+    .review-badge.youtube-badge {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(239,68,68,0.9) 0%, rgba(185,28,28,0.9) 100%);
+      border: 1px solid rgba(239,68,68,0.7);
+      box-shadow: 0 0 10px rgba(239,68,68,0.3);
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .review-badge.youtube-badge .yt-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #ef4444;
+      width: 12px; height: 9px;
+      border-radius: 2px;
+      font-size: 6px;
+      padding-left: 1px;
+      font-weight: 900;
+    }
+
+    .review-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: #777; margin-top: -4px; }
+    .review-meta .dot { color: #444; font-size: 12px; }
+    .review-purchased {
+      display: inline-flex; align-items: center; gap: 5px; font-size: 10px;
+      color: #d4af37; background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.2);
+      padding: 4px 10px; border-radius: 8px; width: fit-content;
+      font-weight: 600; letter-spacing: 0.2px;
+    }
+    .review-stars { color: #d4af37; font-size: 14px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
+    .review-stars .rating-num { font-size: 11px; color: #888; letter-spacing: 0.3px; font-weight: 600; }
+    .review-text {
+      font-size: 13px; color: #ffffff; line-height: 1.6;
+      position: relative; padding-top: 6px; font-weight: 400; letter-spacing: 0.1px;
+    }
+    .review-text::before {
+      content: '"'; font-size: 30px; color: rgba(212,175,55,0.25);
+      position: absolute; top: -8px; left: -8px; font-family: serif; font-weight: 700;
+    }
+    .review-card.youtuber-card .review-text::before { color: rgba(239,68,68,0.3); }
+
+    .review-helpful {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 11px;
+      color: #888; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 5px 10px; border-radius: 20px; width: fit-content; margin-top: 2px;
+      cursor: pointer; transition: all 0.25s ease; font-weight: 600;
+      font-family: inherit;
+      user-select: none;
+    }
+    .review-helpful:hover { border-color: rgba(212,175,55,0.4); color: #d4af37; background: rgba(212,175,55,0.06); }
+    .review-helpful.active {
+      border-color: #d4af37;
+      color: #d4af37;
+      background: rgba(212,175,55,0.12);
+      box-shadow: 0 0 12px rgba(212,175,55,0.3), inset 0 0 8px rgba(212,175,55,0.08);
+      transform: translateY(-1px);
+    }
+    .review-helpful.active .helpful-icon { animation: helpfulPop 0.4s ease; display: inline-block; }
+    @keyframes helpfulPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    .review-more-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; color: #d4af37;
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.25);
+      padding: 5px 12px; border-radius: 20px; width: fit-content; margin-top: 2px;
+      cursor: pointer; transition: all 0.2s; font-weight: 700;
+      font-family: inherit; letter-spacing: 0.3px;
+    }
+    .review-more-btn:hover { background: rgba(212,175,55,0.15); border-color: #d4af37; transform: translateY(-1px); }
+    .review-more-btn .arrow { font-size: 10px; transition: transform 0.2s; }
+    .review-more-btn:hover .arrow { transform: translateX(2px); }
+
+    .review-seller-reply {
+      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
+      border-left: 3px solid rgba(212,175,55,0.75);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #e8e8e8;
+      margin-top: 4px;
+      line-height: 1.6;
+      box-shadow:
+        0 0 14px rgba(212,175,55,0.18),
+        inset 0 1px 0 rgba(212,175,55,0.2),
+        inset 0 0 12px rgba(212,175,55,0.05);
+      position: relative;
+    }
+    .review-seller-reply::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
+    }
+    .review-seller-reply strong {
+      color: #f5d76e; font-weight: 800; font-size: 10px;
+      display: block; margin-bottom: 4px;
+      letter-spacing: 0.9px; text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(212,175,55,0.5);
+    }
+
+    .load-more-reviews-wrapper { display: flex; justify-content: center; margin-top: 24px; padding: 4px 0 8px; }
+    .load-more-reviews-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1.5px solid rgba(212,175,55,0.4);
+      color: #fff;
+      padding: 14px 26px; border-radius: 30px;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      cursor: pointer; font-family: inherit; transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative; overflow: hidden;
+    }
+    .load-more-reviews-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(212,175,55,0.15), transparent);
+      transform: rotate(20deg); transition: left 0.8s ease; pointer-events: none;
+    }
+    .load-more-reviews-btn:hover::before { left: 130%; }
+    .load-more-reviews-btn:hover {
+      border-color: #d4af37; transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .load-more-reviews-btn .lm-icon { font-size: 16px; filter: drop-shadow(0 0 6px rgba(212,175,55,0.5)); }
+    .load-more-reviews-btn .lm-text {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-weight: 900; letter-spacing: 0.4px;
+    }
+    .load-more-reviews-btn .lm-arrow { font-size: 14px; color: #d4af37; transition: transform 0.3s ease; }
+    .load-more-reviews-btn:hover .lm-arrow { transform: translateX(4px); }
+    .load-more-reviews-btn.loading { opacity: 0.8; pointer-events: none; }
+    .load-more-reviews-btn.loading .lm-arrow { animation: spin 0.8s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (max-width: 480px) {
+      .load-more-reviews-btn { padding: 12px 20px; font-size: 12px; gap: 8px; }
+      .load-more-reviews-btn .lm-icon { font-size: 14px; }
+    }
+
+    .network-error-modal { text-align: center; padding: 40px 26px; }
+    .network-error-icon { font-size: 54px; margin-bottom: 14px; animation: pulseIcon 1.5s ease-in-out infinite; }
+    @keyframes pulseIcon { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.08); } }
+    .network-error-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .network-error-title.warning { color: #f59e0b; }
+    .network-error-title.danger { color: #ef4444; }
+    .network-error-title.busy { color: #d4af37; }
+    .network-error-message { font-size: 13px; color: #999; line-height: 1.7; margin-bottom: 20px; max-width: 320px; margin-left: auto; margin-right: auto; }
+    .network-error-details {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 11px; color: #666; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 8px 14px; border-radius: 20px; margin-bottom: 20px;
+      width: fit-content; margin-left: auto; margin-right: auto;
+    }
+    .network-error-details .dot-pulse { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; animation: dotPulse 1.5s ease-in-out infinite; }
+    @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .network-retry-btn {
+      width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 26px; padding: 14px;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.6px;
+      cursor: pointer; font-family: inherit; transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .network-retry-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
+
+    .live-notif-container {
+      position: fixed;
+      top: 86px; right: 20px;
+      left: auto; bottom: auto;
+      z-index: 500;
+      display: flex; flex-direction: column; gap: 10px;
+      pointer-events: none;
+      max-width: 320px;
+    }
+    .live-notif {
+      display: flex; flex-direction: column; gap: 0;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08);
+      animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
+      pointer-events: auto;
+      overflow: hidden;
+    }
+    @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
+    .live-notif .notif-card-badge {
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+      color: #fff; font-size: 10px; font-weight: 900;
+      letter-spacing: 1.2px; padding: 5px 10px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+    }
+    .live-notif .notif-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+    .live-notif .notif-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.08));
+      display: flex; align-items: center; justify-content: center;
+      color: #d4af37; font-weight: 800; font-size: 11px;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(212,175,55,0.5);
+      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+    }
+    .live-notif .notif-content { font-size: 11px; color: #ccc; line-height: 1.4; flex: 1; min-width: 0; }
+    .live-notif .notif-content strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
+    .live-notif .notif-content .notif-time { color: #22c55e; font-size: 10px; display: block; margin-top: 3px; font-weight: 600; letter-spacing: 0.2px; }
+    @media (max-width: 480px) {
+      .live-notif-container { left: 10px; right: 10px; top: 76px; max-width: none; }
+    }
+
+    .more-stats-modal { text-align: center; padding: 40px 26px; }
+    .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
+    .more-stats-number {
+      font-size: 48px; font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .more-stats-label { font-size: 13px; color: #ccc; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 18px; text-transform: uppercase; }
+    .more-stats-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); margin: 18px 0; }
+    .more-stats-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; color: #22c55e;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      padding: 6px 14px; border-radius: 20px; letter-spacing: 0.4px; margin-bottom: 14px;
+    }
+    .more-stats-message { font-size: 12px; color: #888; line-height: 1.6; max-width: 280px; margin: 0 auto; }
+
+    .review-modal { max-width: 440px; }
+    .review-form-group { margin-bottom: 14px; text-align: left; }
+    .review-form-group label {
+      display: block; font-size: 10px; font-weight: 700; color: #d4af37;
+      margin-bottom: 6px; letter-spacing: 1.3px; text-transform: uppercase;
+    }
+    .review-form-group input, .review-form-group textarea, .review-form-group select {
+      width: 100%; padding: 11px 14px; border: 1px solid #262626; border-radius: 10px;
+      font-size: 13px; background: #0f0f0f; color: #fff; font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .review-form-group select {
+      cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+    }
+    .review-form-group input:focus, .review-form-group textarea:focus, .review-form-group select:focus {
+      border-color: #d4af37; background-color: #131313; box-shadow: 0 0 0 4px rgba(212,175,55,0.1);
+    }
+    .review-form-group input::placeholder, .review-form-group textarea::placeholder { color: #444; }
+    .review-form-group textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+    .photo-upload-row { display: flex; align-items: center; gap: 14px; padding: 4px 0; }
+    .photo-upload-area {
+      position: relative; width: 70px; height: 70px; border-radius: 50%;
+      border: 2px dashed rgba(212,175,55,0.5); background: rgba(212,175,55,0.04);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.25s ease; overflow: hidden; flex-shrink: 0;
+    }
+    .photo-upload-area:hover { border-color: #d4af37; background: rgba(212,175,55,0.1); transform: scale(1.03); }
+    .photo-upload-area .plus-icon { font-size: 26px; color: #d4af37; font-weight: 300; line-height: 1; user-select: none; }
+    .photo-upload-area.has-photo { border-style: solid; border-color: #d4af37; box-shadow: 0 0 18px rgba(212,175,55,0.35); }
+    .photo-upload-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .photo-remove-btn {
+      position: absolute; top: -2px; right: -2px; width: 22px; height: 22px; border-radius: 50%;
+      background: #ff4444; color: #fff; border: 2px solid #0d0d0d;
+      font-size: 12px; font-weight: 900; cursor: pointer; display: none;
+      align-items: center; justify-content: center; line-height: 1; padding: 0; z-index: 3;
+    }
+    .photo-upload-area.has-photo .photo-remove-btn { display: flex; }
+    .photo-upload-hint { display: flex; flex-direction: column; gap: 3px; }
+    .photo-upload-hint .primary { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.2px; }
+    .photo-upload-hint .secondary { font-size: 10px; color: #777; letter-spacing: 0.2px; }
+
+    .star-selector { display: flex; gap: 8px; align-items: center; padding: 4px 0; }
+    .star-selector .star-btn {
+      font-size: 28px; color: #333; background: none; border: none;
+      cursor: pointer; padding: 0; line-height: 1; transition: all 0.15s ease; font-family: Arial, sans-serif;
+    }
+    .star-selector .star-btn:hover, .star-selector .star-btn.active { color: #d4af37; transform: scale(1.15); }
+    .star-selector-label { font-size: 11px; color: #888; margin-left: 8px; font-weight: 600; }
+
+    .review-submit-btn {
+      width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 26px; padding: 14px;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer;
+      font-family: inherit; transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 4px; position: relative; overflow: hidden;
+    }
+    .review-submit-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .review-submit-btn:hover::before { left: 130%; }
+    .review-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
+
+    footer {
+      background: transparent; padding: 36px 20px 30px; text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.1); margin-top: 20px;
+    }
+    .footer-links { display: flex; justify-content: center; align-items: center; flex-wrap: nowrap; gap: 6px 10px; margin-bottom: 16px; }
+    .footer-links a {
+      font-size: 11px; font-weight: 600; color: #999; text-decoration: none;
+      letter-spacing: 0.3px; transition: color 0.2s ease; cursor: pointer; position: relative; white-space: nowrap;
+    }
+    .footer-links a:hover { color: #d4af37; }
+    .footer-divider { color: #333; font-size: 10px; user-select: none; }
+    @media (max-width: 360px) { .footer-links a { font-size: 9px; } .footer-divider { font-size: 8px; } }
+    .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
+
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      display: none; justify-content: center; align-items: center;
+      z-index: 1000; padding: 20px; overflow-y: auto;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .modal {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 26px; max-width: 400px; width: 100%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.85), 0 0 40px rgba(212,175,55,0.06);
+      animation: premiumScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      overflow: hidden;
+    }
+    @keyframes premiumScaleIn { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-close {
+      position: absolute; top: 14px; right: 14px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 50%; width: 34px; height: 34px; font-size: 16px;
+      cursor: pointer; color: #aaa; z-index: 10;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .modal-close:hover { background: #d4af37; color: #1a1408; border-color: #d4af37; }
+    .modal-body { padding: 24px; }
+
+    .modal-card-wrap { perspective: 1200px; width: 100%; aspect-ratio: 1.586 / 1; cursor: pointer; margin-bottom: 12px; position: relative; }
+    .modal-card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .modal-card-wrap.flipped .modal-card-inner { transform: rotateY(180deg); }
+    .modal-card-inner .cc-face {
+      border-radius: 16px; padding: 16px 20px;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.75), 0 4px 10px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.5);
+    }
+    .modal-card-inner .cc-face.cc-back.cc-amex-gold-back { padding: 0; }
+    .modal-card-inner .cc-number { font-size: 16px; letter-spacing: 3px; }
+    .modal-card-inner .cc-bank { font-size: 13px; letter-spacing: 2.5px; }
+    .modal-card-inner .cc-bank-type { font-size: 8px; letter-spacing: 2px; }
+    .modal-card-inner .cc-bank-icon { width: 22px; height: 22px; font-size: 11px; }
+    .modal-card-inner .cc-chip { width: 38px; height: 28px; }
+    .modal-card-inner .cc-label { font-size: 7px; }
+    .modal-card-inner .cc-value { font-size: 12px; }
+    .modal-card-inner .cc-visa { font-size: 15px; padding: 4px 10px 5px; border-radius: 5px; }
+    .modal-card-inner .cc-holo-sticker { width: 26px; height: 26px; padding: 3px; }
+    .modal-card-inner .cc-tier-wm { font-size: 42px; }
+
+    .flip-hint { text-align: center; font-size: 11px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; user-select: none; }
+    .modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px; margin-bottom: 6px; text-align: center; }
+    .modal-tagline { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
+    .modal-meta { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 16px; }
+    .modal-price { color: #22c55e; padding: 8px 20px; font-weight: 800; font-size: 18px; letter-spacing: -0.3px; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
+    .modal-rating { display: flex; align-items: center; gap: 6px; color: #aaa; font-size: 13px; font-weight: 700; }
+    .modal-material { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-align: center; margin-bottom: 14px; }
+    .modal-description { color: #999; font-size: 13px; line-height: 1.7; margin-bottom: 18px; text-align: center; }
+
+    .qty-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 18px; }
+    .qty-row button {
+      background: #1a1a1a; border: 1px solid #262626; border-radius: 50%;
+      width: 36px; height: 36px; font-size: 18px; font-weight: 700; cursor: pointer;
+      color: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+    }
+    .qty-row button:hover { background: #d4af37; color: #1a1408; border-color: #d4af37; transform: scale(1.05); }
+    .qty-row span { font-size: 20px; font-weight: 800; min-width: 30px; text-align: center; }
+
+    .modal-buy-btn {
+      width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 26px; padding: 16px;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer;
+      font-family: inherit; transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; overflow: hidden;
+    }
+    .modal-buy-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .modal-buy-btn:hover::before { left: 130%; }
+    .modal-buy-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
+
+    .order-modal { max-height: 88vh; display: flex; flex-direction: column; }
+    .order-modal .modal-body { overflow-y: auto; flex: 1; padding: 18px 16px 16px; }
+    .order-modal .modal-body::-webkit-scrollbar { width: 4px; }
+    .order-modal .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .order-modal .modal-body::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+
+    .checkout-header { text-align: center; margin-bottom: 14px; }
+    .checkout-eyebrow {
+      display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 2.5px;
+      color: #d4af37; background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 3px 10px; border-radius: 20px; margin-bottom: 8px;
+    }
+    .checkout-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
+    .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
+
+    .mini-card-preview {
+      position: relative; width: 100%; aspect-ratio: 1.586 / 1; border-radius: 12px; overflow: hidden;
+      margin-bottom: 14px; transition: transform 0.4s ease;
+    }
+    .mini-card-preview:hover { transform: translateY(-2px); }
+    .mini-card-preview .cc-face {
+      border-radius: 12px; padding: 10px 12px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4);
+    }
+    .mini-card-preview .cc-face.cc-back.cc-amex-gold-back { padding: 0; }
+    .mini-card-preview .cc-number { font-size: 12px; letter-spacing: 2.2px; }
+    .mini-card-preview .cc-bank { font-size: 10px; letter-spacing: 2px; }
+    .mini-card-preview .cc-bank-type { font-size: 6px; letter-spacing: 1.6px; }
+    .mini-card-preview .cc-bank-icon { width: 17px; height: 17px; font-size: 8px; }
+    .mini-card-preview .cc-chip { width: 30px; height: 22px; }
+    .mini-card-preview .cc-label { font-size: 5.5px; }
+    .mini-card-preview .cc-value { font-size: 9px; letter-spacing: 1px; }
+    .mini-card-preview .cc-visa { font-size: 10px; padding: 3px 7px 4px; border-radius: 3px; }
+    .mini-card-preview .cc-holo-sticker { width: 18px; height: 18px; padding: 2px; }
+    .mini-card-preview .cc-tier-wm { font-size: 28px; }
+
+    .section-divider { display: flex; align-items: center; gap: 8px; margin: 12px 0 8px; }
+    .section-divider span { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #8a7231; white-space: nowrap; }
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.25), transparent);
+    }
+
+    .order-summary-card { background: #0d0d0d; border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; padding: 10px 12px; margin-bottom: 4px; }
+    .summary-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 4px 0; }
+    .summary-label { font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.8px; text-transform: uppercase; flex-shrink: 0; }
+    .summary-value { font-size: 12px; font-weight: 700; color: #fff; text-align: right; word-break: break-word; }
+    .summary-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent); margin: 6px 0; }
+    .total-row { padding: 4px 0; }
+    .summary-label-total { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #fff; }
+    .summary-value-total { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: #22c55e; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
+
+    .order-btn-premium {
+      width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 22px; padding: 13px;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer;
+      font-family: inherit; margin-top: 8px; transition: all 0.25s ease;
+      box-shadow: 0 8px 24px rgba(212,175,55,0.4);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; overflow: hidden;
+    }
+    .order-btn-premium::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .order-btn-premium:hover::before { left: 130%; }
+    .order-btn-premium:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,175,55,0.55); }
+
+    .trust-badges { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; font-size: 10px; font-weight: 600; color: #666; letter-spacing: 0.3px; }
+    .trust-badges .dot { color: #333; font-size: 13px; }
+    .trust-badges span:not(.dot) { display: inline-flex; align-items: center; gap: 3px; color: #888; }
+
+    .payment-total-card {
+      background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.25); border-radius: 14px;
+      padding: 14px; text-align: center; margin-bottom: 4px;
+      position: relative; overflow: hidden;
+    }
+    .payment-total-card::before {
+      content: ''; position: absolute; top: -60%; right: -20%; width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%); pointer-events: none;
+    }
+    .payment-total-label { font-size: 9px; font-weight: 800; letter-spacing: 2.8px; color: #d4af37; margin-bottom: 6px; position: relative; z-index: 1; }
+    .payment-total-amount { font-size: 30px; font-weight: 900; letter-spacing: -1.2px; color: #22c55e; margin-bottom: 4px; line-height: 1.05; position: relative; z-index: 1; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
+    .payment-total-design { font-size: 11px; color: #999; font-weight: 500; letter-spacing: 0.3px; position: relative; z-index: 1; }
+
+    .qr-container { display: flex; justify-content: center; align-items: center; margin: 4px 0 10px; }
+    .qr-container img {
+      width: 180px; height: 180px; object-fit: contain;
+      background: #fff; padding: 10px; border-radius: 14px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.25);
+      display: block; image-rendering: crisp-edges;
+    }
+    @media (max-width:400px) {
+      .qr-container img { width: 150px; height: 150px; padding: 8px; border-radius: 12px; }
+      .payment-total-amount { font-size: 26px; }
+    }
+
+    .qr-hint { text-align: center; font-size: 11px; color: #777; margin-bottom: 2px; letter-spacing: 0.3px; font-weight: 500; }
+    .qr-hint strong { color: #d4af37; font-weight: 700; }
+
+    .field-group { margin-bottom: 10px; text-align: left; }
+    .field-group label { display: block; font-size: 10px; font-weight: 700; color: #888; margin-bottom: 4px; letter-spacing: 1.3px; text-transform: uppercase; }
+    .field-group input, .field-group textarea {
+      width: 100%; padding: 10px 14px; border: 1px solid #262626; border-radius: 10px;
+      font-size: 13px; background: #0f0f0f; color: #fff; font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-group input:focus, .field-group textarea:focus {
+      border-color: #d4af37; background: #131313; box-shadow: 0 0 0 4px rgba(212,175,55,0.1);
+    }
+    .field-group input::placeholder, .field-group textarea::placeholder { color: #444; }
+
+    .success-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+      display: none; justify-content: center; align-items: center;
+      z-index: 2000; padding: 20px; backdrop-filter: blur(12px);
+    }
+    .success-modal {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.25); border-radius: 28px;
+      max-width: 380px; width: 100%; padding: 38px 30px; text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.1);
+      animation: successModalIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes successModalIn { 0% { opacity: 0; transform: scale(0.7) translateY(30px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+    .success-checkmark { width: 80px; height: 80px; margin: 0 auto 20px; }
+    .success-checkmark-circle {
+      stroke-dasharray: 166; stroke-dashoffset: 166;
+      stroke-width: 2; stroke-miterlimit: 10; stroke: #d4af37; fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65,0,0.45,1) forwards;
+    }
+    .success-checkmark-check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48; stroke-dashoffset: 48;
+      stroke-width: 3; stroke: #d4af37; fill: none;
+      animation: stroke 0.3s cubic-bezier(0.65,0,0.45,1) 0.6s forwards;
+    }
+    @keyframes stroke { to { stroke-dashoffset: 0; } }
+    .success-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .success-message { font-size: 14px; color: #999; line-height: 1.6; margin-bottom: 16px; }
+    .success-tracking {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 11px; color: #22c55e; font-weight: 600;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      padding: 8px 14px; border-radius: 20px; margin-bottom: 18px;
+      letter-spacing: 0.2px;
+    }
+    .success-tracking .st-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+    .success-order-details {
+      background: #0d0d0d; border: 1px solid rgba(212,175,55,0.15);
+      border-radius: 12px; padding: 14px; margin-bottom: 20px;
+      text-align: left; font-size: 13px; color: #ccc;
+    }
+    .success-order-details span { display: block; margin-bottom: 5px; }
+    .success-btn {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 30px; padding: 15px 24px;
+      font-size: 15px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer;
+      width: 100%; transition: all 0.2s; font-family: inherit;
+      box-shadow: 0 6px 20px rgba(212,175,55,0.35);
+    }
+    .success-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.5); }
+
+    #toastContainer { position: fixed; bottom: 30px; right: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast {
+      background: #141414; border: 1px solid rgba(212,175,55,0.3); color: #fff;
+      padding: 14px 20px; border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.6);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 600;
+      animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards;
+      pointer-events: auto; max-width: 300px;
+    }
+    .toast.success { border-color: #d4af37; box-shadow: 0 10px 28px rgba(212,175,55,0.3); }
+    .toast.error { border-color: #ff4d4d; box-shadow: 0 10px 28px rgba(255,77,77,0.3); }
+    .toast.info { border-color: #888; box-shadow: 0 10px 28px rgba(136,136,136,0.2); }
+    .toast-icon { font-size: 20px; }
+    @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+    @media (max-width:400px) { #toastContainer { bottom: 16px; right: 10px; } }
+
+    .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 2001; }
+    .confetti-piece { position: absolute; width: 10px; height: 10px; opacity: 0.9; animation: confettiFall linear forwards; }
+    @keyframes confettiFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+    .custom-alert-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3000; padding: 20px; backdrop-filter: blur(6px);
+    }
+    .custom-alert-box {
+      background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.25); border-radius: 22px;
+      padding: 30px 25px; max-width: 360px; width: 100%; text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.08);
+      animation: modalFadeIn 0.25s ease;
+    }
+    @keyframes modalFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .custom-alert-icon { font-size: 46px; margin-bottom: 10px; }
+    .custom-alert-title { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .custom-alert-message { font-size: 14px; color: #999; margin-bottom: 20px; line-height: 1.5; }
+    .custom-alert-btn {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border: none; border-radius: 30px; padding: 12px 24px;
+      font-size: 14px; font-weight: 800; cursor: pointer; min-width: 120px;
+      transition: all 0.2s; font-family: inherit;
+    }
+    .custom-alert-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(212,175,55,0.4); }
+    .custom-alert-btn.secondary { background: #1f1f1f; color: #fff; margin-left: 10px; border: 1px solid #2a2a2a; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-brand">
+      <span class="site-brand-icon">💳</span>
+      <span class="site-brand-name">Card Seller</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-text-section">
+      <div class="hero-eyebrow">✨ Selling Credit Cards ✨</div>
+      <h1 class="hero-headline">
+        Swipe In Style.
+        <span class="gold-line">Own The Moment.</span>
+      </h1>
+      <p class="hero-sub">
+        Unlock exclusive high-balance credit cards tailored for the elite. Experience massive spending limits and premium luxury that speaks for your success.
+      </p>
+      <div class="hero-trust">
+        <span><span class="trust-emoji">💳</span> Credit Card's</span>
+        <span class="trust-dot">•</span>
+        <span><span class="trust-emoji">⚡</span> Instant Delivery</span>
+        <span class="trust-dot">•</span>
+        <span><span class="trust-emoji">💎</span> High Budget Card's</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-number" data-count="12487">0</span>
+          <span class="stat-label">Cards Sold</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="9876">0</span>
+          <span class="stat-label">Happy Buyers</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-number" data-count="4.9" data-decimal="1">0</span>
+          <span class="stat-label">Avg Rating</span>
+        </div>
+      </div>
+      <button class="hero-cta-btn" id="heroCtaBtn">Buy Card's <span class="shop-arrow">→</span></button>
+    </section>
+
+    <section class="why-trust-section">
+      <h2>Why Trust Us?</h2>
+      <p class="why-trust-sub">Thousands choose us every month for a reason</p>
+      <div class="trust-features">
+        <div class="trust-feature-card"><div class="tf-icon">🎯</div><div class="tf-label">10,000+</div><div class="tf-value">Happy Customers</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">✅</div><div class="tf-label">100% Verified</div><div class="tf-value">Genuine Cards</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">⚡</div><div class="tf-label">60 Seconds</div><div class="tf-value">Instant Delivery</div></div>
+        <div class="trust-feature-card"><div class="tf-icon">🔒</div><div class="tf-label">100% Secure</div><div class="tf-value">Encrypted Payment</div></div>
+      </div>
+    </section>
+
+    <div class="pulse-feed">
+      <div class="pulse-header">
+        <div class="pulse-title"><span class="pulse-live-dot"></span> LIVE PURCHASES</div>
+      </div>
+      <div class="pulse-list" id="pulseList"></div>
+    </div>
+
+    <div class="heading-row">
+      <h1>Buy Card's</h1>
+      <p>Tap any card to flip & see details</p>
+    </div>
+
+    <div class="product-trust-row">
+      <span class="ptr-item"><span class="ptr-icon">🔒</span> SSL Secured</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">🛡️</span> 100% Safe</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">⚡</span> Instant Delivery</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">✓</span> Verified Seller</span>
+      <span class="ptr-divider">·</span>
+      <span class="ptr-item"><span class="ptr-icon">💯</span> Genuine Cards</span>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <section class="reviews-section">
+      <div class="reviews-header">
+        <div class="heading-row">
+          <h1>Trusted by Thousands</h1>
+          <p>What our customers say after buying</p>
+        </div>
+        <button class="write-review-btn" id="writeReviewBtn">✍️ Write a Review</button>
+      </div>
+      <div class="reviews-grid" id="reviewsGrid"></div>
+
+      <div class="load-more-reviews-wrapper">
+        <button class="load-more-reviews-btn" id="loadMoreReviewsBtn">
+          <span class="lm-icon">📖</span>
+          <span class="lm-text" id="loadMoreText">More + 7,865 Reviews</span>
+          <span class="lm-arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#" id="privacyLink">Privacy Policy</a>
+      <span class="footer-divider">·</span>
+      <a href="#" id="termsLink">Terms of Service</a>
+      <span class="footer-divider">·</span>
+      <a href="mailto:Support@Cardsaller.com">Contact</a>
+    </div>
+    <div class="copyright">© 2026 Card Seller. All rights reserved.</div>
+  </footer>
+
+  <div class="modal-overlay" id="productOverlay">
+    <div class="modal">
+      <button class="modal-close" id="productClose">&times;</button>
+      <div class="modal-body">
+        <div class="modal-card-wrap" id="modalCardWrap"><div class="modal-card-inner" id="modalCardInner"></div></div>
+        <div class="flip-hint">↻ Tap card to flip</div>
+        <h3 class="modal-title" id="modalName">Card</h3>
+        <p class="modal-tagline" id="modalTagline">Tagline</p>
+        <div class="modal-meta">
+          <span class="modal-price" id="modalPrice">₹499</span>
+          <span class="modal-rating" id="modalRating"></span>
+        </div>
+        <div class="modal-material" id="modalMaterial">MATTE FINISH</div>
+        <p class="modal-description" id="modalDescription">Description</p>
+        <div class="qty-row">
+          <button id="qtyMinus">−</button>
+          <span id="qtyValue">1</span>
+          <button id="qtyPlus">+</button>
+        </div>
+        <button class="modal-buy-btn" id="modalBuyBtn">⚡ Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="orderOverlay">
+    <div class="modal order-modal">
+      <button class="modal-close" id="orderClose">&times;</button>
+      <div class="modal-body">
+        <div class="checkout-header">
+          <span class="checkout-eyebrow">CHECKOUT</span>
+          <h3 class="checkout-title">Complete Your Order</h3>
+          <p class="checkout-subtitle">Confirm your card details and shipping information</p>
+        </div>
+        <div class="mini-card-preview" id="miniCardPreview"></div>
+        <div class="section-divider"><span>ORDER SUMMARY</span></div>
+        <div class="order-summary-card">
+          <div class="summary-row"><span class="summary-label">Card</span><span class="summary-value" id="summaryDesign">—</span></div>
+          <div class="summary-row"><span class="summary-label">Material</span><span class="summary-value" id="summaryMaterial">—</span></div>
+          <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-value" id="summaryQty">1</span></div>
+          <div class="summary-divider"></div>
+          <div class="summary-row total-row"><span class="summary-label-total">TOTAL</span><span class="summary-value-total" id="summaryTotal">₹0</span></div>
+        </div>
+        <div class="section-divider"><span>YOUR DETAILS</span></div>
+        <form class="order-form" id="orderForm">
+          <div class="field-group"><label>Full Name</label><input type="text" id="orderName" placeholder="John Smith" required /></div>
+          <div class="field-group"><label>WhatsApp Number</label><input type="tel" id="orderPhone" placeholder="+91 98765 43210" required /></div>
+          <button type="submit" class="order-btn-premium"><span>💳</span> Proceed to Payment</button>
+          <div class="trust-badges">
+            <span>🔒 Secure</span><span class="dot">·</span><span>⚡ Fast</span><span class="dot">·</span><span>✓ Genuine</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="paymentOverlay">
+    <div class="modal order-modal">
+      <button class="modal-close" id="paymentClose">&times;</button>
+      <div class="modal-body">
+        <div class="checkout-header">
+          <span class="checkout-eyebrow">PAYMENT</span>
+          <h3 class="checkout-title">Scan & Pay</h3>
+          <p class="checkout-subtitle">Complete payment and enter your transaction ID</p>
+        </div>
+        <div class="payment-total-card">
+          <div class="payment-total-label">ORDER TOTAL</div>
+          <div class="payment-total-amount" id="paymentAmount">₹0</div>
+          <div class="payment-total-design" id="paymentDesign">—</div>
+        </div>
+        <div class="section-divider"><span>SCAN QR CODE</span></div>
+        <div class="qr-container"><img id="qrCodeImage" src="qr-code.png" alt="Payment QR Code" /></div>
+        <p class="qr-hint">Scan with any <strong>UPI app</strong> to pay</p>
+        <div class="section-divider"><span>ENTER TRANSACTION ID</span></div>
+        <div class="field-group"><label>Transaction ID</label><input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="15" autocomplete="off" /></div>
+        <button class="order-btn-premium" id="confirmPaymentBtn"><span>🔒</span> Confirm Payment</button>
+        <div class="trust-badges">
+          <span>🔒 100% Secure</span><span class="dot">·</span><span>📦 Fast Delivery</span><span class="dot">·</span><span>🛡️ 100% Privacy</span>
+        </div>
+        <p style="text-align:center; font-size:10px; color:#666; margin-top:8px; letter-spacing:0.3px;">
+          🔐 Your details are 100% private. Instant confirmation on WhatsApp.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="reviewOverlay">
+    <div class="modal review-modal">
+      <button class="modal-close" id="reviewClose">&times;</button>
+      <div class="modal-body">
+        <div class="checkout-header" style="margin-bottom: 20px;">
+          <span class="checkout-eyebrow">SHARE YOUR EXPERIENCE</span>
+          <h3 class="checkout-title">Write a Review</h3>
+          <p class="checkout-subtitle">Help others by sharing your honest experience</p>
+        </div>
+        <form id="reviewForm">
+          <div class="review-form-group">
+            <label>Your Photo (Optional)</label>
+            <div class="photo-upload-row">
+              <div class="photo-upload-area" id="photoUploadArea">
+                <span class="plus-icon" id="photoPlusIcon">+</span>
+                <button type="button" class="photo-remove-btn" id="photoRemoveBtn" title="Remove photo">×</button>
+              </div>
+              <div class="photo-upload-hint">
+                <span class="primary">Add your photo</span>
+                <span class="secondary">Tap to open gallery 📷</span>
+              </div>
+            </div>
+            <input type="file" id="reviewPhotoInput" accept="image/*" style="display: none;" />
+          </div>
+          <div class="review-form-group"><label>Your Name</label><input type="text" id="reviewName" placeholder="e.g. Arjun Singh" required maxlength="30" /></div>
+          <div class="review-form-group"><label>Your City</label><input type="text" id="reviewLocation" placeholder="e.g. Mumbai" required maxlength="20" /></div>
+          <div class="review-form-group">
+            <label>Which Card Did You Buy?</label>
+            <select id="reviewCard" required>
+              <option value="">-- Select Card --</option>
+              <option>American Express Gold</option>
+              <option>Metro Signature</option>
+              <option>Sunrise Elite</option>
+              <option>Pacific Infinite</option>
+              <option>Liberty Reserve</option>
+            </select>
+          </div>
+          <div class="review-form-group">
+            <label>Your Rating</label>
+            <div class="star-selector" id="starSelector">
+              <button type="button" class="star-btn" data-star="1">★</button>
+              <button type="button" class="star-btn" data-star="2">★</button>
+              <button type="button" class="star-btn" data-star="3">★</button>
+              <button type="button" class="star-btn" data-star="4">★</button>
+              <button type="button" class="star-btn" data-star="5">★</button>
+              <span class="star-selector-label" id="starLabel">Select rating</span>
+            </div>
+          </div>
+          <div class="review-form-group"><label>Your Review</label><textarea id="reviewText" placeholder="Share your experience with the card, delivery, and service..." required maxlength="250"></textarea></div>
+          <button type="submit" class="review-submit-btn"><span>✨</span> Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="networkErrorOverlay">
+    <div class="modal" style="max-width: 380px;">
+      <button class="modal-close" id="networkErrorClose">&times;</button>
+      <div class="network-error-modal">
+        <div class="network-error-icon" id="networkErrorIcon">📡</div>
+        <div class="network-error-title" id="networkErrorTitle">Connection Issue</div>
+        <div class="network-error-message" id="networkErrorMessage">Unable to load reviews. Please check your connection.</div>
+        <div class="network-error-details">
+          <span class="dot-pulse" id="networkErrorDot"></span>
+          <span id="networkErrorDetails">Checking connection...</span>
+        </div>
+        <button class="network-retry-btn" id="networkRetryBtn"><span>🔄</span> Retry Loading Reviews</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="moreStatsOverlay">
+    <div class="modal" style="max-width: 360px;">
+      <button class="modal-close" id="moreStatsClose">&times;</button>
+      <div class="more-stats-modal">
+        <div class="more-stats-icon">👍</div>
+        <div class="more-stats-number" id="moreStatsNumber">5,788+</div>
+        <div class="more-stats-label">People Found This Helpful</div>
+        <div class="more-stats-divider"></div>
+        <div class="more-stats-badge">🛡️ Trusted by Verified Buyers</div>
+        <div class="more-stats-message">Join thousands of satisfied customers who trust this seller. Every review comes from a real purchase.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="legalOverlay">
+    <div class="modal" style="max-width: 500px;">
+      <button class="modal-close" id="legalClose">&times;</button>
+      <div class="modal-body">
+        <h3 class="modal-title" id="legalTitle" style="margin-bottom: 16px; text-align: left;">Privacy Policy</h3>
+        <div class="legal-content" id="legalContent" style="color: #999; font-size: 13px; line-height: 1.7; text-align: left;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-modal">
+      <div class="success-checkmark">
+        <svg viewBox="0 0 52 52" style="width:100%; height:100%;">
+          <circle class="success-checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="success-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+      </div>
+      <div class="success-title">Order Placed Successfully</div>
+      <div class="success-message">Thank you! We'll contact you shortly to confirm your order.</div>
+      <div class="success-tracking">
+        <span class="st-dot"></span>
+        <span>Your card details will be sent within 30 seconds</span>
+      </div>
+      <div class="success-order-details" id="successOrderDetails" style="display:none;"></div>
+      <button class="success-btn" id="successCloseBtn">Continue Shopping</button>
+    </div>
+    <div class="confetti-container" id="confettiContainer"></div>
+  </div>
+
+  <div id="toastContainer"></div>
+  <div class="live-notif-container" id="liveNotifContainer"></div>
+
+  <script>
+    (function() {
+      function createOverlay() {
+        var o = document.createElement('div');
+        o.className = 'custom-alert-overlay';
+        document.body.appendChild(o);
+        return o;
+      }
+      window.alert = function(message) {
+        var overlay = createOverlay();
+        var box = document.createElement('div');
+        box.className = 'custom-alert-box';
+        box.innerHTML = '<div class="custom-alert-icon">✨</div><div class="custom-alert-title">Message</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
+        overlay.appendChild(box);
+        document.body.style.overflow = 'hidden';
+        document.getElementById('caOk').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; });
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; } });
+      };
+      window.confirm = function(message) {
+        return new Promise(function(resolve) {
+          var overlay = createOverlay();
+          var box = document.createElement('div');
+          box.className = 'custom-alert-box';
+          box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
+          overlay.appendChild(box);
+          document.body.style.overflow = 'hidden';
+          document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(true); });
+          document.getElementById('ccCancel').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(false); });
+          overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; resolve(false); } });
+        });
+      };
+    })();
+
+    var designs = [
+      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92 },
+      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78 },
+      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85 },
+      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71 },
+      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88 }
+    ];
+
+    // --- REVIEWS DATA ---
+    // YouTubers ke reviews sabse upar (isYouTuber: true), ab avatar images ke saath
+    var reviewsData = [
+      // YOUTUBER REVIEWS (TOP) - avatar images with youtuber1-5.png
+      {
+        name: 'Total Gaming',
+        avatar: 'reviews/youtuber1.png',
+        location: 'Gujarat',
+        time: '9 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥',
+        rating: 4.5,
+        helpful: 1247,
+        moreCount: 8932,
+        isYouTuber: true
+      },
+      {
+        name: 'Tonde Gamer',
+        avatar: 'reviews/youtuber2.png',
+        location: 'Nepal',
+        time: '17 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯',
+        rating: 4.9,
+        helpful: 2156,
+        moreCount: 12480,
+        isYouTuber: true
+      },
+      {
+        name: 'Gyan Gaming',
+        avatar: 'reviews/youtuber3.png',
+        location: 'Kolkata',
+        time: '28 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍',
+        rating: 4.1,
+        helpful: 876,
+        moreCount: 5432,
+        isYouTuber: true
+      },
+      {
+        name: 'Lokesh Gamer',
+        avatar: 'reviews/youtuber4.png',
+        location: 'Hyderabad',
+        time: '7 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀',
+        rating: 5,
+        helpful: 1876,
+        moreCount: 9543,
+        isYouTuber: true
+      },
+      {
+        name: 'Sooneeta',
+        avatar: 'reviews/youtuber5.png',
+        location: 'Nepal',
+        time: '21 days ago',
+        purchased: 'Purchased: All Cards',
+        comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊',
+        rating: 4.3,
+        helpful: 654,
+        moreCount: 3421,
+        isYouTuber: true
+      },
+      // NORMAL REVIEWS
+      { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'Purchased: American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
+      { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Purchased: Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
+      { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Purchased: Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
+      { name: 'Pilu Tonde', avatar: 'reviews/review4.png', location: 'Pune', time: '1 month ago', purchased: 'Purchased: Sunrise Elite', comment: 'Card ke balance se Free Fire mein weekly membership li. Achha hai par delivery mein thoda time laga. Baaki sab badhiya 👍', rating: 4, helpful: 23, moreCount: 654, sellerReply: 'Thanks Pilu bhai! Next order mein fast delivery ka promise 🙏' },
+      { name: 'Ramu Gamer', avatar: 'reviews/review5.png', location: 'Hyderabad', time: '2 months ago', purchased: 'Purchased: Liberty Reserve', comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai. Paisa vasool 🔥🔥', rating: 5, helpful: 67, moreCount: 2135 },
+      { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'Purchased: American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
+    ];
+
+    var currentDesign = null;
+    var currentQty = 1;
+    var currentOrderDesign = null;
+    var currentPendingOrder = null;
+    var isFlipped = false;
+    var selectedRating = 0;
+    var selectedPhotoDataURL = null;
+
+    function showToast(message, type) {
+      var container = document.getElementById('toastContainer');
+      var toast = document.createElement('div');
+      toast.className = 'toast ' + (type || '');
+      var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
+      container.appendChild(toast);
+      setTimeout(function() { toast.remove(); }, 3000);
+    }
+
+    function getFinishClass(material) {
+      var m = (material || '').toLowerCase();
+      if (m.indexOf('matte') !== -1) return 'finish-matte';
+      if (m.indexOf('gloss') !== -1) return 'finish-gloss';
+      if (m.indexOf('gold') !== -1) return 'finish-gold';
+      if (m.indexOf('holo') !== -1) return 'finish-holo';
+      if (m.indexOf('satin') !== -1) return 'finish-satin';
+      if (m.indexOf('carbon') !== -1) return 'finish-carbon';
+      return '';
+    }
+
+    function renderStars(ratingStr) {
+      var num = parseFloat((ratingStr || '').replace(/[^0-9.]/g, '')) || 0;
+      var percent = (num / 5) * 100;
+      return '<span class="rating-stars"><span class="stars-bg">★★★★★</span><span class="stars-fill" style="width:' + percent + '%">★★★★★</span></span>';
+    }
+
+    function maskCardNumber(cardNumber) {
+      var digits = (cardNumber || '').replace(/\D/g, '');
+      if (digits.length === 15) return '•••• ••••• ' + digits.slice(-5);
+      return '•••• •••• •••• ' + digits.slice(-4);
+    }
+
+    function holoDoveSVG() {
+      return '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M6 23 Q12 14 20 16 Q23 11 29 13 Q27 18 33 18 Q30 26 22 27 Q14 28 6 23 Z" fill="#fff" opacity="0.95"/><circle cx="22" cy="17" r="0.7" fill="#000"/></svg>';
+    }
+
+    function amexFrontHTML(design, holderName) {
+      return '<div class="cc-face cc-front cc-amex-gold"><img src="amex-gold.png" alt="American Express Gold" onload="this.classList.add(\'loaded\')" onerror="this.classList.add(\'loaded\')"></div>';
+    }
+
+    function amexBackHTML(design) {
+      return '<div class="cc-face cc-back cc-amex-gold-back">' +
+        '<div class="amex-back-frame"></div>' +
+        '<div class="amex-back-content">' +
+          '<div class="amex-back-top-strip">' +
+            '<span>U.S. Patent Nos. 6,339,688; 6,509,582</span>' +
+            '<span class="amex-top-right">AMEX</span>' +
+          '</div>' +
+          '<div class="amex-back-magstripe"></div>' +
+          '<div class="amex-back-sig-labels">' +
+            '<span>AUTHORIZED SIGNATURE</span>' +
+            '<span>NOT VALID UNLESS SIGNED</span>' +
+          '</div>' +
+          '<div class="amex-back-sig-area">' +
+            '<div class="amex-back-sig-strip"></div>' +
+            '<div class="amex-back-cvv-box">' +
+              '<div class="amex-back-cvv-num">' + design.cvv + '</div>' +
+              '<div class="amex-back-cvv-label">CVV2</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="amex-back-cs-row">' +
+            '<div class="amex-back-cs-info">' +
+              '<div>americanexpress.com</div>' +
+            '</div>' +
+            '<div class="amex-back-nontransferable">NOT TRANSFERABLE</div>' +
+          '</div>' +
+          '<div class="amex-back-bottom">' +
+            '<div class="amex-back-logo">' +
+              '<span class="amex-logo-line1">AMERICAN</span>' +
+              '<span class="amex-logo-line2">EXPRESS</span>' +
+            '</div>' +
+            '<div class="amex-back-legal">' +
+              'This card is issued by American Express Banking Corp. © 2023 American Express Company. All rights reserved.' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function visaFrontHTML(design, holderName) {
+      return '<div class="cc-face cc-front" style="background:' + design.gradient + '">' +
+        '<div class="cc-glow" style="background: radial-gradient(circle at 78% 18%, ' + design.accent + '55, transparent 62%)"></div>' +
+        '<div class="cc-sheen"></div>' +
+        '<div class="cc-tier-wm">' + design.cardType + '</div>' +
+        '<div class="cc-top">' +
+          '<div class="cc-bank-row">' +
+            '<div class="cc-bank-icon">' + design.bankInitial + '</div>' +
+            '<div class="cc-bank-info">' +
+              '<div class="cc-bank">' + design.bank + '</div>' +
+              '<div class="cc-bank-type">' + design.cardType + ' · ' + design.debitCredit + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cc-contactless"><div class="cc-contactless-icon"></div></div>' +
+        '</div>' +
+        '<div class="cc-chip"></div>' +
+        '<div class="cc-number">' + maskCardNumber(design.cardNumber) + '</div>' +
+        '<div class="cc-bottom">' +
+          '<div class="cc-holder"><div class="cc-label">CARD HOLDER</div><div class="cc-value">' + holderName + '</div></div>' +
+          '<div class="cc-valid"><div class="cc-label">VALID<br/>THRU</div><div class="cc-value">' + design.expiry + '</div></div>' +
+          '<div class="cc-brand"><div class="cc-holo-sticker">' + holoDoveSVG() + '</div><div class="cc-visa">VISA</div></div>' +
+        '</div></div>';
+    }
+
+    function cardFrontHTML(design) {
+      var holderName = design.defaultName;
+      if (design.brand === 'amex') return amexFrontHTML(design, holderName);
+      return visaFrontHTML(design, holderName);
+    }
+
+    function cardBackHTML(design) {
+      if (design.brand === 'amex') return amexBackHTML(design);
+      return '<div class="cc-face cc-back" style="background:' + design.gradient + '">' +
+        '<div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div>' +
+        '<div class="cc-stripe"></div>' +
+        '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
+    }
+
+    function renderGrid() {
+      var grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      designs.forEach(function(design) {
+        var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
+        var stockLeft = Math.floor(Math.random() * 5) + 2;
+        var card = document.createElement('div');
+        card.className = 'grid-card';
+        card.setAttribute('data-id', design.id);
+        card.innerHTML =
+          '<div class="cc-preview-wrap">' +
+            '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
+          '</div>' +
+          '<div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div>' +
+          '<div class="gc-info">' +
+            '<div class="gc-name">' + design.name + '</div>' +
+            '<div class="gc-tagline">' + design.tagline + '</div>' +
+            '<div class="gc-material">' + design.material + '</div>' +
+            '<div class="gc-meta"><span class="gc-rating">' + renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span></span><span class="gc-price">' + design.price + '</span></div>' +
+            '<div class="stock-progress">' +
+              '<div class="stock-progress-top">' +
+                '<span class="stock-left">🔥 Only ' + stockLeft + ' left in stock!</span>' +
+                '<span class="stock-percent">' + design.stockPercent + '% Sold</span>' +
+              '</div>' +
+              '<div class="stock-bar-track"><div class="stock-bar-fill" style="width:0%" data-fill="' + design.stockPercent + '"></div></div>' +
+            '</div>' +
+            '<div class="gc-actions"><button class="gc-buy-btn" data-action="buy">Buy Now</button></div>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+      attachGridEvents();
+      setTimeout(function() {
+        document.querySelectorAll('.stock-bar-fill').forEach(function(bar) {
+          bar.style.width = bar.getAttribute('data-fill') + '%';
+        });
+      }, 300);
+    }
+
+    function createReviewCardHTML(review) {
+      var starsHTML = '';
+      for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
+
+      var initials = review.name.split(' ').map(function(n){return n[0];}).join('').substring(0,2).toUpperCase();
+      var avatarHTML;
+      if (review.avatar) {
+        // Agar avatar image hai, to use karo; agar fail hui to initials fallback
+        var fallbackColor = review.isYouTuber ? '#ef4444' : '#d4af37';
+        var fallbackBg = review.isYouTuber ? 'rgba(239,68,68,0.25)' : 'rgba(212,175,55,0.25)';
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:' + fallbackColor + ';font-weight:800;font-size:' + (review.isYouTuber ? '15' : '14') + 'px;background:linear-gradient(135deg, ' + fallbackBg + ' 0%, rgba(0,0,0,0.1) 100%);&quot;>' + initials + '</span>\'">';
+      } else {
+        if (review.isYouTuber) {
+          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#ef4444;font-weight:900;font-size:15px;background:linear-gradient(135deg, rgba(239,68,68,0.25) 0%, rgba(239,68,68,0.08) 100%);">' + initials + '</span>';
+        } else {
+          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;background:linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);">' + initials + '</span>';
+        }
+      }
+
+      var badgeHTML;
+      if (review.isYouTuber) {
+        badgeHTML = '<div class="review-badge youtube-badge"><span class="yt-icon">▶</span> YouTube Verified</div>';
+      } else {
+        badgeHTML = '<div class="review-badge">✓ Verified Buyer</div>';
+      }
+
+      var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
+
+      var html =
+        '<div class="review-header">' +
+          '<div class="review-avatar">' + avatarHTML + '</div>' +
+          '<div class="review-info">' +
+            '<div class="review-name">' + review.name + '</div>' +
+            badgeHTML +
+          '</div>' +
+        '</div>' +
+        '<div class="review-meta"><span>📍 ' + review.location + '</span><span class="dot">·</span><span>🕐 ' + review.time + '</span></div>' +
+        '<div class="review-purchased">📦 ' + review.purchased + '</div>' +
+        '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
+        '<div class="review-text">' + review.comment + '</div>' +
+        '<button class="review-helpful" type="button" data-helpful="' + review.helpful + '"><span class="helpful-icon">👍</span> Helpful (<span class="helpful-count">' + review.helpful.toLocaleString('en-IN') + '</span>)</button>' +
+        '<button class="review-more-btn" data-more="' + (review.moreCount || 0) + '">More <span class="arrow">+</span>' + (review.moreCount || 0).toLocaleString('en-IN') + '</button>';
+      if (review.sellerReply) {
+        html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
+      }
+      return { html: html, cardClass: cardClass };
+    }
+
+    function renderReviews() {
+      var grid = document.getElementById('reviewsGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      reviewsData.forEach(function(review) {
+        var result = createReviewCardHTML(review);
+        var card = document.createElement('div');
+        card.className = result.cardClass;
+        card.innerHTML = result.html;
+        grid.appendChild(card);
+      });
+      attachMoreButtonEvents();
+      attachHelpfulButtonEvents();
+    }
+
+    function attachGridEvents() {
+      document.querySelectorAll('.grid-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.gc-buy-btn')) return;
+          var design = designs.find(d => d.id === card.getAttribute('data-id'));
+          if (design) openProductModal(design);
+        });
+      });
+      document.querySelectorAll('.gc-buy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var design = designs.find(d => d.id === btn.closest('.grid-card').getAttribute('data-id'));
+          if (!design) return;
+          currentDesign = design;
+          currentQty = 1;
+          placeOrderDirect();
+        });
+      });
+    }
+
+    function openProductModal(design) {
+      currentDesign = design;
+      currentQty = 1;
+      isFlipped = false;
+      var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
+      var wrap = document.getElementById('modalCardWrap');
+      wrap.className = 'modal-card-wrap ' + finishClass;
+      var inner = document.getElementById('modalCardInner');
+      inner.innerHTML = cardFrontHTML(design) + cardBackHTML(design);
+      wrap.classList.remove('flipped');
+      document.getElementById('modalName').textContent = design.name;
+      document.getElementById('modalTagline').textContent = design.tagline;
+      document.getElementById('modalPrice').textContent = design.price;
+      document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
+      document.getElementById('modalMaterial').textContent = design.material;
+      document.getElementById('modalDescription').textContent = design.description;
+      document.getElementById('qtyValue').textContent = '1';
+      document.getElementById('productOverlay').style.display = 'flex';
+    }
+
+    function placeOrderDirect() {
+      if (!currentDesign) return;
+      currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material };
+      var previewEl = document.getElementById('miniCardPreview');
+      var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
+      previewEl.className = 'mini-card-preview ' + finishClass;
+      previewEl.innerHTML = cardFrontHTML(currentDesign);
+      document.getElementById('summaryDesign').textContent = currentDesign.name;
+      document.getElementById('summaryMaterial').textContent = currentDesign.material;
+      document.getElementById('summaryQty').textContent = currentQty;
+      var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0;
+      var total = Math.round(priceNum * currentQty);
+      document.getElementById('summaryTotal').textContent = '₹' + total;
+      document.getElementById('productOverlay').style.display = 'none';
+      document.getElementById('orderOverlay').style.display = 'flex';
+      document.getElementById('orderName').value = '';
+      document.getElementById('orderPhone').value = '';
+    }
+
+    function placeOrderFromForm(e) {
+      e.preventDefault();
+      var customerName = document.getElementById('orderName').value.trim();
+      var whatsapp = document.getElementById('orderPhone').value.trim();
+      var nameRegex = /^[a-zA-Z\s]{3,}$/;
+      if (!nameRegex.test(customerName)) { alert('Please enter a valid full name (minimum 3 letters, no numbers or special characters).'); return; }
+      var phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
+      if (!phoneRegex.test(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).'); return; }
+      currentPendingOrder = {
+        id: Date.now().toString(), designName: currentOrderDesign.name, price: currentOrderDesign.price,
+        qty: currentOrderDesign.qty, material: currentOrderDesign.material,
+        customerName: customerName, whatsapp: whatsapp, timestamp: Date.now()
+      };
+      var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0;
+      var total = Math.round(priceNum * currentOrderDesign.qty);
+      document.getElementById('paymentAmount').textContent = '₹' + total;
+      document.getElementById('paymentDesign').textContent = currentOrderDesign.name + ' × ' + currentOrderDesign.qty;
+      document.getElementById('transactionId').value = '';
+      document.getElementById('orderOverlay').style.display = 'none';
+      document.getElementById('paymentOverlay').style.display = 'flex';
+    }
+
+    function confirmPayment() {
+      var txnId = document.getElementById('transactionId').value.trim();
+      var txnRegex = /^(\d{12}|UPI\d{12})$/;
+      if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. Please check and try again.'); return; }
+      currentPendingOrder.transactionId = txnId;
+      document.getElementById('paymentOverlay').style.display = 'none';
+      showToast('Payment confirmed!', 'success');
+      showSuccessModal(currentPendingOrder);
+      playOrderSound();
+    }
+
+    function showSuccessModal(order) {
+      var modal = document.getElementById('successOverlay');
+      var detailsContainer = document.getElementById('successOrderDetails');
+      var html = '';
+      html += '<span>💳 ' + order.designName + ' × ' + order.qty + ' — ' + order.price + '</span>';
+      html += '<span>🎨 ' + order.material + '</span>';
+      if (order.transactionId) html += '<span>✅ Txn ID: ' + order.transactionId + '</span>';
+      html += '<span>📱 WhatsApp: ' + order.whatsapp + '</span>';
+      detailsContainer.innerHTML = html;
+      detailsContainer.style.display = 'block';
+      modal.style.display = 'flex';
+      spawnConfetti();
+    }
+
+    function spawnConfetti() {
+      var container = document.getElementById('confettiContainer');
+      container.innerHTML = '';
+      var colors = ['#d4af37', '#f5d76e', '#ffcc00', '#b8941f', '#f7e7a1', '#e8c960'];
+      for (var i = 0; i < 70; i++) {
+        var piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        piece.style.animationDelay = Math.random() * 0.5 + 's';
+        piece.style.width = (Math.random() * 8 + 6) + 'px';
+        piece.style.height = (Math.random() * 8 + 6) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        container.appendChild(piece);
+      }
+      setTimeout(function() { container.innerHTML = ''; }, 4000);
+    }
+
+    function playOrderSound() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var o1 = ctx.createOscillator(); var o2 = ctx.createOscillator(); var g = ctx.createGain();
+        o1.type = 'sine'; o1.frequency.setValueAtTime(880, ctx.currentTime);
+        o2.type = 'sine'; o2.frequency.setValueAtTime(1320, ctx.currentTime + 0.1);
+        g.gain.setValueAtTime(0.08, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
+        o1.connect(g); o2.connect(g); g.connect(ctx.destination);
+        o1.start(); o2.start(ctx.currentTime + 0.1);
+        o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2);
+      } catch(e) {}
+    }
+
+    document.getElementById('heroCtaBtn').addEventListener('click', function() {
+      document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.getElementById('modalCardWrap').addEventListener('click', function() {
+      this.classList.toggle('flipped');
+      isFlipped = this.classList.contains('flipped');
+    });
+
+    document.getElementById('qtyMinus').addEventListener('click', function() { if (currentQty > 1) currentQty--; document.getElementById('qtyValue').textContent = currentQty; });
+    document.getElementById('qtyPlus').addEventListener('click', function() {
+      if (currentQty < 10) { currentQty++; document.getElementById('qtyValue').textContent = currentQty; }
+      else { showToast('Maximum 10 cards allowed per order', 'error'); }
+    });
+
+    document.getElementById('modalBuyBtn').addEventListener('click', placeOrderDirect);
+    document.getElementById('productClose').addEventListener('click', function() { document.getElementById('productOverlay').style.display = 'none'; });
+    document.getElementById('productOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+
+    document.getElementById('orderClose').addEventListener('click', function() { document.getElementById('orderOverlay').style.display = 'none'; });
+    document.getElementById('orderOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('orderForm').addEventListener('submit', placeOrderFromForm);
+
+    document.getElementById('paymentClose').addEventListener('click', function() { document.getElementById('paymentOverlay').style.display = 'none'; });
+    document.getElementById('paymentOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('confirmPaymentBtn').addEventListener('click', confirmPayment);
+    document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^0-9UPI]/g, ''); });
+
+    document.getElementById('successCloseBtn').addEventListener('click', function() {
+      document.getElementById('successOverlay').style.display = 'none';
+      document.getElementById('confettiContainer').innerHTML = '';
+    });
+    document.getElementById('successOverlay').addEventListener('click', function(e) {
+      if (e.target === this) { this.style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; }
+    });
+
+    function animateCounters() {
+      document.querySelectorAll('.stat-number').forEach(function(el) {
+        var target = parseFloat(el.getAttribute('data-count'));
+        var decimals = parseInt(el.getAttribute('data-decimal')) || 0;
+        var duration = 1800;
+        var startTime = null;
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var current = target * progress;
+          if (decimals > 0) el.textContent = current.toFixed(decimals);
+          else el.textContent = Math.floor(current).toLocaleString('en-IN');
+          if (progress < 1) requestAnimationFrame(step);
+          else {
+            if (decimals > 0) el.textContent = target.toFixed(decimals);
+            else el.textContent = Math.floor(target).toLocaleString('en-IN') + '+';
+          }
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    var firstNames = [
+      'Aarav', 'Vivaan', 'Aditya', 'Vihaan', 'Arjun', 'Sai', 'Reyansh', 'Ayaan', 'Krishna', 'Ishaan',
+      'Rohan', 'Karan', 'Rahul', 'Amit', 'Vikram', 'Raj', 'Suraj', 'Deepak', 'Manish', 'Ankit',
+      'Ravi', 'Sunil', 'Nikhil', 'Harsh', 'Yash', 'Dev', 'Kartik', 'Pranav', 'Rudra', 'Shaurya',
+      'Anjali', 'Priya', 'Sneha', 'Neha', 'Pooja', 'Riya', 'Simran', 'Kavita', 'Divya', 'Meera',
+      'Aditi', 'Nisha', 'Sakshi', 'Tanvi', 'Ishita', 'Aisha', 'Ananya', 'Diya', 'Kritika', 'Sanya'
+    ];
+
+    var surnames = [
+      'Sharma', 'Verma', 'Yadav', 'Patel', 'Khan', 'Singh', 'Gupta', 'Agarwal', 'Jain', 'Mehta',
+      'Shah', 'Reddy', 'Nair', 'Iyer', 'Rao', 'Kumar', 'Chauhan', 'Rathore', 'Mishra', 'Tiwari',
+      'Pandey', 'Joshi', 'Desai', 'Kapoor', 'Malhotra', 'Chopra', 'Sinha', 'Bose', 'Das', 'Roy',
+      'Thakur', 'Kaur', 'Saxena', 'Bansal', 'Garg', 'Ahuja', 'Khanna', 'Bhatia', 'Sethi', 'Dutta'
+    ];
+
+    var cities = [
+      'Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata',
+      'Ahmedabad', 'Lucknow', 'Indore', 'Bhopal', 'Chandigarh', 'Surat', 'Nagpur', 'Varanasi',
+      'Ranchi', 'Patna', 'Kanpur', 'Coimbatore', 'Visakhapatnam', 'Goa', 'Agra', 'Amritsar',
+      'Dehradun', 'Noida', 'Gurgaon', 'Kochi', 'Mysore', 'Udaipur', 'Jodhpur', 'Raipur',
+      'Guwahati', 'Bhubaneswar', 'Ludhiana', 'Jalandhar', 'Nashik', 'Aurangabad', 'Vadodara', 'Rajkot'
+    ];
+
+    var notifContainer = document.getElementById('liveNotifContainer');
+
+    // --- PULSE FEED LOGIC (SYNCHRONIZED WITH POPUP) ---
+    var usedPulseKeys = [];
+
+    function generatePulseBuyer() {
+      var attempts = 0;
+      while (attempts < 50) {
+        var fn = firstNames[Math.floor(Math.random() * firstNames.length)];
+        var ln = surnames[Math.floor(Math.random() * surnames.length)];
+        var city = cities[Math.floor(Math.random() * cities.length)];
+        var key = fn + '|' + ln + '|' + city;
+        if (usedPulseKeys.indexOf(key) === -1) {
+          usedPulseKeys.push(key);
+          if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
+          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city };
+        }
+        attempts++;
+      }
+      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi' };
+    }
+
+    function getCardThumbStyle(design) {
+      if (design.brand === 'amex') {
+        return "background-image: url('amex-gold.png'); background-size: cover; background-position: center;";
+      }
+      return "background: " + design.gradient + ";";
+    }
+
+    function formatTimeAgo(timestamp) {
+      var diffMins = Math.floor((Date.now() - timestamp) / 60000);
+      if (diffMins < 1) return 'Just now';
+      if (diffMins === 1) return '1 min ago';
+      return diffMins + ' mins ago';
+    }
+
+    function createPulseItemHTML(buyer, design, timestamp) {
+      var thumbStyle = getCardThumbStyle(design);
+      var timeStr = formatTimeAgo(timestamp);
+
+      return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
+        '<div class="pulse-avatar-wrap">' +
+          '<div class="pulse-avatar">' + buyer.initials.toUpperCase() + '</div>' +
+          '<div class="pulse-check">✓</div>' +
+        '</div>' +
+        '<div class="pulse-content">' +
+          '<div class="pulse-text"><strong>' + buyer.name + '</strong> from ' + buyer.city + ' just bought <span class="card-name">' + design.name + '</span></div>' +
+          '<div class="pulse-meta">' +
+            '<span class="pulse-price">' + design.price + '</span> &bull; ' +
+            '<span class="pulse-balance">Balance: ' + design.balance + '</span> &bull; ' +
+            '<span class="pulse-time-text">' + timeStr + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pulse-card-thumb" style="' + thumbStyle + '"></div>' +
+      '</div>';
+    }
+
+    function addLiveNotification(buyer, design, timestamp) {
+      var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
+      var initials = buyer.initials;
+      var timeStr = formatTimeAgo(timestamp);
+
+      var notif = document.createElement('div');
+      notif.className = 'live-notif';
+      notif.innerHTML =
+        '<div class="notif-card-badge">💳 Card Purchased</div>' +
+        '<div class="notif-row">' +
+          '<div class="notif-avatar">' + initials.toUpperCase() + '</div>' +
+          '<div class="notif-content">' +
+            '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
+            'bought ' + design.name +
+            '<span class="notif-time">🕐 ' + timeStr + '</span>' +
+          '</div>' +
+        '</div>';
+      notifContainer.appendChild(notif);
+      setTimeout(function() { notif.remove(); }, 6500);
+    }
+
+    function addPulseItem(buyer, design, timestamp) {
+      var list = document.getElementById('pulseList');
+      if (!list) return;
+
+      var itemHTML = createPulseItemHTML(buyer, design, timestamp);
+      list.insertAdjacentHTML('afterbegin', itemHTML);
+
+      while (list.children.length > 3) {
+        list.removeChild(list.lastElementChild);
+      }
+    }
+
+    function triggerRandomPurchase() {
+      var buyer = generatePulseBuyer();
+      var design = designs[Math.floor(Math.random() * designs.length)];
+      var timestamp = Date.now();
+
+      addLiveNotification(buyer, design, timestamp);
+      addPulseItem(buyer, design, timestamp);
+
+      var delay = 8000 + Math.random() * 7000;
+      setTimeout(triggerRandomPurchase, delay);
+    }
+
+    function updateNotificationTimes() {
+      var items = document.querySelectorAll('.pulse-item');
+      items.forEach(function(item) {
+        var ts = parseInt(item.getAttribute('data-timestamp'));
+        if (!ts) return;
+        var timeSpan = item.querySelector('.pulse-time-text');
+        if (timeSpan) {
+          timeSpan.textContent = formatTimeAgo(ts);
+        }
+      });
+    }
+    setInterval(updateNotificationTimes, 30000);
+
+    setTimeout(function() {
+      triggerRandomPurchase();
+    }, 4000);
+
+    var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
+    var loadMoreText = document.getElementById('loadMoreText');
+    var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon');
+    var clickCount = 0;
+    var isProcessing = false;
+
+    var errorScenarios = [
+      { icon: '📡', title: 'Connection Error', titleClass: 'warning', message: 'Unable to load reviews right now. Please check your internet connection and try again.', details: 'Slow network detected', detailsColor: '#f59e0b' },
+      { icon: '⚠️', title: 'Request Timed Out', titleClass: 'danger', message: 'We couldn\'t load more reviews. Your connection may be unstable. Please try again in a moment.', details: 'Server did not respond', detailsColor: '#ef4444' },
+      { icon: '🌐', title: 'Network Unstable', titleClass: 'warning', message: 'Your network connection appears unstable. Reviews will load once the connection is restored.', details: 'Connection unstable', detailsColor: '#f59e0b' },
+      { icon: '🔌', title: 'Connection Lost', titleClass: 'danger', message: 'Please check your internet connection and retry. All reviews are safe and will load shortly.', details: 'No response from server', detailsColor: '#ef4444' },
+      { icon: '⏳', title: 'Server Busy', titleClass: 'busy', message: 'Our servers are experiencing high traffic at the moment. Please wait a moment and try again.', details: 'High traffic detected', detailsColor: '#d4af37' }
+    ];
+
+    loadMoreBtn.addEventListener('click', function() {
+      if (isProcessing) return;
+      isProcessing = true;
+      loadMoreBtn.classList.add('loading');
+      loadMoreText.textContent = 'Loading reviews...';
+      loadMoreIcon.textContent = '⏳';
+      var delay = 1800 + Math.random() * 1200;
+      setTimeout(function() {
+        loadMoreBtn.classList.remove('loading');
+        loadMoreIcon.textContent = '📖';
+        var scenarioIndex = clickCount % errorScenarios.length;
+        var scenario = errorScenarios[scenarioIndex];
+        clickCount++;
+        showNetworkError(scenario);
+        var newNumber = 7865 - Math.floor(Math.random() * 30);
+        loadMoreText.textContent = 'More + ' + newNumber.toLocaleString('en-IN') + ' Reviews';
+        isProcessing = false;
+      }, delay);
+    });
+
+    function showNetworkError(scenario) {
+      document.getElementById('networkErrorIcon').textContent = scenario.icon;
+      var titleEl = document.getElementById('networkErrorTitle');
+      titleEl.textContent = scenario.title;
+      titleEl.className = 'network-error-title ' + scenario.titleClass;
+      document.getElementById('networkErrorMessage').textContent = scenario.message;
+      var details = document.getElementById('networkErrorDetails');
+      details.textContent = scenario.details;
+      document.getElementById('networkErrorDot').style.background = scenario.detailsColor;
+      document.getElementById('networkErrorOverlay').style.display = 'flex';
+    }
+
+    document.getElementById('networkErrorClose').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; });
+    document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('networkRetryBtn').addEventListener('click', function() {
+      document.getElementById('networkErrorOverlay').style.display = 'none';
+      setTimeout(function() { loadMoreBtn.click(); }, 300);
+    });
+
+    function attachHelpfulButtonEvents() {
+      document.querySelectorAll('.review-helpful').forEach(function(btn) {
+        if (btn.dataset.helpfulAttached === '1') return;
+        btn.dataset.helpfulAttached = '1';
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          var isActive = this.classList.contains('active');
+          var countEl = this.querySelector('.helpful-count');
+          var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
+
+          if (isActive) {
+            this.classList.remove('active');
+            countEl.textContent = (currentCount - 1).toLocaleString('en-IN');
+            showToast('Removed from helpful', 'info');
+          } else {
+            this.classList.add('active');
+            countEl.textContent = (currentCount + 1).toLocaleString('en-IN');
+            showToast('Thanks for your feedback!', 'success');
+          }
+        });
+      });
+    }
+
+    var photoUploadArea = document.getElementById('photoUploadArea');
+    var photoInput = document.getElementById('reviewPhotoInput');
+    var photoPlusIcon = document.getElementById('photoPlusIcon');
+    var photoRemoveBtn = document.getElementById('photoRemoveBtn');
+
+    document.getElementById('writeReviewBtn').addEventListener('click', function() {
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      selectedPhotoDataURL = null;
+      resetPhotoUpload();
+      updateStarDisplay();
+      document.getElementById('starLabel').textContent = 'Select rating';
+      document.getElementById('reviewOverlay').style.display = 'flex';
+    });
+
+    document.getElementById('reviewClose').addEventListener('click', function() { document.getElementById('reviewOverlay').style.display = 'none'; });
+    document.getElementById('reviewOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+
+    photoUploadArea.addEventListener('click', function(e) {
+      if (e.target === photoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
+      photoInput.click();
+    });
+
+    photoInput.addEventListener('change', function(e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('Please select an image file.'); return; }
+      if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.'); return; }
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        selectedPhotoDataURL = ev.target.result;
+        photoUploadArea.classList.add('has-photo');
+        photoPlusIcon.style.display = 'none';
+        var oldImg = photoUploadArea.querySelector('img');
+        if (oldImg) oldImg.remove();
+        var img = document.createElement('img');
+        img.src = selectedPhotoDataURL;
+        img.alt = 'Review photo';
+        photoUploadArea.insertBefore(img, photoUploadArea.firstChild);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    photoRemoveBtn.addEventListener('click', function(e) { e.stopPropagation(); resetPhotoUpload(); photoInput.value = ''; });
+
+    function resetPhotoUpload() {
+      selectedPhotoDataURL = null;
+      photoUploadArea.classList.remove('has-photo');
+      photoPlusIcon.style.display = '';
+      var oldImg = photoUploadArea.querySelector('img');
+      if (oldImg) oldImg.remove();
+    }
+
+    document.querySelectorAll('.star-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { selectedRating = parseInt(this.getAttribute('data-star')); updateStarDisplay(); });
+      btn.addEventListener('mouseenter', function() {
+        var hoverVal = parseInt(this.getAttribute('data-star'));
+        document.querySelectorAll('.star-btn').forEach(function(b) { b.style.color = parseInt(b.getAttribute('data-star')) <= hoverVal ? '#d4af37' : '#333'; });
+      });
+      btn.addEventListener('mouseleave', function() { updateStarDisplay(); });
+    });
+
+    function updateStarDisplay() {
+      document.querySelectorAll('.star-btn').forEach(function(b) {
+        var val = parseInt(b.getAttribute('data-star'));
+        if (val <= selectedRating) { b.classList.add('active'); b.style.color = '#d4af37'; }
+        else { b.classList.remove('active'); b.style.color = '#333'; }
+      });
+      var labels = { 0: 'Select rating', 1: 'Poor 😞', 2: 'Fair 😐', 3: 'Good 🙂', 4: 'Very Good 😊', 5: 'Excellent! 🤩' };
+      document.getElementById('starLabel').textContent = labels[selectedRating] || 'Select rating';
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name = document.getElementById('reviewName').value.trim();
+      var location = document.getElementById('reviewLocation').value.trim();
+      var card = document.getElementById('reviewCard').value;
+      var text = document.getElementById('reviewText').value.trim();
+      if (!name || !location || !card || !text || selectedRating === 0) {
+        if (selectedRating === 0) alert('Please select a rating (1-5 stars).');
+        else alert('Please fill all the fields.');
+        return;
+      }
+      var newReview = {
+        name: name, avatar: selectedPhotoDataURL || null, location: location, time: 'Just now',
+        purchased: 'Purchased: ' + card, comment: text, rating: selectedRating,
+        helpful: 0, moreCount: Math.floor(Math.random() * 500) + 50
+      };
+      reviewsData.push(newReview);
+      var grid = document.getElementById('reviewsGrid');
+      var result = createReviewCardHTML(newReview);
+      var card_el = document.createElement('div');
+      card_el.className = result.cardClass;
+      card_el.innerHTML = result.html;
+      grid.appendChild(card_el);
+      attachMoreButtonEvents();
+      attachHelpfulButtonEvents();
+      document.getElementById('reviewOverlay').style.display = 'none';
+      showToast('Thank you! Your review has been posted.', 'success');
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      selectedPhotoDataURL = null;
+      resetPhotoUpload();
+      updateStarDisplay();
+      setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
+    });
+
+    document.getElementById('moreStatsClose').addEventListener('click', function() { document.getElementById('moreStatsOverlay').style.display = 'none'; });
+    document.getElementById('moreStatsOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+
+    function attachMoreButtonEvents() {
+      document.querySelectorAll('.review-more-btn').forEach(function(btn) {
+        if (btn.dataset.attached === '1') return;
+        btn.dataset.attached = '1';
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var count = parseInt(this.getAttribute('data-more')) || 0;
+          var formatted = count.toLocaleString('en-IN');
+          document.getElementById('moreStatsNumber').textContent = formatted + '+';
+          document.getElementById('moreStatsOverlay').style.display = 'flex';
+        });
+      });
+    }
+
+    var legalData = {
+      privacy: { title: 'Privacy Policy', content: '<p>We value your privacy. Your personal details (Name, WhatsApp number) are only used to process your order and deliver your card. We do not share, sell, or distribute your information to any third parties. All transactions are 100% secure.</p>' },
+      terms: { title: 'Terms of Service', content: '<p>By placing an order, you agree to provide accurate contact details. Orders are processed after successful payment verification. We reserve the right to cancel any order if suspicious activity is detected. Delivery timelines may vary based on location.</p>' }
+    };
+
+    document.getElementById('privacyLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('legalTitle').textContent = legalData.privacy.title;
+      document.getElementById('legalContent').innerHTML = legalData.privacy.content;
+      document.getElementById('legalOverlay').style.display = 'flex';
+    });
+    document.getElementById('termsLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('legalTitle').textContent = legalData.terms.title;
+      document.getElementById('legalContent').innerHTML = legalData.terms.content;
+      document.getElementById('legalOverlay').style.display = 'flex';
+    });
+    document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
+    document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+
+    renderGrid();
+    renderReviews();
+    animateCounters();
+  </script>
+</body>
+</html>
