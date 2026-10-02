@@ -25,25 +25,59 @@
 
     .site-header {
       position: sticky; top: 0; z-index: 900;
-      display: flex; align-items: center; justify-content: flex-start;
-      padding: 16px 26px;
-      background: rgba(10, 10, 10, 0.72);
+      background: rgba(10, 10, 10, 0.82);
       backdrop-filter: blur(16px) saturate(160%);
       -webkit-backdrop-filter: blur(16px) saturate(160%);
       border-bottom: 1px solid rgba(212, 175, 55, 0.12);
     }
-    .site-brand { display: flex; align-items: center; gap: 12px; cursor: default; user-select: none; }
+    .site-header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 26px;
+    }
+    .site-brand { display: flex; align-items: center; gap: 10px; cursor: default; user-select: none; }
     .site-brand-icon { font-size: 30px; line-height: 1; filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.5)); }
     .site-brand-name {
       font-family: 'Cormorant Garamond', 'Inter', serif;
       font-size: 30px; font-weight: 700; letter-spacing: 1.2px;
       background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
+      display: inline-flex; align-items: center; gap: 6px;
     }
-    @media (max-width: 500px) {
-      .site-header { padding: 14px 16px; }
-      .site-brand-name { font-size: 24px; letter-spacing: 1px; }
-      .site-brand-icon { font-size: 24px; }
+    .verified-logo-tick {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(29,155,240,0.6), inset 0 1px 0 rgba(255,255,255,0.4);
+      margin-left: -2px;
+    }
+    .verified-logo-tick svg {
+      width: 11px; height: 11px; display: block;
+      stroke: #fff; stroke-width: 4; fill: none;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* SERVER STATUS BAR */
+    .server-status-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 6px 14px;
+      background: linear-gradient(90deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.14) 50%, rgba(34,197,94,0.08) 100%);
+      border-top: 1px solid rgba(34,197,94,0.15);
+      font-size: 10.5px; color: #86efac; font-weight: 600;
+      letter-spacing: 0.3px; flex-wrap: wrap;
+    }
+    .server-status-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: serverPulse 1.8s ease-in-out infinite;
+      box-shadow: 0 0 6px rgba(34,197,94,0.8);
+    }
+    @keyframes serverPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+    .server-status-bar .sep { color: rgba(134,239,172,0.4); font-size: 9px; }
+    @media (max-width: 600px) {
+      .server-status-bar { font-size: 9.5px; padding: 5px 10px; gap: 6px; }
     }
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
@@ -158,6 +192,43 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
+    /* TRUSTED BY ROW */
+    .trusted-by-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin: 0 0 20px; padding: 12px 18px;
+      background: linear-gradient(160deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0.02) 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 14px; flex-wrap: wrap;
+    }
+    .trusted-by-avatars {
+      display: flex; align-items: center;
+    }
+    .trusted-by-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #0d0d0d;
+      margin-left: -10px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1.5px rgba(212,175,55,0.5), 0 2px 6px rgba(0,0,0,0.5);
+      background: #1a1a1a;
+      flex-shrink: 0;
+    }
+    .trusted-by-avatar:first-child { margin-left: 0; }
+    .trusted-by-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .trusted-by-text {
+      font-size: 12px; font-weight: 600; color: #ccc;
+      letter-spacing: 0.2px;
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+      justify-content: center; text-align: center;
+    }
+    .trusted-by-text strong {
+      color: #f5d76e; font-weight: 800;
+    }
+    @media (max-width: 500px) {
+      .trusted-by-row { padding: 10px 12px; gap: 10px; }
+      .trusted-by-avatar { width: 28px; height: 28px; margin-left: -8px; }
+      .trusted-by-text { font-size: 11px; }
+    }
+
     .pulse-feed {
       margin: 0 0 24px;
       padding: 16px 20px;
@@ -209,11 +280,12 @@
     .pulse-avatar-wrap { position: relative; flex-shrink: 0; }
     .pulse-avatar {
       width: 32px; height: 32px; border-radius: 50%;
-      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));
-      color: #f5d76e; font-size: 11px; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(212,175,55,0.4);
+      overflow: hidden;
+      border: 1.5px solid rgba(212,175,55,0.6);
+      box-shadow: 0 0 8px rgba(212,175,55,0.3);
+      background: #1a1a1a;
     }
+    .pulse-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .pulse-check {
       position: absolute; bottom: -2px; right: -2px;
       width: 12px; height: 12px; border-radius: 50%;
@@ -300,6 +372,78 @@
     .grid-card:hover::before { opacity: 1; }
 
     .cc-preview-wrap { position: relative; }
+
+    /* LIVE VIEWER BADGE - top-left of card */
+    .live-viewers-badge {
+      position: absolute;
+      top: 10px; left: 10px;
+      z-index: 5;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: rgba(10, 10, 10, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(239, 68, 68, 0.6);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 12px rgba(239,68,68,0.25);
+      pointer-events: none;
+      user-select: none;
+    }
+    .live-viewers-badge .eye {
+      font-size: 10px;
+      line-height: 1;
+    }
+    .live-viewers-badge .live-pulse-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: #ef4444;
+      animation: pulseLive 1.4s ease-in-out infinite;
+    }
+    .live-viewers-badge .vcount {
+      color: #f5d76e;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.25s ease;
+    }
+    .live-viewers-badge .vcount.bump {
+      transform: scale(1.18);
+    }
+    @media (max-width: 500px) {
+      .live-viewers-badge { font-size: 9px; padding: 3px 7px; top: 8px; left: 8px; }
+    }
+
+    /* COUNTDOWN STRIP - top of card (below views) */
+    .countdown-strip {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.16) 100%);
+      border: 1px solid rgba(239,68,68,0.4);
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #fecaca;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .countdown-strip .cd-icon { font-size: 11px; }
+    .countdown-strip .cd-time {
+      font-variant-numeric: tabular-nums;
+      color: #fff;
+      background: rgba(0,0,0,0.4);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      border: 1px solid rgba(239,68,68,0.5);
+    }
+    .countdown-strip.expiring { animation: cdPulse 1.5s ease-in-out infinite; }
+    @keyframes cdPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+      50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); }
+    }
 
     .cc-preview {
       position: relative; aspect-ratio: 1.586 / 1; border-radius: 14px; overflow: hidden;
@@ -978,20 +1122,57 @@
     }
     .live-notif .notif-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
     .live-notif .notif-avatar {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.08));
-      display: flex; align-items: center; justify-content: center;
-      color: #d4af37; font-weight: 800; font-size: 11px;
+      width: 36px; height: 36px; border-radius: 50%;
+      overflow: hidden;
       flex-shrink: 0;
-      border: 1.5px solid rgba(212,175,55,0.5);
-      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+      border: 1.5px solid rgba(212,175,55,0.6);
+      box-shadow: 0 0 10px rgba(212,175,55,0.3);
+      background: #1a1a1a;
     }
+    .live-notif .notif-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .live-notif .notif-content { font-size: 11px; color: #ccc; line-height: 1.4; flex: 1; min-width: 0; }
     .live-notif .notif-content strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
     .live-notif .notif-content .notif-time { color: #22c55e; font-size: 10px; display: block; margin-top: 3px; font-weight: 600; letter-spacing: 0.2px; }
     @media (max-width: 480px) {
       .live-notif-container { left: 10px; right: 10px; top: 76px; max-width: none; }
     }
+
+    /* Review submitted notification (top-right popup, blue theme) */
+    .review-notif {
+      display: flex; flex-direction: column; gap: 0;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid rgba(29,155,240,0.45);
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12);
+      animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
+      pointer-events: auto;
+      overflow: hidden;
+    }
+    .review-notif .notif-card-badge {
+      background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
+    }
+
+    /* Welcome Back Toast (top-right) */
+    .welcome-back-toast {
+      display: flex; align-items: center; gap: 12px;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid rgba(34,197,94,0.5);
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(34,197,94,0.15);
+      animation: notifIn 0.4s ease, notifOut 0.4s ease 5s forwards;
+      pointer-events: auto;
+      max-width: 320px;
+    }
+    .welcome-back-toast .wb-icon {
+      font-size: 22px; flex-shrink: 0;
+      filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
+    }
+    .welcome-back-toast .wb-text {
+      font-size: 12px; color: #ddd; line-height: 1.4; font-weight: 500;
+    }
+    .welcome-back-toast .wb-text strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
+    .welcome-back-toast .wb-text .wb-sub { font-size: 10px; color: #22c55e; font-weight: 600; margin-top: 2px; display: block; }
 
     .more-stats-modal { text-align: center; padding: 40px 26px; }
     .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
@@ -1399,9 +1580,19 @@
 <body>
 
   <header class="site-header">
-    <div class="site-brand">
-      <span class="site-brand-icon">💳</span>
-      <span class="site-brand-name">Card Seller</span>
+    <div class="site-header-inner">
+      <div class="site-brand">
+        <span class="site-brand-icon">💳</span>
+        <span class="site-brand-name">Card Seller <span class="verified-logo-tick" title="Verified Seller"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
+      </div>
+    </div>
+    <div class="server-status-bar">
+      <span class="server-status-dot"></span>
+      <span>All systems operational</span>
+      <span class="sep">•</span>
+      <span>99.9% uptime</span>
+      <span class="sep">•</span>
+      <span id="serverStatusLastChecked">Last checked just now</span>
     </div>
   </header>
 
@@ -1455,6 +1646,12 @@
         <div class="pulse-title"><span class="pulse-live-dot"></span> LIVE PURCHASES</div>
       </div>
       <div class="pulse-list" id="pulseList"></div>
+    </div>
+
+    <!-- TRUSTED BY ROW -->
+    <div class="trusted-by-row" id="trustedByRow">
+      <div class="trusted-by-avatars" id="trustedByAvatars"></div>
+      <div class="trusted-by-text"><strong id="trustedByCount">+8,500 buyers</strong> trust us this month</div>
     </div>
 
     <div class="heading-row">
@@ -1714,9 +1911,6 @@
   <script>
     // ============================================================
     // DAILY GROWTH SYSTEM
-    // Number har din automatically badhta hai
-    // localStorgage mein pehli visit date save hoti hai
-    // Same din = same number (deterministic)
     // ============================================================
     (function() {
       try {
@@ -1725,9 +1919,7 @@
         if (!localStorage.getItem(STORAGE_KEY)) {
           localStorage.setItem(STORAGE_KEY, todayKey);
         }
-      } catch (e) {
-        // localStorage not available, ignore
-      }
+      } catch (e) {}
     })();
 
     function initDailyGrowth() {
@@ -1735,17 +1927,12 @@
         var STORAGE_KEY = 'cardseller_first_visit';
         var todayKey = new Date().toDateString();
         var stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) {
-          localStorage.setItem(STORAGE_KEY, todayKey);
-          return 0;
-        }
+        if (!stored) { localStorage.setItem(STORAGE_KEY, todayKey); return 0; }
         var firstDate = new Date(stored);
         var todayDate = new Date(todayKey);
         var days = Math.floor((todayDate - firstDate) / 86400000);
         return days < 0 ? 0 : days;
-      } catch(e) {
-        return 0;
-      }
+      } catch(e) { return 0; }
     }
 
     var DAYS_PASSED = initDailyGrowth();
@@ -1760,10 +1947,6 @@
       return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
     }
 
-    // Cumulative growth calculation
-    // base: starting value
-    // dailyMin, dailyMax: range of daily increment
-    // seedOffset: unique per number
     function growNumber(base, dailyMin, dailyMax, seedOffset) {
       var total = base;
       if (DAYS_PASSED <= 0) return total;
@@ -1776,7 +1959,29 @@
     }
 
     // ============================================================
+    // AVATAR SYSTEM — 270+ unique real-face photos
+    // Combined: randomuser.me (200) + pravatar.cc (70)
+    // ============================================================
+    var AVATAR_TOTAL = 270;
 
+    function getAvatarUrlByIndex(idx) {
+      idx = ((idx % AVATAR_TOTAL) + AVATAR_TOTAL) % AVATAR_TOTAL;
+      if (idx < 200) {
+        // randomuser.me - 100 men + 100 women
+        var gender = (idx % 2 === 0) ? 'men' : 'women';
+        var num = Math.floor(idx / 2) + 1;
+        return 'https://randomuser.me/api/portraits/' + gender + '/' + num + '.jpg';
+      } else {
+        // pravatar.cc - 70 unique photos
+        return 'https://i.pravatar.cc/150?img=' + (idx - 200 + 1);
+      }
+    }
+
+    function getRandomAvatarUrl() {
+      return getAvatarUrlByIndex(Math.floor(Math.random() * AVATAR_TOTAL));
+    }
+
+    // ============================================================
     (function() {
       function createOverlay() {
         var o = document.createElement('div');
@@ -1810,74 +2015,19 @@
     })();
 
     var designs = [
-      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92 },
-      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78 },
-      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85 },
-      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71 },
-      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88 }
+      { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92, viewerWeight: 1.6 },
+      { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78, viewerWeight: 0.8 },
+      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85, viewerWeight: 1.1 },
+      { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71, viewerWeight: 0.9 },
+      { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88, viewerWeight: 1.3 }
     ];
 
     var reviewsData = [
-      {
-        name: 'Total Gaming',
-        avatar: 'reviews/youtuber1.png',
-        location: 'Gujarat',
-        time: '9 days ago',
-        purchased: 'All 5 Cards',
-        comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥',
-        rating: 4.5,
-        helpful: 1247,
-        moreCount: 8932,
-        isYouTuber: true
-      },
-      {
-        name: 'Tonde Gamer',
-        avatar: 'reviews/youtuber2.png',
-        location: 'Nepal',
-        time: '17 days ago',
-        purchased: 'All 5 Cards',
-        comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯',
-        rating: 4.9,
-        helpful: 2156,
-        moreCount: 12480,
-        isYouTuber: true
-      },
-      {
-        name: 'Gyan Gaming',
-        avatar: 'reviews/youtuber3.png',
-        location: 'Kolkata',
-        time: '28 days ago',
-        purchased: 'All 5 Cards',
-        comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍',
-        rating: 4.1,
-        helpful: 876,
-        moreCount: 5432,
-        isYouTuber: true
-      },
-      {
-        name: 'Lokesh Gamer',
-        avatar: 'reviews/youtuber4.png',
-        location: 'Hyderabad',
-        time: '7 days ago',
-        purchased: 'All 5 Cards',
-        comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀',
-        rating: 5,
-        helpful: 1876,
-        moreCount: 9543,
-        isYouTuber: true
-      },
-      {
-        name: 'Sooneeta',
-        avatar: 'reviews/youtuber5.png',
-        location: 'Nepal',
-        time: '21 days ago',
-        purchased: 'All 5 Cards',
-        comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊',
-        rating: 4.3,
-        helpful: 654,
-        moreCount: 3421,
-        isYouTuber: true
-      },
+      { name: 'Total Gaming', avatar: 'reviews/youtuber1.png', location: 'Gujarat', time: '9 days ago', purchased: 'All 5 Cards', comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥', rating: 4.5, helpful: 1247, moreCount: 8932, isYouTuber: true },
+      { name: 'Tonde Gamer', avatar: 'reviews/youtuber2.png', location: 'Nepal', time: '17 days ago', purchased: 'All 5 Cards', comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯', rating: 4.9, helpful: 2156, moreCount: 12480, isYouTuber: true },
+      { name: 'Gyan Gaming', avatar: 'reviews/youtuber3.png', location: 'Kolkata', time: '28 days ago', purchased: 'All 5 Cards', comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍', rating: 4.1, helpful: 876, moreCount: 5432, isYouTuber: true },
+      { name: 'Lokesh Gamer', avatar: 'reviews/youtuber4.png', location: 'Hyderabad', time: '7 days ago', purchased: 'All 5 Cards', comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀', rating: 5, helpful: 1876, moreCount: 9543, isYouTuber: true },
+      { name: 'Sooneeta', avatar: 'reviews/youtuber5.png', location: 'Nepal', time: '21 days ago', purchased: 'All 5 Cards', comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊', rating: 4.3, helpful: 654, moreCount: 3421, isYouTuber: true },
       { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
       { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
       { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
@@ -2012,17 +2162,242 @@
         '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
+    // ============================================================
+    // LIVE VIEWER COUNTS
+    // Base = cardsSold / 200 * stockPercent/100 * viewerWeight
+    // Daily grows as cardsSold grows
+    // ============================================================
+    function getBaseViewerCount(design) {
+      var cardsSoldNow = growNumber(12487, 25, 45, 7001);
+      var base = (cardsSoldNow / 200) * (design.stockPercent / 100) * design.viewerWeight;
+      return Math.max(8, Math.round(base));
+    }
+
+    var viewerState = {};
+
+    function initViewerCounts() {
+      designs.forEach(function(d) {
+        var base = getBaseViewerCount(d);
+        viewerState[d.id] = { base: base, current: base };
+      });
+    }
+
+    function fluctuateViewers() {
+      designs.forEach(function(d) {
+        var s = viewerState[d.id];
+        if (!s) return;
+        // Small jitter every 5s
+        var delta = Math.floor(Math.random() * 5) - 2; // -2 to +2
+        s.current += delta;
+        var min = Math.max(5, Math.floor(s.base * 0.78));
+        var max = Math.ceil(s.base * 1.22);
+        if (s.current < min) s.current = min + Math.floor(Math.random() * 4);
+        if (s.current > max) s.current = max - Math.floor(Math.random() * 4);
+        // Update UI
+        var badge = document.querySelector('.live-viewers-badge[data-design-id="' + d.id + '"] .vcount');
+        if (badge) {
+          var oldVal = parseInt(badge.textContent);
+          badge.textContent = s.current;
+          if (delta !== 0 && oldVal !== s.current) {
+            badge.classList.add('bump');
+            setTimeout(function() { badge.classList.remove('bump'); }, 260);
+          }
+        }
+      });
+    }
+
+    function bigFluctuateViewers() {
+      designs.forEach(function(d) {
+        var s = viewerState[d.id];
+        if (!s) return;
+        var delta = Math.floor(Math.random() * 13) - 6; // -6 to +6
+        s.current += delta;
+        var min = Math.max(5, Math.floor(s.base * 0.75));
+        var max = Math.ceil(s.base * 1.28);
+        if (s.current < min) s.current = min + Math.floor(Math.random() * 6);
+        if (s.current > max) s.current = max - Math.floor(Math.random() * 6);
+      });
+    }
+
+    setInterval(fluctuateViewers, 5000);
+    setInterval(bigFluctuateViewers, 25000);
+
+    // ============================================================
+    // COUNTDOWN TIMERS PER CARD (2-6 hours, resets at 0, localStorage)
+    // ============================================================
+    function getTimerEnd(cardId) {
+      try {
+        var key = 'cardseller_timer_' + cardId;
+        var stored = localStorage.getItem(key);
+        if (stored) {
+          var end = parseInt(stored);
+          if (!isNaN(end) && end > Date.now()) return end;
+        }
+        // New timer: 2 to 6 hours from now
+        var hours = 2 + Math.random() * 4;
+        var newEnd = Date.now() + Math.floor(hours * 3600000);
+        localStorage.setItem(key, newEnd.toString());
+        return newEnd;
+      } catch(e) {
+        return Date.now() + 3 * 3600000;
+      }
+    }
+
+    function formatCountdown(ms) {
+      if (ms < 0) ms = 0;
+      var totalSec = Math.floor(ms / 1000);
+      var h = Math.floor(totalSec / 3600);
+      var m = Math.floor((totalSec % 3600) / 60);
+      var s = totalSec % 60;
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      return pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+
+    var activeCountdowns = [];
+
+    function initCountdowns() {
+      activeCountdowns = [];
+      designs.forEach(function(d) {
+        var end = getTimerEnd(d.id);
+        activeCountdowns.push({ id: d.id, end: end });
+      });
+    }
+
+    function updateCountdowns() {
+      var now = Date.now();
+      activeCountdowns.forEach(function(item) {
+        var el = document.querySelector('.countdown-strip[data-design-id="' + item.id + '"] .cd-time');
+        if (!el) return;
+        var remaining = item.end - now;
+        if (remaining <= 0) {
+          // Reset timer for 2-6 hours
+          try {
+            var key = 'cardseller_timer_' + item.id;
+            var hours = 2 + Math.random() * 4;
+            var newEnd = now + Math.floor(hours * 3600000);
+            localStorage.setItem(key, newEnd.toString());
+            item.end = newEnd;
+            remaining = newEnd - now;
+          } catch(e) {}
+        }
+        el.textContent = formatCountdown(remaining);
+        // Add expiring class if < 30 min
+        var strip = el.closest('.countdown-strip');
+        if (strip) {
+          if (remaining < 30 * 60000) strip.classList.add('expiring');
+          else strip.classList.remove('expiring');
+        }
+      });
+    }
+
+    setInterval(updateCountdowns, 1000);
+
+    // ============================================================
+    // SERVER STATUS BAR
+    // ============================================================
+    var serverLastCheckedTime = Date.now();
+    function updateServerStatus() {
+      var el = document.getElementById('serverStatusLastChecked');
+      if (!el) return;
+      var secs = Math.floor((Date.now() - serverLastCheckedTime) / 1000);
+      if (secs < 3) el.textContent = 'Last checked just now';
+      else if (secs < 60) el.textContent = 'Last checked ' + secs + 's ago';
+      else {
+        el.textContent = 'Last checked just now';
+        serverLastCheckedTime = Date.now();
+      }
+    }
+    setInterval(updateServerStatus, 3000);
+
+    // ============================================================
+    // TRUSTED BY ROW
+    // ============================================================
+    function renderTrustedByRow() {
+      var avatarsEl = document.getElementById('trustedByAvatars');
+      var countEl = document.getElementById('trustedByCount');
+      if (!avatarsEl) return;
+      avatarsEl.innerHTML = '';
+      for (var i = 0; i < 5; i++) {
+        var avatar = getAvatarUrlByIndex(Math.floor(Math.random() * AVATAR_TOTAL));
+        var div = document.createElement('div');
+        div.className = 'trusted-by-avatar';
+        div.innerHTML = '<img src="' + avatar + '" alt="Buyer" loading="lazy" onerror="this.style.display=\'none\'">';
+        avatarsEl.appendChild(div);
+      }
+      if (countEl) {
+        var happyBuyers = growNumber(9876, 18, 32, 8801);
+        countEl.textContent = '+' + happyBuyers.toLocaleString('en-IN') + ' buyers';
+      }
+    }
+
+    // ============================================================
+    // WELCOME BACK TOAST
+    // ============================================================
+    function initWelcomeBack() {
+      try {
+        var VISITS_KEY = 'cardseller_visits';
+        var LAST_VISIT_KEY = 'cardseller_last_visit';
+        var today = new Date().toDateString();
+        var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0');
+        var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
+
+        if (lastVisit !== today) {
+          visits += 1;
+          localStorage.setItem(VISITS_KEY, visits.toString());
+          localStorage.setItem(LAST_VISIT_KEY, today);
+        }
+
+        // Show after 3 seconds
+        setTimeout(function() {
+          var container = document.getElementById('liveNotifContainer');
+          if (!container) return;
+          var notif = document.createElement('div');
+          notif.className = 'welcome-back-toast';
+
+          var title, sub;
+          if (visits === 1) {
+            title = '👋 Welcome to Card Seller!';
+            sub = 'First visit — enjoy premium cards';
+          } else {
+            title = '👋 Welcome back!';
+            sub = 'Visit #' + visits + ' — thanks for your trust';
+          }
+
+          notif.innerHTML =
+            '<div class="wb-icon">✨</div>' +
+            '<div class="wb-text"><strong>' + title + '</strong>' + sub + '<span class="wb-sub">Trusted by thousands</span></div>';
+
+          container.appendChild(notif);
+          setTimeout(function() { notif.remove(); }, 5500);
+        }, 3000);
+      } catch(e) {}
+    }
+
+    // ============================================================
+    // RENDER GRID
+    // ============================================================
     function renderGrid() {
       var grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       designs.forEach(function(design) {
         var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
         var stockLeft = Math.floor(Math.random() * 5) + 2;
+        var viewerBase = getBaseViewerCount(design);
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
         card.innerHTML =
+          '<div class="countdown-strip" data-design-id="' + design.id + '">' +
+            '<span class="cd-icon">🔥</span>' +
+            '<span>Offer ends:</span>' +
+            '<span class="cd-time">--:--:--</span>' +
+          '</div>' +
           '<div class="cc-preview-wrap">' +
+            '<div class="live-viewers-badge" data-design-id="' + design.id + '">' +
+              '<span class="live-pulse-dot"></span>' +
+              '<span class="eye">👁</span>' +
+              '<span class="vcount">' + viewerBase + '</span>' +
+            '</div>' +
             '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
           '</div>' +
           '<div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div>' +
@@ -2076,7 +2451,6 @@
 
       var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
 
-      // DAILY GROWTH APPLIED TO HELPFUL AND MORE COUNTS
       var baseHelpful = review.helpful || 0;
       var baseMore = review.moreCount || 0;
       var seedBase = index * 100;
@@ -2301,13 +2675,10 @@
         var base = parseFloat(el.getAttribute('data-count'));
         var decimals = parseInt(el.getAttribute('data-decimal')) || 0;
         var increment = parseInt(el.getAttribute('data-increment')) || 0;
-
-        // Apply daily growth
         var target = base;
         if (increment > 0) {
           target = growNumber(base, Math.floor(increment * 0.7), Math.ceil(increment * 1.5), Math.floor(base));
         }
-
         var duration = 1800;
         var startTime = null;
         function step(timestamp) {
@@ -2363,11 +2734,11 @@
         if (usedPulseKeys.indexOf(key) === -1) {
           usedPulseKeys.push(key);
           if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
-          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city };
+          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getRandomAvatarUrl() };
         }
         attempts++;
       }
-      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi' };
+      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi', avatar: getRandomAvatarUrl() };
     }
 
     function getCardThumbStyle(design) {
@@ -2387,10 +2758,12 @@
     function createPulseItemHTML(buyer, design, timestamp) {
       var thumbStyle = getCardThumbStyle(design);
       var timeStr = formatTimeAgo(timestamp);
+      var avatarUrl = buyer.avatar || getRandomAvatarUrl();
+      var initials = buyer.initials.toUpperCase();
 
       return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
         '<div class="pulse-avatar-wrap">' +
-          '<div class="pulse-avatar">' + buyer.initials.toUpperCase() + '</div>' +
+          '<div class="pulse-avatar"><img src="' + avatarUrl + '" alt="' + buyer.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div style=&quot;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#f5d76e;font-weight:800;font-size:11px;background:linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));&quot;>' + initials + '</div>\'"></div>' +
           '<div class="pulse-check">✓</div>' +
         '</div>' +
         '<div class="pulse-content">' +
@@ -2407,15 +2780,16 @@
 
     function addLiveNotification(buyer, design, timestamp) {
       var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
-      var initials = buyer.initials;
       var timeStr = formatTimeAgo(timestamp);
+      var avatarUrl = buyer.avatar || getRandomAvatarUrl();
+      var initials = buyer.initials.toUpperCase();
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
       notif.innerHTML =
         '<div class="notif-card-badge">💳 Card Purchased</div>' +
         '<div class="notif-row">' +
-          '<div class="notif-avatar">' + initials.toUpperCase() + '</div>' +
+          '<div class="notif-avatar"><img src="' + avatarUrl + '" alt="' + buyer.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div style=&quot;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:12px;background:linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));&quot;>' + initials + '</div>\'"></div>' +
           '<div class="notif-content">' +
             '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
             'bought ' + design.name +
@@ -2426,13 +2800,33 @@
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
+    // Review submitted notification popup
+    function showReviewNotification(review) {
+      var displayName = review.name.split(' ')[0] + ' ' + (review.name.split(' ')[1] ? review.name.split(' ')[1].charAt(0) + '.' : '');
+      var stars = '';
+      for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
+
+      var notif = document.createElement('div');
+      notif.className = 'live-notif review-notif';
+      notif.innerHTML =
+        '<div class="notif-card-badge">⭐ New Review</div>' +
+        '<div class="notif-row">' +
+          '<div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#1d9bf0;font-weight:800;font-size:13px;">' + review.name.charAt(0).toUpperCase() + '</div></div>' +
+          '<div class="notif-content">' +
+            '<strong>' + displayName + ' just left a ' + stars + ' review!</strong>' +
+            'for ' + review.purchased +
+            '<span class="notif-time">🕐 Just now</span>' +
+          '</div>' +
+        '</div>';
+      notifContainer.appendChild(notif);
+      setTimeout(function() { notif.remove(); }, 6500);
+    }
+
     function addPulseItem(buyer, design, timestamp) {
       var list = document.getElementById('pulseList');
       if (!list) return;
-
       var itemHTML = createPulseItemHTML(buyer, design, timestamp);
       list.insertAdjacentHTML('afterbegin', itemHTML);
-
       while (list.children.length > 3) {
         list.removeChild(list.lastElementChild);
       }
@@ -2442,10 +2836,8 @@
       var buyer = generatePulseBuyer();
       var design = designs[Math.floor(Math.random() * designs.length)];
       var timestamp = Date.now();
-
       addLiveNotification(buyer, design, timestamp);
       addPulseItem(buyer, design, timestamp);
-
       var delay = 8000 + Math.random() * 7000;
       setTimeout(triggerRandomPurchase, delay);
     }
@@ -2456,16 +2848,12 @@
         var ts = parseInt(item.getAttribute('data-timestamp'));
         if (!ts) return;
         var timeSpan = item.querySelector('.pulse-time-text');
-        if (timeSpan) {
-          timeSpan.textContent = formatTimeAgo(ts);
-        }
+        if (timeSpan) timeSpan.textContent = formatTimeAgo(ts);
       });
     }
     setInterval(updateNotificationTimes, 30000);
 
-    setTimeout(function() {
-      triggerRandomPurchase();
-    }, 4000);
+    setTimeout(function() { triggerRandomPurchase(); }, 4000);
 
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
@@ -2530,7 +2918,6 @@
           var isActive = this.classList.contains('active');
           var countEl = this.querySelector('.helpful-count');
           var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
-
           if (isActive) {
             this.classList.remove('active');
             countEl.textContent = (currentCount - 1).toLocaleString('en-IN');
@@ -2656,6 +3043,8 @@
       attachReportButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
       showToast('Thank you! Your review has been posted.', 'success');
+      // Show live review notification popup
+      showReviewNotification(newReview);
       document.getElementById('reviewForm').reset();
       selectedRating = 0;
       selectedPhotoDataURL = null;
@@ -2701,9 +3090,17 @@
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
+    // ============================================================
+    // INIT
+    // ============================================================
+    initViewerCounts();
     renderGrid();
+    initCountdowns();
+    updateCountdowns();
+    renderTrustedByRow();
     renderReviews();
     animateCounters();
+    initWelcomeBack();
   </script>
 </body>
 </html>
