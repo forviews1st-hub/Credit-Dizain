@@ -57,29 +57,6 @@
       stroke-linecap: round; stroke-linejoin: round;
     }
 
-    /* SERVER STATUS BAR */
-    .server-status-bar {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; padding: 6px 14px;
-      background: linear-gradient(90deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.14) 50%, rgba(34,197,94,0.08) 100%);
-      border-top: 1px solid rgba(34,197,94,0.15);
-      font-size: 10.5px; color: #86efac; font-weight: 600;
-      letter-spacing: 0.3px; flex-wrap: wrap;
-    }
-    .server-status-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
-      animation: serverPulse 1.8s ease-in-out infinite;
-      box-shadow: 0 0 6px rgba(34,197,94,0.8);
-    }
-    @keyframes serverPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(0.85); }
-    }
-    .server-status-bar .sep { color: rgba(134,239,172,0.4); font-size: 9px; }
-    @media (max-width: 600px) {
-      .server-status-bar { font-size: 9.5px; padding: 5px 10px; gap: 6px; }
-    }
-
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
     .hero-text-section { text-align: left; padding: 50px 20px 40px; max-width: 800px; margin: 0; position: relative; }
@@ -192,43 +169,7 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
-    /* TRUSTED BY ROW */
-    .trusted-by-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 14px; margin: 0 0 20px; padding: 12px 18px;
-      background: linear-gradient(160deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0.02) 100%);
-      border: 1px solid rgba(212,175,55,0.2);
-      border-radius: 14px; flex-wrap: wrap;
-    }
-    .trusted-by-avatars {
-      display: flex; align-items: center;
-    }
-    .trusted-by-avatar {
-      width: 32px; height: 32px; border-radius: 50%;
-      border: 2px solid #0d0d0d;
-      margin-left: -10px;
-      overflow: hidden;
-      box-shadow: 0 0 0 1.5px rgba(212,175,55,0.5), 0 2px 6px rgba(0,0,0,0.5);
-      background: #1a1a1a;
-      flex-shrink: 0;
-    }
-    .trusted-by-avatar:first-child { margin-left: 0; }
-    .trusted-by-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .trusted-by-text {
-      font-size: 12px; font-weight: 600; color: #ccc;
-      letter-spacing: 0.2px;
-      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
-      justify-content: center; text-align: center;
-    }
-    .trusted-by-text strong {
-      color: #f5d76e; font-weight: 800;
-    }
-    @media (max-width: 500px) {
-      .trusted-by-row { padding: 10px 12px; gap: 10px; }
-      .trusted-by-avatar { width: 28px; height: 28px; margin-left: -8px; }
-      .trusted-by-text { font-size: 11px; }
-    }
-
+    /* PULSE FEED */
     .pulse-feed {
       margin: 0 0 24px;
       padding: 16px 20px;
@@ -248,20 +189,44 @@
       margin-bottom: 14px;
     }
     .pulse-title {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #f5d76e;
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap;
+    }
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 11px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
+      box-shadow: 0 0 0 0 rgba(239,68,68,0.7), 0 4px 10px rgba(239,68,68,0.35);
+      animation: livePillPulse 2s ease-in-out infinite;
+      position: relative;
     }
-    .pulse-live-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: #ef4444;
-      animation: pulseLive 1.5s ease-in-out infinite;
+    @keyframes livePillPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.7), 0 4px 10px rgba(239,68,68,0.35); }
+      50% { box-shadow: 0 0 0 6px rgba(239,68,68,0), 0 4px 10px rgba(239,68,68,0.55); }
     }
-    @keyframes pulseLive { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.7); } 50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(239,68,68,0); } }
+    .live-pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #fff;
+      animation: liveDotBlink 1.2s ease-in-out infinite;
+    }
+    @keyframes liveDotBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+    .pulse-subtitle {
+      font-size: 11px; font-weight: 800; letter-spacing: 1.8px;
+      color: #f5d76e; text-transform: uppercase;
+    }
 
+    /* Fixed to always show exactly 3 items — no max-height clipping */
     .pulse-list {
       display: flex; flex-direction: column; gap: 8px;
-      max-height: 210px;
-      overflow: hidden;
     }
 
     .pulse-item {
@@ -320,7 +285,45 @@
       .pulse-item { padding: 8px 10px; gap: 8px; }
       .pulse-text { font-size: 11px; }
       .pulse-card-thumb { width: 34px; height: 20px; }
-      .pulse-list { max-height: 180px; }
+      .live-pill { font-size: 9.5px; padding: 3px 9px; }
+      .pulse-subtitle { font-size: 10px; letter-spacing: 1.4px; }
+    }
+
+    /* TRUSTED BY ROW */
+    .trusted-by-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin: 0 0 20px; padding: 12px 18px;
+      background: linear-gradient(160deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0.02) 100%);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 14px; flex-wrap: wrap;
+    }
+    .trusted-by-avatars {
+      display: flex; align-items: center;
+    }
+    .trusted-by-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid #0d0d0d;
+      margin-left: -10px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1.5px rgba(212,175,55,0.5), 0 2px 6px rgba(0,0,0,0.5);
+      background: #1a1a1a;
+      flex-shrink: 0;
+    }
+    .trusted-by-avatar:first-child { margin-left: 0; }
+    .trusted-by-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .trusted-by-text {
+      font-size: 12px; font-weight: 600; color: #ccc;
+      letter-spacing: 0.2px;
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+      justify-content: center; text-align: center;
+    }
+    .trusted-by-text strong {
+      color: #f5d76e; font-weight: 800;
+    }
+    @media (max-width: 500px) {
+      .trusted-by-row { padding: 10px 12px; gap: 10px; }
+      .trusted-by-avatar { width: 28px; height: 28px; margin-left: -8px; }
+      .trusted-by-text { font-size: 11px; }
     }
 
     .heading-row { margin-bottom: 20px; }
@@ -373,7 +376,6 @@
 
     .cc-preview-wrap { position: relative; }
 
-    /* LIVE VIEWER BADGE - top-left of card */
     .live-viewers-badge {
       position: absolute;
       top: 10px; left: 10px;
@@ -393,13 +395,10 @@
       pointer-events: none;
       user-select: none;
     }
-    .live-viewers-badge .eye {
-      font-size: 10px;
-      line-height: 1;
-    }
+    .live-viewers-badge .eye { font-size: 10px; line-height: 1; }
     .live-viewers-badge .live-pulse-dot {
       width: 5px; height: 5px; border-radius: 50%; background: #ef4444;
-      animation: pulseLive 1.4s ease-in-out infinite;
+      animation: liveDotBlink 1.4s ease-in-out infinite;
     }
     .live-viewers-badge .vcount {
       color: #f5d76e;
@@ -407,14 +406,11 @@
       font-variant-numeric: tabular-nums;
       transition: transform 0.25s ease;
     }
-    .live-viewers-badge .vcount.bump {
-      transform: scale(1.18);
-    }
+    .live-viewers-badge .vcount.bump { transform: scale(1.18); }
     @media (max-width: 500px) {
       .live-viewers-badge { font-size: 9px; padding: 3px 7px; top: 8px; left: 8px; }
     }
 
-    /* COUNTDOWN STRIP - top of card (below views) */
     .countdown-strip {
       display: flex; align-items: center; justify-content: center; gap: 6px;
       padding: 6px 10px;
@@ -1137,7 +1133,6 @@
       .live-notif-container { left: 10px; right: 10px; top: 76px; max-width: none; }
     }
 
-    /* Review submitted notification (top-right popup, blue theme) */
     .review-notif {
       display: flex; flex-direction: column; gap: 0;
       background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -1152,7 +1147,6 @@
       background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
     }
 
-    /* Welcome Back Toast (top-right) */
     .welcome-back-toast {
       display: flex; align-items: center; gap: 12px;
       background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
@@ -1327,10 +1321,9 @@
     .flip-hint { text-align: center; font-size: 11px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; user-select: none; }
     .modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px; margin-bottom: 6px; text-align: center; }
     .modal-tagline { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
-    .modal-meta { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 16px; }
+    .modal-meta { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 18px; }
     .modal-price { color: #22c55e; padding: 8px 20px; font-weight: 800; font-size: 18px; letter-spacing: -0.3px; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
     .modal-rating { display: flex; align-items: center; gap: 6px; color: #aaa; font-size: 13px; font-weight: 700; }
-    .modal-material { font-size: 10px; color: #666; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-align: center; margin-bottom: 14px; }
     .modal-description { color: #999; font-size: 13px; line-height: 1.7; margin-bottom: 18px; text-align: center; }
 
     .qty-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 18px; }
@@ -1512,7 +1505,7 @@
     }
     .success-tracking .st-dot {
       width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
-      animation: livePulse 1.5s ease-in-out infinite;
+      animation: liveDotBlink 1.5s ease-in-out infinite;
     }
     .success-order-details {
       background: #0d0d0d; border: 1px solid rgba(212,175,55,0.15);
@@ -1586,14 +1579,6 @@
         <span class="site-brand-name">Card Seller <span class="verified-logo-tick" title="Verified Seller"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></span></span>
       </div>
     </div>
-    <div class="server-status-bar">
-      <span class="server-status-dot"></span>
-      <span>All systems operational</span>
-      <span class="sep">•</span>
-      <span>99.9% uptime</span>
-      <span class="sep">•</span>
-      <span id="serverStatusLastChecked">Last checked just now</span>
-    </div>
   </header>
 
   <main>
@@ -1643,12 +1628,17 @@
 
     <div class="pulse-feed">
       <div class="pulse-header">
-        <div class="pulse-title"><span class="pulse-live-dot"></span> LIVE PURCHASES</div>
+        <div class="pulse-title">
+          <span class="live-pill">
+            <span class="live-pill-dot"></span>
+            LIVE
+          </span>
+          <span class="pulse-subtitle">• RECENT PURCHASES</span>
+        </div>
       </div>
       <div class="pulse-list" id="pulseList"></div>
     </div>
 
-    <!-- TRUSTED BY ROW -->
     <div class="trusted-by-row" id="trustedByRow">
       <div class="trusted-by-avatars" id="trustedByAvatars"></div>
       <div class="trusted-by-text"><strong id="trustedByCount">+8,500 buyers</strong> trust us this month</div>
@@ -1717,7 +1707,6 @@
           <span class="modal-price" id="modalPrice">₹499</span>
           <span class="modal-rating" id="modalRating"></span>
         </div>
-        <div class="modal-material" id="modalMaterial">MATTE FINISH</div>
         <p class="modal-description" id="modalDescription">Description</p>
         <div class="qty-row">
           <button id="qtyMinus">−</button>
@@ -1959,26 +1948,15 @@
     }
 
     // ============================================================
-    // AVATAR SYSTEM — 270+ unique real-face photos
-    // Combined: randomuser.me (200) + pravatar.cc (70)
+    // AVATAR SYSTEM — DiceBear (Unlimited, Indian Skin Tones)
     // ============================================================
-    var AVATAR_TOTAL = 270;
-
-    function getAvatarUrlByIndex(idx) {
-      idx = ((idx % AVATAR_TOTAL) + AVATAR_TOTAL) % AVATAR_TOTAL;
-      if (idx < 200) {
-        // randomuser.me - 100 men + 100 women
-        var gender = (idx % 2 === 0) ? 'men' : 'women';
-        var num = Math.floor(idx / 2) + 1;
-        return 'https://randomuser.me/api/portraits/' + gender + '/' + num + '.jpg';
-      } else {
-        // pravatar.cc - 70 unique photos
-        return 'https://i.pravatar.cc/150?img=' + (idx - 200 + 1);
-      }
+    function getDiceBearAvatar(seed) {
+      var s = seed || (Date.now() + Math.random()).toString(36);
+      return 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(s) + '&skinColor=ae5d29,d08b5b,8d5524,c68629,edb98a&topColor=2c1b18,4a312c,724133,0e0e0e,a55728,c93305&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf';
     }
 
     function getRandomAvatarUrl() {
-      return getAvatarUrlByIndex(Math.floor(Math.random() * AVATAR_TOTAL));
+      return getDiceBearAvatar(Math.random().toString(36).substring(2, 12));
     }
 
     // ============================================================
@@ -2017,7 +1995,7 @@
     var designs = [
       { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', cid: '7997', memberSince: '93', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', description: 'The iconic gold card trusted worldwide. A statement of prestige with 24k gold-foil finish and premium metallic engraving.', stockPercent: 92, viewerWeight: 1.6 },
       { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', description: 'Signature-tier card with a bold holographic finish. Built for those who command attention in every swipe.', stockPercent: 78, viewerWeight: 0.8 },
-      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'DEBIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85, viewerWeight: 1.1 },
+      { id: 'd8', brand: 'visa', name: 'Sunrise Elite', bank: 'SUNRISE BANK', bankInitial: 'S', cardType: 'ELITE', debitCredit: 'CREDIT', cardNumber: '4072 5566 7788 8901', expiry: '07 / 27', cvv: '149', balance: '60k - 65k', defaultName: 'PATRICIA DAVIS', tagline: 'Where luxury meets dawn', gradient: 'linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f59e0b 100%)', accent: '#f59e0b', price: '₹399', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Elite-tier debit card featuring a warm amber-to-crimson gradient. Elegant, bold, and unapologetically premium.', stockPercent: 85, viewerWeight: 1.1 },
       { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', description: 'Visa Infinite card with deep ocean tones and a glossy finish. Crafted for a lifestyle of refined luxury.', stockPercent: 71, viewerWeight: 0.9 },
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88, viewerWeight: 1.3 }
     ];
@@ -2162,11 +2140,7 @@
         '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
-    // ============================================================
-    // LIVE VIEWER COUNTS
-    // Base = cardsSold / 200 * stockPercent/100 * viewerWeight
-    // Daily grows as cardsSold grows
-    // ============================================================
+    // LIVE VIEWERS
     function getBaseViewerCount(design) {
       var cardsSoldNow = growNumber(12487, 25, 45, 7001);
       var base = (cardsSoldNow / 200) * (design.stockPercent / 100) * design.viewerWeight;
@@ -2186,14 +2160,12 @@
       designs.forEach(function(d) {
         var s = viewerState[d.id];
         if (!s) return;
-        // Small jitter every 5s
-        var delta = Math.floor(Math.random() * 5) - 2; // -2 to +2
+        var delta = Math.floor(Math.random() * 5) - 2;
         s.current += delta;
         var min = Math.max(5, Math.floor(s.base * 0.78));
         var max = Math.ceil(s.base * 1.22);
         if (s.current < min) s.current = min + Math.floor(Math.random() * 4);
         if (s.current > max) s.current = max - Math.floor(Math.random() * 4);
-        // Update UI
         var badge = document.querySelector('.live-viewers-badge[data-design-id="' + d.id + '"] .vcount');
         if (badge) {
           var oldVal = parseInt(badge.textContent);
@@ -2210,7 +2182,7 @@
       designs.forEach(function(d) {
         var s = viewerState[d.id];
         if (!s) return;
-        var delta = Math.floor(Math.random() * 13) - 6; // -6 to +6
+        var delta = Math.floor(Math.random() * 13) - 6;
         s.current += delta;
         var min = Math.max(5, Math.floor(s.base * 0.75));
         var max = Math.ceil(s.base * 1.28);
@@ -2222,9 +2194,7 @@
     setInterval(fluctuateViewers, 5000);
     setInterval(bigFluctuateViewers, 25000);
 
-    // ============================================================
-    // COUNTDOWN TIMERS PER CARD (2-6 hours, resets at 0, localStorage)
-    // ============================================================
+    // COUNTDOWN
     function getTimerEnd(cardId) {
       try {
         var key = 'cardseller_timer_' + cardId;
@@ -2233,7 +2203,6 @@
           var end = parseInt(stored);
           if (!isNaN(end) && end > Date.now()) return end;
         }
-        // New timer: 2 to 6 hours from now
         var hours = 2 + Math.random() * 4;
         var newEnd = Date.now() + Math.floor(hours * 3600000);
         localStorage.setItem(key, newEnd.toString());
@@ -2270,7 +2239,6 @@
         if (!el) return;
         var remaining = item.end - now;
         if (remaining <= 0) {
-          // Reset timer for 2-6 hours
           try {
             var key = 'cardseller_timer_' + item.id;
             var hours = 2 + Math.random() * 4;
@@ -2281,7 +2249,6 @@
           } catch(e) {}
         }
         el.textContent = formatCountdown(remaining);
-        // Add expiring class if < 30 min
         var strip = el.closest('.countdown-strip');
         if (strip) {
           if (remaining < 30 * 60000) strip.classList.add('expiring');
@@ -2292,33 +2259,14 @@
 
     setInterval(updateCountdowns, 1000);
 
-    // ============================================================
-    // SERVER STATUS BAR
-    // ============================================================
-    var serverLastCheckedTime = Date.now();
-    function updateServerStatus() {
-      var el = document.getElementById('serverStatusLastChecked');
-      if (!el) return;
-      var secs = Math.floor((Date.now() - serverLastCheckedTime) / 1000);
-      if (secs < 3) el.textContent = 'Last checked just now';
-      else if (secs < 60) el.textContent = 'Last checked ' + secs + 's ago';
-      else {
-        el.textContent = 'Last checked just now';
-        serverLastCheckedTime = Date.now();
-      }
-    }
-    setInterval(updateServerStatus, 3000);
-
-    // ============================================================
     // TRUSTED BY ROW
-    // ============================================================
     function renderTrustedByRow() {
       var avatarsEl = document.getElementById('trustedByAvatars');
       var countEl = document.getElementById('trustedByCount');
       if (!avatarsEl) return;
       avatarsEl.innerHTML = '';
       for (var i = 0; i < 5; i++) {
-        var avatar = getAvatarUrlByIndex(Math.floor(Math.random() * AVATAR_TOTAL));
+        var avatar = getRandomAvatarUrl();
         var div = document.createElement('div');
         div.className = 'trusted-by-avatar';
         div.innerHTML = '<img src="' + avatar + '" alt="Buyer" loading="lazy" onerror="this.style.display=\'none\'">';
@@ -2330,9 +2278,7 @@
       }
     }
 
-    // ============================================================
-    // WELCOME BACK TOAST
-    // ============================================================
+    // WELCOME BACK
     function initWelcomeBack() {
       try {
         var VISITS_KEY = 'cardseller_visits';
@@ -2347,7 +2293,6 @@
           localStorage.setItem(LAST_VISIT_KEY, today);
         }
 
-        // Show after 3 seconds
         setTimeout(function() {
           var container = document.getElementById('liveNotifContainer');
           if (!container) return;
@@ -2373,9 +2318,7 @@
       } catch(e) {}
     }
 
-    // ============================================================
     // RENDER GRID
-    // ============================================================
     function renderGrid() {
       var grid = document.getElementById('productGrid');
       grid.innerHTML = '';
@@ -2529,7 +2472,6 @@
       document.getElementById('modalTagline').textContent = design.tagline;
       document.getElementById('modalPrice').textContent = design.price;
       document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
-      document.getElementById('modalMaterial').textContent = design.material;
       document.getElementById('modalDescription').textContent = design.description;
       document.getElementById('qtyValue').textContent = '1';
       document.getElementById('productOverlay').style.display = 'flex';
@@ -2734,7 +2676,7 @@
         if (usedPulseKeys.indexOf(key) === -1) {
           usedPulseKeys.push(key);
           if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
-          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getRandomAvatarUrl() };
+          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getDiceBearAvatar(fn + ln + city + Math.random().toString(36)) };
         }
         attempts++;
       }
@@ -2800,7 +2742,6 @@
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
-    // Review submitted notification popup
     function showReviewNotification(review) {
       var displayName = review.name.split(' ')[0] + ' ' + (review.name.split(' ')[1] ? review.name.split(' ')[1].charAt(0) + '.' : '');
       var stars = '';
@@ -3043,7 +2984,6 @@
       attachReportButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
       showToast('Thank you! Your review has been posted.', 'success');
-      // Show live review notification popup
       showReviewNotification(newReview);
       document.getElementById('reviewForm').reset();
       selectedRating = 0;
@@ -3090,9 +3030,7 @@
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    // ============================================================
     // INIT
-    // ============================================================
     initViewerCounts();
     renderGrid();
     initCountdowns();
