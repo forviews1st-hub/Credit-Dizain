@@ -16,19 +16,47 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
-      - name: Install sharp
-        run: npm install sharp
+      - name: Install compression tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y jpegoptim optipng
       
       - name: Compress images
-        run: node scripts/compress-images.js
+        run: |
+          if [ ! -d avatars ]; then
+            echo "No avatars folder. Skipping."
+            exit 0
+          fi
+          
+          cd avatars
+          echo "=== Starting compression ==="
+          
+          shopt -s nullglob
+          jpgs=(*.jpg *.jpeg *.JPG *.JPEG)
+          
+          if [ ${#jpgs[@]} -gt 0 ]; then
+            echo "Compressing ${#jpgs[@]} JPEG files..."
+            for file in "${jpgs[@]}"; do
+              before=$(stat -c%s "$file")
+              jpegoptim --max=80 --strip-all --all-progressive --quiet "$file" || true
+              after=$(stat -c%s "$file")
+              echo "✓ $file: $((before/1024))KB → $((after/1024))KB"
+            done
+          fi
+          
+          pngs=(*.png *.PNG)
+          if [ ${#pngs[@]} -gt 0 ]; then
+            echo "Compressing ${#pngs[@]} PNG files..."
+            for file in "${pngs[@]}"; do
+              before=$(stat -c%s "$file")
+              optipng -o2 -strip all -quiet "$file" || true
+              after=$(stat -c%s "$file")
+              echo "✓ $file: $((before/1024))KB → $((after/1024))KB"
+            done
+          fi
+          
+          echo "=== Done ==="
       
       - name: Commit and push
         run: |
