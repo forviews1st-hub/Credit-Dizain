@@ -1,0 +1,43 @@
+name: Auto Compress Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'avatars/**'
+  workflow_dispatch:
+
+jobs:
+  compress:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install sharp
+        run: npm install sharp
+      
+      - name: Compress images
+        run: node scripts/compress-images.js
+      
+      - name: Commit and push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Auto Compress Bot"
+          git add avatars/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-compress images [skip ci]"
+            git push
+          fi
