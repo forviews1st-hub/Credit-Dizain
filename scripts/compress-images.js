@@ -71,10 +71,11 @@ async function compressImages() {
     }
   }
 
-  console.log('\n--- Summary ---');
+  console.log('');
+  console.log('--- Summary ---');
   console.log('Compressed: ' + compressedCount + '/' + files.length + ' files');
   if (compressedCount > 0) {
-    console.log('Total: ' + (beforeSize/1024).toFixed(1) + 'KB → ' + (afterSize/1024).toFixed(1) + 'KB');
+    console.log('Total: ' + (totalBefore/1024).toFixed(1) + 'KB → ' + (totalAfter/1024).toFixed(1) + 'KB');
     console.log('Saved: ' + (((totalBefore - totalAfter)/totalBefore)*100).toFixed(1) + '%');
   }
 }
