@@ -53,6 +53,35 @@
     }
     .verified-logo-tick svg { width: 100%; height: 100%; display: block; }
 
+    .profile-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.4);
+      color: #d4af37; padding: 8px 14px; border-radius: 20px;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer;
+      font-family: inherit; transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .profile-btn:hover {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border-color: transparent;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(212,175,55,0.4);
+    }
+    .profile-btn.saved {
+      background: rgba(34,197,94,0.12);
+      border-color: rgba(34,197,94,0.45);
+      color: #22c55e;
+    }
+    .profile-btn.saved:hover {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: #fff; border-color: transparent;
+    }
+    .profile-btn .profile-icon { font-size: 14px; line-height: 1; }
+    @media (max-width: 400px) {
+      .profile-btn { padding: 7px 10px; font-size: 11px; }
+      .profile-btn .profile-label-full { display: none; }
+    }
+
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
     .hero-text-section { text-align: left; padding: 50px 20px 40px; max-width: 800px; margin: 0; position: relative; }
@@ -290,17 +319,14 @@
       border: 1px solid rgba(212,175,55,0.2);
       border-radius: 14px; flex-wrap: wrap;
     }
-    .trusted-by-avatars {
-      display: flex; align-items: center;
-    }
+    .trusted-by-avatars { display: flex; align-items: center; }
     .trusted-by-avatar {
       width: 32px; height: 32px; border-radius: 50%;
       border: 2px solid #0d0d0d;
       margin-left: -10px;
       overflow: hidden;
       box-shadow: 0 0 0 1.5px rgba(212,175,55,0.5), 0 2px 6px rgba(0,0,0,0.5);
-      background: #1a1a1a;
-      flex-shrink: 0;
+      background: #1a1a1a; flex-shrink: 0;
     }
     .trusted-by-avatar:first-child { margin-left: 0; }
     .trusted-by-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -367,45 +393,24 @@
 
     .cc-preview-wrap { position: relative; }
 
-    .card-bottom-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-    }
+    .card-bottom-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
     .live-viewers-badge {
       display: inline-flex; align-items: center; gap: 5px;
-      padding: 6px 10px;
-      border-radius: 20px;
+      padding: 6px 10px; border-radius: 20px;
       background: linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%);
       border: 1px solid rgba(239,68,68,0.45);
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      color: #fff;
+      font-size: 10.5px; font-weight: 800; letter-spacing: 0.3px; color: #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
+      pointer-events: none; user-select: none; white-space: nowrap;
     }
     .live-viewers-badge .eye { font-size: 10px; line-height: 1; }
     .live-viewers-badge .live-pulse-dot {
       width: 5px; height: 5px; border-radius: 50%; background: #ef4444;
       animation: liveDotBlink 1.4s ease-in-out infinite;
     }
-    .live-viewers-badge .vcount {
-      color: #f5d76e;
-      font-weight: 900;
-      font-variant-numeric: tabular-nums;
-      transition: transform 0.25s ease;
-    }
+    .live-viewers-badge .vcount { color: #f5d76e; font-weight: 900; font-variant-numeric: tabular-nums; transition: transform 0.25s ease; }
     .live-viewers-badge .vcount.bump { transform: scale(1.18); }
-    .live-viewers-badge .viewing-text {
-      color: #ccc;
-      font-weight: 600;
-      font-size: 10px;
-    }
+    .live-viewers-badge .viewing-text { color: #ccc; font-weight: 600; font-size: 10px; }
     @media (max-width: 500px) {
       .live-viewers-badge { font-size: 9px; padding: 4px 7px; }
       .live-viewers-badge .viewing-text { font-size: 9px; }
@@ -413,27 +418,17 @@
 
     .countdown-strip {
       display: flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 6px 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
+      padding: 6px 10px; margin-bottom: 10px; border-radius: 10px;
       background: linear-gradient(90deg, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.16) 100%);
       border: 1px solid rgba(239,68,68,0.4);
-      font-size: 10.5px;
-      font-weight: 800;
-      color: #fecaca;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
+      font-size: 10.5px; font-weight: 800; color: #fecaca;
+      letter-spacing: 0.4px; text-transform: uppercase;
     }
     .countdown-strip .cd-icon { font-size: 11px; }
     .countdown-strip .cd-time {
-      font-variant-numeric: tabular-nums;
-      color: #fff;
-      background: rgba(0,0,0,0.4);
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-weight: 900;
-      letter-spacing: 1px;
-      border: 1px solid rgba(239,68,68,0.5);
+      font-variant-numeric: tabular-nums; color: #fff;
+      background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 6px;
+      font-weight: 900; letter-spacing: 1px; border: 1px solid rgba(239,68,68,0.5);
     }
     .countdown-strip.expiring { animation: cdPulse 1.5s ease-in-out infinite; }
     @keyframes cdPulse {
@@ -589,11 +584,7 @@
     .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
 
     .cc-face.cc-back.cc-amex-gold-back {
-      padding: 0;
-      color: #1a1408;
-      display: block;
-      position: relative;
-      overflow: hidden;
+      padding: 0; color: #1a1408; display: block; position: relative; overflow: hidden;
       background:
         radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.55) 0%, transparent 45%),
         radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.5) 0%, transparent 50%),
@@ -602,23 +593,18 @@
       text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7);
     }
     .cc-face.cc-back.cc-amex-gold-back::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
       background-image:
         repeating-radial-gradient(circle at 20% 30%, transparent 0 6px, rgba(255, 235, 150, 0.09) 6px 7px),
         repeating-radial-gradient(circle at 70% 70%, transparent 0 8px, rgba(120, 85, 15, 0.07) 8px 9px),
         repeating-linear-gradient(0deg, transparent 0 4px, rgba(255, 240, 170, 0.05) 4px 5px);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
     .amex-back-frame {
       position: absolute; inset: 7px;
       border: 1.4px solid rgba(26, 20, 8, 0.85);
-      border-radius: 9px;
-      pointer-events: none; z-index: 10;
+      border-radius: 9px; pointer-events: none; z-index: 10;
       box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.55), 0 0 0 0.5px rgba(26, 20, 8, 0.4);
     }
     .amex-back-frame::before { content: ''; position: absolute; inset: 2.5px; border: 0.7px solid rgba(26, 20, 8, 0.5); border-radius: 7px; }
@@ -829,8 +815,7 @@
       letter-spacing: 1px; padding: 3px 8px;
       border-radius: 6px; margin-bottom: 4px;
       box-shadow: 0 2px 8px rgba(239,68,68,0.4);
-      text-transform: uppercase;
-      width: fit-content;
+      text-transform: uppercase; width: fit-content;
     }
 
     .rating-stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 1.5px; line-height: 1; font-family: Arial, sans-serif; }
@@ -866,8 +851,7 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s ease, border-color 0.3s ease;
       animation: reviewFadeIn 0.5s ease;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     @keyframes reviewFadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
     .review-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
@@ -892,31 +876,21 @@
       width: 46px; height: 46px; border-radius: 50%;
       border: 2px solid rgba(212, 175, 55, 0.55);
       overflow: hidden; flex-shrink: 0; background: #1a1a1a;
-      box-shadow: 0 0 12px rgba(212,175,55,0.15);
-      position: relative;
+      box-shadow: 0 0 12px rgba(212,175,55,0.15); position: relative;
     }
     .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     .review-card.youtuber-card .review-avatar {
       border: 2px solid #1d9bf0;
       box-shadow: 0 0 12px rgba(29,155,240,0.5), 0 0 0 2px rgba(29,155,240,0.2);
     }
 
     .review-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
-
-    .review-name-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-    }
+    .review-name-row { display: inline-flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
     .verified-tick {
       width: 17px; height: 17px;
       display: inline-flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 4px rgba(29,155,240,0.65));
-      vertical-align: middle;
+      flex-shrink: 0; filter: drop-shadow(0 0 4px rgba(29,155,240,0.65)); vertical-align: middle;
     }
     .verified-tick svg { width: 100%; height: 100%; display: block; }
 
@@ -950,8 +924,7 @@
       margin-top: 10px; padding-top: 10px;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
-    .review-helpful,
-    .review-more-btn {
+    .review-helpful, .review-more-btn {
       display: inline-flex; align-items: center; gap: 5px;
       font-size: 11px; padding: 6px 11px;
       border-radius: 8px; cursor: pointer;
@@ -962,33 +935,18 @@
       color: #999; letter-spacing: 0.2px;
       user-select: none;
     }
-    .review-helpful:hover,
-    .review-more-btn:hover {
+    .review-helpful:hover, .review-more-btn:hover {
       border-color: rgba(212,175,55,0.4);
-      color: #d4af37;
-      background: rgba(212,175,55,0.06);
+      color: #d4af37; background: rgba(212,175,55,0.06);
     }
     .review-helpful.active {
-      border-color: #d4af37;
-      color: #d4af37;
+      border-color: #d4af37; color: #d4af37;
       background: rgba(212,175,55,0.14);
       box-shadow: 0 0 12px rgba(212,175,55,0.25), inset 0 0 8px rgba(212,175,55,0.06);
     }
-    .review-helpful.active .helpful-icon {
-      animation: helpfulPop 0.4s ease;
-      display: inline-block;
-    }
-    @keyframes helpfulPop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
-    .review-helpful .helpful-count,
-    .review-more-btn .more-count {
-      color: #fff;
-      font-weight: 800;
-      margin-left: 1px;
-    }
+    .review-helpful.active .helpful-icon { animation: helpfulPop 0.4s ease; display: inline-block; }
+    @keyframes helpfulPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .review-helpful .helpful-count, .review-more-btn .more-count { color: #fff; font-weight: 800; margin-left: 1px; }
     .review-helpful.active .helpful-count { color: #d4af37; }
     .review-helpful .helpful-icon { font-size: 11px; line-height: 1; }
 
@@ -1017,8 +975,7 @@
       display: inline-flex; align-items: center; gap: 10px;
       background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
       border: 1.5px solid rgba(212,175,55,0.4);
-      color: #fff;
-      padding: 14px 26px; border-radius: 30px;
+      color: #fff; padding: 14px 26px; border-radius: 30px;
       font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
       cursor: pointer; font-family: inherit; transition: all 0.3s ease;
       box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
@@ -1095,6 +1052,7 @@
       animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
       pointer-events: auto;
       overflow: hidden;
+      position: relative;
     }
     @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
@@ -1109,8 +1067,7 @@
     .live-notif .notif-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
     .live-notif .notif-avatar {
       width: 36px; height: 36px; border-radius: 50%;
-      overflow: hidden;
-      flex-shrink: 0;
+      overflow: hidden; flex-shrink: 0;
       border: 1.5px solid rgba(212,175,55,0.6);
       box-shadow: 0 0 10px rgba(212,175,55,0.3);
       background: #1a1a1a;
@@ -1130,8 +1087,7 @@
       border-radius: 14px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12);
       animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
-      pointer-events: auto;
-      overflow: hidden;
+      pointer-events: auto; overflow: hidden;
     }
     .review-notif .notif-card-badge {
       background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
@@ -1147,6 +1103,7 @@
       pointer-events: auto;
       max-width: 340px;
       overflow: hidden;
+      position: relative;
     }
     .welcome-back-toast .wb-header {
       background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #b8941f 100%);
@@ -1177,6 +1134,19 @@
       background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35);
       padding: 3px 8px; border-radius: 10px; letter-spacing: 0.5px;
     }
+
+    .notif-close-btn {
+      position: absolute; top: 6px; right: 6px;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; font-size: 12px; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      line-height: 1; padding: 0; z-index: 5;
+      transition: all 0.2s ease;
+    }
+    .notif-close-btn:hover { background: #ef4444; border-color: #ef4444; }
+
+    body.modal-open .live-notif-container { display: none !important; }
 
     .more-stats-modal { text-align: center; padding: 40px 26px; }
     .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
@@ -1401,8 +1371,7 @@
       font-variant-numeric: tabular-nums;
     }
     .reserved-timer.warning {
-      color: #ff8800;
-      background: rgba(255, 136, 0, 0.15);
+      color: #ff8800; background: rgba(255, 136, 0, 0.15);
       border-color: rgba(255, 136, 0, 0.5);
       animation: reserveWarningPulse 1s ease-in-out infinite;
     }
@@ -1463,9 +1432,7 @@
       transform-style: preserve-3d;
       transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .mini-card-preview.flipped .mini-card-inner {
-      transform: rotateY(180deg);
-    }
+    .mini-card-preview.flipped .mini-card-inner { transform: rotateY(180deg); }
     .mini-card-preview .cc-face {
       border-radius: 12px; padding: 10px 12px;
       box-shadow: 0 14px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4);
@@ -1485,6 +1452,21 @@
     .mini-card-preview .cc-holo-sticker { width: 18px; height: 18px; padding: 2px; }
     .mini-card-preview .cc-tier-wm { font-size: 28px; }
 
+    .mini-card-preview.compact { max-width: 220px; margin: 0 auto 12px; }
+    .mini-card-preview.compact .cc-number { font-size: 9px; letter-spacing: 1.5px; }
+    .mini-card-preview.compact .cc-bank { font-size: 8px; letter-spacing: 1.5px; }
+    .mini-card-preview.compact .cc-bank-type { font-size: 5px; letter-spacing: 1.2px; }
+    .mini-card-preview.compact .cc-bank-icon { width: 14px; height: 14px; font-size: 7px; }
+    .mini-card-preview.compact .cc-chip { width: 24px; height: 18px; }
+    .mini-card-preview.compact .cc-label { font-size: 4.5px; }
+    .mini-card-preview.compact .cc-value { font-size: 7.5px; letter-spacing: 0.8px; }
+    .mini-card-preview.compact .cc-visa { font-size: 8px; padding: 2px 5px 2.5px; border-radius: 2.5px; }
+    .mini-card-preview.compact .cc-holo-sticker { width: 14px; height: 14px; padding: 1.5px; }
+    .mini-card-preview.compact .cc-tier-wm { font-size: 22px; }
+    .mini-card-preview.compact .cc-contactless-icon { width: 10px; height: 10px; }
+    .mini-card-preview.compact .cc-contactless-icon::before { width: 6px; height: 6px; top: 2px; left: 2px; }
+    .mini-card-preview.compact .cc-contactless-icon::after { width: 9px; height: 9px; top: 0.5px; left: 0.5px; }
+
     .section-divider { display: flex; align-items: center; gap: 8px; margin: 12px 0 8px; }
     .section-divider span { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #8a7231; white-space: nowrap; }
     .section-divider::before, .section-divider::after {
@@ -1500,6 +1482,15 @@
     .total-row { padding: 4px 0; }
     .summary-label-total { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #fff; }
     .summary-value-total { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: #22c55e; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
+
+    .order-summary-card.compact-summary { padding: 8px 12px; }
+    .order-summary-card.compact-summary .summary-row { padding: 2px 0; }
+    .order-summary-card.compact-summary .summary-value-total { font-size: 16px; }
+    .order-summary-card.compact-summary .summary-divider { margin: 5px 0; }
+
+    .order-modal .checkout-header { margin-bottom: 10px; }
+    .order-modal .order-form { margin-top: 4px; }
+    .order-modal .field-group { margin-bottom: 8px; }
 
     .order-btn-premium {
       width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
@@ -1521,6 +1512,77 @@
     .trust-badges { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; font-size: 10px; font-weight: 600; color: #666; letter-spacing: 0.3px; }
     .trust-badges .dot { color: #333; font-size: 13px; }
     .trust-badges span:not(.dot) { display: inline-flex; align-items: center; gap: 3px; color: #888; }
+
+    .profile-clear-btn {
+      width: 100%; background: transparent;
+      border: 1.5px solid rgba(239,68,68,0.4);
+      color: #ef4444; padding: 10px 20px; border-radius: 22px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+      cursor: pointer; font-family: inherit; transition: all 0.25s ease;
+      margin-top: 8px;
+    }
+    .profile-clear-btn:hover { background: rgba(239,68,68,0.1); border-color: #ef4444; }
+    .profile-hint-box {
+      background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25);
+      padding: 10px 14px; border-radius: 10px; margin-bottom: 14px;
+      font-size: 11px; color: #ccc; line-height: 1.5;
+    }
+    .profile-hint-box strong { color: #f5d76e; }
+
+    .profile-saved-card { text-align: center; padding: 8px 4px 4px; }
+    .profile-saved-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      margin: 0 auto 14px;
+      border: 3px solid rgba(212,175,55,0.55);
+      overflow: hidden; background: #1a1a1a;
+      box-shadow: 0 0 24px rgba(212,175,55,0.35);
+    }
+    .profile-saved-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .profile-saved-name {
+      font-size: 20px; font-weight: 800; color: #fff;
+      letter-spacing: -0.3px; margin-bottom: 16px;
+    }
+    .profile-saved-info {
+      display: flex; flex-direction: column; gap: 10px;
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 18px;
+    }
+    .profile-info-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: #ddd; font-weight: 500;
+      text-align: left;
+    }
+    .profile-info-row .info-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
+    }
+    .profile-info-row .info-text { flex: 1; min-width: 0; word-break: break-word; }
+    .profile-saved-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 800; color: #22c55e;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      padding: 4px 10px; border-radius: 12px;
+      letter-spacing: 0.5px; margin: 0 auto 14px;
+      text-transform: uppercase;
+    }
+    .profile-edit-btn {
+      width: 100%; background: rgba(212,175,55,0.1);
+      border: 1.5px solid rgba(212,175,55,0.5);
+      color: #d4af37; padding: 12px 20px; border-radius: 22px;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.5px;
+      cursor: pointer; font-family: inherit; transition: all 0.25s ease;
+      margin-bottom: 8px;
+    }
+    .profile-edit-btn:hover {
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408; border-color: transparent;
+    }
 
     .payment-total-card {
       background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%);
@@ -1674,6 +1736,10 @@
         <span class="site-brand-icon">💳</span>
         <span class="site-brand-name">Card Seller <span class="verified-logo-tick" title="Verified Seller"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#0095F6" d="M12 0.5l2.19 1.99 2.86-.31 1.19 2.62 2.71 1.02-.31 2.86L22.7 11l-2.06 2.32.31 2.86-2.71 1.02-1.19 2.62-2.86-.31L12 21.5l-2.19-1.99-2.86.31-1.19-2.62-2.71-1.02.31-2.86L1.3 11l2.06-2.32-.31-2.86 2.71-1.02 1.19-2.62 2.86.31L12 0.5z"/><path fill="#fff" d="M10.86 14.79l-3.4-3.4 1.5-1.5 1.9 1.9 5.18-5.18 1.5 1.5-6.68 6.68z"/></svg></span></span>
       </div>
+      <button class="profile-btn" id="profileBtn" type="button">
+        <span class="profile-icon">👤</span>
+        <span class="profile-label-full" id="profileBtnLabel">Profile</span>
+      </button>
     </div>
   </header>
 
@@ -1791,6 +1857,77 @@
     <div class="copyright">© 2026 Card Seller. All rights reserved.</div>
   </footer>
 
+  <div class="modal-overlay" id="profileOverlay">
+    <div class="modal profile-modal">
+      <button class="modal-close" id="profileClose">&times;</button>
+      <div class="modal-body">
+        <div class="checkout-header">
+          <span class="checkout-eyebrow">YOUR PROFILE</span>
+          <h3 class="checkout-title" id="profileModalTitle">Save Your Details</h3>
+          <p class="checkout-subtitle" id="profileModalSubtitle">Save once, order faster next time</p>
+        </div>
+
+        <div id="profileSavedView" style="display:none;">
+          <div class="profile-saved-card">
+            <span class="profile-saved-badge">✅ Profile Saved</span>
+            <div class="profile-saved-avatar">
+              <img id="profileSavedAvatar" src="" alt="Profile">
+            </div>
+            <div class="profile-saved-name" id="profileSavedName">—</div>
+            <div class="profile-saved-info">
+              <div class="profile-info-row" id="profileSavedPhoneRow">
+                <span class="info-icon">📱</span>
+                <span class="info-text" id="profileSavedPhone">—</span>
+              </div>
+              <div class="profile-info-row" id="profileSavedCityRow">
+                <span class="info-icon">📍</span>
+                <span class="info-text" id="profileSavedCity">—</span>
+              </div>
+            </div>
+            <button type="button" class="profile-edit-btn" id="profileEditBtn">✏️ Edit Profile</button>
+            <button type="button" class="profile-clear-btn" id="profileClearBtn2">Clear Saved Profile</button>
+          </div>
+        </div>
+
+        <div id="profileFormView">
+          <div class="profile-hint-box" id="profileHintBox">
+            <strong>💡 Tip:</strong> Save your details here to auto-fill the order form when you buy a card. Optional — you can also fill manually.
+          </div>
+          <form id="profileForm">
+            <div class="review-form-group">
+              <label>Your Photo (Optional)</label>
+              <div class="photo-upload-row">
+                <div class="photo-upload-area" id="profilePhotoUploadArea">
+                  <span class="plus-icon" id="profilePhotoPlusIcon">+</span>
+                  <button type="button" class="photo-remove-btn" id="profilePhotoRemoveBtn" title="Remove photo">×</button>
+                </div>
+                <div class="photo-upload-hint">
+                  <span class="primary">Add your photo</span>
+                  <span class="secondary">Shows in your purchase notification</span>
+                </div>
+              </div>
+              <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" />
+            </div>
+            <div class="review-form-group">
+              <label>Full Name</label>
+              <input type="text" id="profileName" placeholder="e.g. Rahul Sharma" required maxlength="30" />
+            </div>
+            <div class="review-form-group">
+              <label>Your City (Optional)</label>
+              <input type="text" id="profileCity" placeholder="e.g. Mumbai" maxlength="20" />
+            </div>
+            <div class="review-form-group">
+              <label>WhatsApp Number</label>
+              <input type="tel" id="profilePhone" placeholder="+91 98765 43210" required />
+            </div>
+            <button type="submit" class="order-btn-premium"><span>💾</span> Save Profile</button>
+            <button type="button" class="profile-clear-btn" id="profileClearBtn" style="display:none;">Clear Saved Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="productOverlay">
     <div class="modal">
       <button class="modal-close" id="productClose">&times;</button>
@@ -1820,37 +1957,19 @@
         <div class="checkout-header">
           <span class="checkout-eyebrow">CHECKOUT</span>
           <h3 class="checkout-title">Complete Your Order</h3>
-          <p class="checkout-subtitle">Confirm your card details and shipping information</p>
+          <p class="checkout-subtitle">Just 2 details and you're done</p>
           <div class="reserved-timer" id="reservedTimer">⏳ Reserved for 10:00</div>
         </div>
-        <div class="mini-card-preview" id="miniCardPreview"></div>
-        <div class="section-divider"><span>ORDER SUMMARY</span></div>
-        <div class="order-summary-card">
+        <div class="mini-card-preview compact" id="miniCardPreview"></div>
+        <div class="order-summary-card compact-summary">
           <div class="summary-row"><span class="summary-label">Card</span><span class="summary-value" id="summaryDesign">—</span></div>
-          <div class="summary-row"><span class="summary-label">Material</span><span class="summary-value" id="summaryMaterial">—</span></div>
           <div class="summary-row"><span class="summary-label">Quantity</span><span class="summary-value" id="summaryQty">1</span></div>
           <div class="summary-divider"></div>
           <div class="summary-row total-row"><span class="summary-label-total">TOTAL</span><span class="summary-value-total" id="summaryTotal">₹0</span></div>
         </div>
-        <div class="section-divider"><span>YOUR DETAILS</span></div>
         <form class="order-form" id="orderForm">
           <div class="field-group"><label>Full Name</label><input type="text" id="orderName" placeholder="John Smith" required /></div>
-          <div class="field-group"><label>Your City</label><input type="text" id="orderCity" placeholder="e.g. Mumbai" required maxlength="20" /></div>
           <div class="field-group"><label>WhatsApp Number</label><input type="tel" id="orderPhone" placeholder="+91 98765 43210" required /></div>
-          <div class="field-group">
-            <label>Your Photo (Optional)</label>
-            <div class="photo-upload-row">
-              <div class="photo-upload-area" id="orderPhotoUploadArea">
-                <span class="plus-icon" id="orderPhotoPlusIcon">+</span>
-                <button type="button" class="photo-remove-btn" id="orderPhotoRemoveBtn" title="Remove photo">×</button>
-              </div>
-              <div class="photo-upload-hint">
-                <span class="primary">Add your photo</span>
-                <span class="secondary">Shows in your purchase notification</span>
-              </div>
-            </div>
-            <input type="file" id="orderPhotoInput" accept="image/*" style="display: none;" />
-          </div>
           <button type="submit" class="order-btn-premium"><span>💳</span> Proceed to Payment</button>
           <div class="trust-badges">
             <span>🔒 Secure</span><span class="dot">·</span><span>⚡ Fast</span><span class="dot">·</span><span>✓ Genuine</span>
@@ -2077,11 +2196,272 @@
       return /^[6789]\d{9}$/.test(digits);
     }
 
+    /* =========================================================
+       PROFILE SYSTEM
+       ========================================================= */
+    var PROFILE_KEY = 'cardseller_profile';
+    var profileData = { name: '', city: '', phone: '', photo: null };
+    var profilePhotoDataURL = null;
+
+    function loadProfileFromStorage() {
+      try {
+        var raw = localStorage.getItem(PROFILE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            profileData = {
+              name: parsed.name || '',
+              city: parsed.city || '',
+              phone: parsed.phone || '',
+              photo: parsed.photo || null
+            };
+            return true;
+          }
+        }
+      } catch(e) {}
+      return false;
+    }
+
+    function saveProfileToStorage() {
+      try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData)); } catch(e) {}
+    }
+
+    function hasProfile() {
+      return !!(profileData.name || profileData.phone);
+    }
+
+    function updateProfileButtonUI() {
+      var btn = document.getElementById('profileBtn');
+      var label = document.getElementById('profileBtnLabel');
+      if (!btn) return;
+      if (hasProfile()) {
+        btn.classList.add('saved');
+        if (label) {
+          var firstName = profileData.name ? profileData.name.trim().split(/\s+/)[0] : '';
+          label.textContent = firstName ? ('Hi, ' + firstName) : 'Saved';
+        }
+      } else {
+        btn.classList.remove('saved');
+        if (label) label.textContent = 'Profile';
+      }
+    }
+
+    function resetProfilePhotoUpload() {
+      profilePhotoDataURL = null;
+      var area = document.getElementById('profilePhotoUploadArea');
+      var plusIcon = document.getElementById('profilePhotoPlusIcon');
+      if (area) {
+        area.classList.remove('has-photo');
+        var oldImg = area.querySelector('img');
+        if (oldImg) oldImg.remove();
+      }
+      if (plusIcon) plusIcon.style.display = '';
+    }
+
+    function showProfileSavedView() {
+      var savedView = document.getElementById('profileSavedView');
+      var formView = document.getElementById('profileFormView');
+      var titleEl = document.getElementById('profileModalTitle');
+      var subtitleEl = document.getElementById('profileModalSubtitle');
+
+      savedView.style.display = 'block';
+      formView.style.display = 'none';
+      titleEl.textContent = 'Your Profile';
+      subtitleEl.textContent = 'Order faster with saved details';
+
+      var avatarImg = document.getElementById('profileSavedAvatar');
+      if (profileData.photo) {
+        avatarImg.src = profileData.photo;
+      } else {
+        avatarImg.src = getInitialsAvatarSVG(profileData.name || 'User', false);
+      }
+
+      document.getElementById('profileSavedName').textContent = profileData.name || '—';
+
+      var phoneRow = document.getElementById('profileSavedPhoneRow');
+      if (profileData.phone) {
+        phoneRow.style.display = 'flex';
+        document.getElementById('profileSavedPhone').textContent = profileData.phone;
+      } else {
+        phoneRow.style.display = 'none';
+      }
+
+      var cityRow = document.getElementById('profileSavedCityRow');
+      if (profileData.city) {
+        cityRow.style.display = 'flex';
+        document.getElementById('profileSavedCity').textContent = profileData.city;
+      } else {
+        cityRow.style.display = 'none';
+      }
+    }
+
+    function showProfileFormView() {
+      var savedView = document.getElementById('profileSavedView');
+      var formView = document.getElementById('profileFormView');
+      var titleEl = document.getElementById('profileModalTitle');
+      var subtitleEl = document.getElementById('profileModalSubtitle');
+
+      savedView.style.display = 'none';
+      formView.style.display = 'block';
+      titleEl.textContent = 'Save Your Details';
+      subtitleEl.textContent = 'Save once, order faster next time';
+
+      document.getElementById('profileName').value = profileData.name || '';
+      document.getElementById('profileCity').value = profileData.city || '';
+      document.getElementById('profilePhone').value = profileData.phone || '';
+
+      resetProfilePhotoUpload();
+      if (profileData.photo) {
+        profilePhotoDataURL = profileData.photo;
+        var area = document.getElementById('profilePhotoUploadArea');
+        var plusIcon = document.getElementById('profilePhotoPlusIcon');
+        if (area) {
+          area.classList.add('has-photo');
+          if (plusIcon) plusIcon.style.display = 'none';
+          var img = document.createElement('img');
+          img.src = profileData.photo;
+          img.alt = 'Profile photo';
+          area.insertBefore(img, area.firstChild);
+        }
+      }
+
+      document.getElementById('profileClearBtn').style.display = hasProfile() ? 'block' : 'none';
+    }
+
+    function openProfileModal() {
+      var overlay = document.getElementById('profileOverlay');
+      if (hasProfile()) {
+        showProfileSavedView();
+      } else {
+        showProfileFormView();
+      }
+      overlay.style.display = 'flex';
+      document.body.classList.add('modal-open');
+    }
+
+    function closeProfileModal() {
+      document.getElementById('profileOverlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
+    }
+
+    document.getElementById('profileBtn').addEventListener('click', openProfileModal);
+    document.getElementById('profileClose').addEventListener('click', closeProfileModal);
+    document.getElementById('profileOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeProfileModal();
+    });
+
+    document.getElementById('profileEditBtn').addEventListener('click', function() {
+      showProfileFormView();
+    });
+
+    document.getElementById('profileClearBtn2').addEventListener('click', function() {
+      document.getElementById('profileClearBtn').click();
+    });
+
+    (function() {
+      var area = document.getElementById('profilePhotoUploadArea');
+      var input = document.getElementById('profilePhotoInput');
+      var plusIcon = document.getElementById('profilePhotoPlusIcon');
+      var removeBtn = document.getElementById('profilePhotoRemoveBtn');
+
+      area.addEventListener('click', function(e) {
+        if (e.target === removeBtn || e.target.closest('.photo-remove-btn')) return;
+        input.click();
+      });
+
+      input.addEventListener('change', function(e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { alert('Please select an image file.', {title: 'Invalid File Type', icon: '📷'}); return; }
+        if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.', {title: 'File Too Large', icon: '📦'}); return; }
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          profilePhotoDataURL = ev.target.result;
+          area.classList.add('has-photo');
+          plusIcon.style.display = 'none';
+          var oldImg = area.querySelector('img');
+          if (oldImg) oldImg.remove();
+          var img = document.createElement('img');
+          img.src = profilePhotoDataURL;
+          img.alt = 'Profile photo';
+          area.insertBefore(img, area.firstChild);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      removeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        resetProfilePhotoUpload();
+        input.value = '';
+      });
+    })();
+
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name = document.getElementById('profileName').value.trim();
+      var city = document.getElementById('profileCity').value.trim();
+      var phone = document.getElementById('profilePhone').value.trim();
+
+      var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
+      if (!nameRegex.test(name)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
+      if (!isValidIndianPhone(phone)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
+
+      profileData.name = name;
+      profileData.city = city;
+      profileData.phone = phone;
+      profileData.photo = profilePhotoDataURL || null;
+      saveProfileToStorage();
+      updateProfileButtonUI();
+      showProfileSavedView();
+      showToast('Profile saved!', 'success');
+    });
+
+    document.getElementById('profileClearBtn').addEventListener('click', function() {
+      var overlay = document.createElement('div');
+      overlay.className = 'custom-alert-overlay';
+      var box = document.createElement('div');
+      box.className = 'custom-alert-box';
+      box.innerHTML = '<div class="custom-alert-icon">🗑️</div><div class="custom-alert-title">Clear Profile?</div><div class="custom-alert-message">Your saved details will be removed. You can save them again anytime.</div><button class="custom-alert-btn secondary" id="clearCancel">Cancel</button><button class="custom-alert-btn" id="clearConfirm">Clear</button>';
+      overlay.appendChild(box);
+      document.body.appendChild(overlay);
+
+      document.getElementById('clearCancel').addEventListener('click', function() {
+        overlay.remove();
+      });
+      document.getElementById('clearConfirm').addEventListener('click', function() {
+        profileData = { name: '', city: '', phone: '', photo: null };
+        profilePhotoDataURL = null;
+        try { localStorage.removeItem(PROFILE_KEY); } catch(e) {}
+        resetProfilePhotoUpload();
+        document.getElementById('profileName').value = '';
+        document.getElementById('profileCity').value = '';
+        document.getElementById('profilePhone').value = '';
+        document.getElementById('profileClearBtn').style.display = 'none';
+        updateProfileButtonUI();
+        overlay.remove();
+        document.getElementById('profileSavedView').style.display = 'none';
+        document.getElementById('profileFormView').style.display = 'block';
+        document.getElementById('profileModalTitle').textContent = 'Save Your Details';
+        document.getElementById('profileModalSubtitle').textContent = 'Save once, order faster next time';
+        showToast('Profile cleared', 'info');
+      });
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) { overlay.remove(); }
+      });
+    });
+
+    document.getElementById('profilePhone').addEventListener('input', function() {
+      this.value = this.value.replace(/[^\d+\-\s]/g, '');
+    });
+
+    /* =========================================================
+       END PROFILE
+       ========================================================= */
+
     var dynamicStocks = {};
     var dynamicSold = {};
     var dynamicTotal = {};
 
-    // SINGLE SOURCE OF TRUTH for all buyer/sold counters
     var LIVE_STATS = {
       baseSold: 12548,
       baseBuyers: 9935,
@@ -2091,7 +2471,6 @@
       getBuyers: function() { return this.baseBuyers + this.sessionBuyers; }
     };
 
-    // Sync all counter UI elements from LIVE_STATS
     function syncAllCounters() {
       var soldEl = document.getElementById('heroSoldCount');
       if (soldEl) soldEl.textContent = LIVE_STATS.getSold().toLocaleString('en-IN') + '+';
@@ -2252,9 +2631,8 @@
         box.className = 'custom-alert-box';
         box.innerHTML = '<div class="custom-alert-icon">' + icon + '</div><div class="custom-alert-title">' + title + '</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
         overlay.appendChild(box);
-        document.body.style.overflow = 'hidden';
-        document.getElementById('caOk').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; });
-        overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; } });
+        document.getElementById('caOk').addEventListener('click', function() { overlay.remove(); });
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); } });
       };
       window.confirm = function(message) {
         return new Promise(function(resolve) {
@@ -2263,10 +2641,9 @@
           box.className = 'custom-alert-box';
           box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
           overlay.appendChild(box);
-          document.body.style.overflow = 'hidden';
-          document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(true); });
-          document.getElementById('ccCancel').addEventListener('click', function() { overlay.remove(); document.body.style.overflow = ''; resolve(false); });
-          overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; resolve(false); } });
+          document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); resolve(true); });
+          document.getElementById('ccCancel').addEventListener('click', function() { overlay.remove(); resolve(false); });
+          overlay.addEventListener('click', function(e) { if (e.target === overlay) { overlay.remove(); resolve(false); } });
         });
       };
     })();
@@ -2300,7 +2677,6 @@
     var isFlipped = false;
     var selectedRating = 0;
     var selectedPhotoDataURL = null;
-    var orderPhotoDataURL = null;
     var qrTimerInterval = null;
     var qrTimeLeft = 300;
     var reservedTimerInterval = null;
@@ -2571,7 +2947,6 @@
         div.innerHTML = buildAvatarImg(avatar, String.fromCharCode(65 + i), false);
         avatarsEl.appendChild(div);
       }
-      // Count will be synced by syncAllCounters after animation
     }
 
     function initWelcomeBack() {
@@ -2600,6 +2975,7 @@
             sub = 'You have visited us ' + visits + ' times. We appreciate your loyalty!';
           }
           notif.innerHTML =
+            '<button type="button" class="notif-close-btn" aria-label="Close">×</button>' +
             '<div class="wb-header">✨ Welcome Back ✨</div>' +
             '<div class="wb-body">' +
               '<div class="wb-icon-wrap">👑</div>' +
@@ -2610,6 +2986,13 @@
               '</div>' +
             '</div>';
           container.appendChild(notif);
+          var closeBtn = notif.querySelector('.notif-close-btn');
+          if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              notif.remove();
+            });
+          }
           setTimeout(function() { notif.remove(); }, 6000);
         }, 3000);
       } catch(e) {}
@@ -2781,48 +3164,59 @@
       document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
       document.getElementById('qtyValue').textContent = '1';
       document.getElementById('productOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     }
 
     function placeOrderDirect() {
       if (!currentDesign) return;
       currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material, id: currentDesign.id };
       var previewEl = document.getElementById('miniCardPreview');
-      var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
-      previewEl.className = 'mini-card-preview ' + finishClass;
-      previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
-      previewEl.classList.remove('flipped');
+      if (previewEl) {
+        var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
+        previewEl.className = 'mini-card-preview compact ' + finishClass;
+        previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
+        previewEl.classList.remove('flipped');
+      }
 
-      document.getElementById('summaryDesign').textContent = currentDesign.name;
-      document.getElementById('summaryMaterial').textContent = currentDesign.material;
-      document.getElementById('summaryQty').textContent = currentQty;
+      var summaryDesignEl = document.getElementById('summaryDesign');
+      if (summaryDesignEl) summaryDesignEl.textContent = currentDesign.name;
+      var summaryQtyEl = document.getElementById('summaryQty');
+      if (summaryQtyEl) summaryQtyEl.textContent = currentQty;
       var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0;
       var total = Math.round(priceNum * currentQty);
-      document.getElementById('summaryTotal').textContent = '₹' + total;
+      var summaryTotalEl = document.getElementById('summaryTotal');
+      if (summaryTotalEl) summaryTotalEl.textContent = '₹' + total;
+
+      if (hasProfile()) {
+        document.getElementById('orderName').value = profileData.name || '';
+        document.getElementById('orderPhone').value = profileData.phone || '';
+      } else {
+        document.getElementById('orderName').value = '';
+        document.getElementById('orderPhone').value = '';
+      }
+
       document.getElementById('productOverlay').style.display = 'none';
       document.getElementById('orderOverlay').style.display = 'flex';
-      document.getElementById('orderName').value = '';
-      document.getElementById('orderCity').value = '';
-      document.getElementById('orderPhone').value = '';
-      orderPhotoDataURL = null;
-      resetOrderPhotoUpload();
+      document.body.classList.add('modal-open');
       startReservedTimer();
     }
 
     function placeOrderFromForm(e) {
       e.preventDefault();
       var customerName = document.getElementById('orderName').value.trim();
-      var city = document.getElementById('orderCity').value.trim();
       var whatsapp = document.getElementById('orderPhone').value.trim();
       var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
       if (!nameRegex.test(customerName)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
-      var cityRegex = /^[a-zA-Z\s.\-]{2,}$/;
-      if (!cityRegex.test(city)) { alert('Please enter a valid city name.', {title: 'Invalid City', icon: '🏙️'}); return; }
       if (!isValidIndianPhone(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
+
+      var finalCity = profileData.city || '';
+      var finalPhoto = profileData.photo || null;
+
       currentPendingOrder = {
         id: Date.now().toString(), designName: currentOrderDesign.name, price: currentOrderDesign.price,
         qty: currentOrderDesign.qty, material: currentOrderDesign.material, designId: currentOrderDesign.id,
-        customerName: customerName, city: city, whatsapp: whatsapp, timestamp: Date.now(),
-        photoDataURL: orderPhotoDataURL
+        customerName: customerName, city: finalCity, whatsapp: whatsapp, timestamp: Date.now(),
+        photoDataURL: finalPhoto
       };
       var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0;
       var total = Math.round(priceNum * currentOrderDesign.qty);
@@ -2831,6 +3225,7 @@
       document.getElementById('transactionId').value = '';
       document.getElementById('orderOverlay').style.display = 'none';
       document.getElementById('paymentOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
       startQrTimer();
       clearInterval(reservedTimerInterval);
     }
@@ -2880,7 +3275,7 @@
           clearInterval(reservedTimerInterval);
           el.textContent = '❌ Reservation Expired. Please start again.';
           el.classList.remove('warning');
-          setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; }, 3000);
+          setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }, 3000);
         } else {
           var m = Math.floor(timeLeft / 60);
           var s = timeLeft % 60;
@@ -2922,6 +3317,7 @@
 
       clearInterval(qrTimerInterval);
       document.getElementById('paymentOverlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
       showToast('Payment confirmed!', 'success');
       showSuccessModal(currentPendingOrder);
       playOrderSound();
@@ -3017,24 +3413,42 @@
     });
 
     document.getElementById('modalBuyBtn').addEventListener('click', placeOrderDirect);
-    document.getElementById('productClose').addEventListener('click', function() { document.getElementById('productOverlay').style.display = 'none'; });
-    document.getElementById('productOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('productClose').addEventListener('click', function() { 
+      document.getElementById('productOverlay').style.display = 'none'; 
+      document.body.classList.remove('modal-open');
+    });
+    document.getElementById('productOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        document.body.classList.remove('modal-open');
+      } 
+    });
 
     document.getElementById('orderClose').addEventListener('click', function() {
       document.getElementById('orderOverlay').style.display = 'none';
       clearInterval(reservedTimerInterval);
+      document.body.classList.remove('modal-open');
     });
     document.getElementById('orderOverlay').addEventListener('click', function(e) {
-      if (e.target === this) { this.style.display = 'none'; clearInterval(reservedTimerInterval); }
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        clearInterval(reservedTimerInterval); 
+        document.body.classList.remove('modal-open');
+      }
     });
     document.getElementById('orderForm').addEventListener('submit', placeOrderFromForm);
 
     document.getElementById('paymentClose').addEventListener('click', function() {
       document.getElementById('paymentOverlay').style.display = 'none';
       clearInterval(qrTimerInterval);
+      document.body.classList.remove('modal-open');
     });
     document.getElementById('paymentOverlay').addEventListener('click', function(e) {
-      if (e.target === this) { this.style.display = 'none'; clearInterval(qrTimerInterval); }
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        clearInterval(qrTimerInterval); 
+        document.body.classList.remove('modal-open');
+      }
     });
     document.getElementById('confirmPaymentBtn').addEventListener('click', confirmPayment);
     document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); });
@@ -3085,7 +3499,6 @@
         }
         requestAnimationFrame(step);
       });
-      // After animation completes, sync all counters
       setTimeout(syncAllCounters, 2000);
     }
 
@@ -3152,6 +3565,7 @@
       var thumbStyle = getCardThumbStyle(design);
       var timeStr = formatTimeAgo(timestamp);
       var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
+      var cityText = buyer.city ? (' from ' + buyer.city) : '';
 
       return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
         '<div class="pulse-avatar-wrap">' +
@@ -3159,7 +3573,7 @@
           '<div class="pulse-check">✓</div>' +
         '</div>' +
         '<div class="pulse-content">' +
-          '<div class="pulse-text"><strong>' + buyer.name + '</strong> from ' + buyer.city + ' just bought <span class="card-name">' + design.name + '</span></div>' +
+          '<div class="pulse-text"><strong>' + buyer.name + '</strong>' + cityText + ' just bought <span class="card-name">' + design.name + '</span></div>' +
           '<div class="pulse-meta">' +
             '<span class="pulse-price">' + design.price + '</span> &bull; ' +
             '<span class="pulse-balance">Balance: ' + design.balance + '</span> &bull; ' +
@@ -3177,20 +3591,31 @@
         : (nameParts[0] || 'Someone');
       var timeStr = formatTimeAgo(timestamp);
       var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
+      var cityText = buyer.city ? (' from ' + buyer.city) : '';
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
       notif.innerHTML =
+        '<button type="button" class="notif-close-btn" aria-label="Close">×</button>' +
         '<div class="notif-card-badge">💳 Card Purchased</div>' +
         '<div class="notif-row">' +
           '<div class="notif-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div>' +
           '<div class="notif-content">' +
-            '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
+            '<strong>' + displayName + cityText + '</strong>' +
             'bought ' + design.name +
             '<span class="notif-time">🕐 ' + timeStr + '</span>' +
           '</div>' +
         '</div>';
       notifContainer.appendChild(notif);
+
+      var closeBtn = notif.querySelector('.notif-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          notif.remove();
+        });
+      }
+
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
@@ -3205,6 +3630,7 @@
       var notif = document.createElement('div');
       notif.className = 'live-notif review-notif';
       notif.innerHTML =
+        '<button type="button" class="notif-close-btn" aria-label="Close">×</button>' +
         '<div class="notif-card-badge">⭐ New Review</div>' +
         '<div class="notif-row">' +
           '<div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);">' +
@@ -3217,6 +3643,13 @@
           '</div>' +
         '</div>';
       notifContainer.appendChild(notif);
+      var closeBtn = notif.querySelector('.notif-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          notif.remove();
+        });
+      }
       setTimeout(function() { notif.remove(); }, 6500);
     }
 
@@ -3326,12 +3759,22 @@
       details.textContent = scenario.details;
       document.getElementById('networkErrorDot').style.background = scenario.detailsColor;
       document.getElementById('networkErrorOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     }
 
-    document.getElementById('networkErrorClose').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; });
-    document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('networkErrorClose').addEventListener('click', function() { 
+      document.getElementById('networkErrorOverlay').style.display = 'none'; 
+      document.body.classList.remove('modal-open');
+    });
+    document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        document.body.classList.remove('modal-open');
+      } 
+    });
     document.getElementById('networkRetryBtn').addEventListener('click', function() {
       document.getElementById('networkErrorOverlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
       setTimeout(function() { loadMoreBtn.click(); }, 300);
     });
 
@@ -3371,10 +3814,19 @@
       updateStarDisplay();
       document.getElementById('starLabel').textContent = 'Select rating';
       document.getElementById('reviewOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     });
 
-    document.getElementById('reviewClose').addEventListener('click', function() { document.getElementById('reviewOverlay').style.display = 'none'; });
-    document.getElementById('reviewOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('reviewClose').addEventListener('click', function() { 
+      document.getElementById('reviewOverlay').style.display = 'none'; 
+      document.body.classList.remove('modal-open');
+    });
+    document.getElementById('reviewOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        document.body.classList.remove('modal-open');
+      } 
+    });
 
     photoUploadArea.addEventListener('click', function(e) {
       if (e.target === photoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
@@ -3408,46 +3860,6 @@
       photoUploadArea.classList.remove('has-photo');
       photoPlusIcon.style.display = '';
       var oldImg = photoUploadArea.querySelector('img');
-      if (oldImg) oldImg.remove();
-    }
-
-    var orderPhotoUploadArea = document.getElementById('orderPhotoUploadArea');
-    var orderPhotoInput = document.getElementById('orderPhotoInput');
-    var orderPhotoPlusIcon = document.getElementById('orderPhotoPlusIcon');
-    var orderPhotoRemoveBtn = document.getElementById('orderPhotoRemoveBtn');
-
-    orderPhotoUploadArea.addEventListener('click', function(e) {
-      if (e.target === orderPhotoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
-      orderPhotoInput.click();
-    });
-
-    orderPhotoInput.addEventListener('change', function(e) {
-      var file = e.target.files && e.target.files[0];
-      if (!file) return;
-      if (!file.type.startsWith('image/')) { alert('Please select an image file.', {title: 'Invalid File Type', icon: '📷'}); return; }
-      if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.', {title: 'File Too Large', icon: '📦'}); return; }
-      var reader = new FileReader();
-      reader.onload = function(ev) {
-        orderPhotoDataURL = ev.target.result;
-        orderPhotoUploadArea.classList.add('has-photo');
-        orderPhotoPlusIcon.style.display = 'none';
-        var oldImg = orderPhotoUploadArea.querySelector('img');
-        if (oldImg) oldImg.remove();
-        var img = document.createElement('img');
-        img.src = orderPhotoDataURL;
-        img.alt = 'Your photo';
-        orderPhotoUploadArea.insertBefore(img, orderPhotoUploadArea.firstChild);
-      };
-      reader.readAsDataURL(file);
-    });
-
-    orderPhotoRemoveBtn.addEventListener('click', function(e) { e.stopPropagation(); resetOrderPhotoUpload(); orderPhotoInput.value = ''; });
-
-    function resetOrderPhotoUpload() {
-      orderPhotoDataURL = null;
-      orderPhotoUploadArea.classList.remove('has-photo');
-      orderPhotoPlusIcon.style.display = '';
-      var oldImg = orderPhotoUploadArea.querySelector('img');
       if (oldImg) oldImg.remove();
     }
 
@@ -3496,6 +3908,7 @@
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
+      document.body.classList.remove('modal-open');
       showToast('Thank you! Your review has been posted.', 'success');
       showReviewNotification(newReview);
       document.getElementById('reviewForm').reset();
@@ -3506,8 +3919,16 @@
       setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
     });
 
-    document.getElementById('moreStatsClose').addEventListener('click', function() { document.getElementById('moreStatsOverlay').style.display = 'none'; });
-    document.getElementById('moreStatsOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('moreStatsClose').addEventListener('click', function() { 
+      document.getElementById('moreStatsOverlay').style.display = 'none'; 
+      document.body.classList.remove('modal-open');
+    });
+    document.getElementById('moreStatsOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        document.body.classList.remove('modal-open');
+      } 
+    });
 
     function attachMoreButtonEvents() {
       document.querySelectorAll('.review-more-btn').forEach(function(btn) {
@@ -3519,6 +3940,7 @@
           var formatted = count.toLocaleString('en-IN');
           document.getElementById('moreStatsNumber').textContent = formatted + '+';
           document.getElementById('moreStatsOverlay').style.display = 'flex';
+          document.body.classList.add('modal-open');
         });
       });
     }
@@ -3533,15 +3955,25 @@
       document.getElementById('legalTitle').textContent = legalData.privacy.title;
       document.getElementById('legalContent').innerHTML = legalData.privacy.content;
       document.getElementById('legalOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     });
     document.getElementById('termsLink').addEventListener('click', function(e) {
       e.preventDefault();
       document.getElementById('legalTitle').textContent = legalData.terms.title;
       document.getElementById('legalContent').innerHTML = legalData.terms.content;
       document.getElementById('legalOverlay').style.display = 'flex';
+      document.body.classList.add('modal-open');
     });
-    document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
-    document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('legalClose').addEventListener('click', function() { 
+      document.getElementById('legalOverlay').style.display = 'none'; 
+      document.body.classList.remove('modal-open');
+    });
+    document.getElementById('legalOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) { 
+        this.style.display = 'none'; 
+        document.body.classList.remove('modal-open');
+      } 
+    });
 
     document.getElementById('miniCardPreview').addEventListener('click', function() {
       this.classList.toggle('flipped');
@@ -3564,6 +3996,9 @@
         showToast('Wait! 🔥 Don\'t miss out on our high balance cards!', 'error');
       }
     });
+
+    loadProfileFromStorage();
+    updateProfileButtonUI();
 
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
