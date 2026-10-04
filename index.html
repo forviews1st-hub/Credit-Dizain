@@ -824,6 +824,18 @@
     .stock-bar-track { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; position: relative; }
     .stock-bar-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b); border-radius: 3px; transition: width 1.5s ease; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
 
+    /* --- UPDATE 8: Trending Badge --- */
+    .trending-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      color: #fff; font-size: 9px; font-weight: 900;
+      letter-spacing: 1px; padding: 3px 8px;
+      border-radius: 6px; margin-bottom: 4px;
+      box-shadow: 0 2px 8px rgba(239,68,68,0.4);
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
     .rating-stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 1.5px; line-height: 1; font-family: Arial, sans-serif; }
     .rating-stars .stars-bg { color: #333; }
     .rating-stars .stars-fill { color: #d4af37; position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; }
@@ -983,21 +995,7 @@
     .review-helpful.active .helpful-count { color: #d4af37; }
     .review-helpful .helpful-icon { font-size: 11px; line-height: 1; }
 
-    .review-report {
-      margin-left: auto;
-      background: transparent;
-      border: none;
-      color: #4d4d4d;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      font-family: inherit;
-      padding: 4px 6px;
-      transition: color 0.2s ease;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-    }
-    .review-report:hover { color: #ef4444; }
+    /* Removed .review-report CSS */
 
     .review-seller-reply {
       background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
@@ -1146,25 +1144,45 @@
 
     /* --- UPDATE 1: Welcome Back Toast Premium Gold Theme --- */
     .welcome-back-toast {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; flex-direction: column; gap: 0;
       background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%);
-      border: 1px solid rgba(212,175,55,0.4);
-      border-radius: 14px;
-      padding: 12px 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.15);
-      animation: notifIn 0.4s ease, notifOut 0.4s ease 5s forwards;
+      border: 1px solid rgba(212,175,55,0.5);
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.25);
+      animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards;
       pointer-events: auto;
-      max-width: 320px;
+      max-width: 340px;
+      overflow: hidden;
     }
-    .welcome-back-toast .wb-icon {
-      font-size: 22px; flex-shrink: 0;
-      filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
+    .welcome-back-toast .wb-header {
+      background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #b8941f 100%);
+      color: #1a1408;
+      padding: 6px 12px;
+      font-size: 10px; font-weight: 900; letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    .welcome-back-toast .wb-text {
-      font-size: 12px; color: #ddd; line-height: 1.4; font-weight: 500;
+    .welcome-back-toast .wb-body {
+      padding: 12px 14px;
+      display: flex; align-items: center; gap: 12px;
     }
-    .welcome-back-toast .wb-text strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
-    .welcome-back-toast .wb-text .wb-sub { font-size: 10px; color: #f5d76e; font-weight: 600; margin-top: 2px; display: block; }
+    .welcome-back-toast .wb-icon-wrap {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);
+      border: 1.5px solid rgba(212,175,55,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(212,175,55,0.3);
+    }
+    .welcome-back-toast .wb-content { flex: 1; min-width: 0; }
+    .welcome-back-toast .wb-title { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; letter-spacing: -0.2px; }
+    .welcome-back-toast .wb-sub { font-size: 11px; color: #aaa; line-height: 1.4; }
+    .welcome-back-toast .wb-badge {
+      display: inline-block; margin-top: 6px;
+      font-size: 9px; font-weight: 800; color: #f5d76e;
+      background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35);
+      padding: 3px 8px; border-radius: 10px; letter-spacing: 0.5px;
+    }
 
     .more-stats-modal { text-align: center; padding: 40px 26px; }
     .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
@@ -1380,6 +1398,34 @@
     }
     .checkout-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
     .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
+
+    /* --- UPDATE 7: Reserved Timer --- */
+    .reserved-timer {
+      display: none;
+      text-align: center; font-size: 11px; font-weight: 800;
+      color: #ef4444; background: rgba(239,68,68,0.1);
+      padding: 4px 10px; border-radius: 10px;
+      margin-top: 6px; border: 1px solid rgba(239,68,68,0.3);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- UPDATE 5: QR Code Timer --- */
+    .qr-timer-wrap {
+      display: flex; justify-content: center; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700; color: #ef4444;
+      background: rgba(239,68,68,0.1); padding: 6px 14px;
+      border-radius: 20px; width: fit-content;
+      margin: 0 auto 10px; border: 1px solid rgba(239,68,68,0.3);
+    }
+    .qr-timer-wrap .timer-clock { font-variant-numeric: tabular-nums; font-size: 14px; letter-spacing: 1px; font-weight: 900; }
+    .qr-container.expired { position: relative; }
+    .qr-container.expired img { filter: blur(4px) grayscale(100%); opacity: 0.5; }
+    .qr-container.expired::after {
+      content: 'QR EXPIRED'; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); color: #ef4444; font-weight: 900;
+      font-size: 16px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,0,0,0.8);
+      z-index: 10; white-space: nowrap;
+    }
 
     /* --- UPDATE 5: Mini Card Flip Feature --- */
     .mini-card-preview {
@@ -1753,6 +1799,7 @@
           <span class="checkout-eyebrow">CHECKOUT</span>
           <h3 class="checkout-title">Complete Your Order</h3>
           <p class="checkout-subtitle">Confirm your card details and shipping information</p>
+          <div class="reserved-timer" id="reservedTimer">⏳ Reserved for 10:00</div>
         </div>
         <!-- UPDATE 5: Mini Card Preview with Flip -->
         <div class="mini-card-preview" id="miniCardPreview">
@@ -1794,7 +1841,12 @@
           <div class="payment-total-design" id="paymentDesign">—</div>
         </div>
         <div class="section-divider"><span>SCAN QR CODE</span></div>
-        <div class="qr-container"><img id="qrCodeImage" src="qr-code.png" alt="Payment QR Code" /></div>
+        <!-- UPDATE 5: QR Timer -->
+        <div class="qr-timer-wrap" id="qrTimerWrap">
+          <span>⏳ QR expires in:</span>
+          <span class="timer-clock" id="qrTimer">05:00</span>
+        </div>
+        <div class="qr-container" id="qrContainer"><img id="qrCodeImage" src="qr-code.png" alt="Payment QR Code" /></div>
         <p class="qr-hint">Scan with any <strong>UPI app</strong> to pay</p>
         <div class="section-divider"><span>ENTER TRANSACTION ID</span></div>
         <div class="field-group"><label>Transaction ID</label><input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="15" autocomplete="off" /></div>
@@ -1977,6 +2029,16 @@
       return total;
     }
 
+    // --- UPDATE 4: Time-based Dynamic Behavior ---
+    function getTimeMultiplier() {
+      var hour = new Date().getHours();
+      if (hour >= 0 && hour < 6) return 0.2; // Night (12 AM - 6 AM)
+      if (hour >= 6 && hour < 12) return 0.6; // Morning (6 AM - 12 PM)
+      if (hour >= 12 && hour < 17) return 0.9; // Afternoon (12 PM - 5 PM)
+      if (hour >= 17 && hour < 23) return 1.3; // Peak Evening (5 PM - 11 PM)
+      return 0.5; // Late night (11 PM - 12 AM)
+    }
+
     // ============================================================
     // INITIALS AVATAR (fallback)
     // ============================================================
@@ -1993,9 +2055,6 @@
 
     // ============================================================
     // AVATAR SYSTEM — GitHub API + No-Repeat Cycle
-    // - Names get permanently assigned images (localStorage)
-    // - Images never repeat until ALL used
-    // - When all used, cycle resets automatically
     // ============================================================
     var avatarCache = {
       list: [],
@@ -2042,12 +2101,10 @@
 
       var map = loadNameAvatarMap();
 
-      // If name already has assigned avatar, return it
       if (map[key]) {
         return map[key];
       }
 
-      // Load used URLs
       var used = loadUsedAvatars();
       var available = [];
       for (var i = 0; i < avatarCache.list.length; i++) {
@@ -2056,27 +2113,20 @@
         }
       }
 
-      // All used? Reset cycle
       if (available.length === 0) {
         used = [];
         available = avatarCache.list.slice();
-        // Optional: clear old name->avatar map so fresh cycle
-        // But we keep it so same name still gets same image if already assigned
       }
 
-      // Pick random from available
       var idx = Math.floor(Math.random() * available.length);
       var chosen = available[idx];
 
-      // Mark as used
       used.push(chosen);
       saveUsedAvatars(used);
 
-      // Save mapping name->url (keep map size reasonable)
       map[key] = chosen;
       var mapKeys = Object.keys(map);
       if (mapKeys.length > 1000) {
-        // Trim old entries (keep last 500)
         var newMap = {};
         var recent = mapKeys.slice(-500);
         for (var k = 0; k < recent.length; k++) {
@@ -2140,7 +2190,6 @@
     }
 
     function getRandomAvatarUrl() {
-      // Used only for trusted-by row avatars (no name attached)
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
       var used = loadUsedAvatars();
       var available = [];
@@ -2214,12 +2263,13 @@
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88, viewerWeight: 1.3 }
     ];
 
+    // --- UPDATE 2: Authentic YouTube Reviews (Balance/Spending Focus) ---
     var reviewsData = [
-      { name: 'Total Gaming', avatar: 'reviews/youtuber1.png', location: 'Gujarat', time: '9 days ago', purchased: 'All 5 Cards', comment: 'Bhai logo maine khud 5-6 baar order kiya hai, har baar ekdum genuine card milta hai. Delivery bhi fast hai aur quality bhi mast. Aap log bhi try karo, maza aa jayega! 🔥', rating: 4.5, helpful: 1247, moreCount: 8932, isYouTuber: true },
-      { name: 'Tonde Gamer', avatar: 'reviews/youtuber2.png', location: 'Nepal', time: '17 days ago', purchased: 'All 5 Cards', comment: 'Yaar yeh seller ekdum top class hai. Card asli hai aur delivery bhi super fast. Maine apne saare subscribers ko recommend kar diya hai. Must try! 💯', rating: 4.9, helpful: 2156, moreCount: 12480, isYouTuber: true },
-      { name: 'Gyan Gaming', avatar: 'reviews/youtuber3.png', location: 'Kolkata', time: '28 days ago', purchased: 'All 5 Cards', comment: 'Sach batau to pehle thoda doubt tha, but order karne ke baad sab clear ho gaya. Card genuine hai, bas delivery thodi late aayi. Overall achha experience raha 👍', rating: 4.1, helpful: 876, moreCount: 5432, isYouTuber: true },
-      { name: 'Lokesh Gamer', avatar: 'reviews/youtuber4.png', location: 'Hyderabad', time: '7 days ago', purchased: 'All 5 Cards', comment: 'Bhai kya bolu, ekdum next level service! 5 minute mein card mil gaya aur balance bhi wahi jo bola tha. Aise seller roz roz nahi milte. Highly recommended 🚀', rating: 5, helpful: 1876, moreCount: 9543, isYouTuber: true },
-      { name: 'Sooneeta', avatar: 'reviews/youtuber5.png', location: 'Nepal', time: '21 days ago', purchased: 'All 5 Cards', comment: 'Maine aur mere bhai ne dono ne order kiya, dono baar card mast aaya. Price bhi reasonable hai. Bas ek baar delivery mein 1 din extra laga. Baaki sab badhiya 😊', rating: 4.3, helpful: 654, moreCount: 3421, isYouTuber: true },
+      { name: 'Total Gaming', avatar: 'reviews/youtuber1.png', location: 'Gujarat', time: '9 days ago', purchased: 'All 5 Cards', comment: 'Hello Gamers! Ajju Bhai here. Maine is seller se card liya hai, aur sach batau toh balance ekdum wahi mila jo bola gaya tha. Maine us balance se apne Free Fire ka top-up kiya aur sab kuch easily ho gaya. Agar aap log bhi high balance card dhundh rahe ho, toh bina tension ke try karo. Trust me, genuine hai! 🔥', rating: 4.5, helpful: 1247, moreCount: 8932, isYouTuber: true },
+      { name: 'Tonde Gamer', avatar: 'reviews/youtuber2.png', location: 'Nepal', time: '17 days ago', purchased: 'All 5 Cards', comment: 'Tonde Bhai here! Yaar, maine pehle socha tha ki online card lena risky hoga, lekin is seller ka card ekdum genuine nikla. Balance bhi high mila aur maine turant apne account mein diamond top-up kar liye. Ab main apne saare subscribers ko bhi bata raha hoon. Try karo, maza aayega! 😎', rating: 4.9, helpful: 2156, moreCount: 12480, isYouTuber: true },
+      { name: 'Gyan Gaming', avatar: 'reviews/youtuber3.png', location: 'Kolkata', time: '28 days ago', purchased: 'All 5 Cards', comment: 'GyanSujan here. Maine is seller se cards order karne se pehle thoda research kiya tha. Payment ke baad card details turant mil gayi, aur jo balance limit unhone bola tha, woh bilkul sahi nikli. Maine us balance se apne in-game purchases kiye, sab kuch smoothly ho gaya. Overall, main isko recommend karunga. Agar aap bhi high balance card dhundh rahe ho, toh yeh ek genuine option hai. 👍', rating: 4.1, helpful: 876, moreCount: 5432, isYouTuber: true },
+      { name: 'Lokesh Gamer', avatar: 'reviews/youtuber4.png', location: 'Hyderabad', time: '7 days ago', purchased: 'All 5 Cards', comment: 'Hello Guys! Lokesh Gamer here. Maine bhi is seller se card liya hai. Balance ekdum high mila, aur maine usi balance se apne account mein top-up kiya. Sab kuch instantly ho gaya. Agar aap ek trustworthy seller dhundh rahe ho jahan se aap high balance card le sako, toh yeh sahi jagah hai. Highly recommended! ✅', rating: 5, helpful: 1876, moreCount: 9543, isYouTuber: true },
+      { name: 'Sooneeta', avatar: 'reviews/youtuber5.png', location: 'Nepal', time: '21 days ago', purchased: 'All 5 Cards', comment: 'Hi Guys! Sooneeta here. Maine aur mere bhai ne dono ne is seller se cards order kiye. Dono baar balance bilkul sahi mila, aur humne us balance se apne games mein top-up kar liya. Price bhi reasonable hai. Delivery mein thoda time laga, lekin overall experience achha raha. Thank you! 😊', rating: 4.3, helpful: 654, moreCount: 3421, isYouTuber: true },
       { name: 'Anjali Desai', avatar: 'reviews/review1.png', location: 'Delhi', time: '3 days ago', purchased: 'American Express Gold', comment: 'Payment karte hi turant WhatsApp par card aur uski saari details mil gayi. Bilkul real service hai 🔥', rating: 5, helpful: 47, moreCount: 1247 },
       { name: 'Rohit Yadav', avatar: 'reviews/review2.png', location: 'Mumbai', time: '1 week ago', purchased: 'Metro Signature', comment: 'Card buy kiya, high balance mila aur usi balance se Free Fire mein monthly membership le li. Sab kuch instantly ho gaya! Bhai yeh toh mast hai 💯', rating: 5, helpful: 89, moreCount: 3891 },
       { name: 'Rahul Sharma', avatar: 'reviews/review3.png', location: 'Bangalore', time: '2 weeks ago', purchased: 'Pacific Infinite', comment: 'Payment ke 1 minute ke andar card details WhatsApp par aa gayi. Genuine aur fast seller hai. Highly recommended ✅', rating: 5, helpful: 156, moreCount: 5788 },
@@ -2235,6 +2285,22 @@
     var isFlipped = false;
     var selectedRating = 0;
     var selectedPhotoDataURL = null;
+
+    // --- UPDATE 6: Dynamic Stock Variables ---
+    var dynamicStocks = {};
+
+    function initDynamicStocks() {
+      designs.forEach(function(d) {
+        dynamicStocks[d.id] = Math.floor(Math.random() * 33) + 55; // 55 to 87
+      });
+    }
+
+    // --- UPDATE 5: QR Timer Variables ---
+    var qrTimerInterval = null;
+    var qrTimeLeft = 300; // 5 minutes
+
+    // --- UPDATE 7: Reserved Timer Variables ---
+    var reservedTimerInterval = null;
 
     function showToast(message, type) {
       var container = document.getElementById('toastContainer');
@@ -2354,11 +2420,10 @@
         '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
-    // --- UPDATE 2: Number Consistency (Formula Change) ---
+    // --- UPDATE 4: Time-based Dynamic Behavior (Formula Change) ---
     function getBaseViewerCount(design) {
       var cardsSoldNow = growNumber(12548, 25, 45, 7001); // Base 12548
-      // Divide by 15 instead of 200 (DeepSeek ka formula)
-      var base = (cardsSoldNow / 15) * (design.stockPercent / 100) * design.viewerWeight;
+      var base = (cardsSoldNow / 15) * (design.stockPercent / 100) * design.viewerWeight * getTimeMultiplier();
       return Math.max(15, Math.round(base)); 
     }
 
@@ -2486,13 +2551,13 @@
         avatarsEl.appendChild(div);
       }
       if (countEl) {
-        var happyBuyers = growNumber(9935, 18, 32, 8801); // Updated base
+        var happyBuyers = growNumber(9935, 18, 32, 8801);
         countEl.textContent = '+' + happyBuyers.toLocaleString('en-IN') + ' buyers';
       }
     }
 
     // ============================================================
-    // WELCOME BACK — Clear Message
+    // WELCOME BACK — Premium Message (UPDATE 1)
     // ============================================================
     function getOrdinalSuffix(n) {
       var s = ['th', 'st', 'nd', 'rd'];
@@ -2521,24 +2586,28 @@
           var notif = document.createElement('div');
           notif.className = 'welcome-back-toast';
 
-          var title, sub;
+          var sub;
           if (visits === 1) {
-            title = 'Welcome to Card Seller!';
-            sub = 'First visit? Explore our premium card collection below.';
+            sub = 'Welcome to our store! Explore premium cards today.';
           } else if (visits === 2) {
-            title = 'Welcome back!';
-            sub = 'Good to see you again! This is your 2nd visit.';
+            sub = 'This is your 2nd visit. Thanks for coming back!';
           } else {
-            title = 'Welcome back!';
-            sub = 'You have visited us ' + visits + ' times now. Thanks for your trust!';
+            sub = 'You have visited us ' + visits + ' times. We appreciate your loyalty!';
           }
 
           notif.innerHTML =
-            '<div class="wb-icon">✨</div>' +
-            '<div class="wb-text"><strong>' + title + '</strong>' + sub + '<span class="wb-sub">🎉 Trusted by thousands of buyers</span></div>';
+            '<div class="wb-header">✨ Welcome Back ✨</div>' +
+            '<div class="wb-body">' +
+              '<div class="wb-icon-wrap">👑</div>' +
+              '<div class="wb-content">' +
+                '<div class="wb-title">Good to see you again!</div>' +
+                '<div class="wb-sub">' + sub + '</div>' +
+                '<span class="wb-badge">🎉 Priority Buyer Status</span>' +
+              '</div>' +
+            '</div>';
 
           container.appendChild(notif);
-          setTimeout(function() { notif.remove(); }, 5500);
+          setTimeout(function() { notif.remove(); }, 6000);
         }, 3000);
       } catch(e) {}
     }
@@ -2546,15 +2615,23 @@
     function renderGrid() {
       var grid = document.getElementById('productGrid');
       grid.innerHTML = '';
+      
+      // --- UPDATE 8: Find Trending Card (Highest stockPercent) ---
+      var maxStock = 0;
+      var trendingId = '';
+      designs.forEach(function(d) { if (d.stockPercent > maxStock) { maxStock = d.stockPercent; trendingId = d.id; } });
+
       designs.forEach(function(design) {
         var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
-        var stockLeft = Math.floor(Math.random() * 5) + 2;
+        var stockLeft = dynamicStocks[design.id]; // UPDATE 6: Dynamic Stock
         var viewerBase = getBaseViewerCount(design);
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
         
-        // --- UPDATE 3: Live Views Badge Location (Card Bottom Row) ---
+        // --- UPDATE 8: Trending Badge HTML ---
+        var badgeHTML = (design.id === trendingId) ? '<div class="trending-badge">🔥 Trending</div>' : '';
+        
         card.innerHTML =
           '<div class="countdown-strip" data-design-id="' + design.id + '">' +
             '<span class="cd-icon">🔥</span>' +
@@ -2577,13 +2654,14 @@
             '</div>' +
           '</div>' +
           '<div class="gc-info">' +
+            badgeHTML +
             '<div class="gc-name">' + design.name + '</div>' +
             '<div class="gc-tagline">' + design.tagline + '</div>' +
             '<div class="gc-material">' + design.material + '</div>' +
             '<div class="gc-meta"><span class="gc-rating">' + renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span></span><span class="gc-price">' + design.price + '</span></div>' +
             '<div class="stock-progress">' +
               '<div class="stock-progress-top">' +
-                '<span class="stock-left">🔥 Only ' + stockLeft + ' left in stock!</span>' +
+                '<span class="stock-left" data-id="' + design.id + '">🔥 Only ' + stockLeft + ' left in stock!</span>' +
                 '<span class="stock-percent">' + design.stockPercent + '% Sold</span>' +
               '</div>' +
               '<div class="stock-bar-track"><div class="stock-bar-fill" style="width:0%" data-fill="' + design.stockPercent + '"></div></div>' +
@@ -2599,6 +2677,17 @@
         });
       }, 300);
     }
+
+    // --- UPDATE 6: Dynamic Stock Reduction Interval ---
+    setInterval(function() {
+      designs.forEach(function(d) {
+        if (dynamicStocks[d.id] > 3) {
+          dynamicStocks[d.id]--;
+          var el = document.querySelector('.stock-left[data-id="' + d.id + '"]');
+          if (el) el.textContent = '🔥 Only ' + dynamicStocks[d.id] + ' left in stock!';
+        }
+      });
+    }, 600000); // 10 minutes
 
     function createReviewCardHTML(review, index) {
       var starsHTML = '';
@@ -2640,7 +2729,6 @@
         '<div class="review-actions">' +
           '<button class="review-helpful" type="button"><span class="helpful-icon">👍</span> Helpful <span class="helpful-count">' + helpfulDisplay.toLocaleString('en-IN') + '</span></button>' +
           '<button class="review-more-btn" type="button" data-more="' + moreDisplay + '"><span>More</span> <span class="more-count">+' + moreDisplay.toLocaleString('en-IN') + '</span></button>' +
-          '<button class="review-report" type="button">Report</button>' +
         '</div>';
       if (review.sellerReply) {
         html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
@@ -2661,7 +2749,6 @@
       });
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
-      attachReportButtonEvents();
     }
 
     function attachGridEvents() {
@@ -2696,7 +2783,6 @@
       wrap.classList.remove('flipped');
       document.getElementById('modalName').textContent = design.name;
       document.getElementById('modalTagline').textContent = design.tagline;
-      // UPDATE 4: Modal Price Block Update
       document.getElementById('modalPrice').textContent = design.price;
       document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
       document.getElementById('qtyValue').textContent = '1';
@@ -2723,6 +2809,9 @@
       document.getElementById('orderOverlay').style.display = 'flex';
       document.getElementById('orderName').value = '';
       document.getElementById('orderPhone').value = '';
+      
+      // UPDATE 7: Start Reserved Timer
+      startReservedTimer();
     }
 
     function placeOrderFromForm(e) {
@@ -2745,13 +2834,79 @@
       document.getElementById('transactionId').value = '';
       document.getElementById('orderOverlay').style.display = 'none';
       document.getElementById('paymentOverlay').style.display = 'flex';
+      
+      // UPDATE 5: Start QR Timer
+      startQrTimer();
+      // UPDATE 7: Stop Reserved Timer
+      clearInterval(reservedTimerInterval);
+    }
+
+    // --- UPDATE 5: QR Timer Functions ---
+    function startQrTimer() {
+      clearInterval(qrTimerInterval);
+      qrTimeLeft = 300; // 5 minutes
+      var timerEl = document.getElementById('qrTimer');
+      var qrContainer = document.getElementById('qrContainer');
+      var confirmBtn = document.getElementById('confirmPaymentBtn');
+      
+      timerEl.textContent = '05:00';
+      qrContainer.classList.remove('expired');
+      confirmBtn.disabled = false;
+      confirmBtn.style.opacity = '1';
+      confirmBtn.style.cursor = 'pointer';
+
+      qrTimerInterval = setInterval(function() {
+        qrTimeLeft--;
+        if (qrTimeLeft <= 0) {
+          clearInterval(qrTimerInterval);
+          timerEl.textContent = '00:00';
+          qrContainer.classList.add('expired');
+          confirmBtn.disabled = true;
+          confirmBtn.style.opacity = '0.5';
+          confirmBtn.style.cursor = 'not-allowed';
+        } else {
+          var m = Math.floor(qrTimeLeft / 60);
+          var s = qrTimeLeft % 60;
+          timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+      }, 1000);
+    }
+
+    // --- UPDATE 7: Reserved Timer Functions ---
+    function startReservedTimer() {
+      clearInterval(reservedTimerInterval);
+      var timeLeft = 600; // 10 minutes
+      var el = document.getElementById('reservedTimer');
+      el.style.display = 'block';
+      el.textContent = '⏳ Reserved for 10:00';
+      
+      reservedTimerInterval = setInterval(function() {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          clearInterval(reservedTimerInterval);
+          el.textContent = '❌ Reservation Expired. Please start again.';
+          setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; }, 3000);
+        } else {
+          var m = Math.floor(timeLeft / 60);
+          var s = timeLeft % 60;
+          el.textContent = '⏳ Reserved for ' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+      }, 1000);
     }
 
     function confirmPayment() {
+      if (qrTimeLeft <= 0) {
+        alert('QR Code expired. Please close and try again.', {title: 'QR Expired', icon: '⏳'});
+        return;
+      }
       var txnId = document.getElementById('transactionId').value.trim();
       var txnRegex = /^(\d{12}|UPI\d{12})$/;
       if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. Please check and try again.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
       currentPendingOrder.transactionId = txnId;
+      
+      // Stop QR Timer
+      clearInterval(qrTimerInterval);
+      
       document.getElementById('paymentOverlay').style.display = 'none';
       showToast('Payment confirmed!', 'success');
       showSuccessModal(currentPendingOrder);
@@ -2824,12 +2979,28 @@
     document.getElementById('productClose').addEventListener('click', function() { document.getElementById('productOverlay').style.display = 'none'; });
     document.getElementById('productOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    document.getElementById('orderClose').addEventListener('click', function() { document.getElementById('orderOverlay').style.display = 'none'; });
-    document.getElementById('orderOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('orderClose').addEventListener('click', function() { 
+      document.getElementById('orderOverlay').style.display = 'none'; 
+      clearInterval(reservedTimerInterval);
+    });
+    document.getElementById('orderOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) {
+        this.style.display = 'none'; 
+        clearInterval(reservedTimerInterval);
+      }
+    });
     document.getElementById('orderForm').addEventListener('submit', placeOrderFromForm);
 
-    document.getElementById('paymentClose').addEventListener('click', function() { document.getElementById('paymentOverlay').style.display = 'none'; });
-    document.getElementById('paymentOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+    document.getElementById('paymentClose').addEventListener('click', function() { 
+      document.getElementById('paymentOverlay').style.display = 'none'; 
+      clearInterval(qrTimerInterval);
+    });
+    document.getElementById('paymentOverlay').addEventListener('click', function(e) { 
+      if (e.target === this) {
+        this.style.display = 'none'; 
+        clearInterval(qrTimerInterval);
+      }
+    });
     document.getElementById('confirmPaymentBtn').addEventListener('click', confirmPayment);
     document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^0-9UPI]/g, ''); });
 
@@ -2906,7 +3077,6 @@
           usedPulseKeys.push(key);
           if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
           var fullName = fn + ' ' + ln;
-          // Assign a unique avatar (won't repeat until all used)
           return { name: fullName, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getAvatarForName(fullName) };
         }
         attempts++;
@@ -3011,7 +3181,12 @@
       var timestamp = Date.now();
       addLiveNotification(buyer, design, timestamp);
       addPulseItem(buyer, design, timestamp);
-      var delay = 8000 + Math.random() * 7000;
+      
+      // --- UPDATE 4: Time-based Notification Delay ---
+      var baseDelay = 15000; // 15 seconds base
+      var multiplier = getTimeMultiplier();
+      var delay = (baseDelay / multiplier) + Math.random() * 5000;
+      
       setTimeout(triggerRandomPurchase, delay);
     }
 
@@ -3104,17 +3279,7 @@
       });
     }
 
-    function attachReportButtonEvents() {
-      document.querySelectorAll('.review-report').forEach(function(btn) {
-        if (btn.dataset.reportAttached === '1') return;
-        btn.dataset.reportAttached = '1';
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          e.preventDefault();
-          showToast('Report submitted. Thanks for the feedback.', 'info');
-        });
-      });
-    }
+    // Removed attachReportButtonEvents()
 
     var photoUploadArea = document.getElementById('photoUploadArea');
     var photoInput = document.getElementById('reviewPhotoInput');
@@ -3213,7 +3378,6 @@
       grid.appendChild(card_el);
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
-      attachReportButtonEvents();
       document.getElementById('reviewOverlay').style.display = 'none';
       showToast('Thank you! Your review has been posted.', 'success');
       showReviewNotification(newReview);
@@ -3262,14 +3426,30 @@
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    // NEW: Event listener for Mini Card Flip
-    document.getElementById('miniCardPreview').addEventListener('click', function() {
-      this.classList.toggle('flipped');
+    // --- UPDATE 9: Idle Reminder / Exit Intent ---
+    var idleTimer = null;
+    function resetIdleTimer() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function() {
+        showToast('Wait! 🔥 High balance cards are selling fast today. Don\'t miss out!', 'info');
+      }, 120000); // 2 minutes
+    }
+    document.addEventListener('mousemove', resetIdleTimer);
+    document.addEventListener('keydown', resetIdleTimer);
+    document.addEventListener('scroll', resetIdleTimer);
+    resetIdleTimer();
+
+    // Exit Intent
+    document.addEventListener('mouseleave', function(e) {
+      if (e.clientY < 0) {
+        showToast('Wait! 🔥 Don\'t miss out on our high balance cards!', 'error');
+      }
     });
 
     // INIT
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
+      initDynamicStocks(); // UPDATE 6
       initViewerCounts();
       renderGrid();
       initCountdowns();
