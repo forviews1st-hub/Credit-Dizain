@@ -1081,7 +1081,7 @@
       position: fixed;
       top: 86px; right: 20px;
       left: auto; bottom: auto;
-      z-index: 500;
+      z-index: 2200;
       display: flex; flex-direction: column; gap: 10px;
       pointer-events: none;
       max-width: 320px;
@@ -1400,6 +1400,16 @@
       margin-top: 6px; border: 1px solid rgba(239,68,68,0.3);
       font-variant-numeric: tabular-nums;
     }
+    .reserved-timer.warning {
+      color: #ff8800;
+      background: rgba(255, 136, 0, 0.15);
+      border-color: rgba(255, 136, 0, 0.5);
+      animation: reserveWarningPulse 1s ease-in-out infinite;
+    }
+    @keyframes reserveWarningPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 136, 0, 0.5); }
+      50% { box-shadow: 0 0 0 5px rgba(255, 136, 0, 0); }
+    }
 
     .qr-timer-wrap {
       display: flex; justify-content: center; align-items: center; gap: 6px;
@@ -1417,6 +1427,29 @@
       font-size: 16px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,0,0,0.8);
       z-index: 10; white-space: nowrap;
     }
+
+    .regenerate-qr-btn {
+      display: none;
+      margin: 8px auto 10px;
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
+      color: #1a1408;
+      border: none; border-radius: 20px;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      cursor: pointer; font-family: inherit;
+      box-shadow: 0 4px 14px rgba(212,175,55,0.45);
+      transition: all 0.25s ease;
+      align-items: center; gap: 6px;
+      width: fit-content;
+      position: relative; overflow: hidden;
+    }
+    .regenerate-qr-btn::before {
+      content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(20deg); transition: left 0.7s ease;
+    }
+    .regenerate-qr-btn:hover::before { left: 130%; }
+    .regenerate-qr-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(212,175,55,0.55); }
 
     .mini-card-preview {
       position: relative; width: 100%; aspect-ratio: 1.586 / 1;
@@ -1802,7 +1835,22 @@
         <div class="section-divider"><span>YOUR DETAILS</span></div>
         <form class="order-form" id="orderForm">
           <div class="field-group"><label>Full Name</label><input type="text" id="orderName" placeholder="John Smith" required /></div>
+          <div class="field-group"><label>Your City</label><input type="text" id="orderCity" placeholder="e.g. Mumbai" required maxlength="20" /></div>
           <div class="field-group"><label>WhatsApp Number</label><input type="tel" id="orderPhone" placeholder="+91 98765 43210" required /></div>
+          <div class="field-group">
+            <label>Your Photo (Optional)</label>
+            <div class="photo-upload-row">
+              <div class="photo-upload-area" id="orderPhotoUploadArea">
+                <span class="plus-icon" id="orderPhotoPlusIcon">+</span>
+                <button type="button" class="photo-remove-btn" id="orderPhotoRemoveBtn" title="Remove photo">×</button>
+              </div>
+              <div class="photo-upload-hint">
+                <span class="primary">Add your photo</span>
+                <span class="secondary">Shows in your purchase notification</span>
+              </div>
+            </div>
+            <input type="file" id="orderPhotoInput" accept="image/*" style="display: none;" />
+          </div>
           <button type="submit" class="order-btn-premium"><span>💳</span> Proceed to Payment</button>
           <div class="trust-badges">
             <span>🔒 Secure</span><span class="dot">·</span><span>⚡ Fast</span><span class="dot">·</span><span>✓ Genuine</span>
@@ -1832,9 +1880,10 @@
           <span class="timer-clock" id="qrTimer">05:00</span>
         </div>
         <div class="qr-container" id="qrContainer"><img id="qrCodeImage" src="qr-code.png" alt="Payment QR Code" /></div>
+        <button type="button" class="regenerate-qr-btn" id="regenerateQrBtn"><span>🔄</span> Generate New QR</button>
         <p class="qr-hint">Scan with any <strong>UPI app</strong> to pay</p>
         <div class="section-divider"><span>ENTER TRANSACTION ID</span></div>
-        <div class="field-group"><label>Transaction ID</label><input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="15" autocomplete="off" /></div>
+        <div class="field-group"><label>Transaction ID</label><input type="text" id="transactionId" placeholder="Enter Transaction ID" maxlength="22" autocomplete="off" /></div>
         <button class="order-btn-premium" id="confirmPaymentBtn"><span>🔒</span> Confirm Payment</button>
         <div class="trust-badges">
           <span>🔒 100% Secure</span><span class="dot">·</span><span>📦 Fast Delivery</span><span class="dot">·</span><span>🛡️ 100% Privacy</span>
@@ -1965,9 +2014,6 @@
   <div class="live-notif-container" id="liveNotifContainer"></div>
 
   <script>
-    // ============================================================
-    // DAILY GROWTH SYSTEM
-    // ============================================================
     (function() {
       try {
         var STORAGE_KEY = 'cardseller_first_visit';
@@ -2014,9 +2060,6 @@
       return total;
     }
 
-    // ============================================================
-    // TIME MULTIPLIER
-    // ============================================================
     function getTimeMultiplier() {
       var hour = new Date().getHours();
       if (hour >= 0 && hour < 6) return 0.2;
@@ -2026,9 +2069,15 @@
       return 0.5;
     }
 
-    // ============================================================
-    // DYNAMIC INVENTORY SYSTEM
-    // ============================================================
+    // NEW FIX: Flexible Indian phone validator
+    function isValidIndianPhone(input) {
+      var digits = String(input || '').replace(/\D/g, '');
+      if (digits.length === 13 && digits.indexOf('91') === 0) digits = digits.slice(2);
+      else if (digits.length === 12 && digits.indexOf('91') === 0) digits = digits.slice(2);
+      else if (digits.length === 11 && digits.charAt(0) === '0') digits = digits.slice(1);
+      return /^[6789]\d{9}$/.test(digits);
+    }
+
     var dynamicStocks = {};
     var dynamicSold = {};
     var dynamicTotal = {};
@@ -2037,7 +2086,6 @@
     var heroBaseSold = 12548;
     var heroBaseBuyers = 9935;
     var trustedBaseBuyers = 9935;
-    // FIX #1: Store animated final values so live updates don't reset to base
     var heroAnimatedSold = 12548;
     var heroAnimatedBuyers = 9935;
 
@@ -2051,9 +2099,6 @@
       });
     }
 
-    // ============================================================
-    // INITIALS AVATAR
-    // ============================================================
     function getInitialsAvatarSVG(name, isYouTuber) {
       var initials = String(name || 'U').split(' ').map(function(n){return (n[0]||'');}).join('').substring(0,2).toUpperCase();
       var bg = isYouTuber ? '#0f1729' : '#1a1a1a';
@@ -2065,9 +2110,6 @@
       return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
 
-    // ============================================================
-    // AVATAR SYSTEM
-    // ============================================================
     var avatarCache = { list: [], loaded: false };
 
     function loadUsedAvatars() {
@@ -2180,9 +2222,6 @@
       return '<img src="' + avatarUrl + '" alt="' + name + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
     }
 
-    // ============================================================
-    // CUSTOM ALERTS
-    // ============================================================
     (function() {
       function createOverlay() {
         var o = document.createElement('div');
@@ -2247,6 +2286,7 @@
     var isFlipped = false;
     var selectedRating = 0;
     var selectedPhotoDataURL = null;
+    var orderPhotoDataURL = null;
     var qrTimerInterval = null;
     var qrTimeLeft = 300;
     var reservedTimerInterval = null;
@@ -2502,7 +2542,6 @@
       }
     }
 
-    // FIX #1: Use animated final values instead of base
     function updateHeroCounters() {
       var soldEl = document.getElementById('heroSoldCount');
       if (soldEl) {
@@ -2582,8 +2621,6 @@
     function renderGrid() {
       var grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-
-      // FIX #2: Trending = lowest stock (min 3) = most sold = actually trending
       var trendingId = '';
       var lowestStock = Infinity;
       designs.forEach(function(d) {
@@ -2643,8 +2680,6 @@
         grid.appendChild(card);
       });
       attachGridEvents();
-
-      // FIX #3: Animate stock bar from 0 to actual value
       setTimeout(function() {
         document.querySelectorAll('.stock-bar-fill').forEach(function(bar) {
           bar.style.width = bar.getAttribute('data-fill') + '%';
@@ -2769,22 +2804,29 @@
       document.getElementById('productOverlay').style.display = 'none';
       document.getElementById('orderOverlay').style.display = 'flex';
       document.getElementById('orderName').value = '';
+      document.getElementById('orderCity').value = '';
       document.getElementById('orderPhone').value = '';
+      orderPhotoDataURL = null;
+      resetOrderPhotoUpload();
       startReservedTimer();
     }
 
     function placeOrderFromForm(e) {
       e.preventDefault();
       var customerName = document.getElementById('orderName').value.trim();
+      var city = document.getElementById('orderCity').value.trim();
       var whatsapp = document.getElementById('orderPhone').value.trim();
-      var nameRegex = /^[a-zA-Z\s]{3,}$/;
-      if (!nameRegex.test(customerName)) { alert('Please enter a valid full name (minimum 3 letters, no numbers or special characters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
-      var phoneRegex = /^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/;
-      if (!phoneRegex.test(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
+      var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
+      if (!nameRegex.test(customerName)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
+      var cityRegex = /^[a-zA-Z\s.\-]{2,}$/;
+      if (!cityRegex.test(city)) { alert('Please enter a valid city name.', {title: 'Invalid City', icon: '🏙️'}); return; }
+      // NEW FIX: Use flexible phone validator
+      if (!isValidIndianPhone(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
       currentPendingOrder = {
         id: Date.now().toString(), designName: currentOrderDesign.name, price: currentOrderDesign.price,
         qty: currentOrderDesign.qty, material: currentOrderDesign.material, designId: currentOrderDesign.id,
-        customerName: customerName, whatsapp: whatsapp, timestamp: Date.now()
+        customerName: customerName, city: city, whatsapp: whatsapp, timestamp: Date.now(),
+        photoDataURL: orderPhotoDataURL
       };
       var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0;
       var total = Math.round(priceNum * currentOrderDesign.qty);
@@ -2803,11 +2845,13 @@
       var timerEl = document.getElementById('qrTimer');
       var qrContainer = document.getElementById('qrContainer');
       var confirmBtn = document.getElementById('confirmPaymentBtn');
+      var regenBtn = document.getElementById('regenerateQrBtn');
       timerEl.textContent = '05:00';
       qrContainer.classList.remove('expired');
       confirmBtn.disabled = false;
       confirmBtn.style.opacity = '1';
       confirmBtn.style.cursor = 'pointer';
+      regenBtn.style.display = 'none';
 
       qrTimerInterval = setInterval(function() {
         qrTimeLeft--;
@@ -2818,6 +2862,7 @@
           confirmBtn.disabled = true;
           confirmBtn.style.opacity = '0.5';
           confirmBtn.style.cursor = 'not-allowed';
+          regenBtn.style.display = 'flex';
         } else {
           var m = Math.floor(qrTimeLeft / 60);
           var s = qrTimeLeft % 60;
@@ -2831,32 +2876,40 @@
       var timeLeft = 600;
       var el = document.getElementById('reservedTimer');
       el.style.display = 'block';
+      el.classList.remove('warning');
       el.textContent = '⏳ Reserved for 10:00';
       reservedTimerInterval = setInterval(function() {
         timeLeft--;
         if (timeLeft <= 0) {
           clearInterval(reservedTimerInterval);
           el.textContent = '❌ Reservation Expired. Please start again.';
+          el.classList.remove('warning');
           setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; }, 3000);
         } else {
           var m = Math.floor(timeLeft / 60);
           var s = timeLeft % 60;
-          el.textContent = '⏳ Reserved for ' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          if (timeLeft <= 120) {
+            el.classList.add('warning');
+            el.textContent = '⚠️ Hurry! Reserved for ' + timeStr;
+          } else {
+            el.classList.remove('warning');
+            el.textContent = '⏳ Reserved for ' + timeStr;
+          }
         }
       }, 1000);
     }
 
     function confirmPayment() {
       if (qrTimeLeft <= 0) {
-        alert('QR Code expired. Please close and try again.', {title: 'QR Expired', icon: '⏳'});
+        alert('QR Code expired. Please generate a new QR or close and try again.', {title: 'QR Expired', icon: '⏳'});
         return;
       }
       var txnId = document.getElementById('transactionId').value.trim();
-      var txnRegex = /^(\d{12}|UPI\d{12})$/;
-      if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. Please check and try again.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
+      var txnRegex = /^[A-Z0-9]{8,22}$/;
+      if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. It should be 8-22 alphanumeric characters.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
       currentPendingOrder.transactionId = txnId;
 
-      // Consistency: User's own purchase also decrements stock
       var pid = currentPendingOrder.designId;
       if (pid && dynamicStocks[pid] !== undefined) {
         var qty = currentPendingOrder.qty || 1;
@@ -2876,6 +2929,33 @@
       showToast('Payment confirmed!', 'success');
       showSuccessModal(currentPendingOrder);
       playOrderSound();
+
+      setTimeout(function() {
+        triggerUserOwnNotification();
+      }, 1500);
+    }
+
+    function triggerUserOwnNotification() {
+      if (!currentPendingOrder) return;
+      var design = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
+      if (!design) design = designs[0];
+
+      var avatarUrl;
+      if (currentPendingOrder.photoDataURL) {
+        avatarUrl = currentPendingOrder.photoDataURL;
+      } else {
+        avatarUrl = getInitialsAvatarSVG(currentPendingOrder.customerName, false);
+      }
+
+      var buyer = {
+        name: currentPendingOrder.customerName,
+        city: currentPendingOrder.city,
+        avatar: avatarUrl
+      };
+
+      var timestamp = Date.now();
+      addLiveNotification(buyer, design, timestamp);
+      addPulseItem(buyer, design, timestamp);
     }
 
     function showSuccessModal(order) {
@@ -2961,7 +3041,18 @@
       if (e.target === this) { this.style.display = 'none'; clearInterval(qrTimerInterval); }
     });
     document.getElementById('confirmPaymentBtn').addEventListener('click', confirmPayment);
-    document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^0-9UPI]/g, ''); });
+    document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); });
+
+    document.getElementById('regenerateQrBtn').addEventListener('click', function() {
+      document.getElementById('transactionId').value = '';
+      startQrTimer();
+      showToast('New QR generated! You have 5 more minutes.', 'success');
+    });
+
+    // NEW FIX: Live sanitization for phone number input
+    document.getElementById('orderPhone').addEventListener('input', function() {
+      this.value = this.value.replace(/[^\d+\-\s]/g, '');
+    });
 
     document.getElementById('successCloseBtn').addEventListener('click', function() {
       document.getElementById('successOverlay').style.display = 'none';
@@ -2971,7 +3062,6 @@
       if (e.target === this) { this.style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; }
     });
 
-    // FIX #1: Save animated final value into heroAnimatedSold/Buyers
     function animateCounters() {
       document.querySelectorAll('.stat-number').forEach(function(el) {
         var base = parseFloat(el.getAttribute('data-count'));
@@ -2981,7 +3071,6 @@
         if (increment > 0) {
           target = growNumber(base, Math.floor(increment * 0.7), Math.ceil(increment * 1.5), Math.floor(base));
         }
-        // Save the animated final value
         if (el.id === 'heroSoldCount') heroAnimatedSold = target;
         if (el.id === 'heroBuyersCount') heroAnimatedBuyers = target;
 
@@ -3085,7 +3174,10 @@
     }
 
     function addLiveNotification(buyer, design, timestamp) {
-      var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
+      var nameParts = String(buyer.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
+      var displayName = nameParts.length > 1
+        ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.'
+        : (nameParts[0] || 'Someone');
       var timeStr = formatTimeAgo(timestamp);
       var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
 
@@ -3106,7 +3198,10 @@
     }
 
     function showReviewNotification(review) {
-      var displayName = review.name.split(' ')[0] + ' ' + (review.name.split(' ')[1] ? review.name.split(' ')[1].charAt(0) + '.' : '');
+      var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
+      var displayName = nameParts.length > 1
+        ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.'
+        : (nameParts[0] || 'Someone');
       var stars = '';
       for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
 
@@ -3138,10 +3233,6 @@
       }
     }
 
-    // ============================================================
-    // CONSISTENT RANDOM PURCHASE
-    // FIX #4: When all stocks hit 3, slow down notifications
-    // ============================================================
     function triggerRandomPurchase() {
       var buyer = generatePulseBuyer();
 
@@ -3175,9 +3266,8 @@
       addLiveNotification(buyer, design, timestamp);
       addPulseItem(buyer, design, timestamp);
 
-      // FIX #4: 3x slower when all depleted
       var multiplier = getTimeMultiplier();
-      var baseDelay = allDepleted ? 180000 : 55000; // 3 min if all depleted, else 55 sec
+      var baseDelay = allDepleted ? 180000 : 55000;
       var delay = (baseDelay / multiplier) + Math.random() * 25000;
       setTimeout(triggerRandomPurchase, delay);
     }
@@ -3193,7 +3283,7 @@
     }
     setInterval(updateNotificationTimes, 30000);
 
-    setTimeout(function() { triggerRandomPurchase(); }, 6000);
+    setTimeout(function() { triggerRandomPurchase(); }, 12000);
 
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
@@ -3324,6 +3414,46 @@
       if (oldImg) oldImg.remove();
     }
 
+    var orderPhotoUploadArea = document.getElementById('orderPhotoUploadArea');
+    var orderPhotoInput = document.getElementById('orderPhotoInput');
+    var orderPhotoPlusIcon = document.getElementById('orderPhotoPlusIcon');
+    var orderPhotoRemoveBtn = document.getElementById('orderPhotoRemoveBtn');
+
+    orderPhotoUploadArea.addEventListener('click', function(e) {
+      if (e.target === orderPhotoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
+      orderPhotoInput.click();
+    });
+
+    orderPhotoInput.addEventListener('change', function(e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { alert('Please select an image file.', {title: 'Invalid File Type', icon: '📷'}); return; }
+      if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.', {title: 'File Too Large', icon: '📦'}); return; }
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        orderPhotoDataURL = ev.target.result;
+        orderPhotoUploadArea.classList.add('has-photo');
+        orderPhotoPlusIcon.style.display = 'none';
+        var oldImg = orderPhotoUploadArea.querySelector('img');
+        if (oldImg) oldImg.remove();
+        var img = document.createElement('img');
+        img.src = orderPhotoDataURL;
+        img.alt = 'Your photo';
+        orderPhotoUploadArea.insertBefore(img, orderPhotoUploadArea.firstChild);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    orderPhotoRemoveBtn.addEventListener('click', function(e) { e.stopPropagation(); resetOrderPhotoUpload(); orderPhotoInput.value = ''; });
+
+    function resetOrderPhotoUpload() {
+      orderPhotoDataURL = null;
+      orderPhotoUploadArea.classList.remove('has-photo');
+      orderPhotoPlusIcon.style.display = '';
+      var oldImg = orderPhotoUploadArea.querySelector('img');
+      if (oldImg) oldImg.remove();
+    }
+
     document.querySelectorAll('.star-btn').forEach(function(btn) {
       btn.addEventListener('click', function() { selectedRating = parseInt(this.getAttribute('data-star')); updateStarDisplay(); });
       btn.addEventListener('mouseenter', function() {
@@ -3438,7 +3568,6 @@
       }
     });
 
-    // INIT
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
       initDynamicStocks();
