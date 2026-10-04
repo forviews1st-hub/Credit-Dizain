@@ -51,9 +51,7 @@
       margin-left: -2px;
       vertical-align: middle;
     }
-    .verified-logo-tick svg {
-      width: 100%; height: 100%; display: block;
-    }
+    .verified-logo-tick svg { width: 100%; height: 100%; display: block; }
 
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
 
@@ -167,7 +165,6 @@
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
 
-    /* PULSE FEED */
     .pulse-feed {
       margin: 0 0 24px;
       padding: 16px 20px;
@@ -286,7 +283,6 @@
       .pulse-subtitle { font-size: 10px; letter-spacing: 1.4px; }
     }
 
-    /* TRUSTED BY ROW */
     .trusted-by-row {
       display: flex; align-items: center; justify-content: center;
       gap: 14px; margin: 0 0 20px; padding: 12px 18px;
@@ -314,9 +310,7 @@
       display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
       justify-content: center; text-align: center;
     }
-    .trusted-by-text strong {
-      color: #f5d76e; font-weight: 800;
-    }
+    .trusted-by-text strong { color: #f5d76e; font-weight: 800; }
     @media (max-width: 500px) {
       .trusted-by-row { padding: 10px 12px; gap: 10px; }
       .trusted-by-avatar { width: 28px; height: 28px; margin-left: -8px; }
@@ -904,9 +898,7 @@
       filter: drop-shadow(0 0 4px rgba(29,155,240,0.65));
       vertical-align: middle;
     }
-    .verified-tick svg {
-      width: 100%; height: 100%; display: block;
-    }
+    .verified-tick svg { width: 100%; height: 100%; display: block; }
 
     .review-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: #777; margin-top: -4px; }
     .review-meta .dot { color: #444; font-size: 12px; }
@@ -1954,12 +1946,102 @@
     }
 
     // ============================================================
-    // AVATAR SYSTEM — GitHub API
+    // AVATAR SYSTEM — GitHub API + No-Repeat Cycle
+    // - Names get permanently assigned images (localStorage)
+    // - Images never repeat until ALL used
+    // - When all used, cycle resets automatically
     // ============================================================
     var avatarCache = {
       list: [],
       loaded: false
     };
+
+    function loadUsedAvatars() {
+      try {
+        var raw = localStorage.getItem('cardseller_used_avatars');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (Array.isArray(parsed)) return parsed;
+        }
+      } catch(e) {}
+      return [];
+    }
+
+    function saveUsedAvatars(arr) {
+      try {
+        localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr));
+      } catch(e) {}
+    }
+
+    function loadNameAvatarMap() {
+      try {
+        var raw = localStorage.getItem('cardseller_name_avatar_map');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') return parsed;
+        }
+      } catch(e) {}
+      return {};
+    }
+
+    function saveNameAvatarMap(map) {
+      try {
+        localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map));
+      } catch(e) {}
+    }
+
+    function assignAvatarToName(name) {
+      if (!avatarCache.list || avatarCache.list.length === 0) return null;
+      var key = String(name || 'anonymous').trim();
+
+      var map = loadNameAvatarMap();
+
+      // If name already has assigned avatar, return it
+      if (map[key]) {
+        return map[key];
+      }
+
+      // Load used URLs
+      var used = loadUsedAvatars();
+      var available = [];
+      for (var i = 0; i < avatarCache.list.length; i++) {
+        if (used.indexOf(avatarCache.list[i]) === -1) {
+          available.push(avatarCache.list[i]);
+        }
+      }
+
+      // All used? Reset cycle
+      if (available.length === 0) {
+        used = [];
+        available = avatarCache.list.slice();
+        // Optional: clear old name->avatar map so fresh cycle
+        // But we keep it so same name still gets same image if already assigned
+      }
+
+      // Pick random from available
+      var idx = Math.floor(Math.random() * available.length);
+      var chosen = available[idx];
+
+      // Mark as used
+      used.push(chosen);
+      saveUsedAvatars(used);
+
+      // Save mapping name->url (keep map size reasonable)
+      map[key] = chosen;
+      var mapKeys = Object.keys(map);
+      if (mapKeys.length > 1000) {
+        // Trim old entries (keep last 500)
+        var newMap = {};
+        var recent = mapKeys.slice(-500);
+        for (var k = 0; k < recent.length; k++) {
+          newMap[recent[k]] = map[recent[k]];
+        }
+        map = newMap;
+      }
+      saveNameAvatarMap(map);
+
+      return chosen;
+    }
 
     function fetchAvatarsFromGitHub(callback) {
       try {
@@ -1983,11 +2065,6 @@
           var images = data.filter(function(item) {
             return item.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(item.name);
           }).map(function(item) { return item.download_url; });
-
-          for (var i = images.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var tmp = images[i]; images[i] = images[j]; images[j] = tmp;
-          }
 
           avatarCache.list = images;
           avatarCache.loaded = true;
@@ -2013,22 +2090,29 @@
     }
 
     function getAvatarForName(name) {
-      if (!avatarCache.list || avatarCache.list.length === 0) return null;
-      var hash = 0;
-      var str = String(name || 'anonymous');
-      for (var i = 0; i < str.length; i++) {
-        hash = ((hash << 5) - hash) + str.charCodeAt(i);
-        hash = hash & hash;
-      }
-      var idx = Math.abs(hash) % avatarCache.list.length;
-      return avatarCache.list[idx];
+      return assignAvatarToName(name);
     }
 
     function getRandomAvatarUrl() {
-      if (avatarCache.list && avatarCache.list.length > 0) {
-        return avatarCache.list[Math.floor(Math.random() * avatarCache.list.length)];
+      // Used only for trusted-by row avatars (no name attached)
+      if (!avatarCache.list || avatarCache.list.length === 0) return null;
+      var used = loadUsedAvatars();
+      var available = [];
+      for (var i = 0; i < avatarCache.list.length; i++) {
+        if (used.indexOf(avatarCache.list[i]) === -1) {
+          available.push(avatarCache.list[i]);
+        }
       }
-      return null;
+      if (available.length === 0) {
+        used = [];
+        saveUsedAvatars(used);
+        available = avatarCache.list.slice();
+      }
+      var idx = Math.floor(Math.random() * available.length);
+      var chosen = available[idx];
+      used.push(chosen);
+      saveUsedAvatars(used);
+      return chosen;
     }
 
     function buildAvatarImg(avatarUrl, name, isYouTuber) {
@@ -2359,10 +2443,20 @@
       }
     }
 
+    // ============================================================
+    // WELCOME BACK — Clear Message
+    // ============================================================
+    function getOrdinalSuffix(n) {
+      var s = ['th', 'st', 'nd', 'rd'];
+      var v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
     function initWelcomeBack() {
       try {
         var VISITS_KEY = 'cardseller_visits';
         var LAST_VISIT_KEY = 'cardseller_last_visit';
+        var FIRST_VISIT_KEY = 'cardseller_first_visit';
         var today = new Date().toDateString();
         var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0');
         var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
@@ -2381,16 +2475,19 @@
 
           var title, sub;
           if (visits === 1) {
-            title = '👋 Welcome to Card Seller!';
-            sub = 'First visit — enjoy premium cards';
+            title = 'Welcome to Card Seller!';
+            sub = 'First visit? Explore our premium card collection below.';
+          } else if (visits === 2) {
+            title = 'Welcome back!';
+            sub = 'Good to see you again! This is your 2nd visit.';
           } else {
-            title = '👋 Welcome back!';
-            sub = 'Visit #' + visits + ' — thanks for your trust';
+            title = 'Welcome back!';
+            sub = 'You have visited us ' + visits + ' times now. Thanks for your trust!';
           }
 
           notif.innerHTML =
             '<div class="wb-icon">✨</div>' +
-            '<div class="wb-text"><strong>' + title + '</strong>' + sub + '<span class="wb-sub">Trusted by thousands</span></div>';
+            '<div class="wb-text"><strong>' + title + '</strong>' + sub + '<span class="wb-sub">🎉 Trusted by thousands of buyers</span></div>';
 
           container.appendChild(notif);
           setTimeout(function() { notif.remove(); }, 5500);
@@ -2749,11 +2846,13 @@
           usedPulseKeys.push(key);
           if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
           var fullName = fn + ' ' + ln;
+          // Assign a unique avatar (won't repeat until all used)
           return { name: fullName, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getAvatarForName(fullName) };
         }
         attempts++;
       }
-      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi', avatar: getAvatarForName('Amit Sharma') };
+      var fallbackName = 'Amit Sharma';
+      return { name: fallbackName, initials: 'AS', city: 'Delhi', avatar: getAvatarForName(fallbackName) };
     }
 
     function getCardThumbStyle(design) {
