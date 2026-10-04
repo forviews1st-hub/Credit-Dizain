@@ -367,24 +367,28 @@
 
     .cc-preview-wrap { position: relative; }
 
+    /* --- UPDATE 3: Live Views Badge + Balance Row --- */
+    .card-bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
     .live-viewers-badge {
-      position: absolute;
-      top: 10px; left: 10px;
-      z-index: 5;
       display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 9px;
+      padding: 6px 10px;
       border-radius: 20px;
-      background: rgba(10, 10, 10, 0.75);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(239, 68, 68, 0.6);
-      font-size: 10px;
+      background: linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%);
+      border: 1px solid rgba(239,68,68,0.45);
+      font-size: 10.5px;
       font-weight: 800;
       letter-spacing: 0.3px;
       color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5), 0 0 12px rgba(239,68,68,0.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
       pointer-events: none;
       user-select: none;
+      white-space: nowrap;
     }
     .live-viewers-badge .eye { font-size: 10px; line-height: 1; }
     .live-viewers-badge .live-pulse-dot {
@@ -398,8 +402,14 @@
       transition: transform 0.25s ease;
     }
     .live-viewers-badge .vcount.bump { transform: scale(1.18); }
+    .live-viewers-badge .viewing-text {
+      color: #ccc;
+      font-weight: 600;
+      font-size: 10px;
+    }
     @media (max-width: 500px) {
-      .live-viewers-badge { font-size: 9px; padding: 3px 7px; top: 8px; left: 8px; }
+      .live-viewers-badge { font-size: 9px; padding: 4px 7px; }
+      .live-viewers-badge .viewing-text { font-size: 9px; }
     }
 
     .countdown-strip {
@@ -744,12 +754,13 @@
     .mini-card-preview .amex-back-logo .amex-logo-line2 { font-size: 3.2px; }
     .mini-card-preview .amex-back-legal { font-size: 2.4px; }
 
+    /* --- UPDATE 3: Balance Badge Compact --- */
     .cc-balance-badge {
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-      padding: 12px 22px; border-radius: 18px;
+      display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2px;
+      padding: 6px 12px; border-radius: 12px;
       background: linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.04) 100%);
       border: 1.5px solid rgba(34,197,94,0.35);
-      width: fit-content; margin: 0 auto;
+      width: fit-content; margin: 0;
       box-shadow: 0 4px 20px rgba(34,197,94,0.15), 0 0 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative; overflow: hidden;
     }
@@ -760,13 +771,13 @@
     }
     @keyframes balanceShimmer { 0% { left: -60%; } 50% { left: 130%; } 100% { left: -60%; } }
     .cc-balance-label {
-      display: flex; align-items: center; justify-content: center; gap: 5px;
-      font-size: 9px; font-weight: 800; letter-spacing: 2.5px; color: #22c55e;
+      display: flex; align-items: center; justify-content: flex-end; gap: 5px;
+      font-size: 8px; font-weight: 800; letter-spacing: 2px; color: #22c55e;
       text-transform: uppercase; opacity: 0.9; line-height: 1; position: relative; z-index: 1;
     }
-    .cc-balance-emoji { font-size: 12px; line-height: 1; }
+    .cc-balance-emoji { font-size: 10px; line-height: 1; }
     .cc-balance-value {
-      font-size: 18px; font-weight: 900; letter-spacing: 0.5px;
+      font-size: 13px; font-weight: 900; letter-spacing: 0.3px;
       background: linear-gradient(135deg, #4ade80 0%, #22c55e 60%, #16a34a 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       line-height: 1; position: relative; z-index: 1;
@@ -1133,26 +1144,27 @@
       background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
     }
 
+    /* --- UPDATE 1: Welcome Back Toast Premium Gold Theme --- */
     .welcome-back-toast {
       display: flex; align-items: center; gap: 12px;
-      background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
-      border: 1px solid rgba(34,197,94,0.5);
+      background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%);
+      border: 1px solid rgba(212,175,55,0.4);
       border-radius: 14px;
       padding: 12px 16px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(34,197,94,0.15);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.15);
       animation: notifIn 0.4s ease, notifOut 0.4s ease 5s forwards;
       pointer-events: auto;
       max-width: 320px;
     }
     .welcome-back-toast .wb-icon {
       font-size: 22px; flex-shrink: 0;
-      filter: drop-shadow(0 0 6px rgba(34,197,94,0.5));
+      filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
     }
     .welcome-back-toast .wb-text {
       font-size: 12px; color: #ddd; line-height: 1.4; font-weight: 500;
     }
     .welcome-back-toast .wb-text strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
-    .welcome-back-toast .wb-text .wb-sub { font-size: 10px; color: #22c55e; font-weight: 600; margin-top: 2px; display: block; }
+    .welcome-back-toast .wb-text .wb-sub { font-size: 10px; color: #f5d76e; font-weight: 600; margin-top: 2px; display: block; }
 
     .more-stats-modal { text-align: center; padding: 40px 26px; }
     .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
@@ -1307,9 +1319,25 @@
     .flip-hint { text-align: center; font-size: 11px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; user-select: none; }
     .modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px; margin-bottom: 6px; text-align: center; }
     .modal-tagline { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
-    .modal-meta { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
-    .modal-price { color: #22c55e; padding: 8px 20px; font-weight: 800; font-size: 18px; letter-spacing: -0.3px; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
-    .modal-rating { display: flex; align-items: center; gap: 6px; color: #aaa; font-size: 13px; font-weight: 700; }
+
+    /* --- UPDATE 4: Modal Price Block --- */
+    .modal-price-block {
+      text-align: center; margin-bottom: 24px; padding: 16px 0;
+      border-top: 1px solid rgba(212,175,55,0.15);
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+    }
+    .modal-price {
+      font-size: 40px; font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #16a34a 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .modal-rating {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 700; color: #aaa;
+      padding: 4px 12px; border-radius: 20px;
+      background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25);
+    }
 
     .qty-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 18px; }
     .qty-row button {
@@ -1353,15 +1381,29 @@
     .checkout-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
     .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
 
+    /* --- UPDATE 5: Mini Card Flip Feature --- */
     .mini-card-preview {
-      position: relative; width: 100%; aspect-ratio: 1.586 / 1; border-radius: 12px; overflow: hidden;
-      margin-bottom: 14px; transition: transform 0.4s ease;
+      position: relative; width: 100%; aspect-ratio: 1.586 / 1;
+      border-radius: 12px; margin-bottom: 14px;
+      cursor: pointer; perspective: 1200px;
+      transition: transform 0.4s ease;
     }
     .mini-card-preview:hover { transform: translateY(-2px); }
+    .mini-card-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mini-card-preview.flipped .mini-card-inner {
+      transform: rotateY(180deg);
+    }
     .mini-card-preview .cc-face {
       border-radius: 12px; padding: 10px 12px;
       box-shadow: 0 14px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.4);
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
     }
+    .mini-card-preview .cc-face.cc-back { transform: rotateY(180deg); }
     .mini-card-preview .cc-face.cc-back.cc-amex-gold-back { padding: 0; }
     .mini-card-preview .cc-number { font-size: 12px; letter-spacing: 2.2px; }
     .mini-card-preview .cc-bank { font-size: 10px; letter-spacing: 2px; }
@@ -1585,11 +1627,11 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <span class="stat-number" data-count="12487" data-increment="35">0</span>
+          <span class="stat-number" data-count="12548" data-increment="35">0</span>
           <span class="stat-label">Cards Sold</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-number" data-count="9876" data-increment="25">0</span>
+          <span class="stat-number" data-count="9935" data-increment="25">0</span>
           <span class="stat-label">Happy Buyers</span>
         </div>
         <div class="hero-stat">
@@ -1688,9 +1730,10 @@
         <div class="flip-hint">↻ Tap card to flip</div>
         <h3 class="modal-title" id="modalName">Card</h3>
         <p class="modal-tagline" id="modalTagline">Tagline</p>
-        <div class="modal-meta">
-          <span class="modal-price" id="modalPrice">₹499</span>
-          <span class="modal-rating" id="modalRating"></span>
+        <!-- UPDATE 4: Modal Price Block -->
+        <div class="modal-price-block">
+          <div class="modal-price" id="modalPrice">₹425</div>
+          <div class="modal-rating" id="modalRating"></div>
         </div>
         <div class="qty-row">
           <button id="qtyMinus">−</button>
@@ -1711,7 +1754,10 @@
           <h3 class="checkout-title">Complete Your Order</h3>
           <p class="checkout-subtitle">Confirm your card details and shipping information</p>
         </div>
-        <div class="mini-card-preview" id="miniCardPreview"></div>
+        <!-- UPDATE 5: Mini Card Preview with Flip -->
+        <div class="mini-card-preview" id="miniCardPreview">
+          <!-- JS will inject mini-card-inner here -->
+        </div>
         <div class="section-divider"><span>ORDER SUMMARY</span></div>
         <div class="order-summary-card">
           <div class="summary-row"><span class="summary-label">Card</span><span class="summary-value" id="summaryDesign">—</span></div>
@@ -2308,10 +2354,12 @@
         '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
+    // --- UPDATE 2: Number Consistency (Formula Change) ---
     function getBaseViewerCount(design) {
-      var cardsSoldNow = growNumber(12487, 25, 45, 7001);
-      var base = (cardsSoldNow / 200) * (design.stockPercent / 100) * design.viewerWeight;
-      return Math.max(8, Math.round(base));
+      var cardsSoldNow = growNumber(12548, 25, 45, 7001); // Base 12548
+      // Divide by 15 instead of 200 (DeepSeek ka formula)
+      var base = (cardsSoldNow / 15) * (design.stockPercent / 100) * design.viewerWeight;
+      return Math.max(15, Math.round(base)); 
     }
 
     var viewerState = {};
@@ -2438,7 +2486,7 @@
         avatarsEl.appendChild(div);
       }
       if (countEl) {
-        var happyBuyers = growNumber(9876, 18, 32, 8801);
+        var happyBuyers = growNumber(9935, 18, 32, 8801); // Updated base
         countEl.textContent = '+' + happyBuyers.toLocaleString('en-IN') + ' buyers';
       }
     }
@@ -2505,6 +2553,8 @@
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
+        
+        // --- UPDATE 3: Live Views Badge Location (Card Bottom Row) ---
         card.innerHTML =
           '<div class="countdown-strip" data-design-id="' + design.id + '">' +
             '<span class="cd-icon">🔥</span>' +
@@ -2512,14 +2562,20 @@
             '<span class="cd-time">--:--:--</span>' +
           '</div>' +
           '<div class="cc-preview-wrap">' +
+            '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
+          '</div>' +
+          '<div class="card-bottom-row">' +
             '<div class="live-viewers-badge" data-design-id="' + design.id + '">' +
               '<span class="live-pulse-dot"></span>' +
               '<span class="eye">👁</span>' +
               '<span class="vcount">' + viewerBase + '</span>' +
+              '<span class="viewing-text">viewing now</span>' +
             '</div>' +
-            '<div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div>' +
+            '<div class="cc-balance-badge">' +
+              '<div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div>' +
+              '<div class="cc-balance-value">' + design.balance + '</div>' +
+            '</div>' +
           '</div>' +
-          '<div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div>' +
           '<div class="gc-info">' +
             '<div class="gc-name">' + design.name + '</div>' +
             '<div class="gc-tagline">' + design.tagline + '</div>' +
@@ -2640,19 +2696,23 @@
       wrap.classList.remove('flipped');
       document.getElementById('modalName').textContent = design.name;
       document.getElementById('modalTagline').textContent = design.tagline;
+      // UPDATE 4: Modal Price Block Update
       document.getElementById('modalPrice').textContent = design.price;
       document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
       document.getElementById('qtyValue').textContent = '1';
       document.getElementById('productOverlay').style.display = 'flex';
     }
 
+    // --- UPDATE 5: Mini Card Flip Functionality ---
     function placeOrderDirect() {
       if (!currentDesign) return;
       currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material };
       var previewEl = document.getElementById('miniCardPreview');
       var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
       previewEl.className = 'mini-card-preview ' + finishClass;
-      previewEl.innerHTML = cardFrontHTML(currentDesign);
+      previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
+      previewEl.classList.remove('flipped');
+      
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
       document.getElementById('summaryQty').textContent = currentQty;
@@ -3201,6 +3261,11 @@
     });
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+
+    // NEW: Event listener for Mini Card Flip
+    document.getElementById('miniCardPreview').addEventListener('click', function() {
+      this.classList.toggle('flipped');
+    });
 
     // INIT
     fetchAvatarsFromGitHub(function() {
