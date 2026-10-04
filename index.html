@@ -367,7 +367,6 @@
 
     .cc-preview-wrap { position: relative; }
 
-    /* --- UPDATE 3: Live Views Badge + Balance Row --- */
     .card-bottom-row {
       display: flex;
       justify-content: space-between;
@@ -754,7 +753,6 @@
     .mini-card-preview .amex-back-logo .amex-logo-line2 { font-size: 3.2px; }
     .mini-card-preview .amex-back-legal { font-size: 2.4px; }
 
-    /* --- UPDATE 3: Balance Badge Compact --- */
     .cc-balance-badge {
       display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2px;
       padding: 6px 12px; border-radius: 12px;
@@ -824,7 +822,6 @@
     .stock-bar-track { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; position: relative; }
     .stock-bar-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b); border-radius: 3px; transition: width 1.5s ease; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
 
-    /* --- UPDATE 8: Trending Badge --- */
     .trending-badge {
       display: inline-block;
       background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
@@ -995,8 +992,6 @@
     .review-helpful.active .helpful-count { color: #d4af37; }
     .review-helpful .helpful-icon { font-size: 11px; line-height: 1; }
 
-    /* Removed .review-report CSS */
-
     .review-seller-reply {
       background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%);
       border-left: 3px solid rgba(212,175,55,0.75);
@@ -1142,7 +1137,6 @@
       background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%);
     }
 
-    /* --- UPDATE 1: Welcome Back Toast Premium Gold Theme --- */
     .welcome-back-toast {
       display: flex; flex-direction: column; gap: 0;
       background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%);
@@ -1338,7 +1332,6 @@
     .modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px; margin-bottom: 6px; text-align: center; }
     .modal-tagline { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
 
-    /* --- UPDATE 4: Modal Price Block --- */
     .modal-price-block {
       text-align: center; margin-bottom: 24px; padding: 16px 0;
       border-top: 1px solid rgba(212,175,55,0.15);
@@ -1399,7 +1392,6 @@
     .checkout-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
     .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
 
-    /* --- UPDATE 7: Reserved Timer --- */
     .reserved-timer {
       display: none;
       text-align: center; font-size: 11px; font-weight: 800;
@@ -1409,7 +1401,6 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* --- UPDATE 5: QR Code Timer --- */
     .qr-timer-wrap {
       display: flex; justify-content: center; align-items: center; gap: 6px;
       font-size: 12px; font-weight: 700; color: #ef4444;
@@ -1427,7 +1418,6 @@
       z-index: 10; white-space: nowrap;
     }
 
-    /* --- UPDATE 5: Mini Card Flip Feature --- */
     .mini-card-preview {
       position: relative; width: 100%; aspect-ratio: 1.586 / 1;
       border-radius: 12px; margin-bottom: 14px;
@@ -1673,11 +1663,11 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <span class="stat-number" data-count="12548" data-increment="35">0</span>
+          <span class="stat-number" id="heroSoldCount" data-count="12548" data-increment="35">0</span>
           <span class="stat-label">Cards Sold</span>
         </div>
         <div class="hero-stat">
-          <span class="stat-number" data-count="9935" data-increment="25">0</span>
+          <span class="stat-number" id="heroBuyersCount" data-count="9935" data-increment="25">0</span>
           <span class="stat-label">Happy Buyers</span>
         </div>
         <div class="hero-stat">
@@ -1776,7 +1766,6 @@
         <div class="flip-hint">↻ Tap card to flip</div>
         <h3 class="modal-title" id="modalName">Card</h3>
         <p class="modal-tagline" id="modalTagline">Tagline</p>
-        <!-- UPDATE 4: Modal Price Block -->
         <div class="modal-price-block">
           <div class="modal-price" id="modalPrice">₹425</div>
           <div class="modal-rating" id="modalRating"></div>
@@ -1801,10 +1790,7 @@
           <p class="checkout-subtitle">Confirm your card details and shipping information</p>
           <div class="reserved-timer" id="reservedTimer">⏳ Reserved for 10:00</div>
         </div>
-        <!-- UPDATE 5: Mini Card Preview with Flip -->
-        <div class="mini-card-preview" id="miniCardPreview">
-          <!-- JS will inject mini-card-inner here -->
-        </div>
+        <div class="mini-card-preview" id="miniCardPreview"></div>
         <div class="section-divider"><span>ORDER SUMMARY</span></div>
         <div class="order-summary-card">
           <div class="summary-row"><span class="summary-label">Card</span><span class="summary-value" id="summaryDesign">—</span></div>
@@ -1841,7 +1827,6 @@
           <div class="payment-total-design" id="paymentDesign">—</div>
         </div>
         <div class="section-divider"><span>SCAN QR CODE</span></div>
-        <!-- UPDATE 5: QR Timer -->
         <div class="qr-timer-wrap" id="qrTimerWrap">
           <span>⏳ QR expires in:</span>
           <span class="timer-clock" id="qrTimer">05:00</span>
@@ -2029,18 +2014,45 @@
       return total;
     }
 
-    // --- UPDATE 4: Time-based Dynamic Behavior ---
+    // ============================================================
+    // TIME MULTIPLIER
+    // ============================================================
     function getTimeMultiplier() {
       var hour = new Date().getHours();
-      if (hour >= 0 && hour < 6) return 0.2; // Night (12 AM - 6 AM)
-      if (hour >= 6 && hour < 12) return 0.6; // Morning (6 AM - 12 PM)
-      if (hour >= 12 && hour < 17) return 0.9; // Afternoon (12 PM - 5 PM)
-      if (hour >= 17 && hour < 23) return 1.3; // Peak Evening (5 PM - 11 PM)
-      return 0.5; // Late night (11 PM - 12 AM)
+      if (hour >= 0 && hour < 6) return 0.2;
+      if (hour >= 6 && hour < 12) return 0.6;
+      if (hour >= 12 && hour < 17) return 0.9;
+      if (hour >= 17 && hour < 23) return 1.3;
+      return 0.5;
     }
 
     // ============================================================
-    // INITIALS AVATAR (fallback)
+    // DYNAMIC INVENTORY SYSTEM
+    // ============================================================
+    var dynamicStocks = {};
+    var dynamicSold = {};
+    var dynamicTotal = {};
+    var sessionSales = 0;
+    var sessionBuyers = 0;
+    var heroBaseSold = 12548;
+    var heroBaseBuyers = 9935;
+    var trustedBaseBuyers = 9935;
+    // FIX #1: Store animated final values so live updates don't reset to base
+    var heroAnimatedSold = 12548;
+    var heroAnimatedBuyers = 9935;
+
+    function initDynamicStocks() {
+      designs.forEach(function(d) {
+        var stock = Math.floor(Math.random() * 33) + 55;
+        var soldBase = Math.round(stock * (d.stockPercent / (100 - d.stockPercent)));
+        dynamicStocks[d.id] = stock;
+        dynamicSold[d.id] = soldBase;
+        dynamicTotal[d.id] = stock + soldBase;
+      });
+    }
+
+    // ============================================================
+    // INITIALS AVATAR
     // ============================================================
     function getInitialsAvatarSVG(name, isYouTuber) {
       var initials = String(name || 'U').split(' ').map(function(n){return (n[0]||'');}).join('').substring(0,2).toUpperCase();
@@ -2054,88 +2066,51 @@
     }
 
     // ============================================================
-    // AVATAR SYSTEM — GitHub API + No-Repeat Cycle
+    // AVATAR SYSTEM
     // ============================================================
-    var avatarCache = {
-      list: [],
-      loaded: false
-    };
+    var avatarCache = { list: [], loaded: false };
 
     function loadUsedAvatars() {
       try {
         var raw = localStorage.getItem('cardseller_used_avatars');
-        if (raw) {
-          var parsed = JSON.parse(raw);
-          if (Array.isArray(parsed)) return parsed;
-        }
+        if (raw) { var parsed = JSON.parse(raw); if (Array.isArray(parsed)) return parsed; }
       } catch(e) {}
       return [];
     }
-
-    function saveUsedAvatars(arr) {
-      try {
-        localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr));
-      } catch(e) {}
-    }
-
+    function saveUsedAvatars(arr) { try { localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr)); } catch(e) {} }
     function loadNameAvatarMap() {
       try {
         var raw = localStorage.getItem('cardseller_name_avatar_map');
-        if (raw) {
-          var parsed = JSON.parse(raw);
-          if (parsed && typeof parsed === 'object') return parsed;
-        }
+        if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') return parsed; }
       } catch(e) {}
       return {};
     }
-
-    function saveNameAvatarMap(map) {
-      try {
-        localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map));
-      } catch(e) {}
-    }
+    function saveNameAvatarMap(map) { try { localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map)); } catch(e) {} }
 
     function assignAvatarToName(name) {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
       var key = String(name || 'anonymous').trim();
-
       var map = loadNameAvatarMap();
-
-      if (map[key]) {
-        return map[key];
-      }
-
+      if (map[key]) return map[key];
       var used = loadUsedAvatars();
       var available = [];
       for (var i = 0; i < avatarCache.list.length; i++) {
-        if (used.indexOf(avatarCache.list[i]) === -1) {
-          available.push(avatarCache.list[i]);
-        }
+        if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]);
       }
-
-      if (available.length === 0) {
-        used = [];
-        available = avatarCache.list.slice();
-      }
-
+      if (available.length === 0) { used = []; available = avatarCache.list.slice(); }
       var idx = Math.floor(Math.random() * available.length);
       var chosen = available[idx];
-
       used.push(chosen);
       saveUsedAvatars(used);
-
       map[key] = chosen;
       var mapKeys = Object.keys(map);
       if (mapKeys.length > 1000) {
         var newMap = {};
         var recent = mapKeys.slice(-500);
-        for (var k = 0; k < recent.length; k++) {
-          newMap[recent[k]] = map[recent[k]];
-        }
+        for (var k = 0; k < recent.length; k++) newMap[recent[k]] = map[recent[k]];
         map = newMap;
       }
       saveNameAvatarMap(map);
-
       return chosen;
     }
 
@@ -2161,7 +2136,6 @@
           var images = data.filter(function(item) {
             return item.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(item.name);
           }).map(function(item) { return item.download_url; });
-
           avatarCache.list = images;
           avatarCache.loaded = true;
           try {
@@ -2179,30 +2153,19 @@
 
     function preloadAllAvatars() {
       if (!avatarCache.list || avatarCache.list.length === 0) return;
-      avatarCache.list.forEach(function(url) {
-        var img = new Image();
-        img.src = url;
-      });
+      avatarCache.list.forEach(function(url) { var img = new Image(); img.src = url; });
     }
 
-    function getAvatarForName(name) {
-      return assignAvatarToName(name);
-    }
+    function getAvatarForName(name) { return assignAvatarToName(name); }
 
     function getRandomAvatarUrl() {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
       var used = loadUsedAvatars();
       var available = [];
       for (var i = 0; i < avatarCache.list.length; i++) {
-        if (used.indexOf(avatarCache.list[i]) === -1) {
-          available.push(avatarCache.list[i]);
-        }
+        if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]);
       }
-      if (available.length === 0) {
-        used = [];
-        saveUsedAvatars(used);
-        available = avatarCache.list.slice();
-      }
+      if (available.length === 0) { used = []; saveUsedAvatars(used); available = avatarCache.list.slice(); }
       var idx = Math.floor(Math.random() * available.length);
       var chosen = available[idx];
       used.push(chosen);
@@ -2212,13 +2175,13 @@
 
     function buildAvatarImg(avatarUrl, name, isYouTuber) {
       var fallback = getInitialsAvatarSVG(name, isYouTuber);
-      if (!avatarUrl) {
-        return '<img src="' + fallback + '" alt="' + name + '">';
-      }
+      if (!avatarUrl) return '<img src="' + fallback + '" alt="' + name + '">';
       var safeFallback = fallback.replace(/"/g, '&quot;');
       return '<img src="' + avatarUrl + '" alt="' + name + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
     }
 
+    // ============================================================
+    // CUSTOM ALERTS
     // ============================================================
     (function() {
       function createOverlay() {
@@ -2263,7 +2226,6 @@
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', description: 'Infinite-tier card in rich emerald matte. A quiet statement of wealth — reserved for those who need no introduction.', stockPercent: 88, viewerWeight: 1.3 }
     ];
 
-    // --- UPDATE 2: Authentic YouTube Reviews (Balance/Spending Focus) ---
     var reviewsData = [
       { name: 'Total Gaming', avatar: 'reviews/youtuber1.png', location: 'Gujarat', time: '9 days ago', purchased: 'All 5 Cards', comment: 'Hello Gamers! Ajju Bhai here. Maine is seller se card liya hai, aur sach batau toh balance ekdum wahi mila jo bola gaya tha. Maine us balance se apne Free Fire ka top-up kiya aur sab kuch easily ho gaya. Agar aap log bhi high balance card dhundh rahe ho, toh bina tension ke try karo. Trust me, genuine hai! 🔥', rating: 4.5, helpful: 1247, moreCount: 8932, isYouTuber: true },
       { name: 'Tonde Gamer', avatar: 'reviews/youtuber2.png', location: 'Nepal', time: '17 days ago', purchased: 'All 5 Cards', comment: 'Tonde Bhai here! Yaar, maine pehle socha tha ki online card lena risky hoga, lekin is seller ka card ekdum genuine nikla. Balance bhi high mila aur maine turant apne account mein diamond top-up kar liye. Ab main apne saare subscribers ko bhi bata raha hoon. Try karo, maza aayega! 😎', rating: 4.9, helpful: 2156, moreCount: 12480, isYouTuber: true },
@@ -2285,21 +2247,8 @@
     var isFlipped = false;
     var selectedRating = 0;
     var selectedPhotoDataURL = null;
-
-    // --- UPDATE 6: Dynamic Stock Variables ---
-    var dynamicStocks = {};
-
-    function initDynamicStocks() {
-      designs.forEach(function(d) {
-        dynamicStocks[d.id] = Math.floor(Math.random() * 33) + 55; // 55 to 87
-      });
-    }
-
-    // --- UPDATE 5: QR Timer Variables ---
     var qrTimerInterval = null;
-    var qrTimeLeft = 300; // 5 minutes
-
-    // --- UPDATE 7: Reserved Timer Variables ---
+    var qrTimeLeft = 300;
     var reservedTimerInterval = null;
 
     function showToast(message, type) {
@@ -2420,11 +2369,10 @@
         '<div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
-    // --- UPDATE 4: Time-based Dynamic Behavior (Formula Change) ---
     function getBaseViewerCount(design) {
-      var cardsSoldNow = growNumber(12548, 25, 45, 7001); // Base 12548
+      var cardsSoldNow = growNumber(12548, 25, 45, 7001);
       var base = (cardsSoldNow / 15) * (design.stockPercent / 100) * design.viewerWeight * getTimeMultiplier();
-      return Math.max(15, Math.round(base)); 
+      return Math.max(15, Math.round(base));
     }
 
     var viewerState = {};
@@ -2486,9 +2434,7 @@
         var newEnd = Date.now() + Math.floor(hours * 3600000);
         localStorage.setItem(key, newEnd.toString());
         return newEnd;
-      } catch(e) {
-        return Date.now() + 3 * 3600000;
-      }
+      } catch(e) { return Date.now() + 3 * 3600000; }
     }
 
     function formatCountdown(ms) {
@@ -2538,6 +2484,43 @@
 
     setInterval(updateCountdowns, 1000);
 
+    function updateStockUI(designId) {
+      var stockLeftEl = document.querySelector('.stock-left[data-id="' + designId + '"]');
+      if (stockLeftEl) {
+        var s = dynamicStocks[designId];
+        stockLeftEl.textContent = '🔥 Only ' + s + ' left in stock!';
+      }
+      var percentEl = document.querySelector('.stock-percent[data-id="' + designId + '"]');
+      if (percentEl) {
+        var p = Math.round((dynamicSold[designId] / dynamicTotal[designId]) * 100);
+        percentEl.textContent = p + '% Sold';
+      }
+      var barEl = document.querySelector('.stock-bar-fill[data-id="' + designId + '"]');
+      if (barEl) {
+        var p2 = Math.round((dynamicSold[designId] / dynamicTotal[designId]) * 100);
+        barEl.style.width = p2 + '%';
+      }
+    }
+
+    // FIX #1: Use animated final values instead of base
+    function updateHeroCounters() {
+      var soldEl = document.getElementById('heroSoldCount');
+      if (soldEl) {
+        var newVal = heroAnimatedSold + sessionSales;
+        soldEl.textContent = newVal.toLocaleString('en-IN') + '+';
+      }
+      var buyersEl = document.getElementById('heroBuyersCount');
+      if (buyersEl) {
+        var newVal2 = heroAnimatedBuyers + sessionBuyers;
+        buyersEl.textContent = newVal2.toLocaleString('en-IN') + '+';
+      }
+      var tbEl = document.getElementById('trustedByCount');
+      if (tbEl) {
+        var newVal3 = trustedBaseBuyers + sessionBuyers;
+        tbEl.textContent = '+' + newVal3.toLocaleString('en-IN') + ' buyers';
+      }
+    }
+
     function renderTrustedByRow() {
       var avatarsEl = document.getElementById('trustedByAvatars');
       var countEl = document.getElementById('trustedByCount');
@@ -2551,41 +2534,27 @@
         avatarsEl.appendChild(div);
       }
       if (countEl) {
-        var happyBuyers = growNumber(9935, 18, 32, 8801);
-        countEl.textContent = '+' + happyBuyers.toLocaleString('en-IN') + ' buyers';
+        countEl.textContent = '+' + trustedBaseBuyers.toLocaleString('en-IN') + ' buyers';
       }
-    }
-
-    // ============================================================
-    // WELCOME BACK — Premium Message (UPDATE 1)
-    // ============================================================
-    function getOrdinalSuffix(n) {
-      var s = ['th', 'st', 'nd', 'rd'];
-      var v = n % 100;
-      return n + (s[(v - 20) % 10] || s[v] || s[0]);
     }
 
     function initWelcomeBack() {
       try {
         var VISITS_KEY = 'cardseller_visits';
         var LAST_VISIT_KEY = 'cardseller_last_visit';
-        var FIRST_VISIT_KEY = 'cardseller_first_visit';
         var today = new Date().toDateString();
         var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0');
         var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
-
         if (lastVisit !== today) {
           visits += 1;
           localStorage.setItem(VISITS_KEY, visits.toString());
           localStorage.setItem(LAST_VISIT_KEY, today);
         }
-
         setTimeout(function() {
           var container = document.getElementById('liveNotifContainer');
           if (!container) return;
           var notif = document.createElement('div');
           notif.className = 'welcome-back-toast';
-
           var sub;
           if (visits === 1) {
             sub = 'Welcome to our store! Explore premium cards today.';
@@ -2594,7 +2563,6 @@
           } else {
             sub = 'You have visited us ' + visits + ' times. We appreciate your loyalty!';
           }
-
           notif.innerHTML =
             '<div class="wb-header">✨ Welcome Back ✨</div>' +
             '<div class="wb-body">' +
@@ -2605,7 +2573,6 @@
                 '<span class="wb-badge">🎉 Priority Buyer Status</span>' +
               '</div>' +
             '</div>';
-
           container.appendChild(notif);
           setTimeout(function() { notif.remove(); }, 6000);
         }, 3000);
@@ -2615,23 +2582,28 @@
     function renderGrid() {
       var grid = document.getElementById('productGrid');
       grid.innerHTML = '';
-      
-      // --- UPDATE 8: Find Trending Card (Highest stockPercent) ---
-      var maxStock = 0;
+
+      // FIX #2: Trending = lowest stock (min 3) = most sold = actually trending
       var trendingId = '';
-      designs.forEach(function(d) { if (d.stockPercent > maxStock) { maxStock = d.stockPercent; trendingId = d.id; } });
+      var lowestStock = Infinity;
+      designs.forEach(function(d) {
+        if (dynamicStocks[d.id] >= 3 && dynamicStocks[d.id] < lowestStock) {
+          lowestStock = dynamicStocks[d.id];
+          trendingId = d.id;
+        }
+      });
 
       designs.forEach(function(design) {
         var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
-        var stockLeft = dynamicStocks[design.id]; // UPDATE 6: Dynamic Stock
+        var stockLeft = dynamicStocks[design.id];
+        var soldPercent = Math.round((dynamicSold[design.id] / dynamicTotal[design.id]) * 100);
         var viewerBase = getBaseViewerCount(design);
         var card = document.createElement('div');
         card.className = 'grid-card';
         card.setAttribute('data-id', design.id);
-        
-        // --- UPDATE 8: Trending Badge HTML ---
+
         var badgeHTML = (design.id === trendingId) ? '<div class="trending-badge">🔥 Trending</div>' : '';
-        
+
         card.innerHTML =
           '<div class="countdown-strip" data-design-id="' + design.id + '">' +
             '<span class="cd-icon">🔥</span>' +
@@ -2662,32 +2634,23 @@
             '<div class="stock-progress">' +
               '<div class="stock-progress-top">' +
                 '<span class="stock-left" data-id="' + design.id + '">🔥 Only ' + stockLeft + ' left in stock!</span>' +
-                '<span class="stock-percent">' + design.stockPercent + '% Sold</span>' +
+                '<span class="stock-percent" data-id="' + design.id + '">' + soldPercent + '% Sold</span>' +
               '</div>' +
-              '<div class="stock-bar-track"><div class="stock-bar-fill" style="width:0%" data-fill="' + design.stockPercent + '"></div></div>' +
+              '<div class="stock-bar-track"><div class="stock-bar-fill" data-id="' + design.id + '" style="width:0%" data-fill="' + soldPercent + '"></div></div>' +
             '</div>' +
             '<div class="gc-actions"><button class="gc-buy-btn" data-action="buy">Buy Now</button></div>' +
           '</div>';
         grid.appendChild(card);
       });
       attachGridEvents();
+
+      // FIX #3: Animate stock bar from 0 to actual value
       setTimeout(function() {
         document.querySelectorAll('.stock-bar-fill').forEach(function(bar) {
           bar.style.width = bar.getAttribute('data-fill') + '%';
         });
       }, 300);
     }
-
-    // --- UPDATE 6: Dynamic Stock Reduction Interval ---
-    setInterval(function() {
-      designs.forEach(function(d) {
-        if (dynamicStocks[d.id] > 3) {
-          dynamicStocks[d.id]--;
-          var el = document.querySelector('.stock-left[data-id="' + d.id + '"]');
-          if (el) el.textContent = '🔥 Only ' + dynamicStocks[d.id] + ' left in stock!';
-        }
-      });
-    }, 600000); // 10 minutes
 
     function createReviewCardHTML(review, index) {
       var starsHTML = '';
@@ -2708,7 +2671,6 @@
       }
 
       var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
-
       var baseHelpful = review.helpful || 0;
       var baseMore = review.moreCount || 0;
       var seedBase = index * 100;
@@ -2789,16 +2751,15 @@
       document.getElementById('productOverlay').style.display = 'flex';
     }
 
-    // --- UPDATE 5: Mini Card Flip Functionality ---
     function placeOrderDirect() {
       if (!currentDesign) return;
-      currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material };
+      currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material, id: currentDesign.id };
       var previewEl = document.getElementById('miniCardPreview');
       var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
       previewEl.className = 'mini-card-preview ' + finishClass;
       previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
       previewEl.classList.remove('flipped');
-      
+
       document.getElementById('summaryDesign').textContent = currentDesign.name;
       document.getElementById('summaryMaterial').textContent = currentDesign.material;
       document.getElementById('summaryQty').textContent = currentQty;
@@ -2809,8 +2770,6 @@
       document.getElementById('orderOverlay').style.display = 'flex';
       document.getElementById('orderName').value = '';
       document.getElementById('orderPhone').value = '';
-      
-      // UPDATE 7: Start Reserved Timer
       startReservedTimer();
     }
 
@@ -2824,7 +2783,7 @@
       if (!phoneRegex.test(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
       currentPendingOrder = {
         id: Date.now().toString(), designName: currentOrderDesign.name, price: currentOrderDesign.price,
-        qty: currentOrderDesign.qty, material: currentOrderDesign.material,
+        qty: currentOrderDesign.qty, material: currentOrderDesign.material, designId: currentOrderDesign.id,
         customerName: customerName, whatsapp: whatsapp, timestamp: Date.now()
       };
       var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0;
@@ -2834,21 +2793,16 @@
       document.getElementById('transactionId').value = '';
       document.getElementById('orderOverlay').style.display = 'none';
       document.getElementById('paymentOverlay').style.display = 'flex';
-      
-      // UPDATE 5: Start QR Timer
       startQrTimer();
-      // UPDATE 7: Stop Reserved Timer
       clearInterval(reservedTimerInterval);
     }
 
-    // --- UPDATE 5: QR Timer Functions ---
     function startQrTimer() {
       clearInterval(qrTimerInterval);
-      qrTimeLeft = 300; // 5 minutes
+      qrTimeLeft = 300;
       var timerEl = document.getElementById('qrTimer');
       var qrContainer = document.getElementById('qrContainer');
       var confirmBtn = document.getElementById('confirmPaymentBtn');
-      
       timerEl.textContent = '05:00';
       qrContainer.classList.remove('expired');
       confirmBtn.disabled = false;
@@ -2872,14 +2826,12 @@
       }, 1000);
     }
 
-    // --- UPDATE 7: Reserved Timer Functions ---
     function startReservedTimer() {
       clearInterval(reservedTimerInterval);
-      var timeLeft = 600; // 10 minutes
+      var timeLeft = 600;
       var el = document.getElementById('reservedTimer');
       el.style.display = 'block';
       el.textContent = '⏳ Reserved for 10:00';
-      
       reservedTimerInterval = setInterval(function() {
         timeLeft--;
         if (timeLeft <= 0) {
@@ -2903,10 +2855,23 @@
       var txnRegex = /^(\d{12}|UPI\d{12})$/;
       if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. Please check and try again.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
       currentPendingOrder.transactionId = txnId;
-      
-      // Stop QR Timer
+
+      // Consistency: User's own purchase also decrements stock
+      var pid = currentPendingOrder.designId;
+      if (pid && dynamicStocks[pid] !== undefined) {
+        var qty = currentPendingOrder.qty || 1;
+        if (dynamicStocks[pid] > 3) {
+          var dec = Math.min(qty, dynamicStocks[pid] - 3);
+          dynamicStocks[pid] -= dec;
+          dynamicSold[pid] += dec;
+          sessionSales += dec;
+          if (Math.random() < 0.5) sessionBuyers++;
+          updateStockUI(pid);
+          updateHeroCounters();
+        }
+      }
+
       clearInterval(qrTimerInterval);
-      
       document.getElementById('paymentOverlay').style.display = 'none';
       showToast('Payment confirmed!', 'success');
       showSuccessModal(currentPendingOrder);
@@ -2979,27 +2944,21 @@
     document.getElementById('productClose').addEventListener('click', function() { document.getElementById('productOverlay').style.display = 'none'; });
     document.getElementById('productOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    document.getElementById('orderClose').addEventListener('click', function() { 
-      document.getElementById('orderOverlay').style.display = 'none'; 
+    document.getElementById('orderClose').addEventListener('click', function() {
+      document.getElementById('orderOverlay').style.display = 'none';
       clearInterval(reservedTimerInterval);
     });
-    document.getElementById('orderOverlay').addEventListener('click', function(e) { 
-      if (e.target === this) {
-        this.style.display = 'none'; 
-        clearInterval(reservedTimerInterval);
-      }
+    document.getElementById('orderOverlay').addEventListener('click', function(e) {
+      if (e.target === this) { this.style.display = 'none'; clearInterval(reservedTimerInterval); }
     });
     document.getElementById('orderForm').addEventListener('submit', placeOrderFromForm);
 
-    document.getElementById('paymentClose').addEventListener('click', function() { 
-      document.getElementById('paymentOverlay').style.display = 'none'; 
+    document.getElementById('paymentClose').addEventListener('click', function() {
+      document.getElementById('paymentOverlay').style.display = 'none';
       clearInterval(qrTimerInterval);
     });
-    document.getElementById('paymentOverlay').addEventListener('click', function(e) { 
-      if (e.target === this) {
-        this.style.display = 'none'; 
-        clearInterval(qrTimerInterval);
-      }
+    document.getElementById('paymentOverlay').addEventListener('click', function(e) {
+      if (e.target === this) { this.style.display = 'none'; clearInterval(qrTimerInterval); }
     });
     document.getElementById('confirmPaymentBtn').addEventListener('click', confirmPayment);
     document.getElementById('transactionId').addEventListener('input', function() { this.value = this.value.toUpperCase().replace(/[^0-9UPI]/g, ''); });
@@ -3012,6 +2971,7 @@
       if (e.target === this) { this.style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; }
     });
 
+    // FIX #1: Save animated final value into heroAnimatedSold/Buyers
     function animateCounters() {
       document.querySelectorAll('.stat-number').forEach(function(el) {
         var base = parseFloat(el.getAttribute('data-count'));
@@ -3021,6 +2981,10 @@
         if (increment > 0) {
           target = growNumber(base, Math.floor(increment * 0.7), Math.ceil(increment * 1.5), Math.floor(base));
         }
+        // Save the animated final value
+        if (el.id === 'heroSoldCount') heroAnimatedSold = target;
+        if (el.id === 'heroBuyersCount') heroAnimatedBuyers = target;
+
         var duration = 1800;
         var startTime = null;
         function step(timestamp) {
@@ -3063,7 +3027,6 @@
     ];
 
     var notifContainer = document.getElementById('liveNotifContainer');
-
     var usedPulseKeys = [];
 
     function generatePulseBuyer() {
@@ -3175,18 +3138,47 @@
       }
     }
 
+    // ============================================================
+    // CONSISTENT RANDOM PURCHASE
+    // FIX #4: When all stocks hit 3, slow down notifications
+    // ============================================================
     function triggerRandomPurchase() {
       var buyer = generatePulseBuyer();
-      var design = designs[Math.floor(Math.random() * designs.length)];
+
+      var availableDesigns = designs.filter(function(d) { return dynamicStocks[d.id] > 3; });
+      var allDepleted = (availableDesigns.length === 0);
+
+      var design;
+      if (allDepleted) {
+        design = designs[Math.floor(Math.random() * designs.length)];
+      } else {
+        var totalWeight = 0;
+        availableDesigns.forEach(function(d) { totalWeight += dynamicStocks[d.id]; });
+        var pick = Math.random() * totalWeight;
+        var acc = 0;
+        for (var i = 0; i < availableDesigns.length; i++) {
+          acc += dynamicStocks[availableDesigns[i].id];
+          if (pick <= acc) { design = availableDesigns[i]; break; }
+        }
+        if (!design) design = availableDesigns[availableDesigns.length - 1];
+
+        dynamicStocks[design.id]--;
+        dynamicSold[design.id]++;
+        sessionSales++;
+        if (Math.random() < 0.4) sessionBuyers++;
+
+        updateStockUI(design.id);
+        updateHeroCounters();
+      }
+
       var timestamp = Date.now();
       addLiveNotification(buyer, design, timestamp);
       addPulseItem(buyer, design, timestamp);
-      
-      // --- UPDATE 4: Time-based Notification Delay ---
-      var baseDelay = 15000; // 15 seconds base
+
+      // FIX #4: 3x slower when all depleted
       var multiplier = getTimeMultiplier();
-      var delay = (baseDelay / multiplier) + Math.random() * 5000;
-      
+      var baseDelay = allDepleted ? 180000 : 55000; // 3 min if all depleted, else 55 sec
+      var delay = (baseDelay / multiplier) + Math.random() * 25000;
       setTimeout(triggerRandomPurchase, delay);
     }
 
@@ -3201,7 +3193,7 @@
     }
     setInterval(updateNotificationTimes, 30000);
 
-    setTimeout(function() { triggerRandomPurchase(); }, 4000);
+    setTimeout(function() { triggerRandomPurchase(); }, 6000);
 
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
@@ -3278,8 +3270,6 @@
         });
       });
     }
-
-    // Removed attachReportButtonEvents()
 
     var photoUploadArea = document.getElementById('photoUploadArea');
     var photoInput = document.getElementById('reviewPhotoInput');
@@ -3426,20 +3416,22 @@
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    // --- UPDATE 9: Idle Reminder / Exit Intent ---
+    document.getElementById('miniCardPreview').addEventListener('click', function() {
+      this.classList.toggle('flipped');
+    });
+
     var idleTimer = null;
     function resetIdleTimer() {
       clearTimeout(idleTimer);
       idleTimer = setTimeout(function() {
         showToast('Wait! 🔥 High balance cards are selling fast today. Don\'t miss out!', 'info');
-      }, 120000); // 2 minutes
+      }, 120000);
     }
     document.addEventListener('mousemove', resetIdleTimer);
     document.addEventListener('keydown', resetIdleTimer);
     document.addEventListener('scroll', resetIdleTimer);
     resetIdleTimer();
 
-    // Exit Intent
     document.addEventListener('mouseleave', function(e) {
       if (e.clientY < 0) {
         showToast('Wait! 🔥 Don\'t miss out on our high balance cards!', 'error');
@@ -3449,7 +3441,7 @@
     // INIT
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
-      initDynamicStocks(); // UPDATE 6
+      initDynamicStocks();
       initViewerCounts();
       renderGrid();
       initCountdowns();
