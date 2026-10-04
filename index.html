@@ -224,7 +224,6 @@
       color: #f5d76e; text-transform: uppercase;
     }
 
-    /* Fixed to always show exactly 3 items — no max-height clipping */
     .pulse-list {
       display: flex; flex-direction: column; gap: 8px;
     }
@@ -1948,15 +1947,108 @@
     }
 
     // ============================================================
-    // AVATAR SYSTEM — DiceBear (Unlimited, Indian Skin Tones)
+    // INITIALS AVATAR (fallback jab image load na ho)
+    // "Rohit Raw" → "RR" SVG data URI
     // ============================================================
-    function getDiceBearAvatar(seed) {
-      var s = seed || (Date.now() + Math.random()).toString(36);
-      return 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + encodeURIComponent(s) + '&skinColor=ae5d29,d08b5b,8d5524,c68629,edb98a&topColor=2c1b18,4a312c,724133,0e0e0e,a55728,c93305&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf';
+    function getInitialsAvatarSVG(name, isYouTuber) {
+      var initials = String(name || 'U').split(' ').map(function(n){return (n[0]||'');}).join('').substring(0,2).toUpperCase();
+      var bg = isYouTuber ? '#0f1729' : '#1a1a1a';
+      var color = isYouTuber ? '#1d9bf0' : '#f5d76e';
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">' +
+        '<rect width="100" height="100" fill="' + bg + '"/>' +
+        '<text x="50" y="50" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="800" fill="' + color + '" text-anchor="middle" dominant-baseline="central">' + initials + '</text>' +
+        '</svg>';
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    // ============================================================
+    // AVATAR SYSTEM — GitHub API se images
+    // ============================================================
+    var avatarCache = {
+      list: [],
+      loaded: false
+    };
+
+    function fetchAvatarsFromGitHub(callback) {
+      try {
+        var cached = localStorage.getItem('cardseller_avatars_list');
+        var cachedTime = localStorage.getItem('cardseller_avatars_time');
+        if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 86400000) {
+          var parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            avatarCache.list = parsed;
+            avatarCache.loaded = true;
+            if (callback) callback(parsed);
+            return;
+          }
+        }
+      } catch(e) {}
+
+      fetch('https://api.github.com/repos/forviews1st-hub/Credit-Dizain/contents/avatars')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (!Array.isArray(data)) throw new Error('Invalid response');
+          var images = data.filter(function(item) {
+            return item.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(item.name);
+          }).map(function(item) { return item.download_url; });
+
+          // Shuffle
+          for (var i = images.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var tmp = images[i]; images[i] = images[j]; images[j] = tmp;
+          }
+
+          avatarCache.list = images;
+          avatarCache.loaded = true;
+          try {
+            localStorage.setItem('cardseller_avatars_list', JSON.stringify(images));
+            localStorage.setItem('cardseller_avatars_time', Date.now().toString());
+          } catch(e) {}
+          if (callback) callback(images);
+        })
+        .catch(function(err) {
+          console.warn('Avatar fetch failed:', err);
+          avatarCache.loaded = true;
+          if (callback) callback([]);
+        });
+    }
+
+    // Preload ALL images in background
+    function preloadAllAvatars() {
+      if (!avatarCache.list || avatarCache.list.length === 0) return;
+      avatarCache.list.forEach(function(url) {
+        var img = new Image();
+        img.src = url;
+      });
+    }
+
+    // Same name => same image
+    function getAvatarForName(name) {
+      if (!avatarCache.list || avatarCache.list.length === 0) return null;
+      var hash = 0;
+      var str = String(name || 'anonymous');
+      for (var i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash = hash & hash;
+      }
+      var idx = Math.abs(hash) % avatarCache.list.length;
+      return avatarCache.list[idx];
     }
 
     function getRandomAvatarUrl() {
-      return getDiceBearAvatar(Math.random().toString(36).substring(2, 12));
+      if (avatarCache.list && avatarCache.list.length > 0) {
+        return avatarCache.list[Math.floor(Math.random() * avatarCache.list.length)];
+      }
+      return null;
+    }
+
+    function buildAvatarImg(avatarUrl, name, isYouTuber) {
+      var fallback = getInitialsAvatarSVG(name, isYouTuber);
+      if (!avatarUrl) {
+        return '<img src="' + fallback + '" alt="' + name + '">';
+      }
+      var safeFallback = fallback.replace(/"/g, '&quot;');
+      return '<img src="' + avatarUrl + '" alt="' + name + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
     }
 
     // ============================================================
@@ -2269,7 +2361,7 @@
         var avatar = getRandomAvatarUrl();
         var div = document.createElement('div');
         div.className = 'trusted-by-avatar';
-        div.innerHTML = '<img src="' + avatar + '" alt="Buyer" loading="lazy" onerror="this.style.display=\'none\'">';
+        div.innerHTML = buildAvatarImg(avatar, String.fromCharCode(65 + i), false);
         avatarsEl.appendChild(div);
       }
       if (countEl) {
@@ -2372,19 +2464,13 @@
       var starsHTML = '';
       for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
 
-      var initials = review.name.split(' ').map(function(n){return n[0];}).join('').substring(0,2).toUpperCase();
       var avatarHTML;
       if (review.avatar) {
-        var fallbackColor = review.isYouTuber ? '#1d9bf0' : '#d4af37';
-        var fallbackBg = review.isYouTuber ? 'rgba(29,155,240,0.25)' : 'rgba(212,175,55,0.25)';
-        var fSize = review.isYouTuber ? '15' : '14';
-        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<span style=&quot;display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:' + fallbackColor + ';font-weight:800;font-size:' + fSize + 'px;background:linear-gradient(135deg, ' + fallbackBg + ' 0%, rgba(0,0,0,0.1) 100%);&quot;>' + initials + '</span>\'">';
+        var fallback = getInitialsAvatarSVG(review.name, review.isYouTuber);
+        var safeFallback = fallback.replace(/"/g, '&quot;');
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
       } else {
-        if (review.isYouTuber) {
-          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#1d9bf0;font-weight:900;font-size:15px;background:linear-gradient(135deg, rgba(29,155,240,0.25) 0%, rgba(29,155,240,0.08) 100%);">' + initials + '</span>';
-        } else {
-          avatarHTML = '<span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:14px;background:linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%);">' + initials + '</span>';
-        }
+        avatarHTML = '<img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber) + '" alt="' + review.name + '">';
       }
 
       var nameInner = '<span class="review-name">' + review.name + '</span>';
@@ -2676,11 +2762,12 @@
         if (usedPulseKeys.indexOf(key) === -1) {
           usedPulseKeys.push(key);
           if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
-          return { name: fn + ' ' + ln, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getDiceBearAvatar(fn + ln + city + Math.random().toString(36)) };
+          var fullName = fn + ' ' + ln;
+          return { name: fullName, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getAvatarForName(fullName) };
         }
         attempts++;
       }
-      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi', avatar: getRandomAvatarUrl() };
+      return { name: 'Amit Sharma', initials: 'AS', city: 'Delhi', avatar: getAvatarForName('Amit Sharma') };
     }
 
     function getCardThumbStyle(design) {
@@ -2700,12 +2787,11 @@
     function createPulseItemHTML(buyer, design, timestamp) {
       var thumbStyle = getCardThumbStyle(design);
       var timeStr = formatTimeAgo(timestamp);
-      var avatarUrl = buyer.avatar || getRandomAvatarUrl();
-      var initials = buyer.initials.toUpperCase();
+      var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
 
       return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
         '<div class="pulse-avatar-wrap">' +
-          '<div class="pulse-avatar"><img src="' + avatarUrl + '" alt="' + buyer.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div style=&quot;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#f5d76e;font-weight:800;font-size:11px;background:linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));&quot;>' + initials + '</div>\'"></div>' +
+          '<div class="pulse-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div>' +
           '<div class="pulse-check">✓</div>' +
         '</div>' +
         '<div class="pulse-content">' +
@@ -2723,15 +2809,14 @@
     function addLiveNotification(buyer, design, timestamp) {
       var displayName = buyer.name.split(' ')[0] + ' ' + buyer.name.split(' ')[1].charAt(0) + '.';
       var timeStr = formatTimeAgo(timestamp);
-      var avatarUrl = buyer.avatar || getRandomAvatarUrl();
-      var initials = buyer.initials.toUpperCase();
+      var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
 
       var notif = document.createElement('div');
       notif.className = 'live-notif';
       notif.innerHTML =
         '<div class="notif-card-badge">💳 Card Purchased</div>' +
         '<div class="notif-row">' +
-          '<div class="notif-avatar"><img src="' + avatarUrl + '" alt="' + buyer.name + '" loading="lazy" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div style=&quot;width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#d4af37;font-weight:800;font-size:12px;background:linear-gradient(135deg, rgba(212,175,55,0.4), rgba(212,175,55,0.1));&quot;>' + initials + '</div>\'"></div>' +
+          '<div class="notif-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div>' +
           '<div class="notif-content">' +
             '<strong>' + displayName + ' from ' + buyer.city + '</strong>' +
             'bought ' + design.name +
@@ -2752,7 +2837,9 @@
       notif.innerHTML =
         '<div class="notif-card-badge">⭐ New Review</div>' +
         '<div class="notif-row">' +
-          '<div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#1d9bf0;font-weight:800;font-size:13px;">' + review.name.charAt(0).toUpperCase() + '</div></div>' +
+          '<div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);">' +
+            '<img src="' + getInitialsAvatarSVG(review.name, true) + '" alt="' + review.name + '">' +
+          '</div>' +
           '<div class="notif-content">' +
             '<strong>' + displayName + ' just left a ' + stars + ' review!</strong>' +
             'for ' + review.purchased +
@@ -3030,15 +3117,20 @@
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-    // INIT
-    initViewerCounts();
-    renderGrid();
-    initCountdowns();
-    updateCountdowns();
-    renderTrustedByRow();
-    renderReviews();
-    animateCounters();
-    initWelcomeBack();
+    // ============================================================
+    // INIT — pehle avatars fetch, phir sab render
+    // ============================================================
+    fetchAvatarsFromGitHub(function() {
+      preloadAllAvatars();
+      initViewerCounts();
+      renderGrid();
+      initCountdowns();
+      updateCountdowns();
+      renderTrustedByRow();
+      renderReviews();
+      animateCounters();
+      initWelcomeBack();
+    });
   </script>
 </body>
 </html>
