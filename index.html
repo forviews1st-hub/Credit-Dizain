@@ -422,7 +422,7 @@
     .network-retry-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
 
     .live-notif-container { position: fixed; top: 86px; right: 20px; left: auto; bottom: auto; z-index: 2200; display: flex; flex-direction: column; gap: 10px; pointer-events: none; max-width: 320px; }
-    .live-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08); animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards; pointer-events: auto; overflow: hidden; position: relative; }
+    .live-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; overflow: hidden; position: relative; }
     @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
     .live-notif .notif-card-badge { display: flex; align-items: center; justify-content: center; gap: 5px; background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 1.2px; padding: 5px 10px; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
@@ -434,10 +434,10 @@
     .live-notif .notif-content .notif-time { color: #22c55e; font-size: 10px; display: block; margin-top: 3px; font-weight: 600; letter-spacing: 0.2px; }
     @media (max-width: 480px) { .live-notif-container { left: 10px; right: 10px; top: 76px; max-width: none; } }
 
-    .review-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(29,155,240,0.45); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12); animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards; pointer-events: auto; overflow: hidden; }
+    .review-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(29,155,240,0.45); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; overflow: hidden; }
     .review-notif .notif-card-badge { background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%); }
 
-    .welcome-back-toast { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.5); border-radius: 16px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.25); animation: notifIn 0.4s ease, notifOut 0.4s ease 6s forwards; pointer-events: auto; max-width: 340px; overflow: hidden; position: relative; }
+    .welcome-back-toast { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.5); border-radius: 16px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.25); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; max-width: 340px; overflow: hidden; position: relative; }
     .welcome-back-toast .wb-header { background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #b8941f 100%); color: #1a1408; padding: 6px 12px; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .welcome-back-toast .wb-body { padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
     .welcome-back-toast .wb-icon-wrap { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%); border: 1.5px solid rgba(212,175,55,0.5); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; box-shadow: 0 0 12px rgba(212,175,55,0.3); }
@@ -1028,11 +1028,12 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM
        - Reference date: 2026-06-01
-       - All counters = Base + organic hourly growth
-       - Same on all devices, no localStorage for counters
-       - Sales rate: 5/hr avg (realistic growth)
+       - Ek single source of truth: buildStream()
+       - Har minute = 1 potential purchase (prob = 5/hr × timeMult / 60)
+       - Saare counters (sold, stock, sold%, hero, notification) isi stream se derive
+       - Same on all devices, deterministic
        ========================================================= */
 
     var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
@@ -1054,48 +1055,62 @@
       return 0.5;
     }
 
-    /* PATCH F: baseRate 20 -> 5 (realistic) */
-    var _cachedTotalPurchases = null;
-    function getTotalPurchases() {
-      if (_cachedTotalPurchases !== null) return _cachedTotalPurchases;
-      var hours = getHoursSinceReference();
-      var total = 0;
-      var baseRate = 5;
-      for (var h = 0; h < hours; h++) {
-        var hourOfDay = h % 24;
+    /* ============ MASTER STREAM SYSTEM ============ */
+    var BASE_PURCHASES_PER_HOUR = 5;
+    var _stream = null;
+
+    function buildStream() {
+      if (_stream) return _stream;
+      var stream = { events: [], totalPurchases: 0, cardCounts: {} };
+      designs.forEach(function(d) { stream.cardCounts[d.id] = 0; });
+
+      var totalWeight = 0;
+      designs.forEach(function(d) { totalWeight += d.viewerWeight; });
+
+      var now = Date.now();
+      var minutesSince = Math.floor((now - REFERENCE_TIME) / 60000);
+
+      for (var m = 0; m < minutesSince; m++) {
+        var minuteTime = REFERENCE_TIME + m * 60000;
+        var hourOfDay = new Date(minuteTime).getHours();
         var mult = getTimeMultiplierForHour(hourOfDay);
-        var expected = baseRate * mult;
-        var r1 = pseudoRandom(7001 + h * 9773);
-        var r2 = pseudoRandom(7001 + h * 9773 + 4337);
-        var u = (r1 + r2) / 2;
-        total += Math.round(u * expected * 2);
+        var expectedPerMinute = (BASE_PURCHASES_PER_HOUR * mult) / 60;
+
+        var r1 = pseudoRandom(7001 + m * 9773);
+        if (r1 < expectedPerMinute) {
+          var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
+          var chosen = designs[0];
+          var acc = 0;
+          for (var i = 0; i < designs.length; i++) {
+            acc += designs[i].viewerWeight;
+            if (cardRoll < acc) { chosen = designs[i]; break; }
+          }
+          stream.events.push({ minute: m, time: minuteTime, designId: chosen.id });
+          stream.totalPurchases++;
+          stream.cardCounts[chosen.id]++;
+        }
       }
-      _cachedTotalPurchases = total;
-      return total;
+      _stream = stream;
+      return stream;
     }
 
-    var _cachedCardPurchases = {};
-    function getCardPurchases(design, idx) {
-      if (_cachedCardPurchases[design.id] !== undefined) return _cachedCardPurchases[design.id];
-      var hours = getHoursSinceReference();
-      var weight = design.viewerWeight;
-      var totalWeight = 5.7;
-      var cardShare = weight / totalWeight;
-      var total = 0;
-      for (var h = 0; h < hours; h++) {
-        var hourOfDay = h % 24;
-        var mult = getTimeMultiplierForHour(hourOfDay);
-        var expected = 5 * mult * cardShare;
-        var r1 = pseudoRandom(9101 + idx * 991 + h * 9773);
-        var r2 = pseudoRandom(9101 + idx * 991 + h * 9773 + 4337);
-        var u = (r1 + r2) / 2;
-        total += Math.round(u * expected * 2);
-      }
-      _cachedCardPurchases[design.id] = total;
-      return total;
+    function getTotalPurchases() { return buildStream().totalPurchases; }
+    function getCardPurchases(design) { return buildStream().cardCounts[design.id] || 0; }
+
+    /* ISSUE 2 FIX: user's own purchase ko stream me record karo */
+    function recordUserPurchase(designId) {
+      var stream = buildStream();
+      var now = Date.now();
+      var currentMinute = Math.floor((now - REFERENCE_TIME) / 60000);
+      stream.events.push({ minute: currentMinute, time: now, designId: designId, isUser: true });
+      stream.totalPurchases++;
+      stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
     }
 
+    /* ISSUE 1 FIX: user ke khud ke review 0 helpful se start */
     function getReviewHelpful(review, idx) {
+      if (review.isUserSubmitted) return review.helpful || 0;
+
       var hours = getHoursSinceReference();
       var base = review.helpful || 0;
       var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131;
@@ -1112,9 +1127,12 @@
       }
       var hourlyRate = dailyRate / 24;
       var total = 0;
+      /* OPTION A: raat slow, peak fast — time-of-day multiplier */
       for (var h = 0; h < hours; h++) {
+        var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getHours();
+        var mult = getTimeMultiplierForHour(hourOfDay);
         var r = pseudoRandom(seed + h * 9773);
-        if (r < hourlyRate) total += 1;
+        if (r < hourlyRate * mult) total += 1;
       }
       return base + total;
     }
@@ -1474,7 +1492,7 @@
       { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
 
-    /* PATCH D: Fixed stock formula — % never exceeds 100 */
+    /* STREAM-BASED card state */
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
@@ -1482,13 +1500,33 @@
       var initialSold = Math.round(initialStock * (design.stockPercent / (100 - design.stockPercent)));
       var totalInventory = initialStock + initialSold;
 
-      var dailyRate = 0.1 + design.viewerWeight * 0.15;
-      var days = getHoursSinceReference() / 24;
-      var purchased = Math.min(initialStock - 3, Math.floor(days * dailyRate));
+      var purchased = getCardPurchases(design);
       var currentStock = Math.max(3, initialStock - purchased);
       var currentSold = initialSold + (initialStock - currentStock);
 
       return { stock: currentStock, sold: currentSold, total: totalInventory };
+    }
+
+    /* ISSUE 3 FIX: Trending badge dynamically move */
+    function updateTrendingBadge() {
+      var trendingId = '';
+      var lowestStock = Infinity;
+      designs.forEach(function(d, idx) {
+        var s = getCardState(d, idx);
+        if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; }
+      });
+      document.querySelectorAll('.grid-card').forEach(function(card) {
+        var id = card.getAttribute('data-id');
+        var existing = card.querySelector('.trending-badge');
+        if (id === trendingId) {
+          if (!existing) {
+            var info = card.querySelector('.gc-info');
+            if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>');
+          }
+        } else if (existing) {
+          existing.remove();
+        }
+      });
     }
 
     var currentDesign = null;
@@ -1547,7 +1585,7 @@
       return '<div class="cc-face cc-back" style="background:' + design.gradient + '"><div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div><div class="cc-stripe"></div><div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
-    /* PATCH C: Live viewer counts 500-2000 range */
+    /* Live viewer counts */
     var viewerState = {};
     function initViewerCounts() {
       designs.forEach(function(d) {
@@ -1686,7 +1724,7 @@
           container.appendChild(notif);
           var closeBtn = notif.querySelector('.notif-close-btn');
           if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-          setTimeout(function() { notif.remove(); }, 6000);
+          setTimeout(function() { notif.remove(); }, 10000);
         }, 3000);
       } catch(e) {}
     }
@@ -1734,7 +1772,6 @@
       }, 300);
     }
 
-    /* PATCH E: persist helpful states */
     function loadHelpfulStates() {
       try {
         var raw = localStorage.getItem('cardseller_helpful_states');
@@ -1953,6 +1990,17 @@
       document.getElementById('paymentOverlay').style.display = 'none';
       document.body.classList.remove('modal-open');
       showToast('Payment confirmed!', 'success');
+
+      /* ISSUE 2 FIX: user ka purchase master stream me add karo */
+      recordUserPurchase(currentPendingOrder.designId);
+      renderHeroCounters();
+      var _ud = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
+      if (_ud) {
+        var _ui = designs.indexOf(_ud);
+        updateStockUI(_ud.id, getCardState(_ud, _ui));
+      }
+      updateTrendingBadge();
+
       showSuccessModal(currentPendingOrder);
       playOrderSound();
       setTimeout(function() { triggerUserOwnNotification(); }, 1500);
@@ -2087,8 +2135,14 @@
         '<div class="pulse-card-thumb" style="' + thumbStyle + '"></div></div>';
     }
 
-    /* PATCH A: Notification now shows price */
+    /* PATCH A + ISSUE 4: max 3 notifs + 10s duration */
     function addLiveNotification(buyer, design, timestamp) {
+      var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
+      while (existing.length >= 3) {
+        existing[0].remove();
+        existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
+      }
+
       var nameParts = String(buyer.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
       var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
       var timeStr = formatTimeAgo(timestamp);
@@ -2104,10 +2158,16 @@
       notifContainer.appendChild(notif);
       var closeBtn = notif.querySelector('.notif-close-btn');
       if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-      setTimeout(function() { notif.remove(); }, 6500);
+      setTimeout(function() { notif.remove(); }, 10000);
     }
 
     function showReviewNotification(review) {
+      var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
+      while (existing.length >= 3) {
+        existing[0].remove();
+        existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
+      }
+
       var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
       var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
       var stars = '';
@@ -2121,7 +2181,7 @@
       notifContainer.appendChild(notif);
       var closeBtn = notif.querySelector('.notif-close-btn');
       if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-      setTimeout(function() { notif.remove(); }, 6500);
+      setTimeout(function() { notif.remove(); }, 10000);
     }
 
     function addPulseItem(buyer, design, timestamp) {
@@ -2132,16 +2192,49 @@
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
 
-    function triggerRandomPurchase() {
-      var buyer = generatePulseBuyer();
-      var design = designs[Math.floor(Math.random() * designs.length)];
-      var timestamp = Date.now();
-      addLiveNotification(buyer, design, timestamp);
-      addPulseItem(buyer, design, timestamp);
-      var multiplier = getTimeMultiplierForHour(new Date().getHours());
-      var delay = (720000 / multiplier) + Math.random() * 120000;
-      setTimeout(triggerRandomPurchase, delay);
+    /* ============ PURCHASE TICK (master-stream driven) ============ */
+    var _lastNotifiedMinute = null;
+
+    function purchaseTick() {
+      var now = Date.now();
+      var currentMinute = Math.floor((now - REFERENCE_TIME) / 60000);
+
+      if (_lastNotifiedMinute === null) {
+        _lastNotifiedMinute = currentMinute;
+        return;
+      }
+      if (currentMinute <= _lastNotifiedMinute) return;
+
+      var stream = buildStream();
+      var shownAny = false;
+      for (var i = 0; i < stream.events.length; i++) {
+        var ev = stream.events[i];
+        if (ev.isUser) continue;
+        if (ev.minute > _lastNotifiedMinute && ev.minute <= currentMinute) {
+          var design = null;
+          for (var j = 0; j < designs.length; j++) {
+            if (designs[j].id === ev.designId) { design = designs[j]; break; }
+          }
+          if (!design) continue;
+          var buyer = generatePulseBuyer();
+          var timestamp = Date.now();
+          addLiveNotification(buyer, design, timestamp);
+          addPulseItem(buyer, design, timestamp);
+          shownAny = true;
+        }
+      }
+      _lastNotifiedMinute = currentMinute;
+
+      if (shownAny) {
+        renderHeroCounters();
+        designs.forEach(function(d, idx) {
+          var state = getCardState(d, idx);
+          updateStockUI(d.id, state);
+        });
+        updateTrendingBadge();
+      }
     }
+    setInterval(purchaseTick, 15000);
 
     function updateNotificationTimes() {
       var items = document.querySelectorAll('.pulse-item');
@@ -2153,8 +2246,6 @@
       });
     }
     setInterval(updateNotificationTimes, 30000);
-
-    setTimeout(function() { triggerRandomPurchase(); }, 20000);
 
     var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
     var loadMoreText = document.getElementById('loadMoreText');
@@ -2318,7 +2409,7 @@
         else alert('Please fill all the fields.', {title: 'Missing Information', icon: '📝'});
         return;
       }
-      var newReview = { name: name, avatar: selectedPhotoDataURL || null, location: location, time: 'Just now', purchased: card, comment: text, rating: selectedRating, helpful: 0, moreCount: 0 };
+      var newReview = { name: name, avatar: selectedPhotoDataURL || null, location: location, time: 'Just now', purchased: card, comment: text, rating: selectedRating, helpful: 0, moreCount: 0, isUserSubmitted: true };
       reviewsData.push(newReview);
       var grid = document.getElementById('reviewsGrid');
       var result = createReviewCardHTML(newReview, reviewsData.length - 1);
@@ -2388,6 +2479,7 @@
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
       initViewerCounts();
+      buildStream();
       renderGrid();
       initCountdowns();
       updateCountdowns();
