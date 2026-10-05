@@ -1028,15 +1028,19 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v2 FIXED)
-       - Reference date: 2026-06-01
-       - Ek single source of truth: incremental stream
-       - Har minute = 1 potential purchase (prob = 5/hr × timeMult / 60)
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v3)
+       - REFERENCE_TIME: reviews, viewers, helpful counts ke liye (June 2026 se)
+       - STREAM_REFERENCE_TIME: rolling 3-hour window (page load pe abhi se 3 ghante pehle)
+       - BASE_PURCHASES_PER_HOUR = 15 (Option A)
        - Saare counters (sold, stock, sold%, hero, notification) isi stream se derive
        - Same on all devices, deterministic
        ========================================================= */
 
+    /* Purana reference — reviews/viewers/helpful ke liye */
     var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
+
+    /* Naya rolling reference — sirf stream (purchases) ke liye (3 ghante pehle se) */
+    var STREAM_REFERENCE_TIME = Date.now() - (3 * 60 * 60 * 1000);
 
     function pseudoRandom(seed) {
       var x = Math.sin(seed) * 10000;
@@ -1055,8 +1059,8 @@
       return 0.5;
     }
 
-    /* ============ MASTER STREAM SYSTEM (INCREMENTAL, FIXED) ============ */
-    var BASE_PURCHASES_PER_HOUR = 5;
+    /* ============ MASTER STREAM SYSTEM (INCREMENTAL, ROLLING 3H WINDOW) ============ */
+    var BASE_PURCHASES_PER_HOUR = 15;
     var _streamState = null;
 
     function getStreamState() {
@@ -1076,7 +1080,7 @@
       designs.forEach(function(d) { totalWeight += d.viewerWeight; });
 
       for (var m = stream.lastMinute + 1; m <= targetMinute; m++) {
-        var minuteTime = REFERENCE_TIME + m * 60000;
+        var minuteTime = STREAM_REFERENCE_TIME + m * 60000;
         var hourOfDay = new Date(minuteTime).getHours();
         var mult = getTimeMultiplierForHour(hourOfDay);
         var expectedPerMinute = (BASE_PURCHASES_PER_HOUR * mult) / 60;
@@ -1100,20 +1104,20 @@
     }
 
     function getTotalPurchases() {
-      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(nowMinute);
       return _streamState.totalPurchases;
     }
 
     function getCardPurchases(design) {
-      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(nowMinute);
       return _streamState.cardCounts[design.id] || 0;
     }
 
     /* ISSUE 2 FIX: user's own purchase ko stream me record karo */
     function recordUserPurchase(designId) {
-      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(nowMinute);
       var stream = _streamState;
       stream.events.push({ minute: nowMinute, time: Date.now(), designId: designId, isUser: true });
@@ -2206,12 +2210,12 @@
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
 
-    /* ============ PURCHASE TICK (master-stream driven, incremental) ============ */
+    /* ============ PURCHASE TICK (master-stream driven, incremental, rolling) ============ */
     var _lastNotifiedMinute = null;
 
     function purchaseTick() {
       var now = Date.now();
-      var currentMinute = Math.floor((now - REFERENCE_TIME) / 60000);
+      var currentMinute = Math.floor((now - STREAM_REFERENCE_TIME) / 60000);
 
       if (_lastNotifiedMinute === null) {
         _lastNotifiedMinute = currentMinute;
@@ -2494,8 +2498,8 @@
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
       initViewerCounts();
-      /* Stream ko current time tak initialize karo (sirf 1 baar) */
-      var initMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      /* Stream ko current time tak initialize karo (rolling 3-hour window) */
+      var initMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(initMinute);
       renderGrid();
       initCountdowns();
