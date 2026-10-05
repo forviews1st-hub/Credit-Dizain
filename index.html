@@ -1028,12 +1028,12 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v3)
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v4)
        - REFERENCE_TIME: reviews, viewers, helpful counts ke liye (June 2026 se)
        - STREAM_REFERENCE_TIME: rolling 3-hour window (page load pe abhi se 3 ghante pehle)
-       - BASE_PURCHASES_PER_HOUR = 15 (Option A)
+       - BASE_PURCHASES_PER_HOUR = 60 (Option C — fast notifications)
+       - Initial stock = 150-200 (safe from floor, long sessions me bhi na atke)
        - Saare counters (sold, stock, sold%, hero, notification) isi stream se derive
-       - Same on all devices, deterministic
        ========================================================= */
 
     /* Purana reference — reviews/viewers/helpful ke liye */
@@ -1060,7 +1060,7 @@
     }
 
     /* ============ MASTER STREAM SYSTEM (INCREMENTAL, ROLLING 3H WINDOW) ============ */
-    var BASE_PURCHASES_PER_HOUR = 15;
+    var BASE_PURCHASES_PER_HOUR = 60;
     var _streamState = null;
 
     function getStreamState() {
@@ -1514,7 +1514,7 @@
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
-      var initialStock = Math.floor(rand * 33) + 55;
+      var initialStock = Math.floor(rand * 50) + 150;
       var initialSold = Math.round(initialStock * (design.stockPercent / (100 - design.stockPercent)));
       var totalInventory = initialStock + initialSold;
 
