@@ -1028,9 +1028,9 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v2 FIXED)
        - Reference date: 2026-06-01
-       - Ek single source of truth: buildStream()
+       - Ek single source of truth: incremental stream
        - Har minute = 1 potential purchase (prob = 5/hr × timeMult / 60)
        - Saare counters (sold, stock, sold%, hero, notification) isi stream se derive
        - Same on all devices, deterministic
@@ -1055,22 +1055,27 @@
       return 0.5;
     }
 
-    /* ============ MASTER STREAM SYSTEM ============ */
+    /* ============ MASTER STREAM SYSTEM (INCREMENTAL, FIXED) ============ */
     var BASE_PURCHASES_PER_HOUR = 5;
-    var _stream = null;
+    var _streamState = null;
 
-    function buildStream() {
-      if (_stream) return _stream;
-      var stream = { events: [], totalPurchases: 0, cardCounts: {} };
-      designs.forEach(function(d) { stream.cardCounts[d.id] = 0; });
+    function getStreamState() {
+      if (_streamState === null) {
+        _streamState = { events: [], totalPurchases: 0, cardCounts: {}, lastMinute: -1 };
+        designs.forEach(function(d) { _streamState.cardCounts[d.id] = 0; });
+      }
+      return _streamState;
+    }
+
+    /* Stream ko target minute tak extend karo (naye minute ke events generate karo) */
+    function extendStreamTo(targetMinute) {
+      var stream = getStreamState();
+      if (targetMinute <= stream.lastMinute) return stream;
 
       var totalWeight = 0;
       designs.forEach(function(d) { totalWeight += d.viewerWeight; });
 
-      var now = Date.now();
-      var minutesSince = Math.floor((now - REFERENCE_TIME) / 60000);
-
-      for (var m = 0; m < minutesSince; m++) {
+      for (var m = stream.lastMinute + 1; m <= targetMinute; m++) {
         var minuteTime = REFERENCE_TIME + m * 60000;
         var hourOfDay = new Date(minuteTime).getHours();
         var mult = getTimeMultiplierForHour(hourOfDay);
@@ -1090,19 +1095,28 @@
           stream.cardCounts[chosen.id]++;
         }
       }
-      _stream = stream;
+      stream.lastMinute = targetMinute;
       return stream;
     }
 
-    function getTotalPurchases() { return buildStream().totalPurchases; }
-    function getCardPurchases(design) { return buildStream().cardCounts[design.id] || 0; }
+    function getTotalPurchases() {
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      extendStreamTo(nowMinute);
+      return _streamState.totalPurchases;
+    }
+
+    function getCardPurchases(design) {
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      extendStreamTo(nowMinute);
+      return _streamState.cardCounts[design.id] || 0;
+    }
 
     /* ISSUE 2 FIX: user's own purchase ko stream me record karo */
     function recordUserPurchase(designId) {
-      var stream = buildStream();
-      var now = Date.now();
-      var currentMinute = Math.floor((now - REFERENCE_TIME) / 60000);
-      stream.events.push({ minute: currentMinute, time: now, designId: designId, isUser: true });
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      extendStreamTo(nowMinute);
+      var stream = _streamState;
+      stream.events.push({ minute: nowMinute, time: Date.now(), designId: designId, isUser: true });
       stream.totalPurchases++;
       stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
     }
@@ -2192,7 +2206,7 @@
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
 
-    /* ============ PURCHASE TICK (master-stream driven) ============ */
+    /* ============ PURCHASE TICK (master-stream driven, incremental) ============ */
     var _lastNotifiedMinute = null;
 
     function purchaseTick() {
@@ -2205,7 +2219,8 @@
       }
       if (currentMinute <= _lastNotifiedMinute) return;
 
-      var stream = buildStream();
+      /* Stream ko aaj ke minute tak extend karo — naye events generate honge */
+      var stream = extendStreamTo(currentMinute);
       var shownAny = false;
       for (var i = 0; i < stream.events.length; i++) {
         var ev = stream.events[i];
@@ -2479,7 +2494,9 @@
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
       initViewerCounts();
-      buildStream();
+      /* Stream ko current time tak initialize karo (sirf 1 baar) */
+      var initMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      extendStreamTo(initMinute);
       renderGrid();
       initCountdowns();
       updateCountdowns();
