@@ -10,66 +10,23 @@
     * { -webkit-tap-highlight-color: transparent; }
     :focus { outline: none; }
     :focus-visible { outline: 2px solid #d4af37; outline-offset: 3px; border-radius: 6px; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0a;
-      background-image:
-        radial-gradient(circle at 20% 0%, rgba(212,175,55,0.06), transparent 50%),
-        radial-gradient(circle at 80% 100%, rgba(212,175,55,0.04), transparent 50%);
-      min-height: 100vh;
-      color: #fff;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .site-header {
-      position: sticky; top: 0; z-index: 900;
-      background: rgba(10, 10, 10, 0.82);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
-    }
-    .site-header-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 26px;
-    }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; background-image: radial-gradient(circle at 20% 0%, rgba(212,175,55,0.06), transparent 50%), radial-gradient(circle at 80% 100%, rgba(212,175,55,0.04), transparent 50%); min-height: 100vh; color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .site-header { position: sticky; top: 0; z-index: 900; background: rgba(10, 10, 10, 0.82); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%); border-bottom: 1px solid rgba(212, 175, 55, 0.12); }
+    .site-header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 26px; }
     .site-brand { display: flex; align-items: center; gap: 10px; cursor: default; user-select: none; }
     .site-brand-icon { font-size: 30px; line-height: 1; filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.5)); }
-    .site-brand-name {
-      font-family: 'Cormorant Garamond', 'Inter', serif;
-      font-size: 30px; font-weight: 700; letter-spacing: 1.2px;
-      background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;
-      display: inline-flex; align-items: center; gap: 6px;
-    }
+    .site-brand-name { font-family: 'Cormorant Garamond', 'Inter', serif; font-size: 30px; font-weight: 700; letter-spacing: 1.2px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; display: inline-flex; align-items: center; gap: 6px; }
     .verified-logo-tick { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; filter: drop-shadow(0 0 5px rgba(29,155,240,0.65)); margin-left: -2px; vertical-align: middle; }
     .verified-logo-tick svg { width: 100%; height: 100%; display: block; }
-
-    .profile-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.4);
-      color: #d4af37; padding: 8px 14px; border-radius: 20px;
-      font-size: 12px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer;
-      font-family: inherit; transition: all 0.25s ease; white-space: nowrap;
-    }
+    .profile-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.4); color: #d4af37; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; white-space: nowrap; }
     .profile-btn:hover { background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border-color: transparent; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(212,175,55,0.4); }
     .profile-btn.saved { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.45); color: #22c55e; }
     .profile-btn.saved:hover { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #fff; border-color: transparent; }
     .profile-btn .profile-icon { font-size: 14px; line-height: 1; }
     @media (max-width: 400px) { .profile-btn { padding: 7px 10px; font-size: 11px; } .profile-btn .profile-label-full { display: none; } }
-
     main { padding: 0 20px 20px; max-width: 1200px; margin: 0 auto; }
-
     .hero-text-section { text-align: left; padding: 50px 20px 40px; max-width: 800px; margin: 0; position: relative; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #d4af37;
-      background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%);
-      border: 1px solid rgba(212,175,55,0.35);
-      padding: 7px 18px; border-radius: 30px; margin-bottom: 22px;
-      text-transform: uppercase; box-shadow: 0 0 20px rgba(212,175,55,0.1);
-    }
+    .hero-eyebrow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 10px; font-weight: 800; letter-spacing: 3px; color: #d4af37; background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%); border: 1px solid rgba(212,175,55,0.35); padding: 7px 18px; border-radius: 30px; margin-bottom: 22px; text-transform: uppercase; box-shadow: 0 0 20px rgba(212,175,55,0.1); }
     .hero-headline { font-family: 'Cormorant Garamond', 'Inter', serif; font-size: 54px; font-weight: 700; line-height: 1.08; letter-spacing: -1px; margin-bottom: 20px; color: #fff; }
     .hero-headline .gold-line { display: block; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 45%, #b8941f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .hero-sub { font-size: 15px; color: #999; line-height: 1.75; max-width: 620px; margin: 0 0 26px; letter-spacing: 0.2px; }
@@ -77,22 +34,18 @@
     .hero-trust span { display: inline-flex; align-items: center; gap: 5px; }
     .hero-trust .trust-emoji { font-size: 14px; }
     .hero-trust .trust-dot { color: #333; font-size: 16px; line-height: 1; }
-
     .hero-stats { display: flex; gap: 24px; margin-top: 26px; flex-wrap: wrap; }
     .hero-stat { display: flex; flex-direction: column; gap: 2px; }
     .hero-stat .stat-number { font-size: 24px; font-weight: 900; letter-spacing: -0.5px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .hero-stat .stat-label { font-size: 10px; color: #777; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 600; }
-
     .hero-cta-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; padding: 15px 32px; border-radius: 30px; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; font-family: inherit; margin-top: 26px; box-shadow: 0 8px 24px rgba(212,175,55,0.35); transition: all 0.25s ease; position: relative; overflow: hidden; }
     .hero-cta-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.5), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .hero-cta-btn:hover::before { left: 130%; }
     .hero-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,175,55,0.5); }
     .hero-cta-btn .shop-arrow { transition: transform 0.22s ease; }
     .hero-cta-btn:hover .shop-arrow { transform: translateX(4px); }
-
     @media (max-width: 700px) { .hero-text-section { padding: 32px 14px 30px; } .hero-headline { font-size: 38px; } .hero-eyebrow { font-size: 9px; letter-spacing: 2.5px; padding: 6px 14px; } .hero-sub { font-size: 14px; } .hero-trust { font-size: 11px; gap: 8px 10px; } .hero-cta-btn { padding: 13px 26px; font-size: 14px; } .hero-stats { gap: 16px; } .hero-stat .stat-number { font-size: 20px; } }
     @media (max-width: 400px) { .hero-headline { font-size: 32px; } .hero-sub { font-size: 13px; } }
-
     .why-trust-section { margin: 20px 0 24px; padding: 28px 20px; background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.2); border-radius: 22px; }
     .why-trust-section h2 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 6px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.3px; }
     .why-trust-section .why-trust-sub { text-align: center; font-size: 12px; color: #777; margin-bottom: 22px; letter-spacing: 0.3px; }
@@ -103,7 +56,6 @@
     .trust-feature-card .tf-icon { font-size: 26px; filter: drop-shadow(0 2px 6px rgba(212,175,55,0.35)); }
     .trust-feature-card .tf-label { font-size: 11px; font-weight: 800; color: #ddd; letter-spacing: 0.3px; line-height: 1.3; }
     .trust-feature-card .tf-value { font-size: 9.5px; color: #888; letter-spacing: 0.2px; margin-top: -2px; }
-
     .pulse-feed { margin: 0 0 24px; padding: 16px 20px; background: linear-gradient(160deg, #1c180e 0%, #0d0a05 100%); border: 1px solid rgba(212,175,55,0.5); border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,175,55,0.2); position: relative; overflow: hidden; }
     .pulse-feed::before { content: ''; position: absolute; top: -50%; left: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%); pointer-events: none; }
     .pulse-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
@@ -131,7 +83,6 @@
     .pulse-card-thumb::before { content: ''; position: absolute; top: 4px; left: 4px; width: 6px; height: 4px; border-radius: 1px; background: #f7e7a1; opacity: 0.8; }
     .pulse-card-thumb.visa-thumb::before { display: none; }
     @media (max-width: 480px) { .pulse-feed { padding: 12px 14px; } .pulse-item { padding: 8px 10px; gap: 8px; } .pulse-text { font-size: 11px; } .pulse-card-thumb { width: 34px; height: 20px; } .live-pill { font-size: 9.5px; padding: 3px 9px; } .pulse-subtitle { font-size: 10px; letter-spacing: 1.4px; } }
-
     .trusted-by-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 20px; padding: 12px 18px; background: linear-gradient(160deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0.02) 100%); border: 1px solid rgba(212,175,55,0.2); border-radius: 14px; flex-wrap: wrap; }
     .trusted-by-avatars { display: flex; align-items: center; }
     .trusted-by-avatar { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #0d0d0d; margin-left: -10px; overflow: hidden; box-shadow: 0 0 0 1.5px rgba(212,175,55,0.5), 0 2px 6px rgba(0,0,0,0.5); background: #1a1a1a; flex-shrink: 0; }
@@ -140,27 +91,22 @@
     .trusted-by-text { font-size: 12px; font-weight: 600; color: #ccc; letter-spacing: 0.2px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; justify-content: center; text-align: center; }
     .trusted-by-text strong { color: #f5d76e; font-weight: 800; }
     @media (max-width: 500px) { .trusted-by-row { padding: 10px 12px; gap: 10px; } .trusted-by-avatar { width: 28px; height: 28px; margin-left: -8px; } .trusted-by-text { font-size: 11px; } }
-
     .heading-row { margin-bottom: 20px; }
     .heading-row h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; color: #fff; }
     .heading-row p { font-size: 13px; color: #777; margin-top: 4px; font-weight: 500; }
     @media (max-width:600px) { .heading-row h1 { font-size: 22px; } }
-
     .product-trust-row { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px 22px; padding: 14px 20px; background: linear-gradient(160deg, #0f0f0f 0%, #0a0a0a 100%); border: 1px solid rgba(212,175,55,0.15); border-radius: 18px; margin: 4px 0 24px; }
     .product-trust-row .ptr-item { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #ccc; letter-spacing: 0.3px; }
     .product-trust-row .ptr-item .ptr-icon { font-size: 14px; filter: drop-shadow(0 0 6px rgba(212,175,55,0.4)); }
     .product-trust-row .ptr-divider { color: #333; font-size: 10px; }
     @media (max-width: 600px) { .product-trust-row { gap: 8px 14px; padding: 12px 12px; } .product-trust-row .ptr-item { font-size: 10px; gap: 4px; } .product-trust-row .ptr-divider { display: none; } .product-trust-row .ptr-icon { font-size: 12px; } }
-
     .product-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-bottom: 40px; scroll-margin-top: 90px; }
     @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
     @media (min-width: 1000px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
-
     .grid-card { background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%); border: 1px solid rgba(212, 175, 55, 0.22); border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     .grid-card:hover { border-color: rgba(212, 175, 55, 0.55); transform: translateY(-4px); box-shadow: 0 20px 45px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.15); }
     .grid-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.06), transparent 60%); pointer-events: none; opacity: 0; transition: opacity 0.4s ease; }
     .grid-card:hover::before { opacity: 1; }
-
     .cc-preview-wrap { position: relative; }
     .card-bottom-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
     .live-viewers-badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 20px; background: linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%); border: 1px solid rgba(239,68,68,0.45); font-size: 10.5px; font-weight: 800; letter-spacing: 0.3px; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3); pointer-events: none; user-select: none; white-space: nowrap; }
@@ -170,25 +116,20 @@
     .live-viewers-badge .vcount.bump { transform: scale(1.18); }
     .live-viewers-badge .viewing-text { color: #ccc; font-weight: 600; font-size: 10px; }
     @media (max-width: 500px) { .live-viewers-badge { font-size: 9px; padding: 4px 7px; } .live-viewers-badge .viewing-text { font-size: 9px; } }
-
     .countdown-strip { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 10px; margin-bottom: 10px; border-radius: 10px; background: linear-gradient(90deg, rgba(239,68,68,0.16) 0%, rgba(245,158,11,0.16) 100%); border: 1px solid rgba(239,68,68,0.4); font-size: 10.5px; font-weight: 800; color: #fecaca; letter-spacing: 0.4px; text-transform: uppercase; }
     .countdown-strip .cd-icon { font-size: 11px; }
     .countdown-strip .cd-time { font-variant-numeric: tabular-nums; color: #fff; background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 6px; font-weight: 900; letter-spacing: 1px; border: 1px solid rgba(239,68,68,0.5); }
     .countdown-strip.expiring { animation: cdPulse 1.5s ease-in-out infinite; }
     @keyframes cdPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); } 50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); } }
-
     .cc-preview { position: relative; aspect-ratio: 1.586 / 1; border-radius: 14px; overflow: hidden; box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -1px 0 rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.06); transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; will-change: transform; }
     .grid-card:hover .cc-preview { transform: perspective(900px) rotateX(6deg) rotateY(-6deg) scale(1.015); }
-
     .cc-face { position: absolute; inset: 0; border-radius: 14px; padding: 12px 14px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
     .cc-front { z-index: 2; }
     .cc-back { transform: rotateY(180deg); z-index: 1; }
     .cc-front::before, .cc-back::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background-image: repeating-linear-gradient(45deg, transparent 0 9px, rgba(255,255,255,0.022) 9px 10px), repeating-linear-gradient(-45deg, transparent 0 12px, rgba(255,255,255,0.015) 12px 13px), repeating-linear-gradient(0deg, transparent 0 18px, rgba(255,255,255,0.012) 18px 19px); pointer-events: none; z-index: 0; }
-
     .cc-glow { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: 0.85; z-index: 1; }
     .cc-sheen { position: absolute; top: -50%; left: -30%; width: 60%; height: 200%; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%); transform: rotate(20deg); pointer-events: none; transition: left 0.7s ease; z-index: 1; }
     .grid-card:hover .cc-sheen { left: 120%; }
-
     .cc-preview.finish-matte .cc-sheen { display: none; }
     .cc-preview.finish-gloss .cc-sheen { background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.35) 50%, transparent 75%); width: 70%; }
     .cc-preview.finish-gold::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 38%, rgba(212,175,55,0.28) 50%, transparent 62%); pointer-events: none; z-index: 3; animation: goldShimmer 3s ease-in-out infinite; border-radius: 14px; }
@@ -196,7 +137,6 @@
     .cc-preview.finish-holo { box-shadow: 0 14px 34px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,0,255,0.35), 0 0 22px rgba(255,0,255,0.22), 0 0 35px rgba(0,255,255,0.18); }
     .cc-preview.finish-satin .cc-sheen { background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%); }
     .cc-preview.finish-carbon::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px); background-size: 5px 5px; pointer-events: none; z-index: 3; border-radius: 14px; }
-
     .cc-top { display: flex; justify-content: space-between; align-items: flex-start; z-index: 2; position: relative; }
     .cc-bank-row { display: flex; flex-direction: row; align-items: center; gap: 7px; z-index: 2; }
     .cc-bank-icon { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.28); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 900; color: #fff; flex-shrink: 0; text-shadow: 0 1px 1px rgba(0,0,0,0.5); box-shadow: inset 0 0 4px rgba(255,255,255,0.15); }
@@ -208,45 +148,34 @@
     .cc-contactless-icon::before, .cc-contactless-icon::after { content: ''; position: absolute; border: 1.5px solid rgba(255,255,255,0.85); border-radius: 50%; border-left-color: transparent; border-bottom-color: transparent; border-top-color: transparent; }
     .cc-contactless-icon::before { width: 8px; height: 8px; top: 3px; left: 3px; transform: rotate(45deg); }
     .cc-contactless-icon::after { width: 13px; height: 13px; top: 0.5px; left: 0.5px; transform: rotate(45deg); }
-
     .cc-chip { width: 32px; height: 24px; border-radius: 5px; background: linear-gradient(135deg, #f7e7a1 0%, #d4af37 35%, #b8941f 60%, #f5d76e 100%); position: relative; box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.45); z-index: 2; margin-top: 4px; align-self: flex-start; }
     .cc-chip::before { content: ''; position: absolute; inset: 2.5px; border-radius: 3px; border: 0.5px solid rgba(0,0,0,0.4); background-image: linear-gradient(to bottom, transparent 31%, rgba(0,0,0,0.42) 31%, rgba(0,0,0,0.42) 34%, transparent 34%), linear-gradient(to bottom, transparent 64%, rgba(0,0,0,0.42) 64%, rgba(0,0,0,0.42) 67%, transparent 67%), linear-gradient(to right, transparent 47%, rgba(0,0,0,0.42) 47%, rgba(0,0,0,0.42) 53%, transparent 53%); }
-
     .cc-visa { position: relative; font-family: 'Inter', sans-serif; font-weight: 900; font-style: italic; font-size: 11px; letter-spacing: -0.4px; color: #1A1F71; background: #ffffff; padding: 3px 8px 4px; border-radius: 4px; transform: skewX(-10deg); align-self: flex-end; line-height: 1; margin-bottom: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.4); display: inline-block; }
     .cc-visa::after { content: ''; position: absolute; bottom: 1.5px; left: 5px; right: 5px; height: 1.6px; background: linear-gradient(90deg, #f7b600, #ffcc00, #f79e1b); border-radius: 1px; opacity: 0.95; }
-
     .cc-number { font-size: 13px; letter-spacing: 2.4px; font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; color: #f2f2f2; text-shadow: -0.5px -0.5px 0 rgba(255,255,255,0.28), 0.5px 0.5px 1px rgba(0,0,0,0.8), 0 0 8px rgba(255,255,255,0.06); z-index: 2; position: relative; }
-
     .cc-bottom { display: flex; justify-content: space-between; align-items: flex-end; z-index: 2; position: relative; gap: 6px; }
     .cc-label { font-size: 6px; letter-spacing: 1.2px; opacity: 0.7; margin-bottom: 2px; text-transform: uppercase; font-weight: 700; line-height: 1.05; }
     .cc-value { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; text-shadow: 0 1px 1px rgba(0,0,0,0.6); }
     .cc-holder { display: flex; flex-direction: column; min-width: 0; }
     .cc-valid { display: flex; flex-direction: column; align-items: flex-start; }
     .cc-brand { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-
     .cc-holo-sticker { width: 20px; height: 20px; border-radius: 50%; background: conic-gradient(from 45deg, #ff0080, #ffcc00, #00ffcc, #00b7ff, #a200ff, #ff0080); display: flex; align-items: center; justify-content: center; padding: 2.5px; box-shadow: 0 0 8px rgba(255,255,255,0.35), inset 0 0 4px rgba(255,255,255,0.45); opacity: 0.96; }
     .cc-holo-sticker svg { width: 100%; height: 100%; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.65)); display: block; }
-
     .cc-tier-wm { position: absolute; right: -6px; bottom: 6px; font-size: 32px; font-weight: 900; font-style: italic; letter-spacing: 1.5px; color: rgba(255,255,255,0.055); z-index: 1; pointer-events: none; transform: rotate(-8deg); white-space: nowrap; user-select: none; text-transform: uppercase; }
-
     .cc-stripe { position: absolute; top: 13%; left: 0; right: 0; height: 20%; background: linear-gradient(180deg, #000 0%, #1a1a1a 100%); z-index: 2; }
     .cc-back-content { position: absolute; bottom: 12px; left: 14px; right: 14px; z-index: 2; }
     .cc-sig-row { display: flex; align-items: center; gap: 6px; }
     .cc-sig-strip { flex: 1; height: 22px; background: repeating-linear-gradient(45deg, #efefef 0 6px, #dcdcdc 6px 12px); border-radius: 3px; display: flex; align-items: center; padding: 0 8px; }
     .cc-sig-strip-text { font-size: 8px; color: #333; font-style: italic; font-weight: 600; opacity: 0.5; }
     .cc-cvv { background: #fff; color: #111; font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 3px; letter-spacing: 1px; }
-
     .cc-face.cc-front.cc-amex-gold { padding: 0 !important; background: transparent !important; overflow: hidden; display: block !important; }
     .cc-face.cc-front.cc-amex-gold img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; filter: blur(15px); opacity: 0.4; transition: filter 0.8s ease, opacity 0.8s ease; }
     .cc-face.cc-front.cc-amex-gold img.loaded { filter: blur(0); opacity: 1; }
-
     .cc-face.cc-back.cc-amex-gold-back { padding: 0; color: #1a1408; display: block; position: relative; overflow: hidden; background: radial-gradient(ellipse at 25% 15%, rgba(255, 248, 220, 0.55) 0%, transparent 45%), radial-gradient(ellipse at 80% 90%, rgba(120, 85, 15, 0.5) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(240, 200, 90, 0.35) 0%, transparent 60%), linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%); text-shadow: 0 0.5px 0 rgba(255, 245, 200, 0.7); }
     .cc-face.cc-back.cc-amex-gold-back::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background-image: repeating-radial-gradient(circle at 20% 30%, transparent 0 6px, rgba(255, 235, 150, 0.09) 6px 7px), repeating-radial-gradient(circle at 70% 70%, transparent 0 8px, rgba(120, 85, 15, 0.07) 8px 9px), repeating-linear-gradient(0deg, transparent 0 4px, rgba(255, 240, 170, 0.05) 4px 5px); pointer-events: none; z-index: 0; }
-
     .amex-back-frame { position: absolute; inset: 7px; border: 1.4px solid rgba(26, 20, 8, 0.85); border-radius: 9px; pointer-events: none; z-index: 10; box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.55), 0 0 0 0.5px rgba(26, 20, 8, 0.4); }
     .amex-back-frame::before { content: ''; position: absolute; inset: 2.5px; border: 0.7px solid rgba(26, 20, 8, 0.5); border-radius: 7px; }
     .amex-back-frame::after { content: ''; position: absolute; inset: -3px; border: 0.6px solid rgba(26, 20, 8, 0.55); border-radius: 11px; }
-
     .amex-back-content { position: relative; z-index: 3; padding: 8% 7% 7%; display: flex; flex-direction: column; height: 100%; box-sizing: border-box; }
     .amex-back-top-strip { display: flex; justify-content: space-between; align-items: center; font-size: 4.2px; font-weight: 800; color: rgba(26, 20, 8, 0.9); letter-spacing: 0.15px; padding: 0 1px; margin-bottom: 5px; line-height: 1; }
     .amex-back-top-strip .amex-top-right { font-weight: 900; letter-spacing: 0.6px; font-size: 4.8px; }
@@ -270,7 +199,6 @@
     .amex-back-logo .amex-logo-line2 { font-size: 3.8px; letter-spacing: 0.5px; margin-top: 0.5px; }
     .amex-back-logo::after { content: '®'; position: absolute; bottom: -2px; right: -2px; font-size: 2.5px; color: #1a1408; background: #d4af37; border-radius: 50%; width: 3.5px; height: 3.5px; display: flex; align-items: center; justify-content: center; font-weight: 700; }
     .amex-back-legal { flex: 1; font-size: 3px; color: rgba(26, 20, 8, 0.82); line-height: 1.4; font-weight: 600; letter-spacing: 0.05px; text-align: left; }
-
     .modal-card-inner .amex-back-frame { inset: 11px; border-width: 1.7px; border-radius: 11px; }
     .modal-card-inner .amex-back-frame::before { inset: 3.5px; border-width: 0.9px; border-radius: 8px; }
     .modal-card-inner .amex-back-frame::after { inset: -4px; border-width: 0.8px; border-radius: 14px; }
@@ -289,7 +217,6 @@
     .modal-card-inner .amex-back-logo .amex-logo-line2 { font-size: 5px; }
     .modal-card-inner .amex-back-logo::after { font-size: 3.5px; width: 5px; height: 5px; bottom: -3px; right: -3px; }
     .modal-card-inner .amex-back-legal { font-size: 4px; }
-
     .mini-card-preview .amex-back-frame { inset: 6px; }
     .mini-card-preview .amex-back-top-strip { font-size: 3.2px; }
     .mini-card-preview .amex-back-top-strip .amex-top-right { font-size: 3.8px; }
@@ -303,14 +230,12 @@
     .mini-card-preview .amex-back-logo .amex-logo-line1,
     .mini-card-preview .amex-back-logo .amex-logo-line2 { font-size: 3.2px; }
     .mini-card-preview .amex-back-legal { font-size: 2.4px; }
-
     .cc-balance-badge { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 2px; padding: 6px 12px; border-radius: 12px; background: linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(34,197,94,0.04) 100%); border: 1.5px solid rgba(34,197,94,0.35); width: fit-content; margin: 0; box-shadow: 0 4px 20px rgba(34,197,94,0.15), 0 0 24px rgba(34,197,94,0.08), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; overflow: hidden; }
     .cc-balance-badge::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(34,197,94,0.22), transparent); transform: rotate(20deg); animation: balanceShimmer 3.5s ease-in-out infinite; pointer-events: none; }
     @keyframes balanceShimmer { 0% { left: -60%; } 50% { left: 130%; } 100% { left: -60%; } }
     .cc-balance-label { display: flex; align-items: center; justify-content: flex-end; gap: 5px; font-size: 8px; font-weight: 800; letter-spacing: 2px; color: #22c55e; text-transform: uppercase; opacity: 0.9; line-height: 1; position: relative; z-index: 1; }
     .cc-balance-emoji { font-size: 10px; line-height: 1; }
     .cc-balance-value { font-size: 13px; font-weight: 900; letter-spacing: 0.3px; background: linear-gradient(135deg, #4ade80 0%, #22c55e 60%, #16a34a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; position: relative; z-index: 1; }
-
     .gc-info { display: flex; flex-direction: column; gap: 6px; }
     .gc-name { font-size: 16px; font-weight: 800; color: #fff; letter-spacing: -0.2px; line-height: 1.3; }
     .gc-tagline { font-size: 12px; color: #888; font-weight: 500; letter-spacing: 0.2px; }
@@ -323,62 +248,48 @@
     .gc-buy-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .gc-buy-btn:hover::before { left: 130%; }
     .gc-buy-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(212,175,55,0.5); background: linear-gradient(135deg, #ffdf7a 0%, #d4af37 55%, #b8941f 100%); }
-
     .stock-progress { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; margin-top: 4px; }
     .stock-progress-top { display: flex; justify-content: space-between; align-items: center; font-size: 10px; font-weight: 800; }
     .stock-progress-top .stock-left { color: #ef4444; letter-spacing: 0.2px; }
     .stock-progress-top .stock-percent { color: #d4af37; letter-spacing: 0.3px; }
     .stock-bar-track { height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; position: relative; }
     .stock-bar-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b); border-radius: 3px; transition: width 1.5s ease; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
-
     .trending-badge { display: inline-block; background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); color: #fff; font-size: 9px; font-weight: 900; letter-spacing: 1px; padding: 3px 8px; border-radius: 6px; margin-bottom: 4px; box-shadow: 0 2px 8px rgba(239,68,68,0.4); text-transform: uppercase; width: fit-content; }
-
     .rating-stars { position: relative; display: inline-block; font-size: 12px; letter-spacing: 1.5px; line-height: 1; font-family: Arial, sans-serif; }
     .rating-stars .stars-bg { color: #333; }
     .rating-stars .stars-fill { color: #d4af37; position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; }
-
     .reviews-section { margin-bottom: 40px; scroll-margin-top: 90px; }
     .reviews-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
     .reviews-header .heading-row { margin-bottom: 0; }
-
     .write-review-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.4); color: #d4af37; padding: 10px 18px; border-radius: 24px; font-size: 12px; font-weight: 800; letter-spacing: 0.4px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; white-space: nowrap; }
     .write-review-btn:hover { background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border-color: transparent; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
-
     .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     @media (min-width: 700px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1000px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
-
     .review-card { background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease, border-color 0.3s ease; animation: reviewFadeIn 0.5s ease; position: relative; overflow: hidden; }
     @keyframes reviewFadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
     .review-card:hover { transform: translateY(-3px); border-color: rgba(212, 175, 55, 0.4); }
-
     .review-card.youtuber-card { background: linear-gradient(160deg, #0f1420 0%, #0d0d0d 100%); border: 1px solid rgba(29, 155, 240, 0.35); box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 20px rgba(29, 155, 240, 0.08); }
     .review-card.youtuber-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1d9bf0, #0a7bc7, #1d9bf0); border-radius: 18px 18px 0 0; }
     .review-card.youtuber-card:hover { border-color: rgba(29, 155, 240, 0.6); box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 0 30px rgba(29, 155, 240, 0.2); }
-
     .review-header { display: flex; align-items: center; gap: 12px; }
     .review-avatar { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(212, 175, 55, 0.55); overflow: hidden; flex-shrink: 0; background: #1a1a1a; box-shadow: 0 0 12px rgba(212,175,55,0.15); position: relative; }
     .review-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .review-card.youtuber-card .review-avatar { border: 2px solid #1d9bf0; box-shadow: 0 0 12px rgba(29,155,240,0.5), 0 0 0 2px rgba(29,155,240,0.2); }
-
     .review-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
     .review-name-row { display: inline-flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .review-name { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px; }
     .verified-tick { width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; filter: drop-shadow(0 0 4px rgba(29,155,240,0.65)); vertical-align: middle; }
     .verified-tick svg { width: 100%; height: 100%; display: block; }
-
     .review-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 11px; color: #777; margin-top: -4px; }
     .review-meta .dot { color: #444; font-size: 12px; }
-
     .review-purchased { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: #ccc; background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.04) 100%); border: 1px solid rgba(212,175,55,0.3); padding: 6px 12px; border-radius: 8px; width: fit-content; font-weight: 500; letter-spacing: 0.2px; }
     .review-purchased strong { color: #f5d76e; font-weight: 800; margin-left: 2px; }
-
     .review-stars { color: #d4af37; font-size: 14px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px; }
     .review-stars .rating-num { font-size: 11px; color: #888; letter-spacing: 0.3px; font-weight: 600; }
     .review-text { font-size: 13px; color: #ffffff; line-height: 1.6; position: relative; padding-top: 6px; font-weight: 400; letter-spacing: 0.1px; }
     .review-text::before { content: '"'; font-size: 30px; color: rgba(212,175,55,0.25); position: absolute; top: -8px; left: -8px; font-family: serif; font-weight: 700; }
     .review-card.youtuber-card .review-text::before { color: rgba(29,155,240,0.3); }
-
     .review-actions { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06); }
     .review-helpful, .review-more-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 6px 11px; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; font-weight: 600; font-family: inherit; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #999; letter-spacing: 0.2px; user-select: none; }
     .review-helpful:hover, .review-more-btn:hover { border-color: rgba(212,175,55,0.4); color: #d4af37; background: rgba(212,175,55,0.06); }
@@ -388,11 +299,9 @@
     .review-helpful .helpful-count, .review-more-btn .more-count { color: #fff; font-weight: 800; margin-left: 1px; }
     .review-helpful.active .helpful-count { color: #d4af37; }
     .review-helpful .helpful-icon { font-size: 11px; line-height: 1; }
-
     .review-seller-reply { background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(212,175,55,0.03) 100%); border-left: 3px solid rgba(212,175,55,0.75); padding: 10px 14px; border-radius: 8px; font-size: 12px; color: #e8e8e8; margin-top: 4px; line-height: 1.6; box-shadow: 0 0 14px rgba(212,175,55,0.18), inset 0 1px 0 rgba(212,175,55,0.2), inset 0 0 12px rgba(212,175,55,0.05); position: relative; }
     .review-seller-reply::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent); }
     .review-seller-reply strong { color: #f5d76e; font-weight: 800; font-size: 10px; display: block; margin-bottom: 4px; letter-spacing: 0.9px; text-transform: uppercase; text-shadow: 0 0 8px rgba(212,175,55,0.5); }
-
     .load-more-reviews-wrapper { display: flex; justify-content: center; margin-top: 24px; padding: 4px 0 8px; }
     .load-more-reviews-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1.5px solid rgba(212,175,55,0.4); color: #fff; padding: 14px 26px; border-radius: 30px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; font-family: inherit; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; overflow: hidden; }
     .load-more-reviews-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(212,175,55,0.15), transparent); transform: rotate(20deg); transition: left 0.8s ease; pointer-events: none; }
@@ -406,7 +315,6 @@
     .load-more-reviews-btn.loading .lm-arrow { animation: spin 0.8s linear infinite; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @media (max-width: 480px) { .load-more-reviews-btn { padding: 12px 20px; font-size: 12px; gap: 8px; } .load-more-reviews-btn .lm-icon { font-size: 14px; } }
-
     .network-error-modal { text-align: center; padding: 40px 26px; }
     .network-error-icon { font-size: 54px; margin-bottom: 14px; animation: pulseIcon 1.5s ease-in-out infinite; }
     @keyframes pulseIcon { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.08); } }
@@ -420,9 +328,8 @@
     @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     .network-retry-btn { width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 26px; padding: 14px; font-size: 14px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; box-shadow: 0 6px 20px rgba(212,175,55,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; }
     .network-retry-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
-
     .live-notif-container { position: fixed; top: 86px; right: 20px; left: auto; bottom: auto; z-index: 2200; display: flex; flex-direction: column; gap: 10px; pointer-events: none; max-width: 320px; }
-    .live-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; overflow: hidden; position: relative; }
+    .live-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(212,175,55,0.08); animation: notifIn 0.4s ease, notifOut 0.4s ease 10.4s forwards; pointer-events: auto; overflow: hidden; position: relative; }
     @keyframes notifIn { from { transform: translateX(110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes notifOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(110%); opacity: 0; } }
     .live-notif .notif-card-badge { display: flex; align-items: center; justify-content: center; gap: 5px; background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: #fff; font-size: 10px; font-weight: 900; letter-spacing: 1.2px; padding: 5px 10px; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.25); }
@@ -433,11 +340,9 @@
     .live-notif .notif-content strong { color: #fff; font-weight: 700; display: block; margin-bottom: 1px; }
     .live-notif .notif-content .notif-time { color: #22c55e; font-size: 10px; display: block; margin-top: 3px; font-weight: 600; letter-spacing: 0.2px; }
     @media (max-width: 480px) { .live-notif-container { left: 10px; right: 10px; top: 76px; max-width: none; } }
-
-    .review-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(29,155,240,0.45); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; overflow: hidden; }
+    .review-notif { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%); border: 1px solid rgba(29,155,240,0.45); border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 20px rgba(29,155,240,0.12); animation: notifIn 0.4s ease, notifOut 0.4s ease 10.4s forwards; pointer-events: auto; overflow: hidden; }
     .review-notif .notif-card-badge { background: linear-gradient(135deg, #1d9bf0 0%, #0a7bc7 100%); }
-
-    .welcome-back-toast { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.5); border-radius: 16px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.25); animation: notifIn 0.4s ease, notifOut 0.4s ease 10s forwards; pointer-events: auto; max-width: 340px; overflow: hidden; position: relative; }
+    .welcome-back-toast { display: flex; flex-direction: column; gap: 0; background: linear-gradient(160deg, #1a1410 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.5); border-radius: 16px; box-shadow: 0 10px 28px rgba(0,0,0,0.7), 0 0 22px rgba(212,175,55,0.25); animation: notifIn 0.4s ease, notifOut 0.4s ease 10.4s forwards; pointer-events: auto; max-width: 340px; overflow: hidden; position: relative; }
     .welcome-back-toast .wb-header { background: linear-gradient(135deg, #d4af37 0%, #f5d76e 50%, #b8941f 100%); color: #1a1408; padding: 6px 12px; font-size: 10px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .welcome-back-toast .wb-body { padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
     .welcome-back-toast .wb-icon-wrap { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.08) 100%); border: 1.5px solid rgba(212,175,55,0.5); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; box-shadow: 0 0 12px rgba(212,175,55,0.3); }
@@ -445,12 +350,9 @@
     .welcome-back-toast .wb-title { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; letter-spacing: -0.2px; }
     .welcome-back-toast .wb-sub { font-size: 11px; color: #aaa; line-height: 1.4; }
     .welcome-back-toast .wb-badge { display: inline-block; margin-top: 6px; font-size: 9px; font-weight: 800; color: #f5d76e; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); padding: 3px 8px; border-radius: 10px; letter-spacing: 0.5px; }
-
     .notif-close-btn { position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0; z-index: 5; transition: all 0.2s ease; }
     .notif-close-btn:hover { background: #ef4444; border-color: #ef4444; }
-
     body.modal-open .live-notif-container { display: none !important; }
-
     .more-stats-modal { text-align: center; padding: 40px 26px; }
     .more-stats-icon { font-size: 52px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(212,175,55,0.4)); }
     .more-stats-number { font-size: 48px; font-weight: 900; letter-spacing: -2px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 8px; }
@@ -458,7 +360,6 @@
     .more-stats-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); margin: 18px 0; }
     .more-stats-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); padding: 6px 14px; border-radius: 20px; letter-spacing: 0.4px; margin-bottom: 14px; }
     .more-stats-message { font-size: 12px; color: #888; line-height: 1.6; max-width: 280px; margin: 0 auto; }
-
     .review-modal { max-width: 440px; }
     .review-form-group { margin-bottom: 14px; text-align: left; }
     .review-form-group label { display: block; font-size: 10px; font-weight: 700; color: #d4af37; margin-bottom: 6px; letter-spacing: 1.3px; text-transform: uppercase; }
@@ -467,7 +368,6 @@
     .review-form-group input:focus, .review-form-group textarea:focus, .review-form-group select:focus { border-color: #d4af37; background-color: #131313; box-shadow: 0 0 0 4px rgba(212,175,55,0.1); }
     .review-form-group input::placeholder, .review-form-group textarea::placeholder { color: #444; }
     .review-form-group textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
-
     .photo-upload-row { display: flex; align-items: center; gap: 14px; padding: 4px 0; }
     .photo-upload-area { position: relative; width: 70px; height: 70px; border-radius: 50%; border: 2px dashed rgba(212,175,55,0.5); background: rgba(212,175,55,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.25s ease; overflow: hidden; flex-shrink: 0; }
     .photo-upload-area:hover { border-color: #d4af37; background: rgba(212,175,55,0.1); transform: scale(1.03); }
@@ -479,17 +379,14 @@
     .photo-upload-hint { display: flex; flex-direction: column; gap: 3px; }
     .photo-upload-hint .primary { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.2px; }
     .photo-upload-hint .secondary { font-size: 10px; color: #777; letter-spacing: 0.2px; }
-
     .star-selector { display: flex; gap: 8px; align-items: center; padding: 4px 0; }
     .star-selector .star-btn { font-size: 28px; color: #333; background: none; border: none; cursor: pointer; padding: 0; line-height: 1; transition: all 0.15s ease; font-family: Arial, sans-serif; }
     .star-selector .star-btn:hover, .star-selector .star-btn.active { color: #d4af37; transform: scale(1.15); }
     .star-selector-label { font-size: 11px; color: #888; margin-left: 8px; font-weight: 600; }
-
     .review-submit-btn { width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 26px; padding: 14px; font-size: 14px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; box-shadow: 0 6px 20px rgba(212,175,55,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 4px; position: relative; overflow: hidden; }
     .review-submit-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .review-submit-btn:hover::before { left: 130%; }
     .review-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
-
     footer { background: transparent; padding: 36px 20px 30px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1); margin-top: 20px; }
     .footer-links { display: flex; justify-content: center; align-items: center; flex-wrap: nowrap; gap: 6px 10px; margin-bottom: 16px; }
     .footer-links a { font-size: 11px; font-weight: 600; color: #999; text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s ease; cursor: pointer; position: relative; white-space: nowrap; }
@@ -497,14 +394,12 @@
     .footer-divider { color: #333; font-size: 10px; user-select: none; }
     @media (max-width: 360px) { .footer-links a { font-size: 9px; } .footer-divider { font-size: 8px; } }
     .copyright { font-size: 12px; color: #555; letter-spacing: 0.5px; }
-
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; overflow-y: auto; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     .modal { background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.2); border-radius: 26px; max-width: 400px; width: 100%; position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.85), 0 0 40px rgba(212,175,55,0.06); animation: premiumScaleIn 0.35s cubic-bezier(0.34,1.56,0.64,1); overflow: hidden; }
     @keyframes premiumScaleIn { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .modal-close { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.15); border-radius: 50%; width: 34px; height: 34px; font-size: 16px; cursor: pointer; color: #aaa; z-index: 10; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .modal-close:hover { background: #d4af37; color: #1a1408; border-color: #d4af37; }
     .modal-body { padding: 24px; }
-
     .modal-card-wrap { perspective: 1200px; width: 100%; aspect-ratio: 1.586 / 1; cursor: pointer; margin-bottom: 12px; position: relative; }
     .modal-card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
     .modal-card-wrap.flipped .modal-card-inner { transform: rotateY(180deg); }
@@ -520,51 +415,41 @@
     .modal-card-inner .cc-visa { font-size: 15px; padding: 4px 10px 5px; border-radius: 5px; }
     .modal-card-inner .cc-holo-sticker { width: 26px; height: 26px; padding: 3px; }
     .modal-card-inner .cc-tier-wm { font-size: 42px; }
-
     .flip-hint { text-align: center; font-size: 11px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; user-select: none; }
     .modal-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.4px; margin-bottom: 6px; text-align: center; }
     .modal-tagline { font-size: 12px; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 0.3px; }
-
     .modal-price-block { text-align: center; margin-bottom: 24px; padding: 16px 0; border-top: 1px solid rgba(212,175,55,0.15); border-bottom: 1px solid rgba(212,175,55,0.15); }
     .modal-price { font-size: 40px; font-weight: 900; letter-spacing: -2px; background: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #16a34a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 8px; }
     .modal-rating { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: #aaa; padding: 4px 12px; border-radius: 20px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); }
-
     .qty-row { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 18px; }
     .qty-row button { background: #1a1a1a; border: 1px solid #262626; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; font-weight: 700; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .qty-row button:hover { background: #d4af37; color: #1a1408; border-color: #d4af37; transform: scale(1.05); }
     .qty-row span { font-size: 20px; font-weight: 800; min-width: 30px; text-align: center; }
-
     .modal-buy-btn { width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 26px; padding: 16px; font-size: 15px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; box-shadow: 0 6px 20px rgba(212,175,55,0.35); display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; overflow: hidden; }
     .modal-buy-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .modal-buy-btn:hover::before { left: 130%; }
     .modal-buy-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.55); }
-
     .order-modal { max-height: 88vh; display: flex; flex-direction: column; }
     .order-modal .modal-body { overflow-y: auto; flex: 1; padding: 18px 16px 16px; }
     .order-modal .modal-body::-webkit-scrollbar { width: 4px; }
     .order-modal .modal-body::-webkit-scrollbar-track { background: transparent; }
     .order-modal .modal-body::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
-
     .checkout-header { text-align: center; margin-bottom: 14px; }
     .checkout-eyebrow { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 2.5px; color: #d4af37; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.3); padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; }
     .checkout-title { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 4px; }
     .checkout-subtitle { font-size: 11px; color: #777; letter-spacing: 0.2px; line-height: 1.4; }
-
     .reserved-timer { display: none; text-align: center; font-size: 11px; font-weight: 800; color: #ef4444; background: rgba(239,68,68,0.1); padding: 4px 10px; border-radius: 10px; margin-top: 6px; border: 1px solid rgba(239,68,68,0.3); font-variant-numeric: tabular-nums; }
     .reserved-timer.warning { color: #ff8800; background: rgba(255, 136, 0, 0.15); border-color: rgba(255, 136, 0, 0.5); animation: reserveWarningPulse 1s ease-in-out infinite; }
     @keyframes reserveWarningPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 136, 0, 0.5); } 50% { box-shadow: 0 0 0 5px rgba(255, 136, 0, 0); } }
-
     .qr-timer-wrap { display: flex; justify-content: center; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.1); padding: 6px 14px; border-radius: 20px; width: fit-content; margin: 0 auto 10px; border: 1px solid rgba(239,68,68,0.3); }
     .qr-timer-wrap .timer-clock { font-variant-numeric: tabular-nums; font-size: 14px; letter-spacing: 1px; font-weight: 900; }
     .qr-container.expired { position: relative; }
     .qr-container.expired img { filter: blur(4px) grayscale(100%); opacity: 0.5; }
     .qr-container.expired::after { content: 'QR EXPIRED'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ef4444; font-weight: 900; font-size: 16px; letter-spacing: 2px; text-shadow: 0 0 10px rgba(0,0,0,0.8); z-index: 10; white-space: nowrap; }
-
     .regenerate-qr-btn { display: none; margin: 8px auto 10px; padding: 10px 22px; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 20px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 14px rgba(212,175,55,0.45); transition: all 0.25s ease; align-items: center; gap: 6px; width: fit-content; position: relative; overflow: hidden; }
     .regenerate-qr-btn::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .regenerate-qr-btn:hover::before { left: 130%; }
     .regenerate-qr-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(212,175,55,0.55); }
-
     .mini-card-preview { position: relative; width: 100%; aspect-ratio: 1.586 / 1; border-radius: 12px; margin-bottom: 14px; cursor: pointer; perspective: 1200px; transition: transform 0.4s ease; }
     .mini-card-preview:hover { transform: translateY(-2px); }
     .mini-card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -582,7 +467,6 @@
     .mini-card-preview .cc-visa { font-size: 10px; padding: 3px 7px 4px; border-radius: 3px; }
     .mini-card-preview .cc-holo-sticker { width: 18px; height: 18px; padding: 2px; }
     .mini-card-preview .cc-tier-wm { font-size: 28px; }
-
     .mini-card-preview.compact { max-width: 220px; margin: 0 auto 12px; }
     .mini-card-preview.compact .cc-number { font-size: 9px; letter-spacing: 1.5px; }
     .mini-card-preview.compact .cc-bank { font-size: 8px; letter-spacing: 1.5px; }
@@ -597,11 +481,9 @@
     .mini-card-preview.compact .cc-contactless-icon { width: 10px; height: 10px; }
     .mini-card-preview.compact .cc-contactless-icon::before { width: 6px; height: 6px; top: 2px; left: 2px; }
     .mini-card-preview.compact .cc-contactless-icon::after { width: 9px; height: 9px; top: 0.5px; left: 0.5px; }
-
     .section-divider { display: flex; align-items: center; gap: 8px; margin: 12px 0 8px; }
     .section-divider span { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #8a7231; white-space: nowrap; }
     .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,175,55,0.25), transparent); }
-
     .order-summary-card { background: #0d0d0d; border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; padding: 10px 12px; margin-bottom: 4px; }
     .summary-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 4px 0; }
     .summary-label { font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.8px; text-transform: uppercase; flex-shrink: 0; }
@@ -610,7 +492,6 @@
     .total-row { padding: 4px 0; }
     .summary-label-total { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #fff; }
     .summary-value-total { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: #22c55e; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
-
     .order-summary-card.compact-summary { padding: 8px 12px; }
     .order-summary-card.compact-summary .summary-row { padding: 2px 0; }
     .order-summary-card.compact-summary .summary-value-total { font-size: 16px; }
@@ -618,21 +499,17 @@
     .order-modal .checkout-header { margin-bottom: 10px; }
     .order-modal .order-form { margin-top: 4px; }
     .order-modal .field-group { margin-bottom: 8px; }
-
     .order-btn-premium { width: 100%; background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 22px; padding: 13px; font-size: 14px; font-weight: 800; letter-spacing: 0.6px; cursor: pointer; font-family: inherit; margin-top: 8px; transition: all 0.25s ease; box-shadow: 0 8px 24px rgba(212,175,55,0.4); display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; overflow: hidden; }
     .order-btn-premium::before { content: ''; position: absolute; top: -50%; left: -60%; width: 40%; height: 200%; background: linear-gradient(115deg, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(20deg); transition: left 0.7s ease; }
     .order-btn-premium:hover::before { left: 130%; }
     .order-btn-premium:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(212,175,55,0.55); }
-
     .trust-badges { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px; font-size: 10px; font-weight: 600; color: #666; letter-spacing: 0.3px; }
     .trust-badges .dot { color: #333; font-size: 13px; }
     .trust-badges span:not(.dot) { display: inline-flex; align-items: center; gap: 3px; color: #888; }
-
     .profile-clear-btn { width: 100%; background: transparent; border: 1.5px solid rgba(239,68,68,0.4); color: #ef4444; padding: 10px 20px; border-radius: 22px; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; margin-top: 8px; }
     .profile-clear-btn:hover { background: rgba(239,68,68,0.1); border-color: #ef4444; }
     .profile-hint-box { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; font-size: 11px; color: #ccc; line-height: 1.5; }
     .profile-hint-box strong { color: #f5d76e; }
-
     .profile-saved-card { text-align: center; padding: 8px 4px 4px; }
     .profile-saved-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 14px; border: 3px solid rgba(212,175,55,0.55); overflow: hidden; background: #1a1a1a; box-shadow: 0 0 24px rgba(212,175,55,0.35); }
     .profile-saved-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -644,26 +521,21 @@
     .profile-saved-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 800; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); padding: 4px 10px; border-radius: 12px; letter-spacing: 0.5px; margin: 0 auto 14px; text-transform: uppercase; }
     .profile-edit-btn { width: 100%; background: rgba(212,175,55,0.1); border: 1.5px solid rgba(212,175,55,0.5); color: #d4af37; padding: 12px 20px; border-radius: 22px; font-size: 14px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; font-family: inherit; transition: all 0.25s ease; margin-bottom: 8px; }
     .profile-edit-btn:hover { background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border-color: transparent; }
-
     .payment-total-card { background: linear-gradient(160deg, #131313 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.25); border-radius: 14px; padding: 14px; text-align: center; margin-bottom: 4px; position: relative; overflow: hidden; }
     .payment-total-card::before { content: ''; position: absolute; top: -60%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%); pointer-events: none; }
     .payment-total-label { font-size: 9px; font-weight: 800; letter-spacing: 2.8px; color: #d4af37; margin-bottom: 6px; position: relative; z-index: 1; }
     .payment-total-amount { font-size: 30px; font-weight: 900; letter-spacing: -1.2px; color: #22c55e; margin-bottom: 4px; line-height: 1.05; position: relative; z-index: 1; text-shadow: 0 0 12px rgba(34,197,94,0.2); }
     .payment-total-design { font-size: 11px; color: #999; font-weight: 500; letter-spacing: 0.3px; position: relative; z-index: 1; }
-
     .qr-container { display: flex; justify-content: center; align-items: center; margin: 4px 0 10px; }
     .qr-container img { width: 180px; height: 180px; object-fit: contain; background: #fff; padding: 10px; border-radius: 14px; box-shadow: 0 14px 34px rgba(0,0,0,0.55), 0 0 0 1px rgba(212,175,55,0.25); display: block; image-rendering: crisp-edges; }
     @media (max-width:400px) { .qr-container img { width: 150px; height: 150px; padding: 8px; border-radius: 12px; } .payment-total-amount { font-size: 26px; } }
-
     .qr-hint { text-align: center; font-size: 11px; color: #777; margin-bottom: 2px; letter-spacing: 0.3px; font-weight: 500; }
     .qr-hint strong { color: #d4af37; font-weight: 700; }
-
     .field-group { margin-bottom: 10px; text-align: left; }
     .field-group label { display: block; font-size: 10px; font-weight: 700; color: #888; margin-bottom: 4px; letter-spacing: 1.3px; text-transform: uppercase; }
     .field-group input, .field-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #262626; border-radius: 10px; font-size: 13px; background: #0f0f0f; color: #fff; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
     .field-group input:focus, .field-group textarea:focus { border-color: #d4af37; background: #131313; box-shadow: 0 0 0 4px rgba(212,175,55,0.1); }
     .field-group input::placeholder, .field-group textarea::placeholder { color: #444; }
-
     .success-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 20px; backdrop-filter: blur(12px); }
     .success-modal { background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.25); border-radius: 28px; max-width: 380px; width: 100%; padding: 38px 30px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(212,175,55,0.1); animation: successModalIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
     @keyframes successModalIn { 0% { opacity: 0; transform: scale(0.7) translateY(30px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
@@ -679,7 +551,6 @@
     .success-order-details span { display: block; margin-bottom: 5px; }
     .success-btn { background: linear-gradient(135deg, #f5d76e 0%, #d4af37 55%, #b8941f 100%); color: #1a1408; border: none; border-radius: 30px; padding: 15px 24px; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; cursor: pointer; width: 100%; transition: all 0.2s; font-family: inherit; box-shadow: 0 6px 20px rgba(212,175,55,0.35); }
     .success-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,0.5); }
-
     #toastContainer { position: fixed; bottom: 30px; right: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
     .toast { background: #141414; border: 1px solid rgba(212,175,55,0.3); color: #fff; padding: 14px 20px; border-radius: 14px; box-shadow: 0 10px 28px rgba(0,0,0,0.6); display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards; pointer-events: auto; max-width: 300px; }
     .toast.success { border-color: #d4af37; box-shadow: 0 10px 28px rgba(212,175,55,0.3); }
@@ -689,11 +560,9 @@
     @keyframes toastIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
     @media (max-width:400px) { #toastContainer { bottom: 16px; right: 10px; } }
-
     .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 2001; }
     .confetti-piece { position: absolute; width: 10px; height: 10px; opacity: 0.9; animation: confettiFall linear forwards; }
     @keyframes confettiFall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-
     .custom-alert-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: flex; align-items: center; justify-content: center; z-index: 3000; padding: 20px; backdrop-filter: blur(6px); }
     .custom-alert-box { background: linear-gradient(160deg, #141414 0%, #0d0d0d 100%); border: 1px solid rgba(212,175,55,0.25); border-radius: 22px; padding: 30px 25px; max-width: 360px; width: 100%; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.08); animation: modalFadeIn 0.25s ease; }
     @keyframes modalFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -1028,29 +897,23 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v4)
-       - REFERENCE_TIME: reviews, viewers, helpful counts ke liye (June 2026 se)
-       - STREAM_REFERENCE_TIME: rolling 3-hour window (page load pe abhi se 3 ghante pehle)
-       - BASE_PURCHASES_PER_HOUR = 60 (Option C — fast notifications)
-       - Initial stock = 150-200 (safe from floor, long sessions me bhi na atke)
-       - Saare counters (sold, stock, sold%, hero, notification) isi stream se derive
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v5 - FINAL)
+       All 8 bugs fixed:
+       1. User reviews persist in localStorage
+       2. "More reviews" count includes user reviews
+       3. User review time is dynamic (formatTimeAgo)
+       4. getReviewMore respects isUserSubmitted
+       5. Helpful button +1 on load when active
+       6. Notification exit animation completes (10.4s CSS, 10.5s JS)
+       7. XSS protection via escapeHtml
+       8. Photo compression before localStorage save
        ========================================================= */
 
-    /* Purana reference — reviews/viewers/helpful ke liye */
     var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
-
-    /* Naya rolling reference — sirf stream (purchases) ke liye (3 ghante pehle se) */
     var STREAM_REFERENCE_TIME = Date.now() - (3 * 60 * 60 * 1000);
 
-    function pseudoRandom(seed) {
-      var x = Math.sin(seed) * 10000;
-      return x - Math.floor(x);
-    }
-
-    function getHoursSinceReference() {
-      return Math.max(0, Math.floor((Date.now() - REFERENCE_TIME) / 3600000));
-    }
-
+    function pseudoRandom(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
+    function getHoursSinceReference() { return Math.max(0, Math.floor((Date.now() - REFERENCE_TIME) / 3600000)); }
     function getTimeMultiplierForHour(hourOfDay) {
       if (hourOfDay < 6) return 0.2;
       if (hourOfDay < 12) return 0.6;
@@ -1059,7 +922,13 @@
       return 0.5;
     }
 
-    /* ============ MASTER STREAM SYSTEM (INCREMENTAL, ROLLING 3H WINDOW) ============ */
+    /* ============ BUG FIX 7: XSS PROTECTION ============ */
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    /* ============ MASTER STREAM SYSTEM ============ */
     var BASE_PURCHASES_PER_HOUR = 60;
     var _streamState = null;
 
@@ -1071,25 +940,20 @@
       return _streamState;
     }
 
-    /* Stream ko target minute tak extend karo (naye minute ke events generate karo) */
     function extendStreamTo(targetMinute) {
       var stream = getStreamState();
       if (targetMinute <= stream.lastMinute) return stream;
-
       var totalWeight = 0;
       designs.forEach(function(d) { totalWeight += d.viewerWeight; });
-
       for (var m = stream.lastMinute + 1; m <= targetMinute; m++) {
         var minuteTime = STREAM_REFERENCE_TIME + m * 60000;
         var hourOfDay = new Date(minuteTime).getHours();
         var mult = getTimeMultiplierForHour(hourOfDay);
         var expectedPerMinute = (BASE_PURCHASES_PER_HOUR * mult) / 60;
-
         var r1 = pseudoRandom(7001 + m * 9773);
         if (r1 < expectedPerMinute) {
           var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
-          var chosen = designs[0];
-          var acc = 0;
+          var chosen = designs[0]; var acc = 0;
           for (var i = 0; i < designs.length; i++) {
             acc += designs[i].viewerWeight;
             if (cardRoll < acc) { chosen = designs[i]; break; }
@@ -1103,19 +967,9 @@
       return stream;
     }
 
-    function getTotalPurchases() {
-      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
-      extendStreamTo(nowMinute);
-      return _streamState.totalPurchases;
-    }
+    function getTotalPurchases() { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.totalPurchases; }
+    function getCardPurchases(design) { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.cardCounts[design.id] || 0; }
 
-    function getCardPurchases(design) {
-      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
-      extendStreamTo(nowMinute);
-      return _streamState.cardCounts[design.id] || 0;
-    }
-
-    /* ISSUE 2 FIX: user's own purchase ko stream me record karo */
     function recordUserPurchase(designId) {
       var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(nowMinute);
@@ -1125,10 +979,8 @@
       stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
     }
 
-    /* ISSUE 1 FIX: user ke khud ke review 0 helpful se start */
     function getReviewHelpful(review, idx) {
       if (review.isUserSubmitted) return review.helpful || 0;
-
       var hours = getHoursSinceReference();
       var base = review.helpful || 0;
       var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131;
@@ -1140,12 +992,9 @@
         else if (review.name === 'Gyan Gaming') popFactor = 1.3;
         else if (review.name === 'Lokesh Gamer') popFactor = 1.1;
         dailyRate = (6 + pseudoRandom(seed) * 10) * popFactor;
-      } else {
-        dailyRate = 0.15 + pseudoRandom(seed) * 0.35;
-      }
+      } else { dailyRate = 0.15 + pseudoRandom(seed) * 0.35; }
       var hourlyRate = dailyRate / 24;
       var total = 0;
-      /* OPTION A: raat slow, peak fast — time-of-day multiplier */
       for (var h = 0; h < hours; h++) {
         var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getHours();
         var mult = getTimeMultiplierForHour(hourOfDay);
@@ -1155,7 +1004,9 @@
       return base + total;
     }
 
+    /* BUG FIX 4: isUserSubmitted check */
     function getReviewMore(review, idx) {
+      if (review.isUserSubmitted) return review.moreCount || 0;
       var hours = getHoursSinceReference();
       var base = review.moreCount || 0;
       var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131 + 17;
@@ -1167,9 +1018,7 @@
         else if (review.name === 'Gyan Gaming') popFactor = 1.3;
         else if (review.name === 'Lokesh Gamer') popFactor = 1.1;
         dailyRate = (20 + pseudoRandom(seed) * 30) * popFactor;
-      } else {
-        dailyRate = 1 + pseudoRandom(seed) * 3;
-      }
+      } else { dailyRate = 1 + pseudoRandom(seed) * 3; }
       var hourlyRate = dailyRate / 24;
       var total = 0;
       for (var h = 0; h < hours; h++) {
@@ -1179,6 +1028,7 @@
       return base + total;
     }
 
+    /* BUG FIX 2: include user reviews in count */
     function getReviewsCount() {
       var base = 7865;
       var hours = getHoursSinceReference();
@@ -1187,7 +1037,52 @@
         var r = pseudoRandom(5555 + h * 9773);
         if (r < 2.5 / 24) total += 1;
       }
-      return base + total;
+      var userCount = reviewsData.filter(function(r) { return r.isUserSubmitted; }).length;
+      return base + total + userCount;
+    }
+
+    /* ============ BUG FIX 1+3: User review persistence ============ */
+    var USER_REVIEWS_KEY = 'cardseller_user_reviews';
+
+    function loadUserReviewsFromStorage() {
+      try {
+        var raw = localStorage.getItem(USER_REVIEWS_KEY);
+        if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) return arr; }
+      } catch(e) { console.warn('Failed to load user reviews:', e); }
+      return [];
+    }
+
+    function saveUserReviewsToStorage() {
+      try {
+        var userOnly = reviewsData.filter(function(r) { return r.isUserSubmitted; });
+        var limited = userOnly.slice(-20);
+        localStorage.setItem(USER_REVIEWS_KEY, JSON.stringify(limited));
+      } catch(e) { console.warn('Failed to save user reviews:', e); }
+    }
+
+    /* ============ BUG FIX 8: Photo compression ============ */
+    function compressImage(dataURL, maxSize, quality, callback) {
+      var img = new Image();
+      img.onload = function() {
+        try {
+          var canvas = document.createElement('canvas');
+          var ratio = Math.min(maxSize / img.width, maxSize / img.height, 1);
+          canvas.width = Math.round(img.width * ratio);
+          canvas.height = Math.round(img.height * ratio);
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          var compressed = canvas.toDataURL('image/jpeg', quality || 0.7);
+          callback(compressed);
+        } catch(e) { console.warn('Image compress failed:', e); callback(dataURL); }
+      };
+      img.onerror = function() { callback(dataURL); };
+      img.src = dataURL;
+    }
+
+    /* ============ BUG FIX 3: format review time ============ */
+    function formatReviewTime(review) {
+      if (review.isUserSubmitted && review.submittedAt) return formatTimeAgo(review.submittedAt);
+      return review.time || 'Just now';
     }
 
     /* ============ PROFILE ============ */
@@ -1212,19 +1107,12 @@
     function hasProfile() { return !!(profileData.name || profileData.phone); }
 
     function updateProfileButtonUI() {
-      var btn = document.getElementById('profileBtn');
-      var label = document.getElementById('profileBtnLabel');
+      var btn = document.getElementById('profileBtn'); var label = document.getElementById('profileBtnLabel');
       if (!btn) return;
       if (hasProfile()) {
         btn.classList.add('saved');
-        if (label) {
-          var fn = profileData.name ? profileData.name.trim().split(/\s+/)[0] : '';
-          label.textContent = fn ? ('Hi, ' + fn) : 'Saved';
-        }
-      } else {
-        btn.classList.remove('saved');
-        if (label) label.textContent = 'Profile';
-      }
+        if (label) { var fn = profileData.name ? profileData.name.trim().split(/\s+/)[0] : ''; label.textContent = fn ? ('Hi, ' + fn) : 'Saved'; }
+      } else { btn.classList.remove('saved'); if (label) label.textContent = 'Profile'; }
     }
 
     function resetProfilePhotoUpload() {
@@ -1244,11 +1132,9 @@
       avatarImg.src = profileData.photo ? profileData.photo : getInitialsAvatarSVG(profileData.name || 'User', false);
       document.getElementById('profileSavedName').textContent = profileData.name || '—';
       var phoneRow = document.getElementById('profileSavedPhoneRow');
-      if (profileData.phone) { phoneRow.style.display = 'flex'; document.getElementById('profileSavedPhone').textContent = profileData.phone; }
-      else phoneRow.style.display = 'none';
+      if (profileData.phone) { phoneRow.style.display = 'flex'; document.getElementById('profileSavedPhone').textContent = profileData.phone; } else phoneRow.style.display = 'none';
       var cityRow = document.getElementById('profileSavedCityRow');
-      if (profileData.city) { cityRow.style.display = 'flex'; document.getElementById('profileSavedCity').textContent = profileData.city; }
-      else cityRow.style.display = 'none';
+      if (profileData.city) { cityRow.style.display = 'flex'; document.getElementById('profileSavedCity').textContent = profileData.city; } else cityRow.style.display = 'none';
     }
 
     function showProfileFormView() {
@@ -1267,8 +1153,7 @@
         if (area) {
           area.classList.add('has-photo');
           if (plusIcon) plusIcon.style.display = 'none';
-          var img = document.createElement('img');
-          img.src = profileData.photo;
+          var img = document.createElement('img'); img.src = profileData.photo;
           area.insertBefore(img, area.firstChild);
         }
       }
@@ -1278,13 +1163,9 @@
     function openProfileModal() {
       var overlay = document.getElementById('profileOverlay');
       if (hasProfile()) showProfileSavedView(); else showProfileFormView();
-      overlay.style.display = 'flex';
-      document.body.classList.add('modal-open');
+      overlay.style.display = 'flex'; document.body.classList.add('modal-open');
     }
-    function closeProfileModal() {
-      document.getElementById('profileOverlay').style.display = 'none';
-      document.body.classList.remove('modal-open');
-    }
+    function closeProfileModal() { document.getElementById('profileOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }
 
     document.getElementById('profileBtn').addEventListener('click', openProfileModal);
     document.getElementById('profileClose').addEventListener('click', closeProfileModal);
@@ -1297,10 +1178,7 @@
       var input = document.getElementById('profilePhotoInput');
       var plusIcon = document.getElementById('profilePhotoPlusIcon');
       var removeBtn = document.getElementById('profilePhotoRemoveBtn');
-      area.addEventListener('click', function(e) {
-        if (e.target === removeBtn || e.target.closest('.photo-remove-btn')) return;
-        input.click();
-      });
+      area.addEventListener('click', function(e) { if (e.target === removeBtn || e.target.closest('.photo-remove-btn')) return; input.click(); });
       input.addEventListener('change', function(e) {
         var file = e.target.files && e.target.files[0];
         if (!file) return;
@@ -1309,12 +1187,9 @@
         var reader = new FileReader();
         reader.onload = function(ev) {
           profilePhotoDataURL = ev.target.result;
-          area.classList.add('has-photo');
-          plusIcon.style.display = 'none';
-          var oldImg = area.querySelector('img');
-          if (oldImg) oldImg.remove();
-          var img = document.createElement('img');
-          img.src = profilePhotoDataURL;
+          area.classList.add('has-photo'); plusIcon.style.display = 'none';
+          var oldImg = area.querySelector('img'); if (oldImg) oldImg.remove();
+          var img = document.createElement('img'); img.src = profilePhotoDataURL;
           area.insertBefore(img, area.firstChild);
         };
         reader.readAsDataURL(file);
@@ -1330,36 +1205,24 @@
       var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
       if (!nameRegex.test(name)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
       if (!isValidIndianPhone(phone)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
-      profileData.name = name;
-      profileData.city = city;
-      profileData.phone = phone;
-      profileData.photo = profilePhotoDataURL || null;
-      saveProfileToStorage();
-      updateProfileButtonUI();
-      showProfileSavedView();
+      profileData.name = name; profileData.city = city; profileData.phone = phone; profileData.photo = profilePhotoDataURL || null;
+      saveProfileToStorage(); updateProfileButtonUI(); showProfileSavedView();
       showToast('Profile saved!', 'success');
     });
 
     document.getElementById('profileClearBtn').addEventListener('click', function() {
-      var overlay = document.createElement('div');
-      overlay.className = 'custom-alert-overlay';
-      var box = document.createElement('div');
-      box.className = 'custom-alert-box';
+      var overlay = document.createElement('div'); overlay.className = 'custom-alert-overlay';
+      var box = document.createElement('div'); box.className = 'custom-alert-box';
       box.innerHTML = '<div class="custom-alert-icon">🗑️</div><div class="custom-alert-title">Clear Profile?</div><div class="custom-alert-message">Your saved details will be removed.</div><button class="custom-alert-btn secondary" id="clearCancel">Cancel</button><button class="custom-alert-btn" id="clearConfirm">Clear</button>';
-      overlay.appendChild(box);
-      document.body.appendChild(overlay);
+      overlay.appendChild(box); document.body.appendChild(overlay);
       document.getElementById('clearCancel').addEventListener('click', function() { overlay.remove(); });
       document.getElementById('clearConfirm').addEventListener('click', function() {
-        profileData = { name: '', city: '', phone: '', photo: null };
-        profilePhotoDataURL = null;
+        profileData = { name: '', city: '', phone: '', photo: null }; profilePhotoDataURL = null;
         try { localStorage.removeItem(PROFILE_KEY); } catch(e) {}
         resetProfilePhotoUpload();
-        document.getElementById('profileName').value = '';
-        document.getElementById('profileCity').value = '';
-        document.getElementById('profilePhone').value = '';
+        document.getElementById('profileName').value = ''; document.getElementById('profileCity').value = ''; document.getElementById('profilePhone').value = '';
         document.getElementById('profileClearBtn').style.display = 'none';
-        updateProfileButtonUI();
-        overlay.remove();
+        updateProfileButtonUI(); overlay.remove();
         document.getElementById('profileSavedView').style.display = 'none';
         document.getElementById('profileFormView').style.display = 'block';
         document.getElementById('profileModalTitle').textContent = 'Save Your Details';
@@ -1400,19 +1263,15 @@
       if (map[key]) return map[key];
       var used = loadUsedAvatars();
       var available = [];
-      for (var i = 0; i < avatarCache.list.length; i++) {
-        if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]);
-      }
+      for (var i = 0; i < avatarCache.list.length; i++) { if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]); }
       if (available.length === 0) { used = []; available = avatarCache.list.slice(); }
       var idx = Math.floor(Math.random() * available.length);
       var chosen = available[idx];
-      used.push(chosen);
-      saveUsedAvatars(used);
+      used.push(chosen); saveUsedAvatars(used);
       map[key] = chosen;
       var mapKeys = Object.keys(map);
       if (mapKeys.length > 1000) {
-        var newMap = {};
-        var recent = mapKeys.slice(-500);
+        var newMap = {}; var recent = mapKeys.slice(-500);
         for (var k = 0; k < recent.length; k++) newMap[recent[k]] = map[recent[k]];
         map = newMap;
       }
@@ -1434,8 +1293,7 @@
         .then(function(data) {
           if (!Array.isArray(data)) throw new Error('Invalid response');
           var images = data.filter(function(item) { return item.type === 'file' && /\.(jpg|jpeg|png|webp)$/i.test(item.name); }).map(function(item) { return item.download_url; });
-          avatarCache.list = images;
-          avatarCache.loaded = true;
+          avatarCache.list = images; avatarCache.loaded = true;
           try { localStorage.setItem('cardseller_avatars_list', JSON.stringify(images)); localStorage.setItem('cardseller_avatars_time', Date.now().toString()); } catch(e) {}
           if (callback) callback(images);
         })
@@ -1445,21 +1303,18 @@
     function getAvatarForName(name) { return assignAvatarToName(name); }
     function getRandomAvatarUrl() {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
-      var used = loadUsedAvatars();
-      var available = [];
+      var used = loadUsedAvatars(); var available = [];
       for (var i = 0; i < avatarCache.list.length; i++) { if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]); }
       if (available.length === 0) { used = []; saveUsedAvatars(used); available = avatarCache.list.slice(); }
       var idx = Math.floor(Math.random() * available.length);
-      var chosen = available[idx];
-      used.push(chosen);
-      saveUsedAvatars(used);
+      var chosen = available[idx]; used.push(chosen); saveUsedAvatars(used);
       return chosen;
     }
     function buildAvatarImg(avatarUrl, name, isYouTuber) {
       var fallback = getInitialsAvatarSVG(name, isYouTuber);
-      if (!avatarUrl) return '<img src="' + fallback + '" alt="' + name + '">';
+      if (!avatarUrl) return '<img src="' + fallback + '" alt="' + escapeHtml(name) + '">';
       var safeFallback = fallback.replace(/"/g, '&quot;');
-      return '<img src="' + avatarUrl + '" alt="' + name + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
+      return '<img src="' + avatarUrl + '" alt="' + escapeHtml(name) + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
     }
 
     (function() {
@@ -1469,7 +1324,7 @@
         var title = options.title || 'Message'; var icon = options.icon || '✨';
         var overlay = createOverlay(); var box = document.createElement('div');
         box.className = 'custom-alert-box';
-        box.innerHTML = '<div class="custom-alert-icon">' + icon + '</div><div class="custom-alert-title">' + title + '</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
+        box.innerHTML = '<div class="custom-alert-icon">' + icon + '</div><div class="custom-alert-title">' + escapeHtml(title) + '</div><div class="custom-alert-message">' + escapeHtml(message) + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
         overlay.appendChild(box);
         document.getElementById('caOk').addEventListener('click', function() { overlay.remove(); });
         overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
@@ -1478,7 +1333,7 @@
         return new Promise(function(resolve) {
           var overlay = createOverlay(); var box = document.createElement('div');
           box.className = 'custom-alert-box';
-          box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + message + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
+          box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + escapeHtml(message) + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
           overlay.appendChild(box);
           document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); resolve(true); });
           document.getElementById('ccCancel').addEventListener('click', function() { overlay.remove(); resolve(false); });
@@ -1510,60 +1365,46 @@
       { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
 
-    /* STREAM-BASED card state */
+    /* BUG FIX 1: Load user reviews from storage */
+    (function loadUserReviews() {
+      var saved = loadUserReviewsFromStorage();
+      saved.forEach(function(r) { if (r && r.isUserSubmitted) reviewsData.push(r); });
+    })();
+
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
       var initialStock = Math.floor(rand * 50) + 150;
       var initialSold = Math.round(initialStock * (design.stockPercent / (100 - design.stockPercent)));
       var totalInventory = initialStock + initialSold;
-
       var purchased = getCardPurchases(design);
       var currentStock = Math.max(3, initialStock - purchased);
       var currentSold = initialSold + (initialStock - currentStock);
-
       return { stock: currentStock, sold: currentSold, total: totalInventory };
     }
 
-    /* ISSUE 3 FIX: Trending badge dynamically move */
     function updateTrendingBadge() {
-      var trendingId = '';
-      var lowestStock = Infinity;
-      designs.forEach(function(d, idx) {
-        var s = getCardState(d, idx);
-        if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; }
-      });
+      var trendingId = ''; var lowestStock = Infinity;
+      designs.forEach(function(d, idx) { var s = getCardState(d, idx); if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; } });
       document.querySelectorAll('.grid-card').forEach(function(card) {
         var id = card.getAttribute('data-id');
         var existing = card.querySelector('.trending-badge');
         if (id === trendingId) {
-          if (!existing) {
-            var info = card.querySelector('.gc-info');
-            if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>');
-          }
-        } else if (existing) {
-          existing.remove();
-        }
+          if (!existing) { var info = card.querySelector('.gc-info'); if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>'); }
+        } else if (existing) { existing.remove(); }
       });
     }
 
-    var currentDesign = null;
-    var currentQty = 1;
-    var currentOrderDesign = null;
-    var currentPendingOrder = null;
-    var isFlipped = false;
-    var selectedRating = 0;
-    var selectedPhotoDataURL = null;
-    var qrTimerInterval = null;
-    var qrTimeLeft = 300;
-    var reservedTimerInterval = null;
+    var currentDesign = null; var currentQty = 1; var currentOrderDesign = null; var currentPendingOrder = null;
+    var isFlipped = false; var selectedRating = 0; var selectedPhotoDataURL = null;
+    var qrTimerInterval = null; var qrTimeLeft = 300; var reservedTimerInterval = null;
 
     function showToast(message, type) {
       var container = document.getElementById('toastContainer');
       var toast = document.createElement('div');
       toast.className = 'toast ' + (type || '');
       var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
-      toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + message + '</span>';
+      toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + escapeHtml(message) + '</span>';
       container.appendChild(toast);
       setTimeout(function() { toast.remove(); }, 3000);
     }
@@ -1603,7 +1444,6 @@
       return '<div class="cc-face cc-back" style="background:' + design.gradient + '"><div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div><div class="cc-stripe"></div><div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
 
-    /* Live viewer counts */
     var viewerState = {};
     function initViewerCounts() {
       designs.forEach(function(d) {
@@ -1618,60 +1458,36 @@
     }
     function fluctuateViewers() {
       designs.forEach(function(d) {
-        var s = viewerState[d.id];
-        if (!s) return;
-        var delta = Math.floor(Math.random() * 5) - 2;
-        s.current += delta;
-        var min = Math.max(5, Math.floor(s.base * 0.78));
-        var max = Math.ceil(s.base * 1.22);
+        var s = viewerState[d.id]; if (!s) return;
+        var delta = Math.floor(Math.random() * 5) - 2; s.current += delta;
+        var min = Math.max(5, Math.floor(s.base * 0.78)); var max = Math.ceil(s.base * 1.22);
         if (s.current < min) s.current = min + Math.floor(Math.random() * 4);
         if (s.current > max) s.current = max - Math.floor(Math.random() * 4);
         var badge = document.querySelector('.live-viewers-badge[data-design-id="' + d.id + '"] .vcount');
-        if (badge) {
-          var oldVal = parseInt(badge.textContent);
-          badge.textContent = s.current;
-          if (delta !== 0 && oldVal !== s.current) {
-            badge.classList.add('bump');
-            setTimeout(function() { badge.classList.remove('bump'); }, 260);
-          }
-        }
+        if (badge) { var oldVal = parseInt(badge.textContent); badge.textContent = s.current; if (delta !== 0 && oldVal !== s.current) { badge.classList.add('bump'); setTimeout(function() { badge.classList.remove('bump'); }, 260); } }
       });
     }
     setInterval(fluctuateViewers, 5000);
 
-    function getNextMidnight() {
-      var now = new Date();
-      var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-      return midnight.getTime();
-    }
+    function getNextMidnight() { var now = new Date(); return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0).getTime(); }
     function formatCountdown(ms) {
       if (ms < 0) ms = 0;
       var totalSec = Math.floor(ms / 1000);
-      var h = Math.floor(totalSec / 3600);
-      var m = Math.floor((totalSec % 3600) / 60);
-      var s = totalSec % 60;
+      var h = Math.floor(totalSec / 3600); var m = Math.floor((totalSec % 3600) / 60); var s = totalSec % 60;
       function pad(n) { return n < 10 ? '0' + n : '' + n; }
       return pad(h) + ':' + pad(m) + ':' + pad(s);
     }
     var activeCountdowns = [];
-    function initCountdowns() {
-      activeCountdowns = [];
-      designs.forEach(function(d) { activeCountdowns.push({ id: d.id, end: getNextMidnight() }); });
-    }
+    function initCountdowns() { activeCountdowns = []; designs.forEach(function(d) { activeCountdowns.push({ id: d.id, end: getNextMidnight() }); }); }
     function updateCountdowns() {
-      var now = Date.now();
-      var midnight = getNextMidnight();
+      var now = Date.now(); var midnight = getNextMidnight();
       activeCountdowns.forEach(function(item) {
         if (item.end < now) item.end = midnight;
         var el = document.querySelector('.countdown-strip[data-design-id="' + item.id + '"] .cd-time');
         if (!el) return;
-        var remaining = item.end - now;
-        el.textContent = formatCountdown(remaining);
+        var remaining = item.end - now; el.textContent = formatCountdown(remaining);
         var strip = el.closest('.countdown-strip');
-        if (strip) {
-          if (remaining < 30 * 60000) strip.classList.add('expiring');
-          else strip.classList.remove('expiring');
-        }
+        if (strip) { if (remaining < 30 * 60000) strip.classList.add('expiring'); else strip.classList.remove('expiring'); }
       });
     }
     setInterval(updateCountdowns, 1000);
@@ -1679,39 +1495,27 @@
     function renderHeroCounters() {
       var sold = 12548 + getTotalPurchases();
       var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
-      var soldEl = document.getElementById('heroSoldCount');
-      if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
-      var buyersEl = document.getElementById('heroBuyersCount');
-      if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
-      var tbEl = document.getElementById('trustedByCount');
-      if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
-      var whyEl = document.getElementById('whyTrustBuyers');
-      if (whyEl) whyEl.textContent = buyers.toLocaleString('en-IN') + '+';
+      var soldEl = document.getElementById('heroSoldCount'); if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
+      var buyersEl = document.getElementById('heroBuyersCount'); if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
+      var tbEl = document.getElementById('trustedByCount'); if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
+      var whyEl = document.getElementById('whyTrustBuyers'); if (whyEl) whyEl.textContent = buyers.toLocaleString('en-IN') + '+';
     }
 
     function updateStockUI(designId, state) {
       var stockLeftEl = document.querySelector('.stock-left[data-id="' + designId + '"]');
       if (stockLeftEl) stockLeftEl.textContent = '🔥 Only ' + state.stock + ' left in stock!';
       var percentEl = document.querySelector('.stock-percent[data-id="' + designId + '"]');
-      if (percentEl) {
-        var p = Math.round((state.sold / state.total) * 100);
-        percentEl.textContent = p + '% Sold';
-      }
+      if (percentEl) { var p = Math.round((state.sold / state.total) * 100); percentEl.textContent = p + '% Sold'; }
       var barEl = document.querySelector('.stock-bar-fill[data-id="' + designId + '"]');
-      if (barEl) {
-        var p2 = Math.round((state.sold / state.total) * 100);
-        barEl.style.width = p2 + '%';
-      }
+      if (barEl) { var p2 = Math.round((state.sold / state.total) * 100); barEl.style.width = p2 + '%'; }
     }
 
     function renderTrustedByRow() {
-      var avatarsEl = document.getElementById('trustedByAvatars');
-      if (!avatarsEl) return;
+      var avatarsEl = document.getElementById('trustedByAvatars'); if (!avatarsEl) return;
       avatarsEl.innerHTML = '';
       for (var i = 0; i < 5; i++) {
         var avatar = getRandomAvatarUrl();
-        var div = document.createElement('div');
-        div.className = 'trusted-by-avatar';
+        var div = document.createElement('div'); div.className = 'trusted-by-avatar';
         div.innerHTML = buildAvatarImg(avatar, String.fromCharCode(65 + i), false);
         avatarsEl.appendChild(div);
       }
@@ -1719,90 +1523,53 @@
 
     function initWelcomeBack() {
       try {
-        var VISITS_KEY = 'cardseller_visits';
-        var LAST_VISIT_KEY = 'cardseller_last_visit';
+        var VISITS_KEY = 'cardseller_visits'; var LAST_VISIT_KEY = 'cardseller_last_visit';
         var today = new Date().toDateString();
         var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0');
         var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
-        if (lastVisit !== today) {
-          visits += 1;
-          localStorage.setItem(VISITS_KEY, visits.toString());
-          localStorage.setItem(LAST_VISIT_KEY, today);
-        }
+        if (lastVisit !== today) { visits += 1; localStorage.setItem(VISITS_KEY, visits.toString()); localStorage.setItem(LAST_VISIT_KEY, today); }
         setTimeout(function() {
-          var container = document.getElementById('liveNotifContainer');
-          if (!container) return;
-          var notif = document.createElement('div');
-          notif.className = 'welcome-back-toast';
+          var container = document.getElementById('liveNotifContainer'); if (!container) return;
+          var notif = document.createElement('div'); notif.className = 'welcome-back-toast';
           var sub;
           if (visits === 1) sub = 'Welcome to our store! Explore premium cards today.';
           else if (visits === 2) sub = 'This is your 2nd visit. Thanks for coming back!';
           else sub = 'You have visited us ' + visits + ' times. We appreciate your loyalty!';
-          notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="wb-header">✨ Welcome Back ✨</div><div class="wb-body"><div class="wb-icon-wrap">👑</div><div class="wb-content"><div class="wb-title">Good to see you again!</div><div class="wb-sub">' + sub + '</div><span class="wb-badge">🎉 Priority Buyer Status</span></div></div>';
+          notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="wb-header">✨ Welcome Back ✨</div><div class="wb-body"><div class="wb-icon-wrap">👑</div><div class="wb-content"><div class="wb-title">Good to see you again!</div><div class="wb-sub">' + escapeHtml(sub) + '</div><span class="wb-badge">🎉 Priority Buyer Status</span></div></div>';
           container.appendChild(notif);
-          var closeBtn = notif.querySelector('.notif-close-btn');
-          if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-          setTimeout(function() { notif.remove(); }, 10000);
+          var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
+          setTimeout(function() { notif.remove(); }, 10500);
         }, 3000);
       } catch(e) {}
     }
 
     function renderGrid() {
-      var grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      var trendingId = '';
-      var lowestStock = Infinity;
-      designs.forEach(function(d, idx) {
-        var s = getCardState(d, idx);
-        if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; }
-      });
-
+      var grid = document.getElementById('productGrid'); grid.innerHTML = '';
+      var trendingId = ''; var lowestStock = Infinity;
+      designs.forEach(function(d, idx) { var s = getCardState(d, idx); if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; } });
       designs.forEach(function(design, idx) {
         var state = getCardState(design, idx);
         var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
-        var stockLeft = state.stock;
-        var soldPercent = Math.round((state.sold / state.total) * 100);
+        var stockLeft = state.stock; var soldPercent = Math.round((state.sold / state.total) * 100);
         var viewerBase = viewerState[design.id] ? viewerState[design.id].current : 50;
-        var card = document.createElement('div');
-        card.className = 'grid-card';
-        card.setAttribute('data-id', design.id);
+        var card = document.createElement('div'); card.className = 'grid-card'; card.setAttribute('data-id', design.id);
         var badgeHTML = (design.id === trendingId) ? '<div class="trending-badge">🔥 Trending</div>' : '';
         card.innerHTML =
           '<div class="countdown-strip" data-design-id="' + design.id + '"><span class="cd-icon">🔥</span><span>Offer ends:</span><span class="cd-time">--:--:--</span></div>' +
           '<div class="cc-preview-wrap"><div class="cc-preview ' + finishClass + '">' + cardFrontHTML(design) + cardBackHTML(design) + '</div></div>' +
-          '<div class="card-bottom-row">' +
-            '<div class="live-viewers-badge" data-design-id="' + design.id + '"><span class="live-pulse-dot"></span><span class="eye">👁</span><span class="vcount">' + viewerBase + '</span><span class="viewing-text">viewing now</span></div>' +
-            '<div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div>' +
-          '</div>' +
-          '<div class="gc-info">' + badgeHTML +
-            '<div class="gc-name">' + design.name + '</div>' +
-            '<div class="gc-tagline">' + design.tagline + '</div>' +
-            '<div class="gc-material">' + design.material + '</div>' +
-            '<div class="gc-meta"><span class="gc-rating">' + renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span></span><span class="gc-price">' + design.price + '</span></div>' +
-            '<div class="stock-progress"><div class="stock-progress-top"><span class="stock-left" data-id="' + design.id + '">🔥 Only ' + stockLeft + ' left in stock!</span><span class="stock-percent" data-id="' + design.id + '">' + soldPercent + '% Sold</span></div><div class="stock-bar-track"><div class="stock-bar-fill" data-id="' + design.id + '" style="width:0%" data-fill="' + soldPercent + '"></div></div></div>' +
-            '<div class="gc-actions"><button class="gc-buy-btn" data-action="buy">Buy Now</button></div>' +
-          '</div>';
+          '<div class="card-bottom-row"><div class="live-viewers-badge" data-design-id="' + design.id + '"><span class="live-pulse-dot"></span><span class="eye">👁</span><span class="vcount">' + viewerBase + '</span><span class="viewing-text">viewing now</span></div><div class="cc-balance-badge"><div class="cc-balance-label"><span class="cc-balance-emoji">💵</span><span>Balance</span></div><div class="cc-balance-value">' + design.balance + '</div></div></div>' +
+          '<div class="gc-info">' + badgeHTML + '<div class="gc-name">' + design.name + '</div><div class="gc-tagline">' + design.tagline + '</div><div class="gc-material">' + design.material + '</div><div class="gc-meta"><span class="gc-rating">' + renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span></span><span class="gc-price">' + design.price + '</span></div>' +
+          '<div class="stock-progress"><div class="stock-progress-top"><span class="stock-left" data-id="' + design.id + '">🔥 Only ' + stockLeft + ' left in stock!</span><span class="stock-percent" data-id="' + design.id + '">' + soldPercent + '% Sold</span></div><div class="stock-bar-track"><div class="stock-bar-fill" data-id="' + design.id + '" style="width:0%" data-fill="' + soldPercent + '"></div></div></div>' +
+          '<div class="gc-actions"><button class="gc-buy-btn" data-action="buy">Buy Now</button></div></div>';
         grid.appendChild(card);
       });
       attachGridEvents();
-      setTimeout(function() {
-        document.querySelectorAll('.stock-bar-fill').forEach(function(bar) { bar.style.width = bar.getAttribute('data-fill') + '%'; });
-      }, 300);
+      setTimeout(function() { document.querySelectorAll('.stock-bar-fill').forEach(function(bar) { bar.style.width = bar.getAttribute('data-fill') + '%'; }); }, 300);
     }
 
-    function loadHelpfulStates() {
-      try {
-        var raw = localStorage.getItem('cardseller_helpful_states');
-        if (raw) { var p = JSON.parse(raw); if (p && typeof p === 'object') return p; }
-      } catch(e) {}
-      return {};
-    }
-    function saveHelpfulStates(obj) {
-      try { localStorage.setItem('cardseller_helpful_states', JSON.stringify(obj)); } catch(e) {}
-    }
-    function getReviewKey(review) {
-      return (review.name || '') + '|' + (review.purchased || '') + '|' + (review.rating || '');
-    }
+    function loadHelpfulStates() { try { var raw = localStorage.getItem('cardseller_helpful_states'); if (raw) { var p = JSON.parse(raw); if (p && typeof p === 'object') return p; } } catch(e) {} return {}; }
+    function saveHelpfulStates(obj) { try { localStorage.setItem('cardseller_helpful_states', JSON.stringify(obj)); } catch(e) {} }
+    function getReviewKey(review) { return (review.name || '') + '|' + (review.purchased || '') + '|' + (review.rating || '') + '|' + (review.submittedAt || ''); }
 
     function createReviewCardHTML(review, index) {
       var starsHTML = '';
@@ -1811,41 +1578,35 @@
       if (review.avatar) {
         var fallback = getInitialsAvatarSVG(review.name, review.isYouTuber);
         var safeFallback = fallback.replace(/"/g, '&quot;');
-        avatarHTML = '<img src="' + review.avatar + '" alt="' + review.name + '" loading="lazy" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
-      } else {
-        avatarHTML = '<img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber) + '" alt="' + review.name + '">';
-      }
-      var nameInner = '<span class="review-name">' + review.name + '</span>';
-      if (review.isYouTuber) {
-        nameInner += '<span class="verified-tick" title="Verified Creator"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#0095F6" d="M12 0.5l2.19 1.99 2.86-.31 1.19 2.62 2.71 1.02-.31 2.86L22.7 11l-2.06 2.32.31 2.86-2.71 1.02-1.19 2.62-2.86-.31L12 21.5l-2.19-1.99-2.86.31-1.19-2.62-2.71-1.02.31-2.86L1.3 11l2.06-2.32-.31-2.86 2.71-1.02 1.19-2.62 2.86.31L12 0.5z"/><path fill="#fff" d="M10.86 14.79l-3.4-3.4 1.5-1.5 1.9 1.9 5.18-5.18 1.5 1.5-6.68 6.68z"/></svg></span>';
-      }
+        avatarHTML = '<img src="' + review.avatar + '" alt="' + escapeHtml(review.name) + '" loading="lazy" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
+      } else { avatarHTML = '<img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber) + '" alt="' + escapeHtml(review.name) + '">'; }
+      var nameInner = '<span class="review-name">' + escapeHtml(review.name) + '</span>';
+      if (review.isYouTuber) { nameInner += '<span class="verified-tick" title="Verified Creator"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#0095F6" d="M12 0.5l2.19 1.99 2.86-.31 1.19 2.62 2.71 1.02-.31 2.86L22.7 11l-2.06 2.32.31 2.86-2.71 1.02-1.19 2.62-2.86-.31L12 21.5l-2.19-1.99-2.86.31-1.19-2.62-2.71-1.02.31-2.86L1.3 11l2.06-2.32-.31-2.86 2.71-1.02 1.19-2.62 2.86.31L12 0.5z"/><path fill="#fff" d="M10.86 14.79l-3.4-3.4 1.5-1.5 1.9 1.9 5.18-5.18 1.5 1.5-6.68 6.68z"/></svg></span>'; }
       var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
       var helpfulDisplay = getReviewHelpful(review, index);
       var moreDisplay = getReviewMore(review, index);
+      var timeDisplay = formatReviewTime(review);
       var html =
         '<div class="review-header"><div class="review-avatar">' + avatarHTML + '</div><div class="review-info"><div class="review-name-row">' + nameInner + '</div></div></div>' +
-        '<div class="review-meta"><span>📍 ' + review.location + '</span><span class="dot">·</span><span>🕐 ' + review.time + '</span></div>' +
-        '<div class="review-purchased">🛍️ Bought <strong>' + review.purchased + '</strong></div>' +
+        '<div class="review-meta"><span>📍 ' + escapeHtml(review.location) + '</span><span class="dot">·</span><span>🕐 ' + escapeHtml(timeDisplay) + '</span></div>' +
+        '<div class="review-purchased">🛍️ Bought <strong>' + escapeHtml(review.purchased) + '</strong></div>' +
         '<div class="review-stars">' + starsHTML + '<span class="rating-num">' + review.rating.toFixed(1) + '</span></div>' +
-        '<div class="review-text">' + review.comment + '</div>' +
+        '<div class="review-text">' + escapeHtml(review.comment) + '</div>' +
         '<div class="review-actions">' +
-          '<button class="review-helpful" type="button" data-review-key="' + getReviewKey(review) + '"><span class="helpful-icon">👍</span> Helpful <span class="helpful-count">' + helpfulDisplay.toLocaleString('en-IN') + '</span></button>' +
+          '<button class="review-helpful" type="button" data-review-key="' + escapeHtml(getReviewKey(review)) + '"><span class="helpful-icon">👍</span> Helpful <span class="helpful-count">' + helpfulDisplay.toLocaleString('en-IN') + '</span></button>' +
           '<button class="review-more-btn" type="button" data-more="' + moreDisplay + '"><span>More</span> <span class="more-count">+' + moreDisplay.toLocaleString('en-IN') + '</span></button>' +
         '</div>';
-      if (review.sellerReply) html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + review.sellerReply + '</div>';
+      if (review.sellerReply) html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + escapeHtml(review.sellerReply) + '</div>';
       return { html: html, cardClass: cardClass };
     }
 
     function renderReviews() {
-      var grid = document.getElementById('reviewsGrid');
-      if (!grid) return;
+      var grid = document.getElementById('reviewsGrid'); if (!grid) return;
       grid.innerHTML = '';
       reviewsData.forEach(function(review, index) {
         var result = createReviewCardHTML(review, index);
-        var card = document.createElement('div');
-        card.className = result.cardClass;
-        card.innerHTML = result.html;
-        grid.appendChild(card);
+        var card = document.createElement('div'); card.className = result.cardClass;
+        card.innerHTML = result.html; grid.appendChild(card);
       });
       attachMoreButtonEvents();
       attachHelpfulButtonEvents();
@@ -1864,22 +1625,16 @@
           e.stopPropagation();
           var design = designs.find(d => d.id === btn.closest('.grid-card').getAttribute('data-id'));
           if (!design) return;
-          currentDesign = design;
-          currentQty = 1;
-          placeOrderDirect();
+          currentDesign = design; currentQty = 1; placeOrderDirect();
         });
       });
     }
 
     function openProductModal(design) {
-      currentDesign = design;
-      currentQty = 1;
-      isFlipped = false;
+      currentDesign = design; currentQty = 1; isFlipped = false;
       var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
-      var wrap = document.getElementById('modalCardWrap');
-      wrap.className = 'modal-card-wrap ' + finishClass;
-      var inner = document.getElementById('modalCardInner');
-      inner.innerHTML = cardFrontHTML(design) + cardBackHTML(design);
+      var wrap = document.getElementById('modalCardWrap'); wrap.className = 'modal-card-wrap ' + finishClass;
+      var inner = document.getElementById('modalCardInner'); inner.innerHTML = cardFrontHTML(design) + cardBackHTML(design);
       wrap.classList.remove('flipped');
       document.getElementById('modalName').textContent = design.name;
       document.getElementById('modalTagline').textContent = design.tagline;
@@ -1900,21 +1655,13 @@
         previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
         previewEl.classList.remove('flipped');
       }
-      var summaryDesignEl = document.getElementById('summaryDesign');
-      if (summaryDesignEl) summaryDesignEl.textContent = currentDesign.name;
-      var summaryQtyEl = document.getElementById('summaryQty');
-      if (summaryQtyEl) summaryQtyEl.textContent = currentQty;
+      var summaryDesignEl = document.getElementById('summaryDesign'); if (summaryDesignEl) summaryDesignEl.textContent = currentDesign.name;
+      var summaryQtyEl = document.getElementById('summaryQty'); if (summaryQtyEl) summaryQtyEl.textContent = currentQty;
       var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0;
       var total = Math.round(priceNum * currentQty);
-      var summaryTotalEl = document.getElementById('summaryTotal');
-      if (summaryTotalEl) summaryTotalEl.textContent = '₹' + total;
-      if (hasProfile()) {
-        document.getElementById('orderName').value = profileData.name || '';
-        document.getElementById('orderPhone').value = profileData.phone || '';
-      } else {
-        document.getElementById('orderName').value = '';
-        document.getElementById('orderPhone').value = '';
-      }
+      var summaryTotalEl = document.getElementById('summaryTotal'); if (summaryTotalEl) summaryTotalEl.textContent = '₹' + total;
+      if (hasProfile()) { document.getElementById('orderName').value = profileData.name || ''; document.getElementById('orderPhone').value = profileData.phone || ''; }
+      else { document.getElementById('orderName').value = ''; document.getElementById('orderPhone').value = ''; }
       document.getElementById('productOverlay').style.display = 'none';
       document.getElementById('orderOverlay').style.display = 'flex';
       document.body.classList.add('modal-open');
@@ -1944,53 +1691,30 @@
     }
 
     function startQrTimer() {
-      clearInterval(qrTimerInterval);
-      qrTimeLeft = 300;
+      clearInterval(qrTimerInterval); qrTimeLeft = 300;
       var timerEl = document.getElementById('qrTimer');
       var qrContainer = document.getElementById('qrContainer');
       var confirmBtn = document.getElementById('confirmPaymentBtn');
       var regenBtn = document.getElementById('regenerateQrBtn');
-      timerEl.textContent = '05:00';
-      qrContainer.classList.remove('expired');
-      confirmBtn.disabled = false;
-      confirmBtn.style.opacity = '1';
-      confirmBtn.style.cursor = 'pointer';
+      timerEl.textContent = '05:00'; qrContainer.classList.remove('expired');
+      confirmBtn.disabled = false; confirmBtn.style.opacity = '1'; confirmBtn.style.cursor = 'pointer';
       regenBtn.style.display = 'none';
       qrTimerInterval = setInterval(function() {
         qrTimeLeft--;
-        if (qrTimeLeft <= 0) {
-          clearInterval(qrTimerInterval);
-          timerEl.textContent = '00:00';
-          qrContainer.classList.add('expired');
-          confirmBtn.disabled = true;
-          confirmBtn.style.opacity = '0.5';
-          confirmBtn.style.cursor = 'not-allowed';
-          regenBtn.style.display = 'flex';
-        } else {
-          var m = Math.floor(qrTimeLeft / 60);
-          var s = qrTimeLeft % 60;
-          timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-        }
+        if (qrTimeLeft <= 0) { clearInterval(qrTimerInterval); timerEl.textContent = '00:00'; qrContainer.classList.add('expired'); confirmBtn.disabled = true; confirmBtn.style.opacity = '0.5'; confirmBtn.style.cursor = 'not-allowed'; regenBtn.style.display = 'flex'; }
+        else { var m = Math.floor(qrTimeLeft / 60); var s = qrTimeLeft % 60; timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
       }, 1000);
     }
 
     function startReservedTimer() {
-      clearInterval(reservedTimerInterval);
-      var timeLeft = 600;
+      clearInterval(reservedTimerInterval); var timeLeft = 600;
       var el = document.getElementById('reservedTimer');
-      el.style.display = 'block';
-      el.classList.remove('warning');
-      el.textContent = '⏳ Reserved for 10:00';
+      el.style.display = 'block'; el.classList.remove('warning'); el.textContent = '⏳ Reserved for 10:00';
       reservedTimerInterval = setInterval(function() {
         timeLeft--;
-        if (timeLeft <= 0) {
-          clearInterval(reservedTimerInterval);
-          el.textContent = '❌ Reservation Expired. Please start again.';
-          el.classList.remove('warning');
-          setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }, 3000);
-        } else {
-          var m = Math.floor(timeLeft / 60);
-          var s = timeLeft % 60;
+        if (timeLeft <= 0) { clearInterval(reservedTimerInterval); el.textContent = '❌ Reservation Expired. Please start again.'; el.classList.remove('warning'); setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }, 3000); }
+        else {
+          var m = Math.floor(timeLeft / 60); var s = timeLeft % 60;
           var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
           if (timeLeft <= 120) { el.classList.add('warning'); el.textContent = '⚠️ Hurry! Reserved for ' + timeStr; }
           else { el.classList.remove('warning'); el.textContent = '⏳ Reserved for ' + timeStr; }
@@ -2008,17 +1732,11 @@
       document.getElementById('paymentOverlay').style.display = 'none';
       document.body.classList.remove('modal-open');
       showToast('Payment confirmed!', 'success');
-
-      /* ISSUE 2 FIX: user ka purchase master stream me add karo */
       recordUserPurchase(currentPendingOrder.designId);
       renderHeroCounters();
       var _ud = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
-      if (_ud) {
-        var _ui = designs.indexOf(_ud);
-        updateStockUI(_ud.id, getCardState(_ud, _ui));
-      }
+      if (_ud) { var _ui = designs.indexOf(_ud); updateStockUI(_ud.id, getCardState(_ud, _ui)); }
       updateTrendingBadge();
-
       showSuccessModal(currentPendingOrder);
       playOrderSound();
       setTimeout(function() { triggerUserOwnNotification(); }, 1500);
@@ -2041,23 +1759,19 @@
       var modal = document.getElementById('successOverlay');
       var detailsContainer = document.getElementById('successOrderDetails');
       var html = '';
-      html += '<span>💳 ' + order.designName + ' × ' + order.qty + ' — ' + order.price + '</span>';
-      html += '<span>🎨 ' + order.material + '</span>';
-      if (order.transactionId) html += '<span>✅ Txn ID: ' + order.transactionId + '</span>';
-      html += '<span>📱 WhatsApp: ' + order.whatsapp + '</span>';
-      detailsContainer.innerHTML = html;
-      detailsContainer.style.display = 'block';
-      modal.style.display = 'flex';
-      spawnConfetti();
+      html += '<span>💳 ' + escapeHtml(order.designName) + ' × ' + order.qty + ' — ' + escapeHtml(order.price) + '</span>';
+      html += '<span>🎨 ' + escapeHtml(order.material) + '</span>';
+      if (order.transactionId) html += '<span>✅ Txn ID: ' + escapeHtml(order.transactionId) + '</span>';
+      html += '<span>📱 WhatsApp: ' + escapeHtml(order.whatsapp) + '</span>';
+      detailsContainer.innerHTML = html; detailsContainer.style.display = 'block';
+      modal.style.display = 'flex'; spawnConfetti();
     }
 
     function spawnConfetti() {
-      var container = document.getElementById('confettiContainer');
-      container.innerHTML = '';
+      var container = document.getElementById('confettiContainer'); container.innerHTML = '';
       var colors = ['#d4af37', '#f5d76e', '#ffcc00', '#b8941f', '#f7e7a1', '#e8c960'];
       for (var i = 0; i < 70; i++) {
-        var piece = document.createElement('div');
-        piece.className = 'confetti-piece';
+        var piece = document.createElement('div'); piece.className = 'confetti-piece';
         piece.style.left = Math.random() * 100 + '%';
         piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
@@ -2134,96 +1848,73 @@
     }
 
     function formatTimeAgo(timestamp) {
-      var diffMins = Math.floor((Date.now() - timestamp) / 60000);
-      if (diffMins < 1) return 'Just now';
-      if (diffMins === 1) return '1 min ago';
-      return diffMins + ' mins ago';
+      var diffMs = Date.now() - timestamp;
+      var diffSec = Math.floor(diffMs / 1000);
+      if (diffSec < 60) return 'Just now';
+      var diffMins = Math.floor(diffSec / 60);
+      if (diffMins < 60) return diffMins + (diffMins === 1 ? ' min ago' : ' mins ago');
+      var diffHours = Math.floor(diffMins / 60);
+      if (diffHours < 24) return diffHours + (diffHours === 1 ? ' hour ago' : ' hours ago');
+      var diffDays = Math.floor(diffHours / 24);
+      if (diffDays < 30) return diffDays + (diffDays === 1 ? ' day ago' : ' days ago');
+      var diffMonths = Math.floor(diffDays / 30);
+      if (diffMonths < 12) return diffMonths + (diffMonths === 1 ? ' month ago' : ' months ago');
+      var diffYears = Math.floor(diffMonths / 12);
+      return diffYears + (diffYears === 1 ? ' year ago' : ' years ago');
     }
 
     function createPulseItemHTML(buyer, design, timestamp) {
       var thumbStyle = getCardThumbStyle(design);
       var timeStr = formatTimeAgo(timestamp);
       var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
-      var cityText = buyer.city ? (' from ' + buyer.city) : '';
+      var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : '';
       var priceShown = buyer.price || design.price;
-      return '<div class="pulse-item" data-timestamp="' + timestamp + '">' +
-        '<div class="pulse-avatar-wrap"><div class="pulse-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div><div class="pulse-check">✓</div></div>' +
-        '<div class="pulse-content"><div class="pulse-text"><strong>' + buyer.name + '</strong>' + cityText + ' just bought <span class="card-name">' + design.name + '</span> for <span style="color:#22c55e; font-weight:800;">' + priceShown + '</span></div>' +
-        '<div class="pulse-meta"><span class="pulse-balance">Balance: ' + design.balance + '</span> &bull; <span class="pulse-time-text">' + timeStr + '</span></div></div>' +
-        '<div class="pulse-card-thumb" style="' + thumbStyle + '"></div></div>';
+      return '<div class="pulse-item" data-timestamp="' + timestamp + '"><div class="pulse-avatar-wrap"><div class="pulse-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div><div class="pulse-check">✓</div></div><div class="pulse-content"><div class="pulse-text"><strong>' + escapeHtml(buyer.name) + '</strong>' + cityText + ' just bought <span class="card-name">' + escapeHtml(design.name) + '</span> for <span style="color:#22c55e; font-weight:800;">' + escapeHtml(priceShown) + '</span></div><div class="pulse-meta"><span class="pulse-balance">Balance: ' + escapeHtml(design.balance) + '</span> &bull; <span class="pulse-time-text">' + escapeHtml(timeStr) + '</span></div></div><div class="pulse-card-thumb" style="' + thumbStyle + '"></div></div>';
     }
 
-    /* PATCH A + ISSUE 4: max 3 notifs + 10s duration */
     function addLiveNotification(buyer, design, timestamp) {
       var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
-      while (existing.length >= 3) {
-        existing[0].remove();
-        existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
-      }
-
+      while (existing.length >= 3) { existing[0].remove(); existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast'); }
       var nameParts = String(buyer.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
       var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
       var timeStr = formatTimeAgo(timestamp);
       var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
-      var cityText = buyer.city ? (' from ' + buyer.city) : '';
+      var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : '';
       var priceShown = buyer.price || design.price;
-      var notif = document.createElement('div');
-      notif.className = 'live-notif';
-      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button>' +
-        '<div class="notif-card-badge">💳 Card Purchased</div>' +
-        '<div class="notif-row"><div class="notif-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div>' +
-        '<div class="notif-content"><strong>' + displayName + cityText + '</strong>bought <span style="color:#f5d76e; font-weight:700;">' + design.name + '</span> for <span style="color:#22c55e; font-weight:800;">' + priceShown + '</span><span class="notif-time">🕐 ' + timeStr + '</span></div></div>';
+      var notif = document.createElement('div'); notif.className = 'live-notif';
+      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">💳 Card Purchased</div><div class="notif-row"><div class="notif-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div><div class="notif-content"><strong>' + escapeHtml(displayName) + cityText + '</strong>bought <span style="color:#f5d76e; font-weight:700;">' + escapeHtml(design.name) + '</span> for <span style="color:#22c55e; font-weight:800;">' + escapeHtml(priceShown) + '</span><span class="notif-time">🕐 ' + escapeHtml(timeStr) + '</span></div></div>';
       notifContainer.appendChild(notif);
-      var closeBtn = notif.querySelector('.notif-close-btn');
-      if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-      setTimeout(function() { notif.remove(); }, 10000);
+      var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
+      setTimeout(function() { notif.remove(); }, 10500);
     }
 
     function showReviewNotification(review) {
       var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
-      while (existing.length >= 3) {
-        existing[0].remove();
-        existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
-      }
-
+      while (existing.length >= 3) { existing[0].remove(); existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast'); }
       var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
       var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
       var stars = '';
       for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
-      var notif = document.createElement('div');
-      notif.className = 'live-notif review-notif';
-      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button>' +
-        '<div class="notif-card-badge">⭐ New Review</div>' +
-        '<div class="notif-row"><div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><img src="' + getInitialsAvatarSVG(review.name, true) + '" alt="' + review.name + '"></div>' +
-        '<div class="notif-content"><strong>' + displayName + ' just left a ' + stars + ' review!</strong>for ' + review.purchased + '<span class="notif-time">🕐 Just now</span></div></div>';
+      var notif = document.createElement('div'); notif.className = 'live-notif review-notif';
+      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">⭐ New Review</div><div class="notif-row"><div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><img src="' + getInitialsAvatarSVG(review.name, true) + '" alt="' + escapeHtml(review.name) + '"></div><div class="notif-content"><strong>' + escapeHtml(displayName) + ' just left a ' + stars + ' review!</strong>for ' + escapeHtml(review.purchased) + '<span class="notif-time">🕐 Just now</span></div></div>';
       notifContainer.appendChild(notif);
-      var closeBtn = notif.querySelector('.notif-close-btn');
-      if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
-      setTimeout(function() { notif.remove(); }, 10000);
+      var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
+      setTimeout(function() { notif.remove(); }, 10500);
     }
 
     function addPulseItem(buyer, design, timestamp) {
-      var list = document.getElementById('pulseList');
-      if (!list) return;
+      var list = document.getElementById('pulseList'); if (!list) return;
       var itemHTML = createPulseItemHTML(buyer, design, timestamp);
       list.insertAdjacentHTML('afterbegin', itemHTML);
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
 
-    /* ============ PURCHASE TICK (master-stream driven, incremental, rolling) ============ */
     var _lastNotifiedMinute = null;
-
     function purchaseTick() {
       var now = Date.now();
       var currentMinute = Math.floor((now - STREAM_REFERENCE_TIME) / 60000);
-
-      if (_lastNotifiedMinute === null) {
-        _lastNotifiedMinute = currentMinute;
-        return;
-      }
+      if (_lastNotifiedMinute === null) { _lastNotifiedMinute = currentMinute; return; }
       if (currentMinute <= _lastNotifiedMinute) return;
-
-      /* Stream ko aaj ke minute tak extend karo — naye events generate honge */
       var stream = extendStreamTo(currentMinute);
       var shownAny = false;
       for (var i = 0; i < stream.events.length; i++) {
@@ -2231,9 +1922,7 @@
         if (ev.isUser) continue;
         if (ev.minute > _lastNotifiedMinute && ev.minute <= currentMinute) {
           var design = null;
-          for (var j = 0; j < designs.length; j++) {
-            if (designs[j].id === ev.designId) { design = designs[j]; break; }
-          }
+          for (var j = 0; j < designs.length; j++) { if (designs[j].id === ev.designId) { design = designs[j]; break; } }
           if (!design) continue;
           var buyer = generatePulseBuyer();
           var timestamp = Date.now();
@@ -2243,13 +1932,9 @@
         }
       }
       _lastNotifiedMinute = currentMinute;
-
       if (shownAny) {
         renderHeroCounters();
-        designs.forEach(function(d, idx) {
-          var state = getCardState(d, idx);
-          updateStockUI(d.id, state);
-        });
+        designs.forEach(function(d, idx) { var state = getCardState(d, idx); updateStockUI(d.id, state); });
         updateTrendingBadge();
       }
     }
@@ -2317,14 +2002,21 @@
     document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.body.classList.remove('modal-open'); } });
     document.getElementById('networkRetryBtn').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); setTimeout(function() { loadMoreBtn.click(); }, 300); });
 
+    /* BUG FIX 5: +1 on load if active */
     function attachHelpfulButtonEvents() {
       var states = loadHelpfulStates();
       document.querySelectorAll('.review-helpful').forEach(function(btn) {
         if (btn.dataset.helpfulAttached === '1') return;
         btn.dataset.helpfulAttached = '1';
         var key = btn.getAttribute('data-review-key');
-        if (key && states[key]) btn.classList.add('active');
-
+        if (key && states[key]) {
+          btn.classList.add('active');
+          var countEl = btn.querySelector('.helpful-count');
+          if (countEl) {
+            var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
+            countEl.textContent = (currentCount + 1).toLocaleString('en-IN');
+          }
+        }
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
           e.preventDefault();
@@ -2354,10 +2046,8 @@
 
     document.getElementById('writeReviewBtn').addEventListener('click', function() {
       document.getElementById('reviewForm').reset();
-      selectedRating = 0;
-      selectedPhotoDataURL = null;
-      resetPhotoUpload();
-      updateStarDisplay();
+      selectedRating = 0; selectedPhotoDataURL = null;
+      resetPhotoUpload(); updateStarDisplay();
       document.getElementById('starLabel').textContent = 'Select rating';
       document.getElementById('reviewOverlay').style.display = 'flex';
       document.body.classList.add('modal-open');
@@ -2378,12 +2068,9 @@
       var reader = new FileReader();
       reader.onload = function(ev) {
         selectedPhotoDataURL = ev.target.result;
-        photoUploadArea.classList.add('has-photo');
-        photoPlusIcon.style.display = 'none';
-        var oldImg = photoUploadArea.querySelector('img');
-        if (oldImg) oldImg.remove();
-        var img = document.createElement('img');
-        img.src = selectedPhotoDataURL;
+        photoUploadArea.classList.add('has-photo'); photoPlusIcon.style.display = 'none';
+        var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove();
+        var img = document.createElement('img'); img.src = selectedPhotoDataURL;
         photoUploadArea.insertBefore(img, photoUploadArea.firstChild);
       };
       reader.readAsDataURL(file);
@@ -2394,8 +2081,7 @@
       selectedPhotoDataURL = null;
       photoUploadArea.classList.remove('has-photo');
       photoPlusIcon.style.display = '';
-      var oldImg = photoUploadArea.querySelector('img');
-      if (oldImg) oldImg.remove();
+      var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove();
     }
 
     document.querySelectorAll('.star-btn').forEach(function(btn) {
@@ -2417,6 +2103,7 @@
       document.getElementById('starLabel').textContent = labels[selectedRating] || 'Select rating';
     }
 
+    /* BUG FIX 1+3+8: Save user review with timestamp + compressed photo */
     document.getElementById('reviewForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var name = document.getElementById('reviewName').value.trim();
@@ -2428,26 +2115,40 @@
         else alert('Please fill all the fields.', {title: 'Missing Information', icon: '📝'});
         return;
       }
-      var newReview = { name: name, avatar: selectedPhotoDataURL || null, location: location, time: 'Just now', purchased: card, comment: text, rating: selectedRating, helpful: 0, moreCount: 0, isUserSubmitted: true };
-      reviewsData.push(newReview);
-      var grid = document.getElementById('reviewsGrid');
-      var result = createReviewCardHTML(newReview, reviewsData.length - 1);
-      var card_el = document.createElement('div');
-      card_el.className = result.cardClass;
-      card_el.innerHTML = result.html;
-      grid.appendChild(card_el);
-      attachMoreButtonEvents();
-      attachHelpfulButtonEvents();
-      document.getElementById('reviewOverlay').style.display = 'none';
-      document.body.classList.remove('modal-open');
-      showToast('Thank you! Your review has been posted.', 'success');
-      showReviewNotification(newReview);
-      document.getElementById('reviewForm').reset();
-      selectedRating = 0;
-      selectedPhotoDataURL = null;
-      resetPhotoUpload();
-      updateStarDisplay();
-      setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
+
+      var finalizeAndSave = function(finalPhotoDataURL) {
+        var newReview = {
+          name: name, avatar: finalPhotoDataURL || null, location: location,
+          time: 'Just now', purchased: card, comment: text, rating: selectedRating,
+          helpful: 0, moreCount: 0, isUserSubmitted: true, submittedAt: Date.now()
+        };
+        reviewsData.push(newReview);
+        var grid = document.getElementById('reviewsGrid');
+        var result = createReviewCardHTML(newReview, reviewsData.length - 1);
+        var card_el = document.createElement('div');
+        card_el.className = result.cardClass;
+        card_el.innerHTML = result.html;
+        grid.appendChild(card_el);
+        attachMoreButtonEvents();
+        attachHelpfulButtonEvents();
+        saveUserReviewsToStorage();
+        var newCount = getReviewsCount();
+        loadMoreText.textContent = 'More + ' + newCount.toLocaleString('en-IN') + ' Reviews';
+        document.getElementById('reviewOverlay').style.display = 'none';
+        document.body.classList.remove('modal-open');
+        showToast('Thank you! Your review has been posted.', 'success');
+        showReviewNotification(newReview);
+        document.getElementById('reviewForm').reset();
+        selectedRating = 0; selectedPhotoDataURL = null;
+        resetPhotoUpload(); updateStarDisplay();
+        setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
+      };
+
+      if (selectedPhotoDataURL) {
+        compressImage(selectedPhotoDataURL, 200, 0.7, function(compressed) { finalizeAndSave(compressed); });
+      } else {
+        finalizeAndSave(null);
+      }
     });
 
     document.getElementById('moreStatsClose').addEventListener('click', function() { document.getElementById('moreStatsOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); });
@@ -2498,7 +2199,6 @@
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars();
       initViewerCounts();
-      /* Stream ko current time tak initialize karo (rolling 3-hour window) */
       var initMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
       extendStreamTo(initMinute);
       renderGrid();
