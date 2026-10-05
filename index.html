@@ -897,21 +897,11 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v5 - FINAL)
-       All 8 bugs fixed:
-       1. User reviews persist in localStorage
-       2. "More reviews" count includes user reviews
-       3. User review time is dynamic (formatTimeAgo)
-       4. getReviewMore respects isUserSubmitted
-       5. Helpful button +1 on load when active
-       6. Notification exit animation completes (10.4s CSS, 10.5s JS)
-       7. XSS protection via escapeHtml
-       8. Photo compression before localStorage save
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v6 FINAL)
+       FIX: Buyer names deterministic (same time = same name on all devices)
        ========================================================= */
-
     var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
     var STREAM_REFERENCE_TIME = Date.now() - (3 * 60 * 60 * 1000);
-
     function pseudoRandom(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
     function getHoursSinceReference() { return Math.max(0, Math.floor((Date.now() - REFERENCE_TIME) / 3600000)); }
     function getTimeMultiplierForHour(hourOfDay) {
@@ -921,30 +911,14 @@
       if (hourOfDay < 23) return 1.3;
       return 0.5;
     }
-
-    /* ============ BUG FIX 7: XSS PROTECTION ============ */
-    function escapeHtml(str) {
-      if (str === null || str === undefined) return '';
-      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
-
-    /* ============ MASTER STREAM SYSTEM ============ */
+    function escapeHtml(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
     var BASE_PURCHASES_PER_HOUR = 60;
     var _streamState = null;
-
-    function getStreamState() {
-      if (_streamState === null) {
-        _streamState = { events: [], totalPurchases: 0, cardCounts: {}, lastMinute: -1 };
-        designs.forEach(function(d) { _streamState.cardCounts[d.id] = 0; });
-      }
-      return _streamState;
-    }
-
+    function getStreamState() { if (_streamState === null) { _streamState = { events: [], totalPurchases: 0, cardCounts: {}, lastMinute: -1 }; designs.forEach(function(d) { _streamState.cardCounts[d.id] = 0; }); } return _streamState; }
     function extendStreamTo(targetMinute) {
       var stream = getStreamState();
       if (targetMinute <= stream.lastMinute) return stream;
-      var totalWeight = 0;
-      designs.forEach(function(d) { totalWeight += d.viewerWeight; });
+      var totalWeight = 0; designs.forEach(function(d) { totalWeight += d.viewerWeight; });
       for (var m = stream.lastMinute + 1; m <= targetMinute; m++) {
         var minuteTime = STREAM_REFERENCE_TIME + m * 60000;
         var hourOfDay = new Date(minuteTime).getHours();
@@ -954,262 +928,110 @@
         if (r1 < expectedPerMinute) {
           var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
           var chosen = designs[0]; var acc = 0;
-          for (var i = 0; i < designs.length; i++) {
-            acc += designs[i].viewerWeight;
-            if (cardRoll < acc) { chosen = designs[i]; break; }
-          }
-          stream.events.push({ minute: m, time: minuteTime, designId: chosen.id });
-          stream.totalPurchases++;
-          stream.cardCounts[chosen.id]++;
+          for (var i = 0; i < designs.length; i++) { acc += designs[i].viewerWeight; if (cardRoll < acc) { chosen = designs[i]; break; } }
+          stream.events.push({ minute: m, time: minuteTime, designId: chosen.id }); stream.totalPurchases++; stream.cardCounts[chosen.id]++;
         }
       }
-      stream.lastMinute = targetMinute;
-      return stream;
+      stream.lastMinute = targetMinute; return stream;
     }
-
     function getTotalPurchases() { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.totalPurchases; }
     function getCardPurchases(design) { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.cardCounts[design.id] || 0; }
-
     function recordUserPurchase(designId) {
-      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
-      extendStreamTo(nowMinute);
+      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute);
       var stream = _streamState;
-      stream.events.push({ minute: nowMinute, time: Date.now(), designId: designId, isUser: true });
-      stream.totalPurchases++;
-      stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
+      stream.events.push({ minute: nowMinute, time: Date.now(), designId: designId, isUser: true }); stream.totalPurchases++; stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
     }
-
     function getReviewHelpful(review, idx) {
       if (review.isUserSubmitted) return review.helpful || 0;
-      var hours = getHoursSinceReference();
-      var base = review.helpful || 0;
-      var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131;
-      var dailyRate;
-      if (review.isYouTuber) {
-        var popFactor = 1.0;
-        if (review.name === 'Total Gaming') popFactor = 1.8;
-        else if (review.name === 'Tonde Gamer') popFactor = 1.5;
-        else if (review.name === 'Gyan Gaming') popFactor = 1.3;
-        else if (review.name === 'Lokesh Gamer') popFactor = 1.1;
-        dailyRate = (6 + pseudoRandom(seed) * 10) * popFactor;
-      } else { dailyRate = 0.15 + pseudoRandom(seed) * 0.35; }
-      var hourlyRate = dailyRate / 24;
-      var total = 0;
-      for (var h = 0; h < hours; h++) {
-        var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getHours();
-        var mult = getTimeMultiplierForHour(hourOfDay);
-        var r = pseudoRandom(seed + h * 9773);
-        if (r < hourlyRate * mult) total += 1;
-      }
+      var hours = getHoursSinceReference(); var base = review.helpful || 0; var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131; var dailyRate;
+      if (review.isYouTuber) { var popFactor = 1.0; if (review.name === 'Total Gaming') popFactor = 1.8; else if (review.name === 'Tonde Gamer') popFactor = 1.5; else if (review.name === 'Gyan Gaming') popFactor = 1.3; else if (review.name === 'Lokesh Gamer') popFactor = 1.1; dailyRate = (6 + pseudoRandom(seed) * 10) * popFactor; } else { dailyRate = 0.15 + pseudoRandom(seed) * 0.35; }
+      var hourlyRate = dailyRate / 24; var total = 0;
+      for (var h = 0; h < hours; h++) { var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getHours(); var mult = getTimeMultiplierForHour(hourOfDay); var r = pseudoRandom(seed + h * 9773); if (r < hourlyRate * mult) total += 1; }
       return base + total;
     }
-
-    /* BUG FIX 4: isUserSubmitted check */
     function getReviewMore(review, idx) {
       if (review.isUserSubmitted) return review.moreCount || 0;
-      var hours = getHoursSinceReference();
-      var base = review.moreCount || 0;
-      var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131 + 17;
-      var dailyRate;
-      if (review.isYouTuber) {
-        var popFactor = 1.0;
-        if (review.name === 'Total Gaming') popFactor = 1.8;
-        else if (review.name === 'Tonde Gamer') popFactor = 1.5;
-        else if (review.name === 'Gyan Gaming') popFactor = 1.3;
-        else if (review.name === 'Lokesh Gamer') popFactor = 1.1;
-        dailyRate = (20 + pseudoRandom(seed) * 30) * popFactor;
-      } else { dailyRate = 1 + pseudoRandom(seed) * 3; }
-      var hourlyRate = dailyRate / 24;
-      var total = 0;
-      for (var h = 0; h < hours; h++) {
-        var r = pseudoRandom(seed + h * 9773);
-        if (r < hourlyRate) total += 1;
-      }
+      var hours = getHoursSinceReference(); var base = review.moreCount || 0; var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131 + 17; var dailyRate;
+      if (review.isYouTuber) { var popFactor = 1.0; if (review.name === 'Total Gaming') popFactor = 1.8; else if (review.name === 'Tonde Gamer') popFactor = 1.5; else if (review.name === 'Gyan Gaming') popFactor = 1.3; else if (review.name === 'Lokesh Gamer') popFactor = 1.1; dailyRate = (20 + pseudoRandom(seed) * 30) * popFactor; } else { dailyRate = 1 + pseudoRandom(seed) * 3; }
+      var hourlyRate = dailyRate / 24; var total = 0;
+      for (var h = 0; h < hours; h++) { var r = pseudoRandom(seed + h * 9773); if (r < hourlyRate) total += 1; }
       return base + total;
     }
-
-    /* BUG FIX 2: include user reviews in count */
     function getReviewsCount() {
-      var base = 7865;
-      var hours = getHoursSinceReference();
-      var total = 0;
-      for (var h = 0; h < hours; h++) {
-        var r = pseudoRandom(5555 + h * 9773);
-        if (r < 2.5 / 24) total += 1;
-      }
+      var base = 7865; var hours = getHoursSinceReference(); var total = 0;
+      for (var h = 0; h < hours; h++) { var r = pseudoRandom(5555 + h * 9773); if (r < 2.5 / 24) total += 1; }
       var userCount = reviewsData.filter(function(r) { return r.isUserSubmitted; }).length;
       return base + total + userCount;
     }
-
-    /* ============ BUG FIX 1+3: User review persistence ============ */
     var USER_REVIEWS_KEY = 'cardseller_user_reviews';
-
-    function loadUserReviewsFromStorage() {
-      try {
-        var raw = localStorage.getItem(USER_REVIEWS_KEY);
-        if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) return arr; }
-      } catch(e) { console.warn('Failed to load user reviews:', e); }
-      return [];
-    }
-
-    function saveUserReviewsToStorage() {
-      try {
-        var userOnly = reviewsData.filter(function(r) { return r.isUserSubmitted; });
-        var limited = userOnly.slice(-20);
-        localStorage.setItem(USER_REVIEWS_KEY, JSON.stringify(limited));
-      } catch(e) { console.warn('Failed to save user reviews:', e); }
-    }
-
-    /* ============ BUG FIX 8: Photo compression ============ */
+    function loadUserReviewsFromStorage() { try { var raw = localStorage.getItem(USER_REVIEWS_KEY); if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) return arr; } } catch(e) {} return []; }
+    function saveUserReviewsToStorage() { try { var userOnly = reviewsData.filter(function(r) { return r.isUserSubmitted; }); var limited = userOnly.slice(-20); localStorage.setItem(USER_REVIEWS_KEY, JSON.stringify(limited)); } catch(e) {} }
     function compressImage(dataURL, maxSize, quality, callback) {
       var img = new Image();
-      img.onload = function() {
-        try {
-          var canvas = document.createElement('canvas');
-          var ratio = Math.min(maxSize / img.width, maxSize / img.height, 1);
-          canvas.width = Math.round(img.width * ratio);
-          canvas.height = Math.round(img.height * ratio);
-          var ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          var compressed = canvas.toDataURL('image/jpeg', quality || 0.7);
-          callback(compressed);
-        } catch(e) { console.warn('Image compress failed:', e); callback(dataURL); }
-      };
-      img.onerror = function() { callback(dataURL); };
-      img.src = dataURL;
+      img.onload = function() { try { var canvas = document.createElement('canvas'); var ratio = Math.min(maxSize / img.width, maxSize / img.height, 1); canvas.width = Math.round(img.width * ratio); canvas.height = Math.round(img.height * ratio); var ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height); var compressed = canvas.toDataURL('image/jpeg', quality || 0.7); callback(compressed); } catch(e) { callback(dataURL); } };
+      img.onerror = function() { callback(dataURL); }; img.src = dataURL;
     }
-
-    /* ============ BUG FIX 3: format review time ============ */
-    function formatReviewTime(review) {
-      if (review.isUserSubmitted && review.submittedAt) return formatTimeAgo(review.submittedAt);
-      return review.time || 'Just now';
-    }
-
-    /* ============ PROFILE ============ */
+    function formatReviewTime(review) { if (review.isUserSubmitted && review.submittedAt) return formatTimeAgo(review.submittedAt); return review.time || 'Just now'; }
     var PROFILE_KEY = 'cardseller_profile';
     var profileData = { name: '', city: '', phone: '', photo: null };
     var profilePhotoDataURL = null;
-
-    function loadProfileFromStorage() {
-      try {
-        var raw = localStorage.getItem(PROFILE_KEY);
-        if (raw) {
-          var parsed = JSON.parse(raw);
-          if (parsed && typeof parsed === 'object') {
-            profileData = { name: parsed.name || '', city: parsed.city || '', phone: parsed.phone || '', photo: parsed.photo || null };
-            return true;
-          }
-        }
-      } catch(e) {}
-      return false;
-    }
+    function loadProfileFromStorage() { try { var raw = localStorage.getItem(PROFILE_KEY); if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') { profileData = { name: parsed.name || '', city: parsed.city || '', phone: parsed.phone || '', photo: parsed.photo || null }; return true; } } } catch(e) {} return false; }
     function saveProfileToStorage() { try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData)); } catch(e) {} }
     function hasProfile() { return !!(profileData.name || profileData.phone); }
-
     function updateProfileButtonUI() {
-      var btn = document.getElementById('profileBtn'); var label = document.getElementById('profileBtnLabel');
-      if (!btn) return;
-      if (hasProfile()) {
-        btn.classList.add('saved');
-        if (label) { var fn = profileData.name ? profileData.name.trim().split(/\s+/)[0] : ''; label.textContent = fn ? ('Hi, ' + fn) : 'Saved'; }
-      } else { btn.classList.remove('saved'); if (label) label.textContent = 'Profile'; }
+      var btn = document.getElementById('profileBtn'); var label = document.getElementById('profileBtnLabel'); if (!btn) return;
+      if (hasProfile()) { btn.classList.add('saved'); if (label) { var fn = profileData.name ? profileData.name.trim().split(/\s+/)[0] : ''; label.textContent = fn ? ('Hi, ' + fn) : 'Saved'; } }
+      else { btn.classList.remove('saved'); if (label) label.textContent = 'Profile'; }
     }
-
     function resetProfilePhotoUpload() {
-      profilePhotoDataURL = null;
-      var area = document.getElementById('profilePhotoUploadArea');
-      var plusIcon = document.getElementById('profilePhotoPlusIcon');
-      if (area) { area.classList.remove('has-photo'); var oldImg = area.querySelector('img'); if (oldImg) oldImg.remove(); }
-      if (plusIcon) plusIcon.style.display = '';
+      profilePhotoDataURL = null; var area = document.getElementById('profilePhotoUploadArea'); var plusIcon = document.getElementById('profilePhotoPlusIcon');
+      if (area) { area.classList.remove('has-photo'); var oldImg = area.querySelector('img'); if (oldImg) oldImg.remove(); } if (plusIcon) plusIcon.style.display = '';
     }
-
     function showProfileSavedView() {
-      document.getElementById('profileSavedView').style.display = 'block';
-      document.getElementById('profileFormView').style.display = 'none';
-      document.getElementById('profileModalTitle').textContent = 'Your Profile';
-      document.getElementById('profileModalSubtitle').textContent = 'Order faster with saved details';
-      var avatarImg = document.getElementById('profileSavedAvatar');
-      avatarImg.src = profileData.photo ? profileData.photo : getInitialsAvatarSVG(profileData.name || 'User', false);
+      document.getElementById('profileSavedView').style.display = 'block'; document.getElementById('profileFormView').style.display = 'none';
+      document.getElementById('profileModalTitle').textContent = 'Your Profile'; document.getElementById('profileModalSubtitle').textContent = 'Order faster with saved details';
+      var avatarImg = document.getElementById('profileSavedAvatar'); avatarImg.src = profileData.photo ? profileData.photo : getInitialsAvatarSVG(profileData.name || 'User', false);
       document.getElementById('profileSavedName').textContent = profileData.name || '—';
-      var phoneRow = document.getElementById('profileSavedPhoneRow');
-      if (profileData.phone) { phoneRow.style.display = 'flex'; document.getElementById('profileSavedPhone').textContent = profileData.phone; } else phoneRow.style.display = 'none';
-      var cityRow = document.getElementById('profileSavedCityRow');
-      if (profileData.city) { cityRow.style.display = 'flex'; document.getElementById('profileSavedCity').textContent = profileData.city; } else cityRow.style.display = 'none';
+      var phoneRow = document.getElementById('profileSavedPhoneRow'); if (profileData.phone) { phoneRow.style.display = 'flex'; document.getElementById('profileSavedPhone').textContent = profileData.phone; } else phoneRow.style.display = 'none';
+      var cityRow = document.getElementById('profileSavedCityRow'); if (profileData.city) { cityRow.style.display = 'flex'; document.getElementById('profileSavedCity').textContent = profileData.city; } else cityRow.style.display = 'none';
     }
-
     function showProfileFormView() {
-      document.getElementById('profileSavedView').style.display = 'none';
-      document.getElementById('profileFormView').style.display = 'block';
-      document.getElementById('profileModalTitle').textContent = 'Save Your Details';
-      document.getElementById('profileModalSubtitle').textContent = 'Save once, order faster next time';
-      document.getElementById('profileName').value = profileData.name || '';
-      document.getElementById('profileCity').value = profileData.city || '';
-      document.getElementById('profilePhone').value = profileData.phone || '';
+      document.getElementById('profileSavedView').style.display = 'none'; document.getElementById('profileFormView').style.display = 'block';
+      document.getElementById('profileModalTitle').textContent = 'Save Your Details'; document.getElementById('profileModalSubtitle').textContent = 'Save once, order faster next time';
+      document.getElementById('profileName').value = profileData.name || ''; document.getElementById('profileCity').value = profileData.city || ''; document.getElementById('profilePhone').value = profileData.phone || '';
       resetProfilePhotoUpload();
-      if (profileData.photo) {
-        profilePhotoDataURL = profileData.photo;
-        var area = document.getElementById('profilePhotoUploadArea');
-        var plusIcon = document.getElementById('profilePhotoPlusIcon');
-        if (area) {
-          area.classList.add('has-photo');
-          if (plusIcon) plusIcon.style.display = 'none';
-          var img = document.createElement('img'); img.src = profileData.photo;
-          area.insertBefore(img, area.firstChild);
-        }
-      }
+      if (profileData.photo) { profilePhotoDataURL = profileData.photo; var area = document.getElementById('profilePhotoUploadArea'); var plusIcon = document.getElementById('profilePhotoPlusIcon'); if (area) { area.classList.add('has-photo'); if (plusIcon) plusIcon.style.display = 'none'; var img = document.createElement('img'); img.src = profileData.photo; area.insertBefore(img, area.firstChild); } }
       document.getElementById('profileClearBtn').style.display = hasProfile() ? 'block' : 'none';
     }
-
-    function openProfileModal() {
-      var overlay = document.getElementById('profileOverlay');
-      if (hasProfile()) showProfileSavedView(); else showProfileFormView();
-      overlay.style.display = 'flex'; document.body.classList.add('modal-open');
-    }
+    function openProfileModal() { var overlay = document.getElementById('profileOverlay'); if (hasProfile()) showProfileSavedView(); else showProfileFormView(); overlay.style.display = 'flex'; document.body.classList.add('modal-open'); }
     function closeProfileModal() { document.getElementById('profileOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }
-
     document.getElementById('profileBtn').addEventListener('click', openProfileModal);
     document.getElementById('profileClose').addEventListener('click', closeProfileModal);
     document.getElementById('profileOverlay').addEventListener('click', function(e) { if (e.target === this) closeProfileModal(); });
     document.getElementById('profileEditBtn').addEventListener('click', showProfileFormView);
     document.getElementById('profileClearBtn2').addEventListener('click', function() { document.getElementById('profileClearBtn').click(); });
-
     (function() {
-      var area = document.getElementById('profilePhotoUploadArea');
-      var input = document.getElementById('profilePhotoInput');
-      var plusIcon = document.getElementById('profilePhotoPlusIcon');
-      var removeBtn = document.getElementById('profilePhotoRemoveBtn');
+      var area = document.getElementById('profilePhotoUploadArea'); var input = document.getElementById('profilePhotoInput'); var plusIcon = document.getElementById('profilePhotoPlusIcon'); var removeBtn = document.getElementById('profilePhotoRemoveBtn');
       area.addEventListener('click', function(e) { if (e.target === removeBtn || e.target.closest('.photo-remove-btn')) return; input.click(); });
       input.addEventListener('change', function(e) {
-        var file = e.target.files && e.target.files[0];
-        if (!file) return;
+        var file = e.target.files && e.target.files[0]; if (!file) return;
         if (!file.type.startsWith('image/')) { alert('Please select an image file.', {title: 'Invalid File Type', icon: '📷'}); return; }
         if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.', {title: 'File Too Large', icon: '📦'}); return; }
         var reader = new FileReader();
-        reader.onload = function(ev) {
-          profilePhotoDataURL = ev.target.result;
-          area.classList.add('has-photo'); plusIcon.style.display = 'none';
-          var oldImg = area.querySelector('img'); if (oldImg) oldImg.remove();
-          var img = document.createElement('img'); img.src = profilePhotoDataURL;
-          area.insertBefore(img, area.firstChild);
-        };
+        reader.onload = function(ev) { profilePhotoDataURL = ev.target.result; area.classList.add('has-photo'); plusIcon.style.display = 'none'; var oldImg = area.querySelector('img'); if (oldImg) oldImg.remove(); var img = document.createElement('img'); img.src = profilePhotoDataURL; area.insertBefore(img, area.firstChild); };
         reader.readAsDataURL(file);
       });
       removeBtn.addEventListener('click', function(e) { e.stopPropagation(); resetProfilePhotoUpload(); input.value = ''; });
     })();
-
     document.getElementById('profileForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      var name = document.getElementById('profileName').value.trim();
-      var city = document.getElementById('profileCity').value.trim();
-      var phone = document.getElementById('profilePhone').value.trim();
+      var name = document.getElementById('profileName').value.trim(); var city = document.getElementById('profileCity').value.trim(); var phone = document.getElementById('profilePhone').value.trim();
       var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
       if (!nameRegex.test(name)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
       if (!isValidIndianPhone(phone)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
       profileData.name = name; profileData.city = city; profileData.phone = phone; profileData.photo = profilePhotoDataURL || null;
-      saveProfileToStorage(); updateProfileButtonUI(); showProfileSavedView();
-      showToast('Profile saved!', 'success');
+      saveProfileToStorage(); updateProfileButtonUI(); showProfileSavedView(); showToast('Profile saved!', 'success');
     });
-
     document.getElementById('profileClearBtn').addEventListener('click', function() {
       var overlay = document.createElement('div'); overlay.className = 'custom-alert-overlay';
       var box = document.createElement('div'); box.className = 'custom-alert-box';
@@ -1219,21 +1041,15 @@
       document.getElementById('clearConfirm').addEventListener('click', function() {
         profileData = { name: '', city: '', phone: '', photo: null }; profilePhotoDataURL = null;
         try { localStorage.removeItem(PROFILE_KEY); } catch(e) {}
-        resetProfilePhotoUpload();
-        document.getElementById('profileName').value = ''; document.getElementById('profileCity').value = ''; document.getElementById('profilePhone').value = '';
-        document.getElementById('profileClearBtn').style.display = 'none';
-        updateProfileButtonUI(); overlay.remove();
-        document.getElementById('profileSavedView').style.display = 'none';
-        document.getElementById('profileFormView').style.display = 'block';
-        document.getElementById('profileModalTitle').textContent = 'Save Your Details';
-        document.getElementById('profileModalSubtitle').textContent = 'Save once, order faster next time';
+        resetProfilePhotoUpload(); document.getElementById('profileName').value = ''; document.getElementById('profileCity').value = ''; document.getElementById('profilePhone').value = '';
+        document.getElementById('profileClearBtn').style.display = 'none'; updateProfileButtonUI(); overlay.remove();
+        document.getElementById('profileSavedView').style.display = 'none'; document.getElementById('profileFormView').style.display = 'block';
+        document.getElementById('profileModalTitle').textContent = 'Save Your Details'; document.getElementById('profileModalSubtitle').textContent = 'Save once, order faster next time';
         showToast('Profile cleared', 'info');
       });
       overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
     });
     document.getElementById('profilePhone').addEventListener('input', function() { this.value = this.value.replace(/[^\d+\-\s]/g, ''); });
-
-    /* ============ HELPERS ============ */
     function isValidIndianPhone(input) {
       var digits = String(input || '').replace(/\D/g, '');
       if (digits.length === 13 && digits.indexOf('91') === 0) digits = digits.slice(2);
@@ -1241,53 +1057,34 @@
       else if (digits.length === 11 && digits.charAt(0) === '0') digits = digits.slice(1);
       return /^[6789]\d{9}$/.test(digits);
     }
-
     function getInitialsAvatarSVG(name, isYouTuber) {
       var initials = String(name || 'U').split(' ').map(function(n){return (n[0]||'');}).join('').substring(0,2).toUpperCase();
-      var bg = isYouTuber ? '#0f1729' : '#1a1a1a';
-      var color = isYouTuber ? '#1d9bf0' : '#f5d76e';
+      var bg = isYouTuber ? '#0f1729' : '#1a1a1a'; var color = isYouTuber ? '#1d9bf0' : '#f5d76e';
       var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="' + bg + '"/><text x="50" y="50" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="800" fill="' + color + '" text-anchor="middle" dominant-baseline="central">' + initials + '</text></svg>';
       return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
     }
-
     var avatarCache = { list: [], loaded: false };
     function loadUsedAvatars() { try { var raw = localStorage.getItem('cardseller_used_avatars'); if (raw) { var parsed = JSON.parse(raw); if (Array.isArray(parsed)) return parsed; } } catch(e) {} return []; }
     function saveUsedAvatars(arr) { try { localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr)); } catch(e) {} }
     function loadNameAvatarMap() { try { var raw = localStorage.getItem('cardseller_name_avatar_map'); if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') return parsed; } } catch(e) {} return {}; }
     function saveNameAvatarMap(map) { try { localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map)); } catch(e) {} }
-
+    /* DETERMINISTIC FIX: uses name hash instead of Math.random() */
     function assignAvatarToName(name) {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
-      var key = String(name || 'anonymous').trim();
-      var map = loadNameAvatarMap();
+      var key = String(name || 'anonymous').trim(); var map = loadNameAvatarMap();
       if (map[key]) return map[key];
-      var used = loadUsedAvatars();
-      var available = [];
+      var used = loadUsedAvatars(); var available = [];
       for (var i = 0; i < avatarCache.list.length; i++) { if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]); }
       if (available.length === 0) { used = []; available = avatarCache.list.slice(); }
-      var idx = Math.floor(Math.random() * available.length);
-      var chosen = available[idx];
-      used.push(chosen); saveUsedAvatars(used);
-      map[key] = chosen;
+      var nameSeed = 0; for (var k = 0; k < key.length; k++) { nameSeed += key.charCodeAt(k); }
+      var idx = Math.floor(pseudoRandom(nameSeed) * available.length);
+      var chosen = available[idx]; used.push(chosen); saveUsedAvatars(used); map[key] = chosen;
       var mapKeys = Object.keys(map);
-      if (mapKeys.length > 1000) {
-        var newMap = {}; var recent = mapKeys.slice(-500);
-        for (var k = 0; k < recent.length; k++) newMap[recent[k]] = map[recent[k]];
-        map = newMap;
-      }
-      saveNameAvatarMap(map);
-      return chosen;
+      if (mapKeys.length > 1000) { var newMap = {}; var recent = mapKeys.slice(-500); for (var j = 0; j < recent.length; j++) newMap[recent[j]] = map[recent[j]]; map = newMap; }
+      saveNameAvatarMap(map); return chosen;
     }
-
     function fetchAvatarsFromGitHub(callback) {
-      try {
-        var cached = localStorage.getItem('cardseller_avatars_list');
-        var cachedTime = localStorage.getItem('cardseller_avatars_time');
-        if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 86400000) {
-          var parsed = JSON.parse(cached);
-          if (Array.isArray(parsed) && parsed.length > 0) { avatarCache.list = parsed; avatarCache.loaded = true; if (callback) callback(parsed); return; }
-        }
-      } catch(e) {}
+      try { var cached = localStorage.getItem('cardseller_avatars_list'); var cachedTime = localStorage.getItem('cardseller_avatars_time'); if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 86400000) { var parsed = JSON.parse(cached); if (Array.isArray(parsed) && parsed.length > 0) { avatarCache.list = parsed; avatarCache.loaded = true; if (callback) callback(parsed); return; } } } catch(e) {}
       fetch('https://api.github.com/repos/forviews1st-hub/Credit-Dizain/contents/avatars')
         .then(function(r) { return r.json(); })
         .then(function(data) {
@@ -1307,8 +1104,7 @@
       for (var i = 0; i < avatarCache.list.length; i++) { if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]); }
       if (available.length === 0) { used = []; saveUsedAvatars(used); available = avatarCache.list.slice(); }
       var idx = Math.floor(Math.random() * available.length);
-      var chosen = available[idx]; used.push(chosen); saveUsedAvatars(used);
-      return chosen;
+      var chosen = available[idx]; used.push(chosen); saveUsedAvatars(used); return chosen;
     }
     function buildAvatarImg(avatarUrl, name, isYouTuber) {
       var fallback = getInitialsAvatarSVG(name, isYouTuber);
@@ -1316,14 +1112,11 @@
       var safeFallback = fallback.replace(/"/g, '&quot;');
       return '<img src="' + avatarUrl + '" alt="' + escapeHtml(name) + '" loading="eager" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
     }
-
     (function() {
       function createOverlay() { var o = document.createElement('div'); o.className = 'custom-alert-overlay'; document.body.appendChild(o); return o; }
       window.alert = function(message, options) {
-        options = options || {};
-        var title = options.title || 'Message'; var icon = options.icon || '✨';
-        var overlay = createOverlay(); var box = document.createElement('div');
-        box.className = 'custom-alert-box';
+        options = options || {}; var title = options.title || 'Message'; var icon = options.icon || '✨';
+        var overlay = createOverlay(); var box = document.createElement('div'); box.className = 'custom-alert-box';
         box.innerHTML = '<div class="custom-alert-icon">' + icon + '</div><div class="custom-alert-title">' + escapeHtml(title) + '</div><div class="custom-alert-message">' + escapeHtml(message) + '</div><button class="custom-alert-btn" id="caOk">OK</button>';
         overlay.appendChild(box);
         document.getElementById('caOk').addEventListener('click', function() { overlay.remove(); });
@@ -1331,8 +1124,7 @@
       };
       window.confirm = function(message) {
         return new Promise(function(resolve) {
-          var overlay = createOverlay(); var box = document.createElement('div');
-          box.className = 'custom-alert-box';
+          var overlay = createOverlay(); var box = document.createElement('div'); box.className = 'custom-alert-box';
           box.innerHTML = '<div class="custom-alert-icon">❓</div><div class="custom-alert-title">Confirm</div><div class="custom-alert-message">' + escapeHtml(message) + '</div><button class="custom-alert-btn" id="ccOk">OK</button><button class="custom-alert-btn secondary" id="ccCancel">Cancel</button>';
           overlay.appendChild(box);
           document.getElementById('ccOk').addEventListener('click', function() { overlay.remove(); resolve(true); });
@@ -1341,8 +1133,6 @@
         });
       };
     })();
-
-    /* ============ DESIGNS ============ */
     var designs = [
       { id: 'amex_gold', brand: 'amex', name: 'American Express Gold', bank: 'AMERICAN EXPRESS', bankInitial: 'AE', cardType: 'GOLD', debitCredit: 'CREDIT', cardNumber: '3759 876543 21001', expiry: '06 / 28', cvv: '8172', balance: '1 - 1.5 lakh', defaultName: 'C F FROST', tagline: 'The world in your wallet', gradient: 'linear-gradient(135deg, #d4af37 0%, #f5d76e 25%, #e8c960 45%, #b8941f 75%, #d4af37 100%)', accent: '#d4af37', price: '₹899', rating: '⭐ 5.0', material: 'Gold Foil', stockPercent: 92, viewerWeight: 1.6 },
       { id: 'd6', brand: 'visa', name: 'Metro Signature', bank: 'METRO CITY BANK', bankInitial: 'M', cardType: 'SIGNATURE', debitCredit: 'CREDIT', cardNumber: '4733 4455 1234 6789', expiry: '05 / 28', cvv: '394', balance: '45k - 55k', defaultName: 'ROBERT JONES', tagline: 'Urban prestige, delivered', gradient: 'linear-gradient(135deg, #12002e 0%, #3d0066 25%, #ff006e 65%, #00d4ff 100%)', accent: '#ff006e', price: '₹199', rating: '⭐ 4.9', material: 'Holographic', stockPercent: 78, viewerWeight: 0.8 },
@@ -1350,7 +1140,6 @@
       { id: 'd3', brand: 'visa', name: 'Pacific Infinite', bank: 'PACIFIC COAST', bankInitial: 'P', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4916 2347 8901 3456', expiry: '03 / 28', cvv: '265', balance: '70k - 88k', defaultName: 'DAVID WILLIAMS', tagline: 'Ocean-inspired elegance', gradient: 'linear-gradient(135deg, #002b4d 0%, #005c99 50%, #00b4d8 100%)', accent: '#00b4d8', price: '₹425', rating: '⭐ 4.8', material: 'Gloss Finish', stockPercent: 71, viewerWeight: 0.9 },
       { id: 'd7', brand: 'visa', name: 'Liberty Reserve', bank: 'LIBERTY NATIONAL', bankInitial: 'L', cardType: 'INFINITE', debitCredit: 'CREDIT', cardNumber: '4488 1122 3344 7890', expiry: '02 / 29', cvv: '867', balance: '80k - 95k', defaultName: 'WILLIAM GARCIA', tagline: 'Freedom in every swipe', gradient: 'linear-gradient(135deg, #022c22 0%, #064e3b 50%, #10b981 100%)', accent: '#10b981', price: '₹547', rating: '⭐ 4.7', material: 'Matte Finish', stockPercent: 88, viewerWeight: 1.3 }
     ];
-
     var reviewsData = [
       { name: 'Total Gaming', avatar: 'reviews/youtuber1.png', location: 'Gujarat', time: '9 days ago', purchased: 'All 5 Cards', comment: 'Hello Gamers! Ajju Bhai here. Maine is seller se card liya hai, aur sach batau toh balance ekdum wahi mila jo bola gaya tha. Maine us balance se apne Free Fire ka top-up kiya aur sab kuch easily ho gaya. Agar aap log bhi high balance card dhundh rahe ho, toh bina tension ke try karo. Trust me, genuine hai! 🔥', rating: 4.5, helpful: 1247, moreCount: 8932, isYouTuber: true },
       { name: 'Tonde Gamer', avatar: 'reviews/youtuber2.png', location: 'Nepal', time: '17 days ago', purchased: 'All 5 Cards', comment: 'Tonde Bhai here! Yaar, maine pehle socha tha ki online card lena risky hoga, lekin is seller ka card ekdum genuine nikla. Balance bhi high mila aur maine turant apne account mein diamond top-up kar liye. Ab main apne saare subscribers ko bhi bata raha hoon. Try karo, maza aayega! 😎', rating: 4.9, helpful: 2156, moreCount: 12480, isYouTuber: true },
@@ -1364,13 +1153,7 @@
       { name: 'Ramu Gamer', avatar: 'reviews/review5.png', location: 'Hyderabad', time: '2 months ago', purchased: 'Liberty Reserve', comment: 'Mene carding se Free Fire mein diamond top-up kiya aur successful bhi ho gaya. Card ka balance sab kuch easily kar deta hai. Paisa vasool 🔥🔥', rating: 5, helpful: 67, moreCount: 2135 },
       { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
-
-    /* BUG FIX 1: Load user reviews from storage */
-    (function loadUserReviews() {
-      var saved = loadUserReviewsFromStorage();
-      saved.forEach(function(r) { if (r && r.isUserSubmitted) reviewsData.push(r); });
-    })();
-
+    (function loadUserReviews() { var saved = loadUserReviewsFromStorage(); saved.forEach(function(r) { if (r && r.isUserSubmitted) reviewsData.push(r); }); })();
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
@@ -1382,33 +1165,23 @@
       var currentSold = initialSold + (initialStock - currentStock);
       return { stock: currentStock, sold: currentSold, total: totalInventory };
     }
-
     function updateTrendingBadge() {
       var trendingId = ''; var lowestStock = Infinity;
       designs.forEach(function(d, idx) { var s = getCardState(d, idx); if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; } });
       document.querySelectorAll('.grid-card').forEach(function(card) {
-        var id = card.getAttribute('data-id');
-        var existing = card.querySelector('.trending-badge');
-        if (id === trendingId) {
-          if (!existing) { var info = card.querySelector('.gc-info'); if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>'); }
-        } else if (existing) { existing.remove(); }
+        var id = card.getAttribute('data-id'); var existing = card.querySelector('.trending-badge');
+        if (id === trendingId) { if (!existing) { var info = card.querySelector('.gc-info'); if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>'); } } else if (existing) { existing.remove(); }
       });
     }
-
     var currentDesign = null; var currentQty = 1; var currentOrderDesign = null; var currentPendingOrder = null;
     var isFlipped = false; var selectedRating = 0; var selectedPhotoDataURL = null;
     var qrTimerInterval = null; var qrTimeLeft = 300; var reservedTimerInterval = null;
-
     function showToast(message, type) {
-      var container = document.getElementById('toastContainer');
-      var toast = document.createElement('div');
-      toast.className = 'toast ' + (type || '');
+      var container = document.getElementById('toastContainer'); var toast = document.createElement('div'); toast.className = 'toast ' + (type || '');
       var icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
       toast.innerHTML = '<span class="toast-icon">' + icon + '</span><span>' + escapeHtml(message) + '</span>';
-      container.appendChild(toast);
-      setTimeout(function() { toast.remove(); }, 3000);
+      container.appendChild(toast); setTimeout(function() { toast.remove(); }, 3000);
     }
-
     function getFinishClass(material) {
       var m = (material || '').toLowerCase();
       if (m.indexOf('matte') !== -1) return 'finish-matte';
@@ -1419,38 +1192,24 @@
       if (m.indexOf('carbon') !== -1) return 'finish-carbon';
       return '';
     }
-
-    function renderStars(ratingStr) {
-      var num = parseFloat((ratingStr || '').replace(/[^0-9.]/g, '')) || 0;
-      var percent = (num / 5) * 100;
-      return '<span class="rating-stars"><span class="stars-bg">★★★★★</span><span class="stars-fill" style="width:' + percent + '%">★★★★★</span></span>';
-    }
-    function maskCardNumber(cardNumber) {
-      var digits = (cardNumber || '').replace(/\D/g, '');
-      if (digits.length === 15) return '•••• ••••• ' + digits.slice(-5);
-      return '•••• •••• •••• ' + digits.slice(-4);
-    }
+    function renderStars(ratingStr) { var num = parseFloat((ratingStr || '').replace(/[^0-9.]/g, '')) || 0; var percent = (num / 5) * 100; return '<span class="rating-stars"><span class="stars-bg">★★★★★</span><span class="stars-fill" style="width:' + percent + '%">★★★★★</span></span>'; }
+    function maskCardNumber(cardNumber) { var digits = (cardNumber || '').replace(/\D/g, ''); if (digits.length === 15) return '•••• ••••• ' + digits.slice(-5); return '•••• •••• •••• ' + digits.slice(-4); }
     function holoDoveSVG() { return '<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M6 23 Q12 14 20 16 Q23 11 29 13 Q27 18 33 18 Q30 26 22 27 Q14 28 6 23 Z" fill="#fff" opacity="0.95"/><circle cx="22" cy="17" r="0.7" fill="#000"/></svg>'; }
     function amexFrontHTML(design, holderName) { return '<div class="cc-face cc-front cc-amex-gold"><img src="amex-gold.png" alt="American Express Gold" onload="this.classList.add(\'loaded\')" onerror="this.classList.add(\'loaded\')"></div>'; }
     function amexBackHTML(design) { return '<div class="cc-face cc-back cc-amex-gold-back"><div class="amex-back-frame"></div><div class="amex-back-content"><div class="amex-back-top-strip"><span>U.S. Patent Nos. 6,339,688; 6,509,582</span><span class="amex-top-right">AMEX</span></div><div class="amex-back-magstripe"></div><div class="amex-back-sig-labels"><span>AUTHORIZED SIGNATURE</span><span>NOT VALID UNLESS SIGNED</span></div><div class="amex-back-sig-area"><div class="amex-back-sig-strip"></div><div class="amex-back-cvv-box"><div class="amex-back-cvv-num">' + design.cvv + '</div><div class="amex-back-cvv-label">CVV2</div></div></div><div class="amex-back-cs-row"><div class="amex-back-cs-info"><div>americanexpress.com</div></div><div class="amex-back-nontransferable">NOT TRANSFERABLE</div></div><div class="amex-back-bottom"><div class="amex-back-logo"><span class="amex-logo-line1">AMERICAN</span><span class="amex-logo-line2">EXPRESS</span></div><div class="amex-back-legal">This card is issued by American Express Banking Corp. © 2023.</div></div></div></div>'; }
-
     function visaFrontHTML(design, holderName) {
       return '<div class="cc-face cc-front" style="background:' + design.gradient + '"><div class="cc-glow" style="background: radial-gradient(circle at 78% 18%, ' + design.accent + '55, transparent 62%)"></div><div class="cc-sheen"></div><div class="cc-tier-wm">' + design.cardType + '</div><div class="cc-top"><div class="cc-bank-row"><div class="cc-bank-icon">' + design.bankInitial + '</div><div class="cc-bank-info"><div class="cc-bank">' + design.bank + '</div><div class="cc-bank-type">' + design.cardType + ' · ' + design.debitCredit + '</div></div></div><div class="cc-contactless"><div class="cc-contactless-icon"></div></div></div><div class="cc-chip"></div><div class="cc-number">' + maskCardNumber(design.cardNumber) + '</div><div class="cc-bottom"><div class="cc-holder"><div class="cc-label">CARD HOLDER</div><div class="cc-value">' + holderName + '</div></div><div class="cc-valid"><div class="cc-label">VALID<br/>THRU</div><div class="cc-value">' + design.expiry + '</div></div><div class="cc-brand"><div class="cc-holo-sticker">' + holoDoveSVG() + '</div><div class="cc-visa">VISA</div></div></div></div>';
     }
-
     function cardFrontHTML(design) { return design.brand === 'amex' ? amexFrontHTML(design, design.defaultName) : visaFrontHTML(design, design.defaultName); }
     function cardBackHTML(design) {
       if (design.brand === 'amex') return amexBackHTML(design);
       return '<div class="cc-face cc-back" style="background:' + design.gradient + '"><div class="cc-glow" style="background: radial-gradient(circle at 20% 80%, ' + design.accent + '44, transparent 62%)"></div><div class="cc-stripe"></div><div class="cc-back-content"><div class="cc-sig-row"><div class="cc-sig-strip"><span class="cc-sig-strip-text">Authorized Signature</span></div><div class="cc-cvv">' + design.cvv + '</div></div></div></div>';
     }
-
     var viewerState = {};
     function initViewerCounts() {
       designs.forEach(function(d) {
-        var seed = 6001 + d.id.charCodeAt(0) * 131;
-        var hours = getHoursSinceReference();
-        var hourOfDay = new Date().getHours();
-        var mult = getTimeMultiplierForHour(hourOfDay);
+        var seed = 6001 + d.id.charCodeAt(0) * 131; var hours = getHoursSinceReference();
+        var hourOfDay = new Date().getHours(); var mult = getTimeMultiplierForHour(hourOfDay);
         var base = Math.round((450 + pseudoRandom(seed) * 250) * d.viewerWeight * mult);
         base += Math.floor(pseudoRandom(seed + Math.floor(hours / 3)) * 100);
         viewerState[d.id] = { base: base, current: base };
@@ -1468,70 +1227,44 @@
       });
     }
     setInterval(fluctuateViewers, 5000);
-
     function getNextMidnight() { var now = new Date(); return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0).getTime(); }
-    function formatCountdown(ms) {
-      if (ms < 0) ms = 0;
-      var totalSec = Math.floor(ms / 1000);
-      var h = Math.floor(totalSec / 3600); var m = Math.floor((totalSec % 3600) / 60); var s = totalSec % 60;
-      function pad(n) { return n < 10 ? '0' + n : '' + n; }
-      return pad(h) + ':' + pad(m) + ':' + pad(s);
-    }
+    function formatCountdown(ms) { if (ms < 0) ms = 0; var totalSec = Math.floor(ms / 1000); var h = Math.floor(totalSec / 3600); var m = Math.floor((totalSec % 3600) / 60); var s = totalSec % 60; function pad(n) { return n < 10 ? '0' + n : '' + n; } return pad(h) + ':' + pad(m) + ':' + pad(s); }
     var activeCountdowns = [];
     function initCountdowns() { activeCountdowns = []; designs.forEach(function(d) { activeCountdowns.push({ id: d.id, end: getNextMidnight() }); }); }
     function updateCountdowns() {
       var now = Date.now(); var midnight = getNextMidnight();
       activeCountdowns.forEach(function(item) {
         if (item.end < now) item.end = midnight;
-        var el = document.querySelector('.countdown-strip[data-design-id="' + item.id + '"] .cd-time');
-        if (!el) return;
+        var el = document.querySelector('.countdown-strip[data-design-id="' + item.id + '"] .cd-time'); if (!el) return;
         var remaining = item.end - now; el.textContent = formatCountdown(remaining);
-        var strip = el.closest('.countdown-strip');
-        if (strip) { if (remaining < 30 * 60000) strip.classList.add('expiring'); else strip.classList.remove('expiring'); }
+        var strip = el.closest('.countdown-strip'); if (strip) { if (remaining < 30 * 60000) strip.classList.add('expiring'); else strip.classList.remove('expiring'); }
       });
     }
     setInterval(updateCountdowns, 1000);
-
     function renderHeroCounters() {
-      var sold = 12548 + getTotalPurchases();
-      var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
+      var sold = 12548 + getTotalPurchases(); var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
       var soldEl = document.getElementById('heroSoldCount'); if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
       var buyersEl = document.getElementById('heroBuyersCount'); if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
       var tbEl = document.getElementById('trustedByCount'); if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
       var whyEl = document.getElementById('whyTrustBuyers'); if (whyEl) whyEl.textContent = buyers.toLocaleString('en-IN') + '+';
     }
-
     function updateStockUI(designId, state) {
-      var stockLeftEl = document.querySelector('.stock-left[data-id="' + designId + '"]');
-      if (stockLeftEl) stockLeftEl.textContent = '🔥 Only ' + state.stock + ' left in stock!';
-      var percentEl = document.querySelector('.stock-percent[data-id="' + designId + '"]');
-      if (percentEl) { var p = Math.round((state.sold / state.total) * 100); percentEl.textContent = p + '% Sold'; }
-      var barEl = document.querySelector('.stock-bar-fill[data-id="' + designId + '"]');
-      if (barEl) { var p2 = Math.round((state.sold / state.total) * 100); barEl.style.width = p2 + '%'; }
+      var stockLeftEl = document.querySelector('.stock-left[data-id="' + designId + '"]'); if (stockLeftEl) stockLeftEl.textContent = '🔥 Only ' + state.stock + ' left in stock!';
+      var percentEl = document.querySelector('.stock-percent[data-id="' + designId + '"]'); if (percentEl) { var p = Math.round((state.sold / state.total) * 100); percentEl.textContent = p + '% Sold'; }
+      var barEl = document.querySelector('.stock-bar-fill[data-id="' + designId + '"]'); if (barEl) { var p2 = Math.round((state.sold / state.total) * 100); barEl.style.width = p2 + '%'; }
     }
-
     function renderTrustedByRow() {
-      var avatarsEl = document.getElementById('trustedByAvatars'); if (!avatarsEl) return;
-      avatarsEl.innerHTML = '';
-      for (var i = 0; i < 5; i++) {
-        var avatar = getRandomAvatarUrl();
-        var div = document.createElement('div'); div.className = 'trusted-by-avatar';
-        div.innerHTML = buildAvatarImg(avatar, String.fromCharCode(65 + i), false);
-        avatarsEl.appendChild(div);
-      }
+      var avatarsEl = document.getElementById('trustedByAvatars'); if (!avatarsEl) return; avatarsEl.innerHTML = '';
+      for (var i = 0; i < 5; i++) { var avatar = getRandomAvatarUrl(); var div = document.createElement('div'); div.className = 'trusted-by-avatar'; div.innerHTML = buildAvatarImg(avatar, String.fromCharCode(65 + i), false); avatarsEl.appendChild(div); }
     }
-
     function initWelcomeBack() {
       try {
         var VISITS_KEY = 'cardseller_visits'; var LAST_VISIT_KEY = 'cardseller_last_visit';
-        var today = new Date().toDateString();
-        var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0');
-        var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
+        var today = new Date().toDateString(); var visits = parseInt(localStorage.getItem(VISITS_KEY) || '0'); var lastVisit = localStorage.getItem(LAST_VISIT_KEY);
         if (lastVisit !== today) { visits += 1; localStorage.setItem(VISITS_KEY, visits.toString()); localStorage.setItem(LAST_VISIT_KEY, today); }
         setTimeout(function() {
           var container = document.getElementById('liveNotifContainer'); if (!container) return;
-          var notif = document.createElement('div'); notif.className = 'welcome-back-toast';
-          var sub;
+          var notif = document.createElement('div'); notif.className = 'welcome-back-toast'; var sub;
           if (visits === 1) sub = 'Welcome to our store! Explore premium cards today.';
           else if (visits === 2) sub = 'This is your 2nd visit. Thanks for coming back!';
           else sub = 'You have visited us ' + visits + ' times. We appreciate your loyalty!';
@@ -1542,14 +1275,12 @@
         }, 3000);
       } catch(e) {}
     }
-
     function renderGrid() {
       var grid = document.getElementById('productGrid'); grid.innerHTML = '';
       var trendingId = ''; var lowestStock = Infinity;
       designs.forEach(function(d, idx) { var s = getCardState(d, idx); if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; } });
       designs.forEach(function(design, idx) {
-        var state = getCardState(design, idx);
-        var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
+        var state = getCardState(design, idx); var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
         var stockLeft = state.stock; var soldPercent = Math.round((state.sold / state.total) * 100);
         var viewerBase = viewerState[design.id] ? viewerState[design.id].current : 50;
         var card = document.createElement('div'); card.className = 'grid-card'; card.setAttribute('data-id', design.id);
@@ -1566,26 +1297,18 @@
       attachGridEvents();
       setTimeout(function() { document.querySelectorAll('.stock-bar-fill').forEach(function(bar) { bar.style.width = bar.getAttribute('data-fill') + '%'; }); }, 300);
     }
-
     function loadHelpfulStates() { try { var raw = localStorage.getItem('cardseller_helpful_states'); if (raw) { var p = JSON.parse(raw); if (p && typeof p === 'object') return p; } } catch(e) {} return {}; }
     function saveHelpfulStates(obj) { try { localStorage.setItem('cardseller_helpful_states', JSON.stringify(obj)); } catch(e) {} }
     function getReviewKey(review) { return (review.name || '') + '|' + (review.purchased || '') + '|' + (review.rating || '') + '|' + (review.submittedAt || ''); }
-
     function createReviewCardHTML(review, index) {
-      var starsHTML = '';
-      for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
+      var starsHTML = ''; for (var i = 0; i < 5; i++) starsHTML += (i < Math.round(review.rating)) ? '★' : '☆';
       var avatarHTML;
-      if (review.avatar) {
-        var fallback = getInitialsAvatarSVG(review.name, review.isYouTuber);
-        var safeFallback = fallback.replace(/"/g, '&quot;');
-        avatarHTML = '<img src="' + review.avatar + '" alt="' + escapeHtml(review.name) + '" loading="lazy" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">';
-      } else { avatarHTML = '<img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber) + '" alt="' + escapeHtml(review.name) + '">'; }
+      if (review.avatar) { var fallback = getInitialsAvatarSVG(review.name, review.isYouTuber); var safeFallback = fallback.replace(/"/g, '&quot;'); avatarHTML = '<img src="' + review.avatar + '" alt="' + escapeHtml(review.name) + '" loading="lazy" data-fallback="' + safeFallback + '" onerror="this.onerror=null; this.src=this.getAttribute(\'data-fallback\');">'; }
+      else { avatarHTML = '<img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber) + '" alt="' + escapeHtml(review.name) + '">'; }
       var nameInner = '<span class="review-name">' + escapeHtml(review.name) + '</span>';
       if (review.isYouTuber) { nameInner += '<span class="verified-tick" title="Verified Creator"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#0095F6" d="M12 0.5l2.19 1.99 2.86-.31 1.19 2.62 2.71 1.02-.31 2.86L22.7 11l-2.06 2.32.31 2.86-2.71 1.02-1.19 2.62-2.86-.31L12 21.5l-2.19-1.99-2.86.31-1.19-2.62-2.71-1.02.31-2.86L1.3 11l2.06-2.32-.31-2.86 2.71-1.02 1.19-2.62 2.86.31L12 0.5z"/><path fill="#fff" d="M10.86 14.79l-3.4-3.4 1.5-1.5 1.9 1.9 5.18-5.18 1.5 1.5-6.68 6.68z"/></svg></span>'; }
       var cardClass = review.isYouTuber ? 'review-card youtuber-card' : 'review-card';
-      var helpfulDisplay = getReviewHelpful(review, index);
-      var moreDisplay = getReviewMore(review, index);
-      var timeDisplay = formatReviewTime(review);
+      var helpfulDisplay = getReviewHelpful(review, index); var moreDisplay = getReviewMore(review, index); var timeDisplay = formatReviewTime(review);
       var html =
         '<div class="review-header"><div class="review-avatar">' + avatarHTML + '</div><div class="review-info"><div class="review-name-row">' + nameInner + '</div></div></div>' +
         '<div class="review-meta"><span>📍 ' + escapeHtml(review.location) + '</span><span class="dot">·</span><span>🕐 ' + escapeHtml(timeDisplay) + '</span></div>' +
@@ -1599,205 +1322,106 @@
       if (review.sellerReply) html += '<div class="review-seller-reply"><strong>SELLER REPLY</strong>' + escapeHtml(review.sellerReply) + '</div>';
       return { html: html, cardClass: cardClass };
     }
-
     function renderReviews() {
-      var grid = document.getElementById('reviewsGrid'); if (!grid) return;
-      grid.innerHTML = '';
-      reviewsData.forEach(function(review, index) {
-        var result = createReviewCardHTML(review, index);
-        var card = document.createElement('div'); card.className = result.cardClass;
-        card.innerHTML = result.html; grid.appendChild(card);
-      });
-      attachMoreButtonEvents();
-      attachHelpfulButtonEvents();
+      var grid = document.getElementById('reviewsGrid'); if (!grid) return; grid.innerHTML = '';
+      reviewsData.forEach(function(review, index) { var result = createReviewCardHTML(review, index); var card = document.createElement('div'); card.className = result.cardClass; card.innerHTML = result.html; grid.appendChild(card); });
+      attachMoreButtonEvents(); attachHelpfulButtonEvents();
     }
-
     function attachGridEvents() {
       document.querySelectorAll('.grid-card').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-          if (e.target.closest('.gc-buy-btn')) return;
-          var design = designs.find(d => d.id === card.getAttribute('data-id'));
-          if (design) openProductModal(design);
-        });
+        card.addEventListener('click', function(e) { if (e.target.closest('.gc-buy-btn')) return; var design = designs.find(d => d.id === card.getAttribute('data-id')); if (design) openProductModal(design); });
       });
       document.querySelectorAll('.gc-buy-btn').forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var design = designs.find(d => d.id === btn.closest('.grid-card').getAttribute('data-id'));
-          if (!design) return;
-          currentDesign = design; currentQty = 1; placeOrderDirect();
-        });
+        btn.addEventListener('click', function(e) { e.stopPropagation(); var design = designs.find(d => d.id === btn.closest('.grid-card').getAttribute('data-id')); if (!design) return; currentDesign = design; currentQty = 1; placeOrderDirect(); });
       });
     }
-
     function openProductModal(design) {
       currentDesign = design; currentQty = 1; isFlipped = false;
       var finishClass = design.brand === 'amex' ? '' : getFinishClass(design.material);
       var wrap = document.getElementById('modalCardWrap'); wrap.className = 'modal-card-wrap ' + finishClass;
       var inner = document.getElementById('modalCardInner'); inner.innerHTML = cardFrontHTML(design) + cardBackHTML(design);
-      wrap.classList.remove('flipped');
-      document.getElementById('modalName').textContent = design.name;
-      document.getElementById('modalTagline').textContent = design.tagline;
-      document.getElementById('modalPrice').textContent = design.price;
+      wrap.classList.remove('flipped'); document.getElementById('modalName').textContent = design.name; document.getElementById('modalTagline').textContent = design.tagline; document.getElementById('modalPrice').textContent = design.price;
       document.getElementById('modalRating').innerHTML = renderStars(design.rating) + '<span>' + design.rating.replace('⭐ ', '') + '</span>';
-      document.getElementById('qtyValue').textContent = '1';
-      document.getElementById('productOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
+      document.getElementById('qtyValue').textContent = '1'; document.getElementById('productOverlay').style.display = 'flex'; document.body.classList.add('modal-open');
     }
-
     function placeOrderDirect() {
       if (!currentDesign) return;
       currentOrderDesign = { name: currentDesign.name, price: currentDesign.price, qty: currentQty, material: currentDesign.material, id: currentDesign.id };
       var previewEl = document.getElementById('miniCardPreview');
-      if (previewEl) {
-        var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material);
-        previewEl.className = 'mini-card-preview compact ' + finishClass;
-        previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>';
-        previewEl.classList.remove('flipped');
-      }
+      if (previewEl) { var finishClass = currentDesign.brand === 'amex' ? '' : getFinishClass(currentDesign.material); previewEl.className = 'mini-card-preview compact ' + finishClass; previewEl.innerHTML = '<div class="mini-card-inner">' + cardFrontHTML(currentDesign) + cardBackHTML(currentDesign) + '</div>'; previewEl.classList.remove('flipped'); }
       var summaryDesignEl = document.getElementById('summaryDesign'); if (summaryDesignEl) summaryDesignEl.textContent = currentDesign.name;
       var summaryQtyEl = document.getElementById('summaryQty'); if (summaryQtyEl) summaryQtyEl.textContent = currentQty;
-      var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0;
-      var total = Math.round(priceNum * currentQty);
+      var priceNum = parseFloat(currentDesign.price.replace(/[^0-9.]/g, '')) || 0; var total = Math.round(priceNum * currentQty);
       var summaryTotalEl = document.getElementById('summaryTotal'); if (summaryTotalEl) summaryTotalEl.textContent = '₹' + total;
       if (hasProfile()) { document.getElementById('orderName').value = profileData.name || ''; document.getElementById('orderPhone').value = profileData.phone || ''; }
       else { document.getElementById('orderName').value = ''; document.getElementById('orderPhone').value = ''; }
-      document.getElementById('productOverlay').style.display = 'none';
-      document.getElementById('orderOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
-      startReservedTimer();
+      document.getElementById('productOverlay').style.display = 'none'; document.getElementById('orderOverlay').style.display = 'flex'; document.body.classList.add('modal-open'); startReservedTimer();
     }
-
     function placeOrderFromForm(e) {
       e.preventDefault();
-      var customerName = document.getElementById('orderName').value.trim();
-      var whatsapp = document.getElementById('orderPhone').value.trim();
+      var customerName = document.getElementById('orderName').value.trim(); var whatsapp = document.getElementById('orderPhone').value.trim();
       var nameRegex = /^[a-zA-Z\s.\-']{3,}$/;
       if (!nameRegex.test(customerName)) { alert('Please enter a valid full name (minimum 3 letters).', {title: 'Invalid Name', icon: '⚠️'}); return; }
       if (!isValidIndianPhone(whatsapp)) { alert('Please enter a valid WhatsApp number (10 digits, starting with 6-9).', {title: 'Invalid WhatsApp Number', icon: '📱'}); return; }
-      var finalCity = profileData.city || '';
-      var finalPhoto = profileData.photo || null;
+      var finalCity = profileData.city || ''; var finalPhoto = profileData.photo || null;
       currentPendingOrder = { id: Date.now().toString(), designName: currentOrderDesign.name, price: currentOrderDesign.price, qty: currentOrderDesign.qty, material: currentOrderDesign.material, designId: currentOrderDesign.id, customerName: customerName, city: finalCity, whatsapp: whatsapp, timestamp: Date.now(), photoDataURL: finalPhoto };
-      var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0;
-      var total = Math.round(priceNum * currentOrderDesign.qty);
-      document.getElementById('paymentAmount').textContent = '₹' + total;
-      document.getElementById('paymentDesign').textContent = currentOrderDesign.name + ' × ' + currentOrderDesign.qty;
-      document.getElementById('transactionId').value = '';
-      document.getElementById('orderOverlay').style.display = 'none';
-      document.getElementById('paymentOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
-      startQrTimer();
-      clearInterval(reservedTimerInterval);
+      var priceNum = parseFloat(currentOrderDesign.price.replace(/[^0-9.]/g, '')) || 0; var total = Math.round(priceNum * currentOrderDesign.qty);
+      document.getElementById('paymentAmount').textContent = '₹' + total; document.getElementById('paymentDesign').textContent = currentOrderDesign.name + ' × ' + currentOrderDesign.qty; document.getElementById('transactionId').value = '';
+      document.getElementById('orderOverlay').style.display = 'none'; document.getElementById('paymentOverlay').style.display = 'flex'; document.body.classList.add('modal-open'); startQrTimer(); clearInterval(reservedTimerInterval);
     }
-
     function startQrTimer() {
-      clearInterval(qrTimerInterval); qrTimeLeft = 300;
-      var timerEl = document.getElementById('qrTimer');
-      var qrContainer = document.getElementById('qrContainer');
-      var confirmBtn = document.getElementById('confirmPaymentBtn');
-      var regenBtn = document.getElementById('regenerateQrBtn');
-      timerEl.textContent = '05:00'; qrContainer.classList.remove('expired');
-      confirmBtn.disabled = false; confirmBtn.style.opacity = '1'; confirmBtn.style.cursor = 'pointer';
-      regenBtn.style.display = 'none';
+      clearInterval(qrTimerInterval); qrTimeLeft = 300; var timerEl = document.getElementById('qrTimer'); var qrContainer = document.getElementById('qrContainer'); var confirmBtn = document.getElementById('confirmPaymentBtn'); var regenBtn = document.getElementById('regenerateQrBtn');
+      timerEl.textContent = '05:00'; qrContainer.classList.remove('expired'); confirmBtn.disabled = false; confirmBtn.style.opacity = '1'; confirmBtn.style.cursor = 'pointer'; regenBtn.style.display = 'none';
       qrTimerInterval = setInterval(function() {
         qrTimeLeft--;
         if (qrTimeLeft <= 0) { clearInterval(qrTimerInterval); timerEl.textContent = '00:00'; qrContainer.classList.add('expired'); confirmBtn.disabled = true; confirmBtn.style.opacity = '0.5'; confirmBtn.style.cursor = 'not-allowed'; regenBtn.style.display = 'flex'; }
         else { var m = Math.floor(qrTimeLeft / 60); var s = qrTimeLeft % 60; timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
       }, 1000);
     }
-
     function startReservedTimer() {
-      clearInterval(reservedTimerInterval); var timeLeft = 600;
-      var el = document.getElementById('reservedTimer');
+      clearInterval(reservedTimerInterval); var timeLeft = 600; var el = document.getElementById('reservedTimer');
       el.style.display = 'block'; el.classList.remove('warning'); el.textContent = '⏳ Reserved for 10:00';
       reservedTimerInterval = setInterval(function() {
         timeLeft--;
         if (timeLeft <= 0) { clearInterval(reservedTimerInterval); el.textContent = '❌ Reservation Expired. Please start again.'; el.classList.remove('warning'); setTimeout(function() { document.getElementById('orderOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); }, 3000); }
-        else {
-          var m = Math.floor(timeLeft / 60); var s = timeLeft % 60;
-          var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-          if (timeLeft <= 120) { el.classList.add('warning'); el.textContent = '⚠️ Hurry! Reserved for ' + timeStr; }
-          else { el.classList.remove('warning'); el.textContent = '⏳ Reserved for ' + timeStr; }
-        }
+        else { var m = Math.floor(timeLeft / 60); var s = timeLeft % 60; var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; if (timeLeft <= 120) { el.classList.add('warning'); el.textContent = '⚠️ Hurry! Reserved for ' + timeStr; } else { el.classList.remove('warning'); el.textContent = '⏳ Reserved for ' + timeStr; } }
       }, 1000);
     }
-
     function confirmPayment() {
       if (qrTimeLeft <= 0) { alert('QR Code expired. Please generate a new QR or close and try again.', {title: 'QR Expired', icon: '⏳'}); return; }
-      var txnId = document.getElementById('transactionId').value.trim();
-      var txnRegex = /^[A-Z0-9]{8,22}$/;
+      var txnId = document.getElementById('transactionId').value.trim(); var txnRegex = /^[A-Z0-9]{8,22}$/;
       if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. It should be 8-22 alphanumeric characters.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
-      currentPendingOrder.transactionId = txnId;
-      clearInterval(qrTimerInterval);
-      document.getElementById('paymentOverlay').style.display = 'none';
-      document.body.classList.remove('modal-open');
-      showToast('Payment confirmed!', 'success');
-      recordUserPurchase(currentPendingOrder.designId);
-      renderHeroCounters();
+      currentPendingOrder.transactionId = txnId; clearInterval(qrTimerInterval); document.getElementById('paymentOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); showToast('Payment confirmed!', 'success');
+      recordUserPurchase(currentPendingOrder.designId); renderHeroCounters();
       var _ud = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
       if (_ud) { var _ui = designs.indexOf(_ud); updateStockUI(_ud.id, getCardState(_ud, _ui)); }
-      updateTrendingBadge();
-      showSuccessModal(currentPendingOrder);
-      playOrderSound();
-      setTimeout(function() { triggerUserOwnNotification(); }, 1500);
+      updateTrendingBadge(); showSuccessModal(currentPendingOrder); playOrderSound(); setTimeout(function() { triggerUserOwnNotification(); }, 1500);
     }
-
     function triggerUserOwnNotification() {
       if (!currentPendingOrder) return;
-      var design = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
-      if (!design) design = designs[0];
+      var design = designs.find(function(d) { return d.id === currentPendingOrder.designId; }); if (!design) design = designs[0];
       var avatarUrl = currentPendingOrder.photoDataURL ? currentPendingOrder.photoDataURL : getInitialsAvatarSVG(currentPendingOrder.customerName, false);
-      var city = currentPendingOrder.city;
-      if (!city) { city = cities[Math.floor(Math.random() * cities.length)]; }
+      var city = currentPendingOrder.city; if (!city) { city = cities[Math.floor(Math.random() * cities.length)]; }
       var buyer = { name: currentPendingOrder.customerName, city: city, avatar: avatarUrl, price: currentPendingOrder.price };
-      var timestamp = Date.now();
-      addLiveNotification(buyer, design, timestamp);
-      addPulseItem(buyer, design, timestamp);
+      var timestamp = Date.now(); addLiveNotification(buyer, design, timestamp); addPulseItem(buyer, design, timestamp);
     }
-
     function showSuccessModal(order) {
-      var modal = document.getElementById('successOverlay');
-      var detailsContainer = document.getElementById('successOrderDetails');
-      var html = '';
+      var modal = document.getElementById('successOverlay'); var detailsContainer = document.getElementById('successOrderDetails'); var html = '';
       html += '<span>💳 ' + escapeHtml(order.designName) + ' × ' + order.qty + ' — ' + escapeHtml(order.price) + '</span>';
       html += '<span>🎨 ' + escapeHtml(order.material) + '</span>';
       if (order.transactionId) html += '<span>✅ Txn ID: ' + escapeHtml(order.transactionId) + '</span>';
       html += '<span>📱 WhatsApp: ' + escapeHtml(order.whatsapp) + '</span>';
-      detailsContainer.innerHTML = html; detailsContainer.style.display = 'block';
-      modal.style.display = 'flex'; spawnConfetti();
+      detailsContainer.innerHTML = html; detailsContainer.style.display = 'block'; modal.style.display = 'flex'; spawnConfetti();
     }
-
     function spawnConfetti() {
       var container = document.getElementById('confettiContainer'); container.innerHTML = '';
       var colors = ['#d4af37', '#f5d76e', '#ffcc00', '#b8941f', '#f7e7a1', '#e8c960'];
-      for (var i = 0; i < 70; i++) {
-        var piece = document.createElement('div'); piece.className = 'confetti-piece';
-        piece.style.left = Math.random() * 100 + '%';
-        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
-        piece.style.animationDelay = Math.random() * 0.5 + 's';
-        piece.style.width = (Math.random() * 8 + 6) + 'px';
-        piece.style.height = (Math.random() * 8 + 6) + 'px';
-        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        container.appendChild(piece);
-      }
+      for (var i = 0; i < 70; i++) { var piece = document.createElement('div'); piece.className = 'confetti-piece'; piece.style.left = Math.random() * 100 + '%'; piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; piece.style.animationDuration = (Math.random() * 2 + 2) + 's'; piece.style.animationDelay = Math.random() * 0.5 + 's'; piece.style.width = (Math.random() * 8 + 6) + 'px'; piece.style.height = (Math.random() * 8 + 6) + 'px'; piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0'; container.appendChild(piece); }
       setTimeout(function() { container.innerHTML = ''; }, 4000);
     }
-
     function playOrderSound() {
-      try {
-        var ctx = new (window.AudioContext || window.webkitAudioContext)();
-        var o1 = ctx.createOscillator(); var o2 = ctx.createOscillator(); var g = ctx.createGain();
-        o1.type = 'sine'; o1.frequency.setValueAtTime(880, ctx.currentTime);
-        o2.type = 'sine'; o2.frequency.setValueAtTime(1320, ctx.currentTime + 0.1);
-        g.gain.setValueAtTime(0.08, ctx.currentTime);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2);
-        o1.connect(g); o2.connect(g); g.connect(ctx.destination);
-        o1.start(); o2.start(ctx.currentTime + 0.1);
-        o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2);
-      } catch(e) {}
+      try { var ctx = new (window.AudioContext || window.webkitAudioContext)(); var o1 = ctx.createOscillator(); var o2 = ctx.createOscillator(); var g = ctx.createGain(); o1.type = 'sine'; o1.frequency.setValueAtTime(880, ctx.currentTime); o2.type = 'sine'; o2.frequency.setValueAtTime(1320, ctx.currentTime + 0.1); g.gain.setValueAtTime(0.08, ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.2); o1.connect(g); o2.connect(g); g.connect(ctx.destination); o1.start(); o2.start(ctx.currentTime + 0.1); o1.stop(ctx.currentTime + 1.2); o2.stop(ctx.currentTime + 1.2); } catch(e) {}
     }
-
     document.getElementById('heroCtaBtn').addEventListener('click', function() { document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
     document.getElementById('modalCardWrap').addEventListener('click', function() { this.classList.toggle('flipped'); isFlipped = this.classList.contains('flipped'); });
     document.getElementById('qtyMinus').addEventListener('click', function() { if (currentQty > 1) currentQty--; document.getElementById('qtyValue').textContent = currentQty; });
@@ -1816,147 +1440,84 @@
     document.getElementById('orderPhone').addEventListener('input', function() { this.value = this.value.replace(/[^\d+\-\s]/g, ''); });
     document.getElementById('successCloseBtn').addEventListener('click', function() { document.getElementById('successOverlay').style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; });
     document.getElementById('successOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.getElementById('confettiContainer').innerHTML = ''; } });
-
     var firstNames = ['Aarav', 'Vivaan', 'Aditya', 'Vihaan', 'Arjun', 'Sai', 'Reyansh', 'Ayaan', 'Krishna', 'Ishaan', 'Rohan', 'Karan', 'Rahul', 'Amit', 'Vikram', 'Raj', 'Suraj', 'Deepak', 'Manish', 'Ankit', 'Ravi', 'Sunil', 'Nikhil', 'Harsh', 'Yash', 'Dev', 'Kartik', 'Pranav', 'Rudra', 'Shaurya', 'Anjali', 'Priya', 'Sneha', 'Neha', 'Pooja', 'Riya', 'Simran', 'Kavita', 'Divya', 'Meera', 'Aditi', 'Nisha', 'Sakshi', 'Tanvi', 'Ishita', 'Aisha', 'Ananya', 'Diya', 'Kritika', 'Sanya'];
     var surnames = ['Sharma', 'Verma', 'Yadav', 'Patel', 'Khan', 'Singh', 'Gupta', 'Agarwal', 'Jain', 'Mehta', 'Shah', 'Reddy', 'Nair', 'Iyer', 'Rao', 'Kumar', 'Chauhan', 'Rathore', 'Mishra', 'Tiwari', 'Pandey', 'Joshi', 'Desai', 'Kapoor', 'Malhotra', 'Chopra', 'Sinha', 'Bose', 'Das', 'Roy', 'Thakur', 'Kaur', 'Saxena', 'Bansal', 'Garg', 'Ahuja', 'Khanna', 'Bhatia', 'Sethi', 'Dutta'];
     var cities = ['Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata', 'Ahmedabad', 'Lucknow', 'Indore', 'Bhopal', 'Chandigarh', 'Surat', 'Nagpur', 'Varanasi', 'Ranchi', 'Patna', 'Kanpur', 'Coimbatore', 'Visakhapatnam', 'Goa', 'Agra', 'Amritsar', 'Dehradun', 'Noida', 'Gurgaon', 'Kochi', 'Mysore', 'Udaipur', 'Jodhpur', 'Raipur', 'Guwahati', 'Bhubaneswar', 'Ludhiana', 'Jalandhar', 'Nashik', 'Aurangabad', 'Vadodara', 'Rajkot'];
     var notifContainer = document.getElementById('liveNotifContainer');
-    var usedPulseKeys = [];
-
-    function generatePulseBuyer() {
-      var attempts = 0;
-      while (attempts < 50) {
-        var fn = firstNames[Math.floor(Math.random() * firstNames.length)];
-        var ln = surnames[Math.floor(Math.random() * surnames.length)];
-        var city = cities[Math.floor(Math.random() * cities.length)];
-        var key = fn + '|' + ln + '|' + city;
-        if (usedPulseKeys.indexOf(key) === -1) {
-          usedPulseKeys.push(key);
-          if (usedPulseKeys.length > 5000) usedPulseKeys.shift();
-          var fullName = fn + ' ' + ln;
-          return { name: fullName, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getAvatarForName(fullName) };
-        }
-        attempts++;
-      }
-      var fallbackName = 'Amit Sharma';
-      return { name: fallbackName, initials: 'AS', city: 'Delhi', avatar: getAvatarForName(fallbackName) };
+    /* DETERMINISTIC FIX: minuteSeed based buyer generation */
+    function generatePulseBuyer(minuteSeed) {
+      var fnIndex = Math.floor(pseudoRandom(minuteSeed * 997 + 1) * firstNames.length);
+      var lnIndex = Math.floor(pseudoRandom(minuteSeed * 991 + 2) * surnames.length);
+      var cityIndex = Math.floor(pseudoRandom(minuteSeed * 983 + 3) * cities.length);
+      var fn = firstNames[fnIndex]; var ln = surnames[lnIndex]; var city = cities[cityIndex];
+      var fullName = fn + ' ' + ln;
+      return { name: fullName, initials: fn.charAt(0) + ln.charAt(0), city: city, avatar: getAvatarForName(fullName) };
     }
-
-    function getCardThumbStyle(design) {
-      if (design.brand === 'amex') return "background-image: url('amex-gold.png'); background-size: cover; background-position: center;";
-      return "background: " + design.gradient + ";";
-    }
-
+    function getCardThumbStyle(design) { if (design.brand === 'amex') return "background-image: url('amex-gold.png'); background-size: cover; background-position: center;"; return "background: " + design.gradient + ";"; }
     function formatTimeAgo(timestamp) {
-      var diffMs = Date.now() - timestamp;
-      var diffSec = Math.floor(diffMs / 1000);
+      var diffMs = Date.now() - timestamp; var diffSec = Math.floor(diffMs / 1000);
       if (diffSec < 60) return 'Just now';
-      var diffMins = Math.floor(diffSec / 60);
-      if (diffMins < 60) return diffMins + (diffMins === 1 ? ' min ago' : ' mins ago');
-      var diffHours = Math.floor(diffMins / 60);
-      if (diffHours < 24) return diffHours + (diffHours === 1 ? ' hour ago' : ' hours ago');
-      var diffDays = Math.floor(diffHours / 24);
-      if (diffDays < 30) return diffDays + (diffDays === 1 ? ' day ago' : ' days ago');
-      var diffMonths = Math.floor(diffDays / 30);
-      if (diffMonths < 12) return diffMonths + (diffMonths === 1 ? ' month ago' : ' months ago');
-      var diffYears = Math.floor(diffMonths / 12);
-      return diffYears + (diffYears === 1 ? ' year ago' : ' years ago');
+      var diffMins = Math.floor(diffSec / 60); if (diffMins < 60) return diffMins + (diffMins === 1 ? ' min ago' : ' mins ago');
+      var diffHours = Math.floor(diffMins / 60); if (diffHours < 24) return diffHours + (diffHours === 1 ? ' hour ago' : ' hours ago');
+      var diffDays = Math.floor(diffHours / 24); if (diffDays < 30) return diffDays + (diffDays === 1 ? ' day ago' : ' days ago');
+      var diffMonths = Math.floor(diffDays / 30); if (diffMonths < 12) return diffMonths + (diffMonths === 1 ? ' month ago' : ' months ago');
+      var diffYears = Math.floor(diffMonths / 12); return diffYears + (diffYears === 1 ? ' year ago' : ' years ago');
     }
-
     function createPulseItemHTML(buyer, design, timestamp) {
-      var thumbStyle = getCardThumbStyle(design);
-      var timeStr = formatTimeAgo(timestamp);
-      var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
-      var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : '';
-      var priceShown = buyer.price || design.price;
+      var thumbStyle = getCardThumbStyle(design); var timeStr = formatTimeAgo(timestamp); var avatarUrl = buyer.avatar || getAvatarForName(buyer.name); var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : ''; var priceShown = buyer.price || design.price;
       return '<div class="pulse-item" data-timestamp="' + timestamp + '"><div class="pulse-avatar-wrap"><div class="pulse-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div><div class="pulse-check">✓</div></div><div class="pulse-content"><div class="pulse-text"><strong>' + escapeHtml(buyer.name) + '</strong>' + cityText + ' just bought <span class="card-name">' + escapeHtml(design.name) + '</span> for <span style="color:#22c55e; font-weight:800;">' + escapeHtml(priceShown) + '</span></div><div class="pulse-meta"><span class="pulse-balance">Balance: ' + escapeHtml(design.balance) + '</span> &bull; <span class="pulse-time-text">' + escapeHtml(timeStr) + '</span></div></div><div class="pulse-card-thumb" style="' + thumbStyle + '"></div></div>';
     }
-
     function addLiveNotification(buyer, design, timestamp) {
       var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
       while (existing.length >= 3) { existing[0].remove(); existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast'); }
-      var nameParts = String(buyer.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
-      var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
-      var timeStr = formatTimeAgo(timestamp);
-      var avatarUrl = buyer.avatar || getAvatarForName(buyer.name);
-      var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : '';
-      var priceShown = buyer.price || design.price;
+      var nameParts = String(buyer.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; }); var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone'); var timeStr = formatTimeAgo(timestamp); var avatarUrl = buyer.avatar || getAvatarForName(buyer.name); var cityText = buyer.city ? (' from ' + escapeHtml(buyer.city)) : ''; var priceShown = buyer.price || design.price;
       var notif = document.createElement('div'); notif.className = 'live-notif';
       notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">💳 Card Purchased</div><div class="notif-row"><div class="notif-avatar">' + buildAvatarImg(avatarUrl, buyer.name, false) + '</div><div class="notif-content"><strong>' + escapeHtml(displayName) + cityText + '</strong>bought <span style="color:#f5d76e; font-weight:700;">' + escapeHtml(design.name) + '</span> for <span style="color:#22c55e; font-weight:800;">' + escapeHtml(priceShown) + '</span><span class="notif-time">🕐 ' + escapeHtml(timeStr) + '</span></div></div>';
       notifContainer.appendChild(notif);
       var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
       setTimeout(function() { notif.remove(); }, 10500);
     }
-
     function showReviewNotification(review) {
       var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
       while (existing.length >= 3) { existing[0].remove(); existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast'); }
-      var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; });
-      var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone');
-      var stars = '';
-      for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
+      var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; }); var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone'); var stars = ''; for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
       var notif = document.createElement('div'); notif.className = 'live-notif review-notif';
       notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">⭐ New Review</div><div class="notif-row"><div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><img src="' + getInitialsAvatarSVG(review.name, true) + '" alt="' + escapeHtml(review.name) + '"></div><div class="notif-content"><strong>' + escapeHtml(displayName) + ' just left a ' + stars + ' review!</strong>for ' + escapeHtml(review.purchased) + '<span class="notif-time">🕐 Just now</span></div></div>';
       notifContainer.appendChild(notif);
       var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
       setTimeout(function() { notif.remove(); }, 10500);
     }
-
     function addPulseItem(buyer, design, timestamp) {
       var list = document.getElementById('pulseList'); if (!list) return;
       var itemHTML = createPulseItemHTML(buyer, design, timestamp);
       list.insertAdjacentHTML('afterbegin', itemHTML);
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
-
     var _lastNotifiedMinute = null;
     function purchaseTick() {
-      var now = Date.now();
-      var currentMinute = Math.floor((now - STREAM_REFERENCE_TIME) / 60000);
+      var now = Date.now(); var currentMinute = Math.floor((now - STREAM_REFERENCE_TIME) / 60000);
       if (_lastNotifiedMinute === null) { _lastNotifiedMinute = currentMinute; return; }
       if (currentMinute <= _lastNotifiedMinute) return;
-      var stream = extendStreamTo(currentMinute);
-      var shownAny = false;
+      var stream = extendStreamTo(currentMinute); var shownAny = false;
       for (var i = 0; i < stream.events.length; i++) {
-        var ev = stream.events[i];
-        if (ev.isUser) continue;
+        var ev = stream.events[i]; if (ev.isUser) continue;
         if (ev.minute > _lastNotifiedMinute && ev.minute <= currentMinute) {
-          var design = null;
-          for (var j = 0; j < designs.length; j++) { if (designs[j].id === ev.designId) { design = designs[j]; break; } }
+          var design = null; for (var j = 0; j < designs.length; j++) { if (designs[j].id === ev.designId) { design = designs[j]; break; } }
           if (!design) continue;
-          var buyer = generatePulseBuyer();
-          var timestamp = Date.now();
-          addLiveNotification(buyer, design, timestamp);
-          addPulseItem(buyer, design, timestamp);
-          shownAny = true;
+          var buyer = generatePulseBuyer(ev.minute);
+          var timestamp = Date.now(); addLiveNotification(buyer, design, timestamp); addPulseItem(buyer, design, timestamp); shownAny = true;
         }
       }
       _lastNotifiedMinute = currentMinute;
-      if (shownAny) {
-        renderHeroCounters();
-        designs.forEach(function(d, idx) { var state = getCardState(d, idx); updateStockUI(d.id, state); });
-        updateTrendingBadge();
-      }
+      if (shownAny) { renderHeroCounters(); designs.forEach(function(d, idx) { var state = getCardState(d, idx); updateStockUI(d.id, state); }); updateTrendingBadge(); }
     }
     setInterval(purchaseTick, 15000);
-
     function updateNotificationTimes() {
       var items = document.querySelectorAll('.pulse-item');
-      items.forEach(function(item) {
-        var ts = parseInt(item.getAttribute('data-timestamp'));
-        if (!ts) return;
-        var timeSpan = item.querySelector('.pulse-time-text');
-        if (timeSpan) timeSpan.textContent = formatTimeAgo(ts);
-      });
+      items.forEach(function(item) { var ts = parseInt(item.getAttribute('data-timestamp')); if (!ts) return; var timeSpan = item.querySelector('.pulse-time-text'); if (timeSpan) timeSpan.textContent = formatTimeAgo(ts); });
     }
     setInterval(updateNotificationTimes, 30000);
-
-    var loadMoreBtn = document.getElementById('loadMoreReviewsBtn');
-    var loadMoreText = document.getElementById('loadMoreText');
-    var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon');
-    var clickCount = 0;
-    var isProcessing = false;
-
+    var loadMoreBtn = document.getElementById('loadMoreReviewsBtn'); var loadMoreText = document.getElementById('loadMoreText'); var loadMoreIcon = loadMoreBtn.querySelector('.lm-icon'); var clickCount = 0; var isProcessing = false;
     var errorScenarios = [
       { icon: '📡', title: 'Connection Error', titleClass: 'warning', message: 'Unable to load reviews right now. Please check your internet connection and try again.', details: 'Slow network detected', detailsColor: '#f59e0b' },
       { icon: '⚠️', title: 'Request Timed Out', titleClass: 'danger', message: 'We couldn\'t load more reviews. Your connection may be unstable.', details: 'Server did not respond', detailsColor: '#ef4444' },
@@ -1964,251 +1525,107 @@
       { icon: '🔌', title: 'Connection Lost', titleClass: 'danger', message: 'Please check your internet connection and retry.', details: 'No response from server', detailsColor: '#ef4444' },
       { icon: '⏳', title: 'Server Busy', titleClass: 'busy', message: 'Our servers are experiencing high traffic at the moment.', details: 'High traffic detected', detailsColor: '#d4af37' }
     ];
-
     loadMoreBtn.addEventListener('click', function() {
-      if (isProcessing) return;
-      isProcessing = true;
-      loadMoreBtn.classList.add('loading');
-      loadMoreText.textContent = 'Loading reviews...';
-      loadMoreIcon.textContent = '⏳';
+      if (isProcessing) return; isProcessing = true; loadMoreBtn.classList.add('loading'); loadMoreText.textContent = 'Loading reviews...'; loadMoreIcon.textContent = '⏳';
       var delay = 1800 + Math.random() * 1200;
       setTimeout(function() {
-        loadMoreBtn.classList.remove('loading');
-        loadMoreIcon.textContent = '📖';
-        var scenarioIndex = clickCount % errorScenarios.length;
-        var scenario = errorScenarios[scenarioIndex];
-        clickCount++;
-        showNetworkError(scenario);
-        var newNumber = getReviewsCount();
-        loadMoreText.textContent = 'More + ' + newNumber.toLocaleString('en-IN') + ' Reviews';
-        isProcessing = false;
+        loadMoreBtn.classList.remove('loading'); loadMoreIcon.textContent = '📖';
+        var scenarioIndex = clickCount % errorScenarios.length; var scenario = errorScenarios[scenarioIndex]; clickCount++;
+        showNetworkError(scenario); var newNumber = getReviewsCount(); loadMoreText.textContent = 'More + ' + newNumber.toLocaleString('en-IN') + ' Reviews'; isProcessing = false;
       }, delay);
     });
-
     function showNetworkError(scenario) {
       document.getElementById('networkErrorIcon').textContent = scenario.icon;
-      var titleEl = document.getElementById('networkErrorTitle');
-      titleEl.textContent = scenario.title;
-      titleEl.className = 'network-error-title ' + scenario.titleClass;
+      var titleEl = document.getElementById('networkErrorTitle'); titleEl.textContent = scenario.title; titleEl.className = 'network-error-title ' + scenario.titleClass;
       document.getElementById('networkErrorMessage').textContent = scenario.message;
-      var details = document.getElementById('networkErrorDetails');
-      details.textContent = scenario.details;
-      document.getElementById('networkErrorDot').style.background = scenario.detailsColor;
-      document.getElementById('networkErrorOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
+      var details = document.getElementById('networkErrorDetails'); details.textContent = scenario.details; document.getElementById('networkErrorDot').style.background = scenario.detailsColor;
+      document.getElementById('networkErrorOverlay').style.display = 'flex'; document.body.classList.add('modal-open');
     }
-
     document.getElementById('networkErrorClose').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); });
     document.getElementById('networkErrorOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.body.classList.remove('modal-open'); } });
     document.getElementById('networkRetryBtn').addEventListener('click', function() { document.getElementById('networkErrorOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); setTimeout(function() { loadMoreBtn.click(); }, 300); });
-
-    /* BUG FIX 5: +1 on load if active */
     function attachHelpfulButtonEvents() {
       var states = loadHelpfulStates();
       document.querySelectorAll('.review-helpful').forEach(function(btn) {
-        if (btn.dataset.helpfulAttached === '1') return;
-        btn.dataset.helpfulAttached = '1';
+        if (btn.dataset.helpfulAttached === '1') return; btn.dataset.helpfulAttached = '1';
         var key = btn.getAttribute('data-review-key');
-        if (key && states[key]) {
-          btn.classList.add('active');
-          var countEl = btn.querySelector('.helpful-count');
-          if (countEl) {
-            var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
-            countEl.textContent = (currentCount + 1).toLocaleString('en-IN');
-          }
-        }
+        if (key && states[key]) { btn.classList.add('active'); var countEl = btn.querySelector('.helpful-count'); if (countEl) { var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0; countEl.textContent = (currentCount + 1).toLocaleString('en-IN'); } }
         btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          e.preventDefault();
-          var isActive = this.classList.contains('active');
-          var countEl = this.querySelector('.helpful-count');
-          var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0;
-          var states2 = loadHelpfulStates();
-          if (isActive) {
-            this.classList.remove('active');
-            countEl.textContent = (currentCount - 1).toLocaleString('en-IN');
-            if (key) { delete states2[key]; saveHelpfulStates(states2); }
-            showToast('Removed from helpful', 'info');
-          } else {
-            this.classList.add('active');
-            countEl.textContent = (currentCount + 1).toLocaleString('en-IN');
-            if (key) { states2[key] = true; saveHelpfulStates(states2); }
-            showToast('Thanks for your feedback!', 'success');
-          }
+          e.stopPropagation(); e.preventDefault();
+          var isActive = this.classList.contains('active'); var countEl = this.querySelector('.helpful-count'); var currentCount = parseInt(countEl.textContent.replace(/,/g, '')) || 0; var states2 = loadHelpfulStates();
+          if (isActive) { this.classList.remove('active'); countEl.textContent = (currentCount - 1).toLocaleString('en-IN'); if (key) { delete states2[key]; saveHelpfulStates(states2); } showToast('Removed from helpful', 'info'); }
+          else { this.classList.add('active'); countEl.textContent = (currentCount + 1).toLocaleString('en-IN'); if (key) { states2[key] = true; saveHelpfulStates(states2); } showToast('Thanks for your feedback!', 'success'); }
         });
       });
     }
-
-    var photoUploadArea = document.getElementById('photoUploadArea');
-    var photoInput = document.getElementById('reviewPhotoInput');
-    var photoPlusIcon = document.getElementById('photoPlusIcon');
-    var photoRemoveBtn = document.getElementById('photoRemoveBtn');
-
+    var photoUploadArea = document.getElementById('photoUploadArea'); var photoInput = document.getElementById('reviewPhotoInput'); var photoPlusIcon = document.getElementById('photoPlusIcon'); var photoRemoveBtn = document.getElementById('photoRemoveBtn');
     document.getElementById('writeReviewBtn').addEventListener('click', function() {
-      document.getElementById('reviewForm').reset();
-      selectedRating = 0; selectedPhotoDataURL = null;
-      resetPhotoUpload(); updateStarDisplay();
-      document.getElementById('starLabel').textContent = 'Select rating';
-      document.getElementById('reviewOverlay').style.display = 'flex';
-      document.body.classList.add('modal-open');
+      document.getElementById('reviewForm').reset(); selectedRating = 0; selectedPhotoDataURL = null; resetPhotoUpload(); updateStarDisplay();
+      document.getElementById('starLabel').textContent = 'Select rating'; document.getElementById('reviewOverlay').style.display = 'flex'; document.body.classList.add('modal-open');
     });
-
     document.getElementById('reviewClose').addEventListener('click', function() { document.getElementById('reviewOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); });
     document.getElementById('reviewOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.body.classList.remove('modal-open'); } });
-
-    photoUploadArea.addEventListener('click', function(e) {
-      if (e.target === photoRemoveBtn || e.target.closest('.photo-remove-btn')) return;
-      photoInput.click();
-    });
+    photoUploadArea.addEventListener('click', function(e) { if (e.target === photoRemoveBtn || e.target.closest('.photo-remove-btn')) return; photoInput.click(); });
     photoInput.addEventListener('change', function(e) {
-      var file = e.target.files && e.target.files[0];
-      if (!file) return;
+      var file = e.target.files && e.target.files[0]; if (!file) return;
       if (!file.type.startsWith('image/')) { alert('Please select an image file.', {title: 'Invalid File Type', icon: '📷'}); return; }
       if (file.size > 5 * 1024 * 1024) { alert('Image size should be less than 5MB.', {title: 'File Too Large', icon: '📦'}); return; }
       var reader = new FileReader();
-      reader.onload = function(ev) {
-        selectedPhotoDataURL = ev.target.result;
-        photoUploadArea.classList.add('has-photo'); photoPlusIcon.style.display = 'none';
-        var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove();
-        var img = document.createElement('img'); img.src = selectedPhotoDataURL;
-        photoUploadArea.insertBefore(img, photoUploadArea.firstChild);
-      };
+      reader.onload = function(ev) { selectedPhotoDataURL = ev.target.result; photoUploadArea.classList.add('has-photo'); photoPlusIcon.style.display = 'none'; var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove(); var img = document.createElement('img'); img.src = selectedPhotoDataURL; photoUploadArea.insertBefore(img, photoUploadArea.firstChild); };
       reader.readAsDataURL(file);
     });
     photoRemoveBtn.addEventListener('click', function(e) { e.stopPropagation(); resetPhotoUpload(); photoInput.value = ''; });
-
-    function resetPhotoUpload() {
-      selectedPhotoDataURL = null;
-      photoUploadArea.classList.remove('has-photo');
-      photoPlusIcon.style.display = '';
-      var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove();
-    }
-
+    function resetPhotoUpload() { selectedPhotoDataURL = null; photoUploadArea.classList.remove('has-photo'); photoPlusIcon.style.display = ''; var oldImg = photoUploadArea.querySelector('img'); if (oldImg) oldImg.remove(); }
     document.querySelectorAll('.star-btn').forEach(function(btn) {
       btn.addEventListener('click', function() { selectedRating = parseInt(this.getAttribute('data-star')); updateStarDisplay(); });
-      btn.addEventListener('mouseenter', function() {
-        var hoverVal = parseInt(this.getAttribute('data-star'));
-        document.querySelectorAll('.star-btn').forEach(function(b) { b.style.color = parseInt(b.getAttribute('data-star')) <= hoverVal ? '#d4af37' : '#333'; });
-      });
+      btn.addEventListener('mouseenter', function() { var hoverVal = parseInt(this.getAttribute('data-star')); document.querySelectorAll('.star-btn').forEach(function(b) { b.style.color = parseInt(b.getAttribute('data-star')) <= hoverVal ? '#d4af37' : '#333'; }); });
       btn.addEventListener('mouseleave', function() { updateStarDisplay(); });
     });
-
     function updateStarDisplay() {
-      document.querySelectorAll('.star-btn').forEach(function(b) {
-        var val = parseInt(b.getAttribute('data-star'));
-        if (val <= selectedRating) { b.classList.add('active'); b.style.color = '#d4af37'; }
-        else { b.classList.remove('active'); b.style.color = '#333'; }
-      });
+      document.querySelectorAll('.star-btn').forEach(function(b) { var val = parseInt(b.getAttribute('data-star')); if (val <= selectedRating) { b.classList.add('active'); b.style.color = '#d4af37'; } else { b.classList.remove('active'); b.style.color = '#333'; } });
       var labels = { 0: 'Select rating', 1: 'Poor 😞', 2: 'Fair 😐', 3: 'Good 🙂', 4: 'Very Good 😊', 5: 'Excellent! 🤩' };
       document.getElementById('starLabel').textContent = labels[selectedRating] || 'Select rating';
     }
-
-    /* BUG FIX 1+3+8: Save user review with timestamp + compressed photo */
     document.getElementById('reviewForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      var name = document.getElementById('reviewName').value.trim();
-      var location = document.getElementById('reviewLocation').value.trim();
-      var card = document.getElementById('reviewCard').value;
-      var text = document.getElementById('reviewText').value.trim();
-      if (!name || !location || !card || !text || selectedRating === 0) {
-        if (selectedRating === 0) alert('Please select a rating (1-5 stars).', {title: 'Rating Required', icon: '⭐'});
-        else alert('Please fill all the fields.', {title: 'Missing Information', icon: '📝'});
-        return;
-      }
-
+      var name = document.getElementById('reviewName').value.trim(); var location = document.getElementById('reviewLocation').value.trim(); var card = document.getElementById('reviewCard').value; var text = document.getElementById('reviewText').value.trim();
+      if (!name || !location || !card || !text || selectedRating === 0) { if (selectedRating === 0) alert('Please select a rating (1-5 stars).', {title: 'Rating Required', icon: '⭐'}); else alert('Please fill all the fields.', {title: 'Missing Information', icon: '📝'}); return; }
       var finalizeAndSave = function(finalPhotoDataURL) {
-        var newReview = {
-          name: name, avatar: finalPhotoDataURL || null, location: location,
-          time: 'Just now', purchased: card, comment: text, rating: selectedRating,
-          helpful: 0, moreCount: 0, isUserSubmitted: true, submittedAt: Date.now()
-        };
-        reviewsData.push(newReview);
-        var grid = document.getElementById('reviewsGrid');
-        var result = createReviewCardHTML(newReview, reviewsData.length - 1);
-        var card_el = document.createElement('div');
-        card_el.className = result.cardClass;
-        card_el.innerHTML = result.html;
-        grid.appendChild(card_el);
-        attachMoreButtonEvents();
-        attachHelpfulButtonEvents();
-        saveUserReviewsToStorage();
-        var newCount = getReviewsCount();
-        loadMoreText.textContent = 'More + ' + newCount.toLocaleString('en-IN') + ' Reviews';
-        document.getElementById('reviewOverlay').style.display = 'none';
-        document.body.classList.remove('modal-open');
-        showToast('Thank you! Your review has been posted.', 'success');
-        showReviewNotification(newReview);
-        document.getElementById('reviewForm').reset();
-        selectedRating = 0; selectedPhotoDataURL = null;
-        resetPhotoUpload(); updateStarDisplay();
+        var newReview = { name: name, avatar: finalPhotoDataURL || null, location: location, time: 'Just now', purchased: card, comment: text, rating: selectedRating, helpful: 0, moreCount: 0, isUserSubmitted: true, submittedAt: Date.now() };
+        reviewsData.push(newReview); var grid = document.getElementById('reviewsGrid'); var result = createReviewCardHTML(newReview, reviewsData.length - 1); var card_el = document.createElement('div'); card_el.className = result.cardClass; card_el.innerHTML = result.html; grid.appendChild(card_el);
+        attachMoreButtonEvents(); attachHelpfulButtonEvents(); saveUserReviewsToStorage(); var newCount = getReviewsCount(); loadMoreText.textContent = 'More + ' + newCount.toLocaleString('en-IN') + ' Reviews';
+        document.getElementById('reviewOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); showToast('Thank you! Your review has been posted.', 'success'); showReviewNotification(newReview); document.getElementById('reviewForm').reset(); selectedRating = 0; selectedPhotoDataURL = null; resetPhotoUpload(); updateStarDisplay();
         setTimeout(function() { document.getElementById('reviewsGrid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 400);
       };
-
-      if (selectedPhotoDataURL) {
-        compressImage(selectedPhotoDataURL, 200, 0.7, function(compressed) { finalizeAndSave(compressed); });
-      } else {
-        finalizeAndSave(null);
-      }
+      if (selectedPhotoDataURL) { compressImage(selectedPhotoDataURL, 200, 0.7, function(compressed) { finalizeAndSave(compressed); }); } else { finalizeAndSave(null); }
     });
-
     document.getElementById('moreStatsClose').addEventListener('click', function() { document.getElementById('moreStatsOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); });
     document.getElementById('moreStatsOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.body.classList.remove('modal-open'); } });
-
     function attachMoreButtonEvents() {
       document.querySelectorAll('.review-more-btn').forEach(function(btn) {
-        if (btn.dataset.attached === '1') return;
-        btn.dataset.attached = '1';
-        btn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var count = parseInt(this.getAttribute('data-more')) || 0;
-          var formatted = count.toLocaleString('en-IN');
-          document.getElementById('moreStatsNumber').textContent = formatted + '+';
-          document.getElementById('moreStatsOverlay').style.display = 'flex';
-          document.body.classList.add('modal-open');
-        });
+        if (btn.dataset.attached === '1') return; btn.dataset.attached = '1';
+        btn.addEventListener('click', function(e) { e.stopPropagation(); var count = parseInt(this.getAttribute('data-more')) || 0; var formatted = count.toLocaleString('en-IN'); document.getElementById('moreStatsNumber').textContent = formatted + '+'; document.getElementById('moreStatsOverlay').style.display = 'flex'; document.body.classList.add('modal-open'); });
       });
     }
-
     var legalData = {
       privacy: { title: 'Privacy Policy', content: '<p>We value your privacy. Your personal details are only used to process your order and deliver your card. All transactions are 100% secure.</p>' },
       terms: { title: 'Terms of Service', content: '<p>By placing an order, you agree to provide accurate contact details. Orders are processed after successful payment verification.</p>' }
     };
-
     document.getElementById('privacyLink').addEventListener('click', function(e) { e.preventDefault(); document.getElementById('legalTitle').textContent = legalData.privacy.title; document.getElementById('legalContent').innerHTML = legalData.privacy.content; document.getElementById('legalOverlay').style.display = 'flex'; document.body.classList.add('modal-open'); });
     document.getElementById('termsLink').addEventListener('click', function(e) { e.preventDefault(); document.getElementById('legalTitle').textContent = legalData.terms.title; document.getElementById('legalContent').innerHTML = legalData.terms.content; document.getElementById('legalOverlay').style.display = 'flex'; document.body.classList.add('modal-open'); });
     document.getElementById('legalClose').addEventListener('click', function() { document.getElementById('legalOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); });
     document.getElementById('legalOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; document.body.classList.remove('modal-open'); } });
-
     document.getElementById('miniCardPreview').addEventListener('click', function() { this.classList.toggle('flipped'); });
-
     var idleTimer = null;
-    function resetIdleTimer() {
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(function() { showToast('Wait! 🔥 High balance cards are selling fast today. Don\'t miss out!', 'info'); }, 120000);
-    }
-    document.addEventListener('mousemove', resetIdleTimer);
-    document.addEventListener('keydown', resetIdleTimer);
-    document.addEventListener('scroll', resetIdleTimer);
-    resetIdleTimer();
+    function resetIdleTimer() { clearTimeout(idleTimer); idleTimer = setTimeout(function() { showToast('Wait! 🔥 High balance cards are selling fast today. Don\'t miss out!', 'info'); }, 120000); }
+    document.addEventListener('mousemove', resetIdleTimer); document.addEventListener('keydown', resetIdleTimer); document.addEventListener('scroll', resetIdleTimer); resetIdleTimer();
     document.addEventListener('mouseleave', function(e) { if (e.clientY < 0) { showToast('Wait! 🔥 Don\'t miss out on our high balance cards!', 'error'); } });
-
-    /* INIT */
-    loadProfileFromStorage();
-    updateProfileButtonUI();
-
+    loadProfileFromStorage(); updateProfileButtonUI();
     fetchAvatarsFromGitHub(function() {
-      preloadAllAvatars();
-      initViewerCounts();
+      preloadAllAvatars(); initViewerCounts();
       var initMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
-      extendStreamTo(initMinute);
-      renderGrid();
-      initCountdowns();
-      updateCountdowns();
-      renderTrustedByRow();
-      renderReviews();
-      renderHeroCounters();
-      var lmt = document.getElementById('loadMoreText');
-      if (lmt) lmt.textContent = 'More + ' + getReviewsCount().toLocaleString('en-IN') + ' Reviews';
+      extendStreamTo(initMinute); renderGrid(); initCountdowns(); updateCountdowns(); renderTrustedByRow(); renderReviews(); renderHeroCounters();
+      var lmt = document.getElementById('loadMoreText'); if (lmt) lmt.textContent = 'More + ' + getReviewsCount().toLocaleString('en-IN') + ' Reviews';
       initWelcomeBack();
     });
   </script>
