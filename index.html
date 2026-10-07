@@ -897,11 +897,17 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — MASTER STREAM (v6 FINAL)
-       FIX: Buyer names deterministic (same time = same name on all devices)
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — v7 (Option 3)
+       - Fixed reference: June 1, 2026 (same on all devices)
+       - Rate: 60/hr
+       - Counter: cumulative since reference (grows forever, no reset)
+       - Stock: 3-hour cycle (depletes then auto-restocks)
+       - Notifications: real-time, deterministic
        ========================================================= */
     var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
-    var STREAM_REFERENCE_TIME = Date.now() - (3 * 60 * 60 * 1000);
+    var CYCLE_MINUTES = 180; // 3-hour stock cycle
+    var BASE_PURCHASES_PER_HOUR = 60;
+
     function pseudoRandom(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
     function getHoursSinceReference() { return Math.max(0, Math.floor((Date.now() - REFERENCE_TIME) / 3600000)); }
     function getTimeMultiplierForHour(hourOfDay) {
@@ -912,35 +918,65 @@
       return 0.5;
     }
     function escapeHtml(str) { if (str === null || str === undefined) return ''; return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
-    var BASE_PURCHASES_PER_HOUR = 60;
-    var _streamState = null;
-    function getStreamState() { if (_streamState === null) { _streamState = { events: [], totalPurchases: 0, cardCounts: {}, lastMinute: -1 }; designs.forEach(function(d) { _streamState.cardCounts[d.id] = 0; }); } return _streamState; }
-    function extendStreamTo(targetMinute) {
-      var stream = getStreamState();
-      if (targetMinute <= stream.lastMinute) return stream;
-      var totalWeight = 0; designs.forEach(function(d) { totalWeight += d.viewerWeight; });
-      for (var m = stream.lastMinute + 1; m <= targetMinute; m++) {
-        var minuteTime = STREAM_REFERENCE_TIME + m * 60000;
-        var hourOfDay = new Date(minuteTime).getHours();
-        var mult = getTimeMultiplierForHour(hourOfDay);
-        var expectedPerMinute = (BASE_PURCHASES_PER_HOUR * mult) / 60;
-        var r1 = pseudoRandom(7001 + m * 9773);
-        if (r1 < expectedPerMinute) {
-          var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
-          var chosen = designs[0]; var acc = 0;
-          for (var i = 0; i < designs.length; i++) { acc += designs[i].viewerWeight; if (cardRoll < acc) { chosen = designs[i]; break; } }
-          stream.events.push({ minute: m, time: minuteTime, designId: chosen.id }); stream.totalPurchases++; stream.cardCounts[chosen.id]++;
+
+    function getTotalWeight() { var w = 0; designs.forEach(function(d) { w += d.viewerWeight; }); return w; }
+
+    /* Core: is there a purchase at minute m? (deterministic across all devices) */
+    function isPurchaseMinute(m) {
+      var minuteTime = REFERENCE_TIME + m * 60000;
+      var hourOfDay = new Date(minuteTime).getHours();
+      var mult = getTimeMultiplierForHour(hourOfDay);
+      var expected = (BASE_PURCHASES_PER_HOUR * mult) / 60;
+      return pseudoRandom(7001 + m * 9773) < expected;
+    }
+
+    /* Which card was purchased at minute m? */
+    function pickCardForMinute(m, totalWeight) {
+      var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
+      var acc = 0;
+      for (var i = 0; i < designs.length; i++) {
+        acc += designs[i].viewerWeight;
+        if (cardRoll < acc) return designs[i];
+      }
+      return designs[designs.length - 1];
+    }
+
+    /* Compute total purchases since reference (cached per minute) */
+    var _totalCache = { minute: -1, count: 0 };
+    function getTotalPurchases() {
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      if (_totalCache.minute === nowMinute) return _totalCache.count;
+      var count = 0;
+      for (var m = 0; m <= nowMinute; m++) { if (isPurchaseMinute(m)) count++; }
+      _totalCache = { minute: nowMinute, count: count };
+      return count;
+    }
+
+    /* Compute per-card purchases in current cycle (cached per minute) */
+    var _cycleCache = { minute: -1, cycleStart: -1, counts: null };
+    function getCurrentCycleStart(nowMinute) { return Math.floor(nowMinute / CYCLE_MINUTES) * CYCLE_MINUTES; }
+    function getCurrentCycleCounts() {
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      var cycleStart = getCurrentCycleStart(nowMinute);
+      if (_cycleCache.minute === nowMinute && _cycleCache.cycleStart === cycleStart) return _cycleCache.counts;
+      var counts = {};
+      designs.forEach(function(d) { counts[d.id] = 0; });
+      var totalWeight = getTotalWeight();
+      for (var m = cycleStart; m <= nowMinute; m++) {
+        if (isPurchaseMinute(m)) {
+          var card = pickCardForMinute(m, totalWeight);
+          counts[card.id]++;
         }
       }
-      stream.lastMinute = targetMinute; return stream;
+      _cycleCache = { minute: nowMinute, cycleStart: cycleStart, counts: counts };
+      return counts;
     }
-    function getTotalPurchases() { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.totalPurchases; }
-    function getCardPurchases(design) { var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute); return _streamState.cardCounts[design.id] || 0; }
-    function recordUserPurchase(designId) {
-      var nowMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000); extendStreamTo(nowMinute);
-      var stream = _streamState;
-      stream.events.push({ minute: nowMinute, time: Date.now(), designId: designId, isUser: true }); stream.totalPurchases++; stream.cardCounts[designId] = (stream.cardCounts[designId] || 0) + 1;
-    }
+
+    function getCardPurchases(design) { return getCurrentCycleCounts()[design.id] || 0; }
+
+    /* User purchase — no longer affects deterministic counter (would break cross-device consistency) */
+    function recordUserPurchase(designId) { /* intentionally no-op for global consistency */ }
+
     function getReviewHelpful(review, idx) {
       if (review.isUserSubmitted) return review.helpful || 0;
       var hours = getHoursSinceReference(); var base = review.helpful || 0; var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131; var dailyRate;
@@ -963,6 +999,7 @@
       var userCount = reviewsData.filter(function(r) { return r.isUserSubmitted; }).length;
       return base + total + userCount;
     }
+
     var USER_REVIEWS_KEY = 'cardseller_user_reviews';
     function loadUserReviewsFromStorage() { try { var raw = localStorage.getItem(USER_REVIEWS_KEY); if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) return arr; } } catch(e) {} return []; }
     function saveUserReviewsToStorage() { try { var userOnly = reviewsData.filter(function(r) { return r.isUserSubmitted; }); var limited = userOnly.slice(-20); localStorage.setItem(USER_REVIEWS_KEY, JSON.stringify(limited)); } catch(e) {} }
@@ -972,6 +1009,7 @@
       img.onerror = function() { callback(dataURL); }; img.src = dataURL;
     }
     function formatReviewTime(review) { if (review.isUserSubmitted && review.submittedAt) return formatTimeAgo(review.submittedAt); return review.time || 'Just now'; }
+
     var PROFILE_KEY = 'cardseller_profile';
     var profileData = { name: '', city: '', phone: '', photo: null };
     var profilePhotoDataURL = null;
@@ -1068,7 +1106,6 @@
     function saveUsedAvatars(arr) { try { localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr)); } catch(e) {} }
     function loadNameAvatarMap() { try { var raw = localStorage.getItem('cardseller_name_avatar_map'); if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') return parsed; } } catch(e) {} return {}; }
     function saveNameAvatarMap(map) { try { localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map)); } catch(e) {} }
-    /* DETERMINISTIC FIX: uses name hash instead of Math.random() */
     function assignAvatarToName(name) {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
       var key = String(name || 'anonymous').trim(); var map = loadNameAvatarMap();
@@ -1154,17 +1191,20 @@
       { name: 'Karan Mehta', avatar: 'reviews/review6.png', location: 'Jaipur', time: '3 months ago', purchased: 'American Express Gold', comment: 'Card buy karne ke baad Free Fire mein Elite Pass aur diamond top-up kiya, sab kuch bina kisi problem ke ho gaya! Best seller 💯', rating: 5, helpful: 112, moreCount: 4230, sellerReply: 'Thanks Karan! Aapka support humesha 🙏' }
     ];
     (function loadUserReviews() { var saved = loadUserReviewsFromStorage(); saved.forEach(function(r) { if (r && r.isUserSubmitted) reviewsData.push(r); }); })();
+
+    /* STOCK: cycle-based. Initial stock 100-150, purchases in 3h cycle reduce it, cycle resets to initial */
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
-      var initialStock = Math.floor(rand * 50) + 150;
+      var initialStock = Math.floor(rand * 50) + 100; // 100-150
       var initialSold = Math.round(initialStock * (design.stockPercent / (100 - design.stockPercent)));
       var totalInventory = initialStock + initialSold;
-      var purchased = getCardPurchases(design);
-      var currentStock = Math.max(3, initialStock - purchased);
+      var purchasedThisCycle = getCardPurchases(design);
+      var currentStock = Math.max(3, initialStock - purchasedThisCycle);
       var currentSold = initialSold + (initialStock - currentStock);
-      return { stock: currentStock, sold: currentSold, total: totalInventory };
+      return { stock: currentStock, sold: currentSold, total: totalInventory, initialStock: initialStock };
     }
+
     function updateTrendingBadge() {
       var trendingId = ''; var lowestStock = Infinity;
       designs.forEach(function(d, idx) { var s = getCardState(d, idx); if (s.stock >= 3 && s.stock < lowestStock) { lowestStock = s.stock; trendingId = d.id; } });
@@ -1173,6 +1213,7 @@
         if (id === trendingId) { if (!existing) { var info = card.querySelector('.gc-info'); if (info) info.insertAdjacentHTML('afterbegin', '<div class="trending-badge">🔥 Trending</div>'); } } else if (existing) { existing.remove(); }
       });
     }
+
     var currentDesign = null; var currentQty = 1; var currentOrderDesign = null; var currentPendingOrder = null;
     var isFlipped = false; var selectedRating = 0; var selectedPhotoDataURL = null;
     var qrTimerInterval = null; var qrTimeLeft = 300; var reservedTimerInterval = null;
@@ -1242,7 +1283,8 @@
     }
     setInterval(updateCountdowns, 1000);
     function renderHeroCounters() {
-      var sold = 12548 + getTotalPurchases(); var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
+      var sold = 12548 + getTotalPurchases();
+      var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
       var soldEl = document.getElementById('heroSoldCount'); if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
       var buyersEl = document.getElementById('heroBuyersCount'); if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
       var tbEl = document.getElementById('trustedByCount'); if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
@@ -1392,10 +1434,7 @@
       var txnId = document.getElementById('transactionId').value.trim(); var txnRegex = /^[A-Z0-9]{8,22}$/;
       if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. It should be 8-22 alphanumeric characters.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
       currentPendingOrder.transactionId = txnId; clearInterval(qrTimerInterval); document.getElementById('paymentOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); showToast('Payment confirmed!', 'success');
-      recordUserPurchase(currentPendingOrder.designId); renderHeroCounters();
-      var _ud = designs.find(function(d) { return d.id === currentPendingOrder.designId; });
-      if (_ud) { var _ui = designs.indexOf(_ud); updateStockUI(_ud.id, getCardState(_ud, _ui)); }
-      updateTrendingBadge(); showSuccessModal(currentPendingOrder); playOrderSound(); setTimeout(function() { triggerUserOwnNotification(); }, 1500);
+      showSuccessModal(currentPendingOrder); playOrderSound(); setTimeout(function() { triggerUserOwnNotification(); }, 1500);
     }
     function triggerUserOwnNotification() {
       if (!currentPendingOrder) return;
@@ -1444,7 +1483,6 @@
     var surnames = ['Sharma', 'Verma', 'Yadav', 'Patel', 'Khan', 'Singh', 'Gupta', 'Agarwal', 'Jain', 'Mehta', 'Shah', 'Reddy', 'Nair', 'Iyer', 'Rao', 'Kumar', 'Chauhan', 'Rathore', 'Mishra', 'Tiwari', 'Pandey', 'Joshi', 'Desai', 'Kapoor', 'Malhotra', 'Chopra', 'Sinha', 'Bose', 'Das', 'Roy', 'Thakur', 'Kaur', 'Saxena', 'Bansal', 'Garg', 'Ahuja', 'Khanna', 'Bhatia', 'Sethi', 'Dutta'];
     var cities = ['Delhi', 'Mumbai', 'Bangalore', 'Pune', 'Hyderabad', 'Jaipur', 'Chennai', 'Kolkata', 'Ahmedabad', 'Lucknow', 'Indore', 'Bhopal', 'Chandigarh', 'Surat', 'Nagpur', 'Varanasi', 'Ranchi', 'Patna', 'Kanpur', 'Coimbatore', 'Visakhapatnam', 'Goa', 'Agra', 'Amritsar', 'Dehradun', 'Noida', 'Gurgaon', 'Kochi', 'Mysore', 'Udaipur', 'Jodhpur', 'Raipur', 'Guwahati', 'Bhubaneswar', 'Ludhiana', 'Jalandhar', 'Nashik', 'Aurangabad', 'Vadodara', 'Rajkot'];
     var notifContainer = document.getElementById('liveNotifContainer');
-    /* DETERMINISTIC FIX: minuteSeed based buyer generation */
     function generatePulseBuyer(minuteSeed) {
       var fnIndex = Math.floor(pseudoRandom(minuteSeed * 997 + 1) * firstNames.length);
       var lnIndex = Math.floor(pseudoRandom(minuteSeed * 991 + 2) * surnames.length);
@@ -1493,23 +1531,28 @@
       list.insertAdjacentHTML('afterbegin', itemHTML);
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
+    /* Notification tick: check for purchases since last tick, show them */
     var _lastNotifiedMinute = null;
     function purchaseTick() {
-      var now = Date.now(); var currentMinute = Math.floor((now - STREAM_REFERENCE_TIME) / 60000);
-      if (_lastNotifiedMinute === null) { _lastNotifiedMinute = currentMinute; return; }
-      if (currentMinute <= _lastNotifiedMinute) return;
-      var stream = extendStreamTo(currentMinute); var shownAny = false;
-      for (var i = 0; i < stream.events.length; i++) {
-        var ev = stream.events[i]; if (ev.isUser) continue;
-        if (ev.minute > _lastNotifiedMinute && ev.minute <= currentMinute) {
-          var design = null; for (var j = 0; j < designs.length; j++) { if (designs[j].id === ev.designId) { design = designs[j]; break; } }
-          if (!design) continue;
-          var buyer = generatePulseBuyer(ev.minute);
-          var timestamp = Date.now(); addLiveNotification(buyer, design, timestamp); addPulseItem(buyer, design, timestamp); shownAny = true;
+      var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      if (_lastNotifiedMinute === null) { _lastNotifiedMinute = nowMinute; return; }
+      if (nowMinute <= _lastNotifiedMinute) return;
+      var totalWeight = getTotalWeight();
+      var shownAny = false;
+      var maxLookBack = 60; // safety cap
+      var startM = Math.max(_lastNotifiedMinute + 1, nowMinute - maxLookBack);
+      for (var m = startM; m <= nowMinute; m++) {
+        if (isPurchaseMinute(m)) {
+          var design = pickCardForMinute(m, totalWeight);
+          var buyer = generatePulseBuyer(m);
+          var timestamp = Date.now();
+          addLiveNotification(buyer, design, timestamp);
+          addPulseItem(buyer, design, timestamp);
+          shownAny = true;
         }
       }
-      _lastNotifiedMinute = currentMinute;
-      if (shownAny) { renderHeroCounters(); designs.forEach(function(d, idx) { var state = getCardState(d, idx); updateStockUI(d.id, state); }); updateTrendingBadge(); }
+      _lastNotifiedMinute = nowMinute;
+      if (shownAny) { renderHeroCounters(); designs.forEach(function(d, idx) { updateStockUI(d.id, getCardState(d, idx)); }); updateTrendingBadge(); }
     }
     setInterval(purchaseTick, 15000);
     function updateNotificationTimes() {
@@ -1623,8 +1666,7 @@
     loadProfileFromStorage(); updateProfileButtonUI();
     fetchAvatarsFromGitHub(function() {
       preloadAllAvatars(); initViewerCounts();
-      var initMinute = Math.floor((Date.now() - STREAM_REFERENCE_TIME) / 60000);
-      extendStreamTo(initMinute); renderGrid(); initCountdowns(); updateCountdowns(); renderTrustedByRow(); renderReviews(); renderHeroCounters();
+      renderGrid(); initCountdowns(); updateCountdowns(); renderTrustedByRow(); renderReviews(); renderHeroCounters();
       var lmt = document.getElementById('loadMoreText'); if (lmt) lmt.textContent = 'More + ' + getReviewsCount().toLocaleString('en-IN') + ' Reviews';
       initWelcomeBack();
     });
