@@ -897,12 +897,12 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — v8 (Option 3 — Launch Ready)
-       - Reference: Oct 7, 2026 (aaj) — launch day se count shuru
-       - Rate: 60/hr
-       - Counter: cumulative since reference (grows forever, no reset)
-       - Stock: 3-hour cycle (depletes then auto-restocks)
-       - Base: 7000 cards sold, 5600 happy buyers
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — v10 (All fixes)
+       FIX 1: getUTCHours() — timezone independent
+       FIX 2: Avatar determinism — same name = same avatar everywhere
+       FIX 3: Review notification color — normal users ko gold
+       FIX 4: Avatar cache 1h (was 24h)
+       FIX 5: User purchase counter — localStorage per-device
        ========================================================= */
     var REFERENCE_TIME = new Date('2026-10-07T00:00:00Z').getTime();
     var CYCLE_MINUTES = 180;
@@ -912,6 +912,7 @@
 
     function pseudoRandom(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
     function getHoursSinceReference() { return Math.max(0, Math.floor((Date.now() - REFERENCE_TIME) / 3600000)); }
+
     function getTimeMultiplierForHour(hourOfDay) {
       if (hourOfDay < 6) return 0.2;
       if (hourOfDay < 12) return 0.6;
@@ -925,7 +926,7 @@
 
     function isPurchaseMinute(m) {
       var minuteTime = REFERENCE_TIME + m * 60000;
-      var hourOfDay = new Date(minuteTime).getHours();
+      var hourOfDay = new Date(minuteTime).getUTCHours();
       var mult = getTimeMultiplierForHour(hourOfDay);
       var expected = (BASE_PURCHASES_PER_HOUR * mult) / 60;
       return pseudoRandom(7001 + m * 9773) < expected;
@@ -973,14 +974,31 @@
     }
 
     function getCardPurchases(design) { return getCurrentCycleCounts()[design.id] || 0; }
-    function recordUserPurchase(designId) { /* no-op for global consistency */ }
+    function recordUserPurchase(designId) { /* no-op — using localStorage counter instead */ }
+
+    /* FIX 5: User purchase counter (per-device) */
+    var USER_PURCHASE_KEY = 'cardseller_user_purchases';
+    function getUserPurchaseCount() {
+      try { var raw = localStorage.getItem(USER_PURCHASE_KEY); return parseInt(raw || '0', 10) || 0; } catch(e) { return 0; }
+    }
+    function incrementUserPurchaseCount(qty) {
+      try {
+        var current = getUserPurchaseCount();
+        localStorage.setItem(USER_PURCHASE_KEY, (current + (qty || 1)).toString());
+      } catch(e) {}
+    }
 
     function getReviewHelpful(review, idx) {
       if (review.isUserSubmitted) return review.helpful || 0;
       var hours = getHoursSinceReference(); var base = review.helpful || 0; var seed = 3001 + idx * 977 + (review.name ? review.name.charCodeAt(0) : 65) * 131; var dailyRate;
       if (review.isYouTuber) { var popFactor = 1.0; if (review.name === 'Total Gaming') popFactor = 1.8; else if (review.name === 'Tonde Gamer') popFactor = 1.5; else if (review.name === 'Gyan Gaming') popFactor = 1.3; else if (review.name === 'Lokesh Gamer') popFactor = 1.1; dailyRate = (6 + pseudoRandom(seed) * 10) * popFactor; } else { dailyRate = 0.15 + pseudoRandom(seed) * 0.35; }
       var hourlyRate = dailyRate / 24; var total = 0;
-      for (var h = 0; h < hours; h++) { var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getHours(); var mult = getTimeMultiplierForHour(hourOfDay); var r = pseudoRandom(seed + h * 9773); if (r < hourlyRate * mult) total += 1; }
+      for (var h = 0; h < hours; h++) {
+        var hourOfDay = new Date(REFERENCE_TIME + h * 3600000).getUTCHours();
+        var mult = getTimeMultiplierForHour(hourOfDay);
+        var r = pseudoRandom(seed + h * 9773);
+        if (r < hourlyRate * mult) total += 1;
+      }
       return base + total;
     }
     function getReviewMore(review, idx) {
@@ -1102,24 +1120,20 @@
     var avatarCache = { list: [], loaded: false };
     function loadUsedAvatars() { try { var raw = localStorage.getItem('cardseller_used_avatars'); if (raw) { var parsed = JSON.parse(raw); if (Array.isArray(parsed)) return parsed; } } catch(e) {} return []; }
     function saveUsedAvatars(arr) { try { localStorage.setItem('cardseller_used_avatars', JSON.stringify(arr)); } catch(e) {} }
-    function loadNameAvatarMap() { try { var raw = localStorage.getItem('cardseller_name_avatar_map'); if (raw) { var parsed = JSON.parse(raw); if (parsed && typeof parsed === 'object') return parsed; } } catch(e) {} return {}; }
-    function saveNameAvatarMap(map) { try { localStorage.setItem('cardseller_name_avatar_map', JSON.stringify(map)); } catch(e) {} }
+
+    /* FIX 2: Deterministic avatar — same name = same avatar on ALL devices */
     function assignAvatarToName(name) {
       if (!avatarCache.list || avatarCache.list.length === 0) return null;
-      var key = String(name || 'anonymous').trim(); var map = loadNameAvatarMap();
-      if (map[key]) return map[key];
-      var used = loadUsedAvatars(); var available = [];
-      for (var i = 0; i < avatarCache.list.length; i++) { if (used.indexOf(avatarCache.list[i]) === -1) available.push(avatarCache.list[i]); }
-      if (available.length === 0) { used = []; available = avatarCache.list.slice(); }
-      var nameSeed = 0; for (var k = 0; k < key.length; k++) { nameSeed += key.charCodeAt(k); }
-      var idx = Math.floor(pseudoRandom(nameSeed) * available.length);
-      var chosen = available[idx]; used.push(chosen); saveUsedAvatars(used); map[key] = chosen;
-      var mapKeys = Object.keys(map);
-      if (mapKeys.length > 1000) { var newMap = {}; var recent = mapKeys.slice(-500); for (var j = 0; j < recent.length; j++) newMap[recent[j]] = map[recent[j]]; map = newMap; }
-      saveNameAvatarMap(map); return chosen;
+      var key = String(name || 'anonymous').trim();
+      var nameSeed = 0;
+      for (var k = 0; k < key.length; k++) { nameSeed += key.charCodeAt(k); }
+      var idx = Math.floor(pseudoRandom(nameSeed) * avatarCache.list.length);
+      return avatarCache.list[idx];
     }
+
+    /* FIX 4: Cache 24h → 1h */
     function fetchAvatarsFromGitHub(callback) {
-      try { var cached = localStorage.getItem('cardseller_avatars_list'); var cachedTime = localStorage.getItem('cardseller_avatars_time'); if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 86400000) { var parsed = JSON.parse(cached); if (Array.isArray(parsed) && parsed.length > 0) { avatarCache.list = parsed; avatarCache.loaded = true; if (callback) callback(parsed); return; } } } catch(e) {}
+      try { var cached = localStorage.getItem('cardseller_avatars_list'); var cachedTime = localStorage.getItem('cardseller_avatars_time'); if (cached && cachedTime && (Date.now() - parseInt(cachedTime)) < 3600000) { var parsed = JSON.parse(cached); if (Array.isArray(parsed) && parsed.length > 0) { avatarCache.list = parsed; avatarCache.loaded = true; if (callback) callback(parsed); return; } } } catch(e) {}
       fetch('https://api.github.com/repos/forviews1st-hub/Credit-Dizain/contents/avatars')
         .then(function(r) { return r.json(); })
         .then(function(data) {
@@ -1247,7 +1261,7 @@
     function initViewerCounts() {
       designs.forEach(function(d) {
         var seed = 6001 + d.id.charCodeAt(0) * 131; var hours = getHoursSinceReference();
-        var hourOfDay = new Date().getHours(); var mult = getTimeMultiplierForHour(hourOfDay);
+        var hourOfDay = new Date().getUTCHours(); var mult = getTimeMultiplierForHour(hourOfDay);
         var base = Math.round((450 + pseudoRandom(seed) * 250) * d.viewerWeight * mult);
         base += Math.floor(pseudoRandom(seed + Math.floor(hours / 3)) * 100);
         viewerState[d.id] = { base: base, current: base };
@@ -1279,9 +1293,13 @@
       });
     }
     setInterval(updateCountdowns, 1000);
+
+    /* FIX 5: Hero counters include user purchases */
     function renderHeroCounters() {
-      var sold = BASE_SOLD + getTotalPurchases();
-      var buyers = BASE_BUYERS + Math.floor(getTotalPurchases() * 0.8);
+      var userPurchases = getUserPurchaseCount();
+      var totalBase = getTotalPurchases() + userPurchases;
+      var sold = BASE_SOLD + totalBase;
+      var buyers = BASE_BUYERS + Math.floor(totalBase * 0.8);
       var soldEl = document.getElementById('heroSoldCount'); if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
       var buyersEl = document.getElementById('heroBuyersCount'); if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
       var tbEl = document.getElementById('trustedByCount'); if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
@@ -1426,11 +1444,15 @@
         else { var m = Math.floor(timeLeft / 60); var s = timeLeft % 60; var timeStr = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; if (timeLeft <= 120) { el.classList.add('warning'); el.textContent = '⚠️ Hurry! Reserved for ' + timeStr; } else { el.classList.remove('warning'); el.textContent = '⏳ Reserved for ' + timeStr; } }
       }, 1000);
     }
+
+    /* FIX 5: increment user purchase count after payment */
     function confirmPayment() {
       if (qrTimeLeft <= 0) { alert('QR Code expired. Please generate a new QR or close and try again.', {title: 'QR Expired', icon: '⏳'}); return; }
       var txnId = document.getElementById('transactionId').value.trim(); var txnRegex = /^[A-Z0-9]{8,22}$/;
       if (!txnRegex.test(txnId)) { alert('Invalid Transaction ID. It should be 8-22 alphanumeric characters.', {title: 'Invalid Transaction ID', icon: '🔒'}); return; }
       currentPendingOrder.transactionId = txnId; clearInterval(qrTimerInterval); document.getElementById('paymentOverlay').style.display = 'none'; document.body.classList.remove('modal-open'); showToast('Payment confirmed!', 'success');
+      incrementUserPurchaseCount(currentPendingOrder.qty || 1);
+      renderHeroCounters();
       showSuccessModal(currentPendingOrder); playOrderSound(); setTimeout(function() { triggerUserOwnNotification(); }, 1500);
     }
     function triggerUserOwnNotification() {
@@ -1512,12 +1534,14 @@
       var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
       setTimeout(function() { notif.remove(); }, 10500);
     }
+
+    /* FIX 3: Normal user ko gold avatar (not blue) */
     function showReviewNotification(review) {
       var existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast');
       while (existing.length >= 3) { existing[0].remove(); existing = notifContainer.querySelectorAll('.live-notif, .review-notif, .welcome-back-toast'); }
       var nameParts = String(review.name || '').trim().split(/\s+/).filter(function(p) { return p.length > 0; }); var displayName = nameParts.length > 1 ? nameParts[0] + ' ' + nameParts[1].charAt(0) + '.' : (nameParts[0] || 'Someone'); var stars = ''; for (var i = 0; i < Math.round(review.rating); i++) stars += '⭐';
       var notif = document.createElement('div'); notif.className = 'live-notif review-notif';
-      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">⭐ New Review</div><div class="notif-row"><div class="notif-avatar" style="background:linear-gradient(135deg, rgba(29,155,240,0.3), rgba(29,155,240,0.08)); border-color:rgba(29,155,240,0.6);"><img src="' + getInitialsAvatarSVG(review.name, true) + '" alt="' + escapeHtml(review.name) + '"></div><div class="notif-content"><strong>' + escapeHtml(displayName) + ' just left a ' + stars + ' review!</strong>for ' + escapeHtml(review.purchased) + '<span class="notif-time">🕐 Just now</span></div></div>';
+      notif.innerHTML = '<button type="button" class="notif-close-btn" aria-label="Close">×</button><div class="notif-card-badge">⭐ New Review</div><div class="notif-row"><div class="notif-avatar" style="background:linear-gradient(135deg, rgba(212,175,55,0.3), rgba(212,175,55,0.08)); border-color:rgba(212,175,55,0.6);"><img src="' + getInitialsAvatarSVG(review.name, review.isYouTuber || false) + '" alt="' + escapeHtml(review.name) + '"></div><div class="notif-content"><strong>' + escapeHtml(displayName) + ' just left a ' + stars + ' review!</strong>for ' + escapeHtml(review.purchased) + '<span class="notif-time">🕐 Just now</span></div></div>';
       notifContainer.appendChild(notif);
       var closeBtn = notif.querySelector('.notif-close-btn'); if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); notif.remove(); });
       setTimeout(function() { notif.remove(); }, 10500);
