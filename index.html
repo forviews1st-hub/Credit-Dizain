@@ -897,15 +897,17 @@
 
   <script>
     /* =========================================================
-       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — v7 (Option 3)
-       - Fixed reference: June 1, 2026 (same on all devices)
+       DETERMINISTIC TIME-BASED ORGANIC SYSTEM — v8 (Option 3 — Launch Ready)
+       - Reference: Oct 7, 2026 (aaj) — launch day se count shuru
        - Rate: 60/hr
        - Counter: cumulative since reference (grows forever, no reset)
        - Stock: 3-hour cycle (depletes then auto-restocks)
-       - Notifications: real-time, deterministic
+       - Base: 7000 cards sold, 5600 happy buyers
        ========================================================= */
-    var REFERENCE_TIME = new Date('2026-06-01T00:00:00Z').getTime();
-    var CYCLE_MINUTES = 180; // 3-hour stock cycle
+    var REFERENCE_TIME = new Date('2026-10-07T00:00:00Z').getTime();
+    var CYCLE_MINUTES = 180;
+    var BASE_SOLD = 7000;
+    var BASE_BUYERS = 5600;
     var BASE_PURCHASES_PER_HOUR = 60;
 
     function pseudoRandom(seed) { var x = Math.sin(seed) * 10000; return x - Math.floor(x); }
@@ -921,7 +923,6 @@
 
     function getTotalWeight() { var w = 0; designs.forEach(function(d) { w += d.viewerWeight; }); return w; }
 
-    /* Core: is there a purchase at minute m? (deterministic across all devices) */
     function isPurchaseMinute(m) {
       var minuteTime = REFERENCE_TIME + m * 60000;
       var hourOfDay = new Date(minuteTime).getHours();
@@ -930,7 +931,6 @@
       return pseudoRandom(7001 + m * 9773) < expected;
     }
 
-    /* Which card was purchased at minute m? */
     function pickCardForMinute(m, totalWeight) {
       var cardRoll = pseudoRandom(7001 + m * 9773 + 4337) * totalWeight;
       var acc = 0;
@@ -941,10 +941,10 @@
       return designs[designs.length - 1];
     }
 
-    /* Compute total purchases since reference (cached per minute) */
     var _totalCache = { minute: -1, count: 0 };
     function getTotalPurchases() {
       var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      if (nowMinute < 0) return 0;
       if (_totalCache.minute === nowMinute) return _totalCache.count;
       var count = 0;
       for (var m = 0; m <= nowMinute; m++) { if (isPurchaseMinute(m)) count++; }
@@ -952,11 +952,11 @@
       return count;
     }
 
-    /* Compute per-card purchases in current cycle (cached per minute) */
     var _cycleCache = { minute: -1, cycleStart: -1, counts: null };
     function getCurrentCycleStart(nowMinute) { return Math.floor(nowMinute / CYCLE_MINUTES) * CYCLE_MINUTES; }
     function getCurrentCycleCounts() {
       var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      if (nowMinute < 0) { var empty = {}; designs.forEach(function(d) { empty[d.id] = 0; }); return empty; }
       var cycleStart = getCurrentCycleStart(nowMinute);
       if (_cycleCache.minute === nowMinute && _cycleCache.cycleStart === cycleStart) return _cycleCache.counts;
       var counts = {};
@@ -973,9 +973,7 @@
     }
 
     function getCardPurchases(design) { return getCurrentCycleCounts()[design.id] || 0; }
-
-    /* User purchase — no longer affects deterministic counter (would break cross-device consistency) */
-    function recordUserPurchase(designId) { /* intentionally no-op for global consistency */ }
+    function recordUserPurchase(designId) { /* no-op for global consistency */ }
 
     function getReviewHelpful(review, idx) {
       if (review.isUserSubmitted) return review.helpful || 0;
@@ -1192,11 +1190,10 @@
     ];
     (function loadUserReviews() { var saved = loadUserReviewsFromStorage(); saved.forEach(function(r) { if (r && r.isUserSubmitted) reviewsData.push(r); }); })();
 
-    /* STOCK: cycle-based. Initial stock 100-150, purchases in 3h cycle reduce it, cycle resets to initial */
     function getCardState(design, idx) {
       var seed = 9001 + idx * 977 + design.id.charCodeAt(0) * 131;
       var rand = pseudoRandom(seed);
-      var initialStock = Math.floor(rand * 50) + 100; // 100-150
+      var initialStock = Math.floor(rand * 50) + 100;
       var initialSold = Math.round(initialStock * (design.stockPercent / (100 - design.stockPercent)));
       var totalInventory = initialStock + initialSold;
       var purchasedThisCycle = getCardPurchases(design);
@@ -1283,8 +1280,8 @@
     }
     setInterval(updateCountdowns, 1000);
     function renderHeroCounters() {
-      var sold = 12548 + getTotalPurchases();
-      var buyers = 9935 + Math.floor(getTotalPurchases() * 0.8);
+      var sold = BASE_SOLD + getTotalPurchases();
+      var buyers = BASE_BUYERS + Math.floor(getTotalPurchases() * 0.8);
       var soldEl = document.getElementById('heroSoldCount'); if (soldEl) soldEl.textContent = sold.toLocaleString('en-IN') + '+';
       var buyersEl = document.getElementById('heroBuyersCount'); if (buyersEl) buyersEl.textContent = buyers.toLocaleString('en-IN') + '+';
       var tbEl = document.getElementById('trustedByCount'); if (tbEl) tbEl.textContent = '+' + buyers.toLocaleString('en-IN') + ' buyers';
@@ -1531,16 +1528,15 @@
       list.insertAdjacentHTML('afterbegin', itemHTML);
       while (list.children.length > 3) list.removeChild(list.lastElementChild);
     }
-    /* Notification tick: check for purchases since last tick, show them */
     var _lastNotifiedMinute = null;
     function purchaseTick() {
       var nowMinute = Math.floor((Date.now() - REFERENCE_TIME) / 60000);
+      if (nowMinute < 0) return;
       if (_lastNotifiedMinute === null) { _lastNotifiedMinute = nowMinute; return; }
       if (nowMinute <= _lastNotifiedMinute) return;
       var totalWeight = getTotalWeight();
       var shownAny = false;
-      var maxLookBack = 60; // safety cap
-      var startM = Math.max(_lastNotifiedMinute + 1, nowMinute - maxLookBack);
+      var startM = Math.max(_lastNotifiedMinute + 1, nowMinute - 60);
       for (var m = startM; m <= nowMinute; m++) {
         if (isPurchaseMinute(m)) {
           var design = pickCardForMinute(m, totalWeight);
